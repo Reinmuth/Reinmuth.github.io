@@ -150,7 +150,9 @@ ul > li a {
   background-color: rgb(53, 112, 114);
 }
 
- 
+ .wichtig {
+   color: red;
+ }
 
   footer {
     position: fixed;
