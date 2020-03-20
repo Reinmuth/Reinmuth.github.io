@@ -2,164 +2,190 @@
 {
 	margin: 0;
 }
-
 nav
 {
-	width: 900px;
+	width: 100%;
 	float: left;
 	
 }
-
 div
 {
 	padding: 10px;
 	margin-left: 310px;
 }
-
 h1, h2
 {
 margin-top: 0;
 } 
 */
 nav > ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: rgb(76,76,76);
-    height: auto;
-    max-height:39px;
-    min-width: 900px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
+  background-color: rgb(76,76,76);
 
-    transition: all 0.5s; 
+  height: 38px;
+  width: 900px;
+
+  transition: all 0.5s; 
+}
+.kachel {
+width: 30%;
+line-height: 30px;
+display: inline-block;
+text-align: center;
+border-radius: 15px;
+margin: 5px 5px;
+color: white;
+text-decoration: none;
+
+}
+
+.Material {
+  width: 22%;
+  line-height: 35px;
+  display: inline-block;
+  text-align: center;
+  margin: 5px 5px;
+  color: white;
+  text-decoration: none;
+  background-color: #306f91;
+
   }
-  
+
 .current {
-    background-color: red
-  }
+  background-color: red
+}
 .sol {
-    background-color: #dfac20;
-  }
+  background-color: #dfac20;
+}
 .vid {
-  background-color: rgb(20, 138, 93);
+background-color: rgb(20, 138, 93);
 }
 
 .exerc{
-  background-color: crimson;
+background-color: crimson;
 }
- nav > ul > li {
-    float: left;
-    padding:0;
-    overflow: hidden;
-  }
-  nav {
-    background-color: rgb(76,76,76);
-  }
-  nav > ul > li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 10px 10px;
-    text-decoration: none;
-    background-color: rgb(76,76,76);
-  }
-    li a:hover {
-        background-color: #111;
-      }
-  h2 {
-    text-align: justify;
-    margin-block-end: 10px;
-    margin-top: 10px;
-  }
-
-  h3 {
-    margin-top: -0.5em;
+nav > ul > li {
+  float: left;
+  padding:0;
+  overflow: hidden;
+}
+nav {
+  background-color: rgb(76,76,76);
+}
+nav > ul > li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 10px 10px;
+  text-decoration: none;
+  background-color: rgb(76,76,76);
+}
 
 
 
-    display:block; 
-    font-size: 1.0em;
-    margin-block-end: 0;
+
+  li a:hover {
+      background-color: #111;
+    }
+h2 {
+  text-align: justify;
+  margin-block-end: 10px;
+  margin-top: 10px;
+}
+
+h3 {
+  margin-top: -0.5em;
+
+
+
+  display:block; 
+  font-size: 1.0em;
+  margin-block-end: 0;
 position: static;
-  }
-  footer > h2 {
-    font-size: 1em;
-    padding: -10px;	
-    margin: -10px;	
-  }
-  h4 {
-    text-align: justify;
-    margin-block-end: 5px;
-    margin-block-start: 5px;
- 
-  }
-  footer > h4 {
-    font-size: 1em;    
-    padding: -20px;	
-    text-align: center;
-	
-  }
+}
+footer > h2 {
+  font-size: 1em;
+  padding: -10px;	
+  margin: -10px;	
+}
+h4 {
+  text-align: justify;
+  margin-block-end: 5px;
+  margin-block-start: 5px;
 
-  footer > h4 > li {
-      background: #dfac20;
-      display: inline;
-      padding: -10;	
-      margin: -1em;	
-    }
-    
-    footer > h4 > a {
-      display: inline-block;	
-      border: 2px solid;
-      background: #306f91;
-      color: #e6f2f7;
-      padding: .1em;	
-      margin: 0;
-      font-size: 1.0em;
-      		
-    }
+}
+footer > h4 {
+  font-size: 1em;    
+  padding: -20px;	
+  text-align: center;
+
+}
+
+footer > h4 > li {
+    background: #dfac20;
+    display: inline;
+    padding: -10;	
+    margin: -1em;	
+  }
   
-
-  body {
-    padding-bottom: 1em;
+  footer > h4 > a {
+    display: inline-block;	
+    border: 2px solid;
+    background: #306f91;
+    color: #e6f2f7;
+    padding: .1em;	
+    margin: 0;
+    font-size: 1.0em;
+        
   }
+
+
+body {
+  padding-bottom: 1em;
+}
 
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    height: auto;
-    max-height:39px;
-    min-width: 900px;
-    transition: all 0.5s; 
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: auto;
+  max-height:39px;
+  min-width: 900px;
+  transition: all 0.5s; 
+  box-sizing: border-box;
 
 }
 ul li {
-  float: left;
-  padding:10px 30px;
+float: left;
+padding:10px 30px;
+box-sizing: border-box;
 }
 
 
 ul > li a {
-  display: inline;
-  list-style-type: none;
-  color: white;
-  text-align: center;
-  padding: 8px 8px;
-  text-decoration: none;
-  background-color: rgb(53, 112, 114);
+display: inline;
+list-style-type: none;
+color: white;
+text-align: center;
+padding: 8px 8px;
+text-decoration: none;
+background-color: rgb(53, 112, 114);
+box-sizing: border-box;
 }
 
- .wichtig {
-   color: red;
- }
+.wichtig {
+ color: red;
+}
 
-  footer {
-    position: fixed;
-    padding: -0.4em;
-    bottom: 0.0em;
-    left: 0;
-    right: 0;
-    background-color: rgb(76, 76, 76);
-  }
-
+footer {
+  position: fixed;
+  padding: -0.4em;
+  bottom: 0.0em;
+  left: 0;
+  right: 0;
+  background-color: rgb(76, 76, 76);
+}
