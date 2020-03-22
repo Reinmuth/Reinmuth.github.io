@@ -4,7 +4,7 @@
   echo "eingetragener Vorname: ". $_GET['vorname'];
   ?>
   
-  <form action="formular-m-anzeige.php" method="get" >
+  <form action="test1.php" method="get" >
    
   <p>Ihr Vorname:
   <input type="text" name="vorname">
