@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Das Universum</title>
+    </head>
+ <body bgcolor="#ADD8E6" style="font-family:Verdana; text-align:left;">
+<p><h1>Das Universum<h1></p>
+
+<h3>Universum - Steckbrief</h3>
+
+<p>Definition: Das Universum, auch der Kosmos oder das Weltall genannt, ist die Gesamtheit von Raum, Zeit und aller Materie und Energie darin.<br>
+Anzahl Galaxien: ca. 2 Bio.<br>
+Alter: 13,81 ± 0,04 Mrd. Jahre<br>
+Masse (sichtbar): ca. 1053 kg<br>
+Mittlere Dichte: ca. 4,7 · 10-30 g/cm3<br>
+Radius: > 45 Mrd. Lj<br>
+Temperatur Hintergrundstrahlung: 2,725 ± 0,002 K</p><br>
+
+<h3>Was gibt es im Universum?</h3>
+
+<p>Das Universum ist alles, was wir anfassen, fühlen, wahrnehmen, messen oder erkennen können. Dazu gehören Lebewesen, Planeten, Sterne, Galaxien, Staubwolken, Licht und sogar die Zeit. Vor der Geburt des Universums gab es weder Zeit noch Raum oder Materie.</p>
+
+<h3>Woraus besteht der Raum zwischen den Galaxien? Sind diese leer?</h3>
+<p>Der Raum zwischen Galaxien ist nicht vollständig leer, sondern enthält neben Sternen und Staubwolken unter anderem auch Wasserstoff-Gas.</p>
+<br> 
+<img src="https://de.wikipedia.org/wiki/Universum#/media/Datei:M31bobo.jpg" height="330" width="233" alt="CHIP-Logo" border="2" align="right">
+ 
+<h3>Welche Form hat das Universum?</h3>
+</p>Intuitiv liegt die Vermutung nahe, dass aus der Urknalltheorie eine „Kugelform“ des Universums folgt; das ist jedoch nur eine von mehreren Möglichkeiten. So wurden neben einem flachen unendlichen Universum viele andere Formen vorgeschlagen, darunter beispielsweise eine Hypertorusform, oder auch die in populärwissenschaftlichen Publikationen als „Fußballform“ und „Trompetenform“ bekannt gewordenen Formen. Einige Daten des Satelliten WMAP sprechen auch dafür, dass das Universum ein Ellipsoid ist.</p>
+
+<h3>Dunkle Materie - Eine dunkle Angelegenheit</h3>
+<p>Planeten kreisen um ihre Sonne und Sonnen kreisen um das Zentrum von Galaxien. Nach den physikalischen Gesetzen wäre zu erwarten, dass sich ein Himmelskörper umso langsamer bewegt, je weiter er vom jeweiligen Zentrum entfernt ist.
+<br>
+Beobachtungen und Messungen haben aber ergeben, dass sich beispielsweise die äußeren Sterne unserer Milchstraße viel schneller bewegen als ursprünglich errechnet.
+<br>
+Ein Erklärungsversuch der Astrophysiker lautet: Unsere Galaxie besteht aus viel mehr Materie als aus der der sichtbaren Himmelskörper. Diese Materie übt ebenfalls eine Anziehungskraft auf die Himmelskörper aus, sodass sie sich schneller bewegen können, ohne aus der Bahn zu geraten.
+<br>
+Diese Materie ist nicht sichtbar und bislang auch nicht experimentell nachzuweisen. Es ist auch unklar, aus was sie besteht. Dennoch muss diese sogenannte "Dunkle Materie" – so nehmen die meisten Wissenschaftler an – vorhanden sein.</p>
+
+<b>Falls diese Themen euch interessieren und ihr mehr davon nachlesen wollt, schaut gerne in die Quellen :)</b>
+
+<p><b><i>Diese Seite wurde erstellt von Melis Kaya am 7.12.2020</i></b></p>
+<br>
+<p>Quellen:</p>
+<br>
+<a href="https://www.esa.int/kids/de/lernen/Unser_Universum/Geschichte_des_Universums/Das_Universum" class="mw-disambig">https://www.esa.int/kids/de/lernen/Unser_Universum/Geschichte_des_Universums/Das_Universum</a>
+<br>
+<a href="https://de.wikipedia.org/wiki/Universum " class="mw-disambig">https://de.wikipedia.org/wiki/Universum </a>
+<br>
+<a href="https://www.planet-wissen.de/natur/weltall/universum/pwiedunklematerie100.html" class="mw-disambig">https://www.planet-wissen.de/natur/weltall/universum/pwiedunklematerie100.html</a>
+<br>
+</p>| Quellen wurden verwendet am 7.12.20</p>
