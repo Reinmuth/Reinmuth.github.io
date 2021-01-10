@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <titl<Studio Ghibli /title>
+  </head>
+ <body bgcolor="#CCFFFF" style="font-family:MONOSPACE; text-align:center;">
+ <!-- Danke für das vid es hat sehr geholfen mw -->
+
+    <h2><font color="#000066">Hayao Miyazakis Werke</font> </h2>
+
+    <p><b>Herzlich Willkommen!</b></p>
+
+                   <table width="70%" border="1" cellpadding="111" cellspacing="2">
+                    <tr>
+                     <td>
+     Der 79 Jährige Japaner Hayao Miyazaki, hat durch den riesigen Erfolg seines ersten Filmes 'NAUSICAÄ',das Studio Ghibli gegründet.
+     Bis zum heutigen Tag verfasste er 22 wunderbare Zeichentrickfilme,
+ hierzu kommen noch mehrere Kurzfilme und Serien.
+ Diese 22 Filme sind auf Netflix verfuegbar,
+ jedoch wurden die weiteren Produktionen nur im Japanischem  Fernsehen gezeigt.
+Diese erreichbaren Filme wurden sehr bekannt und
+ der Film 'Spirited away' (Deusch: 'Chihiros Reise) hat einen Oskar bekommen.
+ Durch den Erfolg wurde in Japan sogar ein Museum zu Ehren von Studio Ghibli gegründet.</p>
+ Findest Du hier:
+<!-- Hier Bild -->
+  <p>
+<a href="https://www.ghibli-museum.jp/en/">
+<img src="Ghibli-Netflix (1).jpg" alt="" border="0" width="120" height="110"></a>
+</td>   <p>
+                       <td> <img src= "Download.png"> </td></td>
+                   </table>
+
+
+    <p align="center"> <img src="Manga.jpg"> </p>
+
+    <p>  Für mehr informationen:  <p>
+    <p>  https://de.wikipedia.org/wiki/Studio_Ghibli </p>
+           <p> Danke fürs lesen, ich hoffe es hat dir/ ihnen/ euch gefallen MW<p>
+  </body>
+</html>
