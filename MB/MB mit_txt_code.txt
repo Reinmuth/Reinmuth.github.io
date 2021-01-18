@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Standardseite</title>
+  </head>
+  <body bgcolor="#ccddff" style="font-family:Verdana; text-align:center;">
+    <h1> Fechten </h1>
+
+    <p>Fechten ist eine Kampfkunst, bei der man versucht den Gegner mit der Spitze der Waffe zu treffen. Es gibt drei Arten von Waffen:</p>
+
+
+         <h3><i>Degen:</i></h3>   
+         <img src=“Degen.jpg” width="204" height="90">
+
+         <h3><i>Florett:</i></h3>
+         <img src=“Florett.jpg” width="204" height="90">
+
+         <h3><i>Säbel:</i></h3>
+         <img src=“Saebel.jpg” width="204" height="90">
+
+
+
+
+ <p> Bei Florett zählen nur die Treffer auf den Rumpf, beim Säbel der komplette Oberkörper und beim Degen den ganzen Körper.
+Fechten ist einer der ältesten Wettbewerbe der Menschheit. Florett und Säbel sind von Anfang an olympische Waffen gewesen, seit den ersten Olympischen Spielen der Moderne im Jahr 1896. Es gibt Mannschaftswettbewerbe und Einzelwettbewerbe. Man fechtet auf der Fechtbahn (“Planche”). Ein Kampf dauert 3 Minuten bei 5 Treffern oder 9 Minuten bei 15 Treffern. Die offizielle Sprache des Fechtens ist Französisch. Der Schiedsrichter wir im Fechten Obmann genannt.Es gibt gelbe Karten (Verwarnung)z.B.für kaputte Kabel oder Degen, rote Karten (Treffer für den Gegner)wenn man 2 gelbe Karten hat und schwarze karten(Disqualifikation)z.B. für Beleidigung des Obmannes oder schmeißen der Fechtmaske. </p>
+
+    <img src=“Fechtsport.png” width=“350px” height=“200px”> 
+    
+    <p><a href=“https://de.wikipedia.org/wiki/Fechten”>Hier</a> finden sie mehr Informationen zum Fechten.</p>    
+  </body>
+</html>
