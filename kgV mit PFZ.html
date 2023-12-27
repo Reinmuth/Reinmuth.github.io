@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kgV über Primfaktorzerlegung</title>
+    <style>
+        td {width: 80px; border: 1px solid black; text-align: center;}
+        table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+        .operator{  border: 2;
+                    outline: 2;
+                    width: 160px;
+                    height: 40px;
+                    border-radius: 10px;
+                    margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+        
+    </style>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+    <div>
+    <form>
+        <h2 style="text-align:center">kgV über Primfaktorzerlegung</h2> 
+        <p style="text-align: center;" >Bitte bestimmen Sie das kleinste gemeinsame Vielfache folgender Zahlen a und b:</p>
+        <div style="text-align: center;">
+            <label>a = </label><input class="equal operator" id="EingabeFeldA" type="number" step="1" min="0" max="10000" style="text-align: center; width: 200px" placeholder="Hier Zahl eingeben">
+            <label>b = </label><input class="equal operator" id="EingabeFeldB" type="number" step="1" min="0" max="10000" style="text-align: center; width: 200px" placeholder="Hier Zahl eingeben"> 
+            <input class="equal operator" type="button" onclick="neuZahl()" value="Neue Zufallszahl" >
+
+        </div>
+        <div style="text-align: center;">
+            <label>kgV(a,b)=</label><input class="equal operator" id="EingabeLösung" style="text-align: center; width: 200px" placeholder="Hier Lösung eingeben">
+            <input class="equal operator" type="button" onclick="Überprüfen()" value="Lösung prüfen" > <input type="button" onclick="kgV()" value="Lösungsweg anzeigen" class="equal operator" >
+
+        </div>
+
+        <div style="text-align: center;">
+        
+    <!--   <input type="button" onclick="kgV()" value="kgV(a,b) berechnen" class="equal operator" >
+        <input type="button" onclick="Phi()" value="&Phi;(a) berechnen" class="equal operator" >  --> 
+        </div>
+    </form>
+    <p style="text-align: center;" id="Ausgabezeile1"></p>
+    <p style="text-align: center;" id="Ausgabezeile2"></p>
+    <p style="text-align: center;" id="Ausgabezeile3"></p>
+    <p style="text-align: center;" id="Ausgabezeile4"></p>
+    <p style="text-align: center;" id="Ausgabezeile5"></p>
+</div>
+
+
+<script>
+    function AngabePFZ(FeldBuchstabe){
+        var meinArray = [];
+        var Antwortsatz ="";
+        if (FeldBuchstabe == 0){
+            meinArray = PFZ(document.getElementById("EingabeFeldA").value);
+            Antwortsatz +="Die Primfaktorzerlegung von a lautet ";
+        } else if (FeldBuchstabe == 1) {
+            meinArray = PFZ(document.getElementById("EingabeFeldB").value);
+            Antwortsatz +="Die Primfaktorzerlegung von b lautet ";
+        }
+        
+        
+        for (i = 2; i<101 ; i++) {
+            if (meinArray[i][1] != 0) {
+                Antwortsatz += meinArray[i][0] + "<sup>"+meinArray[i][1]+"</sup>·";
+            } 
+        }
+        Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+        if (FeldBuchstabe == 0){
+            document.getElementById("Ausgabezeile1").innerHTML = Antwortsatz;
+        } else if (FeldBuchstabe == 1) {
+            document.getElementById("Ausgabezeile2").innerHTML = Antwortsatz;
+        }
+        
+        
+    } 
+
+    function neuZahl(){
+        document.getElementById("Ausgabezeile1").innerHTML = "";
+        document.getElementById("Ausgabezeile2").innerHTML = "";
+        document.getElementById("Ausgabezeile3").innerHTML = "";
+        document.getElementById("Ausgabezeile4").innerHTML = "";
+        document.getElementById("Ausgabezeile5").innerHTML = "";
+        document.getElementById("EingabeFeldA").value = Math.floor(Math.random()*100+2);
+        
+        document.getElementById("EingabeFeldB").value = Math.floor(Math.random()*100+2);
+    }
+
+    function PFZ(n){
+        if (n>10000 || n<2){
+            document.getElementById("Ausgabezeile1").innerHTML = "Bitte ganzzahlige Werte zwischen 2 und 10000 verwenden."
+        } else {
+        var hilfsArray=[];
+        for (i = 2; i<101 ; i++) {
+            var exp = 0;
+            while ( n % i == 0) {
+                exp = exp +1;
+                n = n / i;
+                }
+            hilfsArray[i]= [i, exp];
+        }
+        return hilfsArray;
+        }
+    }
+
+    function ggT(){
+        AngabePFZ(0);
+        AngabePFZ(1);
+        var meinArrayPhi = [];
+        var meinArrayB = [];
+        var ggTPFZArray = [];
+        var Antwortsatz = "";
+        var ErgebnisGGT = 1;
+        Antwortsatz = "Der ggT("+document.getElementById("EingabeFeldA").value+" , "+document.getElementById("EingabeFeldB").value+")= ";
+        meinArrayA = PFZ(document.getElementById("EingabeFeldA").value);
+        meinArrayB = PFZ(document.getElementById("EingabeFeldB").value);
+        for (i=2; i<101; i++) {
+            ggTPFZArray[i]=[i, Math.min(meinArrayA[i][1],meinArrayB[i][1])];
+        }
+        for (i = 2; i<101 ; i++) {
+            if (ggTPFZArray[i][1] != 0) {
+                Antwortsatz += ggTPFZArray[i][0] + "<sup>"+ggTPFZArray[i][1]+"</sup>·";
+                ErgebnisGGT *=  ggTPFZArray[i][0] ** ggTPFZArray[i][1];
+            } 
+        }
+        Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+        if (ErgebnisGGT == 1) {
+            Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+        }
+        Antwortsatz += "= "+ErgebnisGGT;
+        document.getElementById("Ausgabezeile3").innerHTML = Antwortsatz;
+    }
+
+
+    function kgV(){
+        AngabePFZ(0);
+        AngabePFZ(1);
+        var meinArrayA = [];
+        var meinArrayB = [];
+        var kgVArray = [];
+        var Antwortsatz = "";
+        var ErgebnisKGV = 1;
+        Antwortsatz = "Das kgV("+document.getElementById("EingabeFeldA").value+" , "+document.getElementById("EingabeFeldB").value+")= ";
+        meinArrayA = PFZ(document.getElementById("EingabeFeldA").value);
+        meinArrayB = PFZ(document.getElementById("EingabeFeldB").value);
+        for (i=2; i<101; i++) {
+            kgVArray[i]=[i, Math.max(meinArrayA[i][1],meinArrayB[i][1])];
+        }
+        for (i = 2; i<101 ; i++) {
+            if (kgVArray[i][1] != 0) {
+                Antwortsatz += kgVArray[i][0] + "<sup>"+kgVArray[i][1]+"</sup>·";
+                ErgebnisKGV *=  kgVArray[i][0] ** kgVArray[i][1];
+            } 
+        }
+        Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+        Antwortsatz += "= "+ErgebnisKGV;
+        document.getElementById("Ausgabezeile4").innerHTML = Antwortsatz;
+    }
+
+    function Phi(){
+        AngabePFZ(0);
+        var meinArrayA = [];
+        var Antwortsatz = "";
+        var ErgebnisGGT = 1;
+        Antwortsatz = "&Phi;("+document.getElementById("EingabeFeldA").value+")=";
+        meinArrayA = PFZ(document.getElementById("EingabeFeldA").value);
+
+        
+
+        for (i = 2; i<101 ; i++) {
+                if (meinArrayA[i][1] != 0) {
+                    if (meinArrayA[i][1] == 1){
+                        Antwortsatz += "("+meinArrayA[i][0] +"- 1)·";
+                        ErgebnisGGT *=  meinArrayA[i][0] ** (meinArrayA[i][1]) -meinArrayA[i][0] ** (meinArrayA[i][1]-1);
+                    } else {
+                        Antwortsatz += "("+meinArrayA[i][0] + "<sup>"+meinArrayA[i][1]+"</sup>-"+meinArrayA[i][0] + "<sup>"+(meinArrayA[i][1]-1)+"</sup>)·";
+                        ErgebnisGGT *=  meinArrayA[i][0] ** (meinArrayA[i][1]) -meinArrayA[i][0] ** (meinArrayA[i][1]-1);
+                    }
+                } 
+            }
+            Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+            Antwortsatz += "= "+ErgebnisGGT;
+            document.getElementById("Ausgabezeile5").innerHTML = Antwortsatz;
+    }
+
+    function Überprüfen(){
+        document.getElementById("Ausgabezeile1").innerHTML = "";
+        document.getElementById("Ausgabezeile2").innerHTML = "";
+        document.getElementById("Ausgabezeile3").innerHTML = "";
+        document.getElementById("Ausgabezeile4").innerHTML = "";
+        document.getElementById("Ausgabezeile5").innerHTML = "";
+        var meinArrayA = [];
+        var meinArrayB = [];
+        var kgVArray = [];
+        var Antwortsatz = "";
+        var ErgebnisKGV = 1;
+        meinArrayA = PFZ(document.getElementById("EingabeFeldA").value);
+        meinArrayB = PFZ(document.getElementById("EingabeFeldB").value);
+        for (i=2; i<101; i++) {
+            kgVArray[i]=[i, Math.max(meinArrayA[i][1],meinArrayB[i][1])];
+        }
+        for (i = 2; i<101 ; i++) {
+            if (kgVArray[i][1] != 0) {
+                Antwortsatz += kgVArray[i][0] + "<sup>"+kgVArray[i][1]+"</sup>·";
+                ErgebnisKGV *=  kgVArray[i][0] ** kgVArray[i][1];
+            } 
+        }
+        if (ErgebnisKGV == document.getElementById("EingabeLösung").value){
+            document.getElementById("Ausgabezeile1").innerHTML = "Super, alles richtig";
+        } else {
+            document.getElementById("Ausgabezeile1").innerHTML = "Leider falsch.";
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primfaktorzerlegung aus Zahl</title>
+    <style>
+        td {width: 80px; border: 1px solid black; text-align: center;}
+        table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+        .operator{  border: 2;
+                    outline: 2;
+                    width: 120px;
+                    height: 40px;
+                    border-radius: 10px;
+                    margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+        
+    </style>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+    <div>
+    <form>
+        <h2 style="text-align:center">Primfaktorzerlegung berechnen</h2> 
+        <p style="text-align: center;" >Bitte berechnen Sie die Primfaktorzerlegung der folgenden Zahl</p>
+        <div style="text-align: center;">
+            <label>a = </label><input style="text-align: center;" class="equal operator" id="EingabeFeldA" type="number" step="1" min="0" max="10000" style="width: 200px" placeholder="Hier Zahl eingeben"><input class="equal operator" type="button" onclick="neuZahl()" value="Neue Zufallszahl" >
+        </div>
+        <p style="text-align: center;" >Überprüfen Sie Ihre Lösung</p>
+        <div style="text-align: center;">
+            <input style="width: 200px;" class="equal operator" type="button" onclick="AngabePFZ()" value="Primfaktorzerlegung überprüfen" >
+        </div>
+
+    </form>
+    <p style="text-align: center;" id="Ausgabezeile1"></p>
+
+</div>
+
+
+<script>
+    function neuZahl(){
+        document.getElementById("Ausgabezeile1").innerHTML = "";
+        document.getElementById("EingabeFeldA").value = Math.floor(Math.random()*100+2);
+    }
+    
+    function AngabePFZ(){
+        var meinArray = [];
+        var Antwortsatz ="";
+
+        meinArray = PFZ(document.getElementById("EingabeFeldA").value);
+        Antwortsatz +="Die Primfaktorzerlegung von a lautet ";
+       
+        
+        
+        for (i = 2; i<=(document.getElementById("EingabeFeldA").value) ; i++) {
+            if (meinArray[i][1] != 0) {
+                Antwortsatz += meinArray[i][0] + "<sup>"+meinArray[i][1]+"</sup>·";
+            } 
+        }
+        Antwortsatz = Antwortsatz.substr(0, Antwortsatz.length-1);
+       
+        document.getElementById("Ausgabezeile1").innerHTML = Antwortsatz;
+       
+        
+        
+    } 
+
+    function PFZ(n){
+        if (n>10000 || n<2){
+            document.getElementById("Ausgabezeile1").innerHTML = "Bitte ganzzahlige Werte zwischen 2 und 10000 verwenden."
+        } else {
+        var hilfsArray=[];
+        for (i = 2; i<=(document.getElementById("EingabeFeldA").value+2); i++) {
+            var exp = 0;
+            while ( n % i == 0) {
+                exp = exp +1;
+                n = n / i;
+                }
+            hilfsArray[i]= [i, exp];
+        }
+        return hilfsArray;
+        }
+    }
+
+    
+
+</script>
+</body>
+</html>

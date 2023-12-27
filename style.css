@@ -1,0 +1,209 @@
+/* body
+{
+	margin: 0;
+}
+nav
+{
+	width: 100%;
+	float: left;
+	
+}
+div
+{
+	padding: 10px;
+	margin-left: 310px;
+}
+h1, h2
+{
+margin-top: 0;
+} 
+*/
+.header{
+  background-color: rgb(76,76,76);
+  width: 100%;
+}
+
+nav > ul {
+  position: relative;
+  list-style-type: none;
+
+  padding: 0 0 0 0;
+  overflow: auto;
+  transition: all 0.5s;
+  background-color: rgb(76,76,76);
+  text-align: center;
+  display: inline;
+}
+.kachel {
+width: 40%;
+line-height: 30px;
+display: inline-block;
+text-align: center;
+border-radius: 15px;
+margin: 5px 5px;
+color: white;
+text-decoration: none;
+
+}
+
+div > ul > li {
+
+    display: block;
+    padding: 8px 0;
+    
+    color: white;
+    text-decoration: none;
+    
+  
+}
+
+div > ul > li > a{
+
+  color: black;
+  padding: 5px 0;
+  width: 5px;
+  
+  
+}
+
+div > ul > li > a:hover{
+
+  color: rgb(196, 150, 0);
+  background-color: #02dfaf7e;
+
+  
+}
+
+.Material {
+  width: 16%;
+  line-height: 35px;
+  display: inline-block;
+  text-align: center;
+  margin: 5px 5px;
+  color: white;
+  text-decoration: none;
+  background-color: #306f91;
+
+  }
+
+.current {
+  background-color: red
+}
+.sol {
+  background-color: #dfac20;
+}
+.vid {
+background-color: rgb(20, 138, 93);
+}
+
+.exerc{
+background-color: crimson;
+}
+nav > ul > li {
+  float: left;
+  width: 20%;
+  text-align: center;
+  font-size: 1.6vw;
+  margin: 0 auto;
+
+}
+
+
+
+nav {
+  background-color: rgb(76,76,76);
+  margin:0;
+  padding: 0;
+  width: 99%;
+  height: 3vw;
+  overflow: hidden;
+}
+nav > ul > li a {
+  display: block;
+  padding: 5px 0;
+  background-color: rgb(76,76,76);
+  color: white;
+  text-decoration: none;
+
+}
+
+
+
+
+  li a:hover {
+      background-color: #111;
+    }
+h2 {
+  text-align: justify;
+  margin-block-end: 10px;
+  margin-top: 10px;
+}
+
+h3 {
+  margin-top: -0.5em;
+
+
+
+  display:block; 
+  font-size: 2vmin;
+  margin-block-end: 0;
+position: static;
+}
+footer > h2 {
+  font-size: 1em;
+  padding: -10px;	
+  margin: -10px;	
+}
+h4 {
+  text-align: justify;
+  margin-block-end: 5px;
+  margin-block-start: 5px;
+
+}
+footer > h4 {
+  font-size: 1em;    
+  padding: -20px;	
+  text-align: center;
+
+}
+
+footer > h4 > li {
+    background: #dfac20;
+    display: inline;
+    padding: -10;	
+    margin: -1em;	
+  }
+  
+  footer > h4 > a {
+    display: inline-block;	
+    border: 2px solid;
+    background: #306f91;
+    color: #e6f2f7;
+    padding: .1em;	
+    margin: 0;
+    font-size: 1.0em;
+        
+  }
+
+
+body {
+  padding-bottom: 1em;
+}
+
+p {
+  font-size: 2vw;
+}
+
+
+.wichtig {
+ color: red;
+}
+
+footer {
+  position: fixed;
+  padding: -0.4em;
+  bottom: 0.0em;
+  left: 0;
+  right: 0;
+  background-color: rgb(76, 76, 76);
+}

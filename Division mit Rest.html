@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Division mit Rest</title>
+    <style>
+        td {width: 80px; border: 1px solid black; text-align: center;}
+        table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+        .operator{  border: 2;
+                    outline: 2;
+                    width: 120px;
+                    height: 40px;
+                    border-radius: 10px;
+                    margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+        
+    </style>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+    <div>
+    <form>
+        <h2 style="text-align:center">Division mit Rest</h2> 
+        <p style="text-align: center;" >Bitte führen Sie eine Division a : b  mit Rest durch:</p>
+        <div style="text-align: center;">
+            <input class="equal operator" style="text-align: center;" id="EingabeFeldA" type="number" step="1" min="0" max="10000" style="width: 100px" placeholder="a"><label> : </label><input style="text-align: center;" class="equal operator" id="EingabeFeldB" type="number" step="1" min="0" max="10000" style="width: 100" placeholder="b"><input style="width: 200px;" class="equal operator" type="button" onclick="neuZahl()" value="neue Zahlen" >
+        </div>
+        <p style="text-align: center;" >Geben Sie hier Ihre Lösung ein:</p>
+        <div style="text-align: center;">
+            <div style="text-align: center;">
+                <label>a div b = </label><input style="text-align: center;" class="equal operator" id="EingabeFeldDiv" type="number" step="1" min="0" max="10000" style="width: 100px" placeholder=""><label>     a mod b </label><input style="text-align: center;" class="equal operator" id="EingabeFeldMod" type="number" step="1" min="0" max="10000" style="width: 100" placeholder="">            <input style="width: 200px;" class="equal operator" type="button" onclick="Prüfung()" value="Ergebnisse überprüfen" >
+            </div>
+
+        </div>
+
+    </form>
+    <p style="text-align: center; font-size: larger;" id="Ausgabezeile1"></p>
+
+</div>
+
+
+<script>
+    function neuZahl(){
+        document.getElementById("Ausgabezeile1").innerHTML = "";
+        document.getElementById("EingabeFeldA").value = Math.floor(Math.random()*400-200);
+        document.getElementById("EingabeFeldB").value =Math.floor(Math.random()*50+1);
+        document.getElementById("EingabeFeldDiv").value = "";
+        document.getElementById("EingabeFeldMod").value ="";
+
+
+                
+    }
+    
+    function Prüfung(){
+        var a = document.getElementById("EingabeFeldA").value;
+        var b = document.getElementById("EingabeFeldB").value;
+        var div = Math.floor(a / b);
+        var mod = a- div*b;
+        if ((document.getElementById("EingabeFeldDiv").value == div) && (document.getElementById("EingabeFeldMod").value == mod)) {
+            document.getElementById("Ausgabezeile1").innerHTML = "Spitze";
+        } else {
+            document.getElementById("Ausgabezeile1").innerHTML = "Leider falsch <br> Es gilt "+a+":"+b+"= "
+            if (div > 0 ){
+                document.getElementById("Ausgabezeile1").innerHTML += div;
+            } else {
+                document.getElementById("Ausgabezeile1").innerHTML += "("+div+")";
+            }
+            
+            
+            document.getElementById("Ausgabezeile1").innerHTML +=" Rest "+mod+" <br> Versuchen Sie es nochmal.";
+        }
+
+    }
+
+    
+
+</script>
+</body>
+</html>

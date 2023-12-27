@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chinesischer Restsatz</title>
+        <style>
+            td {width: 80px; border: 1px solid black; text-align: center;}
+            table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+            .operator{  border: 2;
+                        outline: 2;
+                        width: 120px;
+                        height: 40px;
+                        border-radius: 10px;
+                        margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+            .display{    text-align: left;
+    flex: 1;
+    font-size: 25px;
+    box-shadow: none;
+    margin-bottom: 20px;
+    font-size: larger;
+}
+        </style>
+
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+       
+           <div class="container">
+            <div style="color: black;" class="calculator" >
+                <form> 
+                    <h2 style="text-align:center">Chinesischer Restsatz</h2> 
+                    <div>
+                        <p style="text-align:center"> Wie viele Kongruenzen sollen simultan erfüllt werden? <select onchange="KongruenzFelder()" id="AnzKG"> <option balue="" >Bitte wählen</option>  <option value="2">2</option> <option value="3">3</option> <option value="4">4</option>
+                        </select></p>
+                    </div>
+                    <div id="zuFüllen" style="text-align: center; ">
+                        <div id="KG1"  style="display:none; margin:10px;"><label>x &equiv;</label><input value="" step="1" id="a1" placeholder="Rest1" style="text-align: center;font-size: larger; width:70px;"><label>(mod</label><input step="1" id="m1" placeholder="mod1" style="text-align: center;font-size: larger; width:70px;"><label>)</label></div>
+                        <div id="KG2"  style="display:none; margin:10px;"><label>x &equiv;</label><input value="" step="1" id="a2" placeholder="Rest2" style="text-align: center;font-size: larger; width:70px;"><label>(mod</label><input step="1" id="m2" placeholder="mod2" style="text-align: center;font-size: larger; width:70px;"><label>)</label></div>
+                        <div id="KG3"  style="display:none; margin:10px;"><label>x &equiv;</label><input value="" step="1" id="a3" placeholder="Rest3" style="text-align: center;font-size: larger; width:70px;"><label>(mod</label><input step="1" id="m3" placeholder="mod3" style="text-align: center;font-size: larger; width:70px;"><label>)</label></div>
+                        <div id="KG4"  style="display:none; margin:10px;"><label>x &equiv;</label><input value="" step="1" id="a4" placeholder="Rest4" style="text-align: center;font-size: larger; width:70px;"><label>(mod</label><input step="1" id="m4" placeholder="mod4" style="text-align: center;font-size: larger; width:70px;"><label>)</label></div>
+                        <input type="button" value="Zufallszahlen" onclick=Zufallszahl() class="equal operator">
+                    </div>
+                   <div style="margin-top: 50px;text-align:center">
+                    <label>Lösung:  x &equiv;</label><input step="1" id="LösX" placeholder="Lösung x" style="text-align: center;font-size: larger; width:90px;"><label>(mod</label><input step="1" id="m_ges" placeholder="m" style="text-align: center;font-size: larger; width:90px;"><label>)</label>
+                    <input type="button" value="Prüfen" onclick=Prüf(0) class="equal operator">
+                    </div>
+                    <div style="text-align:center;">
+                        
+                        
+                    </div>
+                    <div style="text-align:center;">
+                        <input type="button"  value="Lösung anzeigen" onclick=Prüf(1) class="equal operator">
+                        <input type="button"  value="Lösungsweg" onclick=Prüf(2) class="equal operator">
+                     </div>
+
+       
+                    <p style="margin-left: 30%;" id="LösungsLabel"></p>
+                    <p id="Lösungsweg"></p>
+
+
+
+                </form>
+            </div>
+        </div>
+        <script>
+var ganzesArray = [];
+        function KongruenzFelder(){
+            let AnzahlKG = document.getElementById("AnzKG").value;
+  
+            if (AnzahlKG > 1) {
+                document.getElementById("KG1").style.display = "block";
+                document.getElementById("KG2").style.display = "block";
+            }
+            if (AnzahlKG > 2) {
+                document.getElementById("KG3").style.display = "block";
+            }
+            if (AnzahlKG > 3) {
+                document.getElementById("KG4").style.display = "block";
+            }
+            if (AnzahlKG < 3) {
+                document.getElementById("KG3").style.display = "none";
+            }
+            if (AnzahlKG < 4) {
+                document.getElementById("KG4").style.display = "none";
+            }
+
+        }    
+
+        function Lösch(){
+            document.getElementById("LösungsLabel").innerHTML = ""; 
+            document.getElementById("Lösungsweg").innerHTML = ""; 
+            document.getElementById("LösX").value = "";
+            document.getElementById("m_ges").value = "";
+            //Array.prototype.slice.call(document.getElementsByTagName('table')).forEach(function(item) { item.parentNode.removeChild(item); } );
+
+        }
+        /*
+        function GanzeZahl(){
+            
+           /*  Prüfung ob es sich um ganze Zahlen handelt
+           if ((document.getElementById("SupernummerDioA").value % 1 == 0) && (document.getElementById("SupernummerDioB").value % 1 == 0) ) {
+            } else{
+            
+                document.getElementById("LösungsLabel").innerHTML = "Bitte ganzzahlige Werte nutzen.";
+
+*/
+        
+    
+
+        function Teilerfremdheit(array) {  //Gibt an, ob alle Zahlen im Array zueinander teilerfremd sind (boolean)
+            var k = true;
+            for (i=0; i<array.length ; i++){
+                for (j=i+1; j<array.length ; j++)
+                    if (EuklidEA(array[i], array[j]) != 1) {
+                        k=false;
+                    } else {
+                        k=true;
+                    }
+            }
+            return k;
+         }
+
+
+                        
+            function EuklidEA(a, b) {         //Berechnet den ggT mittels Euklidischem Algorithmus von a und b und gibt diesen an.
+                while(b != 0 ) {
+                    let ganzZ = a/b;
+                    let Rest = a % b;
+                    a = b;
+                    b = Rest;
+                }
+                return(a);             
+            }
+
+            function TabelleFürEEA(a,b){    //gibt eine beschriftete ausführliche Tabelle für den EEA an.
+                meinArray=EAArray(a,b);
+                var tableArr = [["a","b","a div b","a mod b"]];
+                tableArr = tableArr.concat(meinArray);
+                Array.prototype.slice.call(document.getElementsByTagName('table')).forEach(function(item) { item.parentNode.removeChild(item); } );
+                createTable(tableArr); 
+            }
+
+
+
+            function EAArray(a, b) { //Erstellt das Array mit allen Einträgen für den EA und gibt es zurück
+                var meinArray = [];
+                a = Math.abs(a);
+                b = Math.abs(b);
+      
+                while(b != 0 ) {   //EEA
+                    let ganzZ = Math.floor(a/b);
+                    let Rest = a % b;
+                    meinArray.push([a,b,ganzZ,Rest]);
+                    a = b;
+                    b = Rest;
+                } 
+                return(meinArray);             
+            }
+
+            function EEAArray(a, b) {
+                var meinArray = EAArray(a,b);
+                let ArrayLaenge = meinArray.length;
+                let x = 0;
+                meinArray[ArrayLaenge-1][4]=x;
+                let y = 1;
+                meinArray[ArrayLaenge-1][5]=y;
+                let z;
+
+                for (i=1 ; i< ArrayLaenge;i++){
+                    z=x;
+                    x=y;
+                    meinArray[ArrayLaenge-1-i][4]=x;
+                    y=z-(meinArray[ArrayLaenge-1-i][2]*y);
+                    meinArray[ArrayLaenge-1-i][5]=y;
+                }
+                return(meinArray)
+            }
+
+            function EEATabelleAnzeigen(a,b) {
+                var tableArr = [["a","b","a div b","a mod b","x","y"]];
+                var tableArr = tableArr.concat(meinArray);
+                Array.prototype.slice.call(document.getElementsByTagName('table')).forEach(function(item) {item.parentNode.removeChild(item);} );
+                createTable(tableArr);
+                document.getElementById("LösungsLabel").innerHTML = "<br> Lösung des EEA in Tabellenform <br>"; 
+            } 
+            
+            /*  Erklärung Lösungsweg EEA
+
+                var gleichungsLoesung2 = "Euklidischer Algorithmus in Gleichungsform und umgestellt<br><br>";
+                for (i=0; i<meinArray.length-1;i++) {
+                gleichungsLoesung2 += meinArray[i][0]+" = "+meinArray[i][2]+" * " + meinArray[i][1] + " + " + meinArray[i][3] + "  \t   &rarr;    " + meinArray[i][3]+" = "+meinArray[i][0]+" - " + meinArray[i][2] + " * " + meinArray[i][1] + "<br>";
+                }
+                gleichungsLoesung2 += meinArray[meinArray.length-1][0]+" = "+meinArray[meinArray.length-1][2]+" * " + meinArray[meinArray.length-1][1] + " + " + meinArray[meinArray.length-1][3];
+                document.getElementById("Rueckmeldung2EA").innerHTML = gleichungsLoesung2; 
+
+                var gleichungsLoesung3 = "Lösung in Gleichungsform: <br> <br>";
+                gleichungsLoesung3 += meinArray[meinArray.length-1][1];
+                for (i=meinArray.length-1; i>1 ; i--) {
+                
+                gleichungsLoesung3 += " = " + meinArray[i-1][4] + "*" + meinArray[i-1][0] + " + (" + meinArray[i-1][5] + ") * " + meinArray[i-1][1] + " = "+meinArray[i-1][0]+" - " + meinArray[i-1][2] + " * (" + meinArray[i-2][0]+" - " + meinArray[i-2][2] + " * " + meinArray[i-2][1] +") <br>";
+
+                }
+                gleichungsLoesung3 += " = " + meinArray[0][4] + "*" + meinArray[0][0] + " + " + meinArray[0][5] + " * " + meinArray[0][1];
+                
+                gleichungsLoesung3 +="<br> <br> Eine Lösung für x ist also "+((meinArray[0][4] % meinArray[0][1])+Math.abs(meinArray[0][1])) % meinArray[0][1]+" (mod"+meinArray[0][1]+")";
+               
+               
+               
+                if (document.getElementById("allgLoesCheck").checked == true){
+                  gleichungsLoesung3 +="<br> <br> Bestimmung der allgemeinen Lösungen <br>";
+                  gleichungsLoesung3 +="Für die allgemeine Lösung von X gilt X=x + n · b/ggT(a,b) = "+e*meinArray[0][4]+"+ n·"+meinArray[0][1]+"/"+EuklidEA()+"="+e*meinArray[0][4]+"+ n·"+meinArray[0][1]/EuklidEA() +"<br>";
+                  gleichungsLoesung3 +="Für die allgemeine Lösung von Y gilt Y=y - n · a/ggT(a,b) = "+e*meinArray[0][5]+"- n·"+meinArray[0][0]+"/"+EuklidEA()+"="+e*meinArray[0][5]+"- n·"+meinArray[0][0]/EuklidEA()+"<br>";
+                } else {
+               
+                }
+*/
+
+
+
+                function createTable(tableData) {
+                    var table = document.createElement('table');
+                    var tableBody = document.createElement('tbody');
+
+                    tableData.forEach(function(rowData) {
+                        var row = document.createElement('tr');
+
+                        rowData.forEach(function(cellData) {
+                        var cell = document.createElement('td');
+                        cell.appendChild(document.createTextNode(cellData));
+                        row.appendChild(cell);
+                        });
+
+                        tableBody.appendChild(row);
+                    });
+
+                    table.appendChild(tableBody);
+                    document.body.appendChild(table);
+                }
+
+            function TeilerfremdArray() {
+                var ZArray = [];
+                var AnzahlKG = 4; //document.getElementById("AnzKG").value;
+                var Zähler = 1
+                ZArray[0]=Math.round(Math.random()*99+1);
+                while (Zähler < AnzahlKG) {
+                    let teilerfremd = true;
+                    let neuZahl = Math.round(Math.random()*99+1);
+                    for (i=0 ; i<Zähler;i++) {
+                        if (EuklidEA(ZArray[i], neuZahl)!=1){
+                            teilerfremd = false;
+                        }
+                    }
+                    if (teilerfremd == true) {
+                        ZArray[Zähler]=neuZahl;
+                        Zähler = Zähler + 1;
+                    }
+                }
+                return ZArray;
+            }
+
+            function ZufallsArray() {
+                var ZArray = [];
+                var AnzahlKG = 4;// document.getElementById("AnzKG").value;
+                for (i=0; i<AnzahlKG; i++) {
+                    ZArray[i]=Math.round(Math.random()*99+1);
+                }
+                return ZArray;
+            }
+
+            function Zufallszahl() {
+                Lösch();
+                var meinArrayM = TeilerfremdArray();
+                
+                var meinArrayA = ZufallsArray();
+                
+                var ganzesArray = [meinArrayA, meinArrayM];
+                
+                document.getElementById("a1").value = ganzesArray[0][0] % ganzesArray[1][0];
+                document.getElementById("a2").value=ganzesArray[0][1] % ganzesArray[1][1];
+                document.getElementById("a3").value=ganzesArray[0][2] % ganzesArray[1][2];
+                document.getElementById("a4").value=ganzesArray[0][3] % ganzesArray[1][3];
+                document.getElementById("m1").value=ganzesArray[1][0];
+                document.getElementById("m2").value=ganzesArray[1][1];
+                document.getElementById("m3").value=ganzesArray[1][2];
+                document.getElementById("m4").value=ganzesArray[1][3];
+                
+                
+                   
+                    
+                    
+            
+                return(ganzesArray);
+            } 
+              
+
+            function WerteAusleser(){
+                let Array1 = [];
+                Array1 = [[parseInt(document.getElementById("a1").value) , parseInt(document.getElementById("a2").value) , parseInt(document.getElementById("a3").value) , parseInt(document.getElementById("a4").value)],[parseInt(document.getElementById("m1").value), parseInt(document.getElementById("m2").value), parseInt(document.getElementById("m3").value), parseInt(document.getElementById("m4").value)]]  ;
+                return Array1;
+            }
+
+           
+
+            function Prüf(LösungAngeben) {
+                
+                var ganzesArray = WerteAusleser();
+                let AnzahlKG = document.getElementById("AnzKG").value;
+                var GesamtM = 1 ;
+                for (i = 0; i<AnzahlKG; i++){
+                GesamtM *=  ganzesArray[1][i];
+                }
+                
+                var meinArrayC1 = GesamtM/ganzesArray[1][0];
+                var meinArrayC2 = GesamtM/ganzesArray[1][1];
+                var meinArrayC3 = GesamtM/ganzesArray[1][2];
+                var meinArrayC4 = GesamtM/ganzesArray[1][3];
+                              
+                ganzesArray[2] = [meinArrayC1,meinArrayC2,meinArrayC3,meinArrayC4];
+                console.table(ganzesArray);
+                var GesamtX = 0;
+                var hilfsArray = [];
+                for (j=0 ; j < AnzahlKG; j++){
+                    var a = (EEAArray(ganzesArray[2][j],ganzesArray[1][j]));
+                    hilfsArray.push(a[0][4]);
+                                    
+                    console.table(hilfsArray);
+                }
+                ganzesArray.push(hilfsArray);
+
+                for (i = 0; i<AnzahlKG; i++){
+                GesamtX += ganzesArray[0][i]*ganzesArray[3][i]*ganzesArray[2][i];
+                }
+                if (LösungAngeben == 0) {
+                    console.log((document.getElementById("m_ges").value == GesamtM));
+                    console.log((document.getElementById("LösX").value % GesamtM));
+                    console.log((GesamtX % GesamtM));
+                    if ((document.getElementById("m_ges").value == GesamtM) &&(((document.getElementById("LösX").value % GesamtM)+GesamtM)%GesamtM == ((GesamtX % GesamtM)+GesamtM)% GesamtM)){
+                        document.getElementById("LösungsLabel").innerHTML = "Alles richtig";
+                    } else{
+                        document.getElementById("LösungsLabel").innerHTML = "Leider falsch";
+                    }
+                } else if (LösungAngeben == 1) {
+                    document.getElementById("LösungsLabel").innerHTML = "x &equiv; "+GesamtX+" mod ( "+GesamtM+" ) &equiv; "+((GesamtX %GesamtM)+GesamtM)%GesamtM+" mod ( "+GesamtM+" )"  ;
+
+                } else {
+                    var AnzugebendeLösung = "";
+                    AnzugebendeLösung += "x &equiv; "+GesamtX+" mod ( "+GesamtM+" ) &equiv; "+((GesamtX %GesamtM)+GesamtM)%GesamtM+" mod ( "+GesamtM+" ) <br><br>"  ;
+                    AnzugebendeLösung += GesamtX+" = ";
+                    for (i = 0; i<AnzahlKG; i++){
+                        AnzugebendeLösung +=  ganzesArray[0][i]+" * "+ ganzesArray[3][i]+" * "+ganzesArray[2][i]+" + ";
+                        }
+                    AnzugebendeLösung =  AnzugebendeLösung.substr(0, AnzugebendeLösung.length - 3);   
+                    AnzugebendeLösung += " <br><br> Mit den multiplikativen Inversen x<sub>i</sub> der jeweiligen Gewichte k<sub>i</sub> <br><br> ";
+                    for (i = 0; i<AnzahlKG; i++){
+                        var ModK = ganzesArray[2][i] % ganzesArray[1][i];
+                        AnzugebendeLösung +=  "k<sub>"+(i+1)+"</sub> = "+ganzesArray[2][i]+" &equiv; "+(ModK)+" mod ("+ganzesArray[1][i]+ ")  mit dem multiplikativen Inversen x<sub>"+(i+1)+"</sub> = "+ganzesArray[3][i]+" mod ("+ganzesArray[1][i]+") <br>";
+                        }
+                    document.getElementById("LösungsLabel").innerHTML =AnzugebendeLösung;
+                }          
+        }
+
+
+        
+
+        </script>
+
+    </body>
+</html>

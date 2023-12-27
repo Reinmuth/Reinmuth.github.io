@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>EA zweier Zahlen</title>
+        <style>
+            td {width: 80px; border: 1px solid black; text-align: center;}
+            table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+            .operator{  border: 2;
+                        outline: 2;
+                        width: 160px;
+                        height: 40px;
+                        border-radius: 10px;
+                        margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+            .display{    text-align: left;
+    flex: 1;
+    font-size: 25px;
+    box-shadow: none;
+    margin-bottom: 20px;
+    font-size: larger;
+}
+        </style>
+
+
+
+<script>            function Werteliste (querystring) {
+    if (querystring == '') return;
+    var wertestring = querystring.slice(1);
+    var paare = wertestring.split("&");
+    var paar, name, wert;
+    for (var i = 0; i < paare.length; i++) {
+      paar = paare[i].split("=");
+      name = paar[0];
+      wert = paar[1];
+      name = unescape(name).replace("+", " ");
+      wert = unescape(wert).replace("+", " ");
+      this[name] = wert;
+    }
+  }
+
+  function EuklidEEA() {
+                var meinArray = [];
+                var a = Math.abs(document.getElementById("SupernummerEA").value);
+
+                var b = Math.abs(document.getElementById("SupernummerEA1").value);
+                var j = 0;
+                if((a != "") && (b != "")) {
+                    while(b != 0 ) {
+                    j = j+1;
+
+                    let ganzZ = Math.floor(a/b);
+                let Rest = a % b;
+                meinArray.push([a,b,ganzZ,Rest]);
+                a = b;
+                b = Rest;
+                
+                }
+                return(meinArray); 
+                } 
+              
+            }
+
+
+
+  </script>
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+           <div class="container">
+            <div style="color: black;" class="calculator" >
+                <form> 
+                    <h2 style="text-align:center"> Der Euklidische Algorithmus<br>
+                    </h2> 
+                    <p style="text-align:center" >Bestimmen Sie den ggT(a,b) mittels Euklidischem Algorithmus</p>
+                    <div style="text-align:center" class="display">
+                        <label>a =</label>
+                        <input name="Antwort" style="text-align: center;  font-size: larger; width:90px;margin-left: 5px; margin-right: 5px;" id="SupernummerEA">
+                        <label>b =</label>
+                        <input name="Antwort" style="text-align: center; font-size: larger; width:90px;" id="SupernummerEA1"> <input type="button" value="Neue Zahlen" onclick=StartiEA() class="equal operator">
+                    </div>
+                    
+                   <div style="color: rgb(0, 0, 0);text-align: center;width: 200 px; height: 50 px;" class="display">
+                    <label>ggT(a,b)=</label><input style="color: rgb(0, 0, 0);text-align:center;font-size: larger;" type="text" name="display" id="SupernummerEA2" placeholder="Hier ggT(a,b) eingeben">
+                    </div>
+                    
+                    <p id="RueckmeldungEA" style="text-align: center"></p>
+
+
+
+                    <div style="text-align:center;">
+                        
+                        <input type="button" value="ggT Lösung prüfen" onclick=pruef1EA() class="equal operator">
+                        
+
+                    </div>
+                    <div style="text-align:center;">
+                     <!--  <input type="button"  value="ggT Lösung anzeigen" onclick=AngabeLoesungEA() class="equal operator">  --> 
+                        <input type="button" value="Lösungsweg EA" onclick=LoesungswegEA() class="equal operator">
+                        
+                       <!-- <input type="button" value="RR" onclick=restarti()> -->
+
+                     <!--  <input type="button" value="=" onclick="display.value = eval(display.value)" class="equal operator"> --> 
+                    </div>
+     
+                    </div>
+                </form>
+                <p id="Rueckmeldung2EA" style="margin-left:40%;"></p>
+                <p id="Rueckmeldung3EA" style="margin-left:40%;"></p>
+                <p id="Rueckmeldung4EA" style="margin-left:40%;"></hp>
+            </div>
+        </div>
+        <script>
+            var meinArray = [];
+            var tableArr = [];
+
+
+
+
+            var liste = new Werteliste(location.search);
+if (liste.name1 == undefined) {
+
+} else{
+  document.getElementById("SupernummerEA").value=liste.name1;
+
+}
+if (liste.name2 == undefined) {
+
+} else{
+    document.getElementById("SupernummerEA1").value=liste.name2;
+
+}                
+
+
+
+                        
+        function AngabeLoesungEA() {
+            document.getElementById("SupernummerEA2").value = EuklidEA();
+            }
+
+        /*    function Solution() {
+                document.getElementById("Rueckmeldung").innerHTML = "Wir bestimmen die Primfaktorzerlegung von a und b.";
+                document.getElementById("Rueckmeldung2").innerHTML ="a=2<sup>"+c[0]+"</sup>·"+"3<sup>"+c[1]+"</sup>"+"·5<sup>"+c[2]+"</sup>"+"·7<sup>"+c[3]+"</sup>"+"·11<sup>"+c[4]+"</sup> "+" und " + "b=2<sup>"+d[0]+"</sup>"+"·3<sup>"+d[1]+"</sup>"+"·5<sup>"+d[2]+"</sup>"+"·7<sup>"+d[3]+"</sup>"+"·11<sup>"+d[4]+"</sup>";
+                document.getElementById("Rueckmeldung3").innerHTML = "Für das kgV nehmen wir das Maximum der Exponenten der jeweiligen Primfaktoren";
+                let ggT;
+                let ErgO = [];
+                for (i = 0; i<5 ; i++){
+                    ErgO[i]=Math.max(c[i], d[i]);
+                    }
+                ggT = ArrayZuZahl(ErgO);
+                document.getElementById("Rueckmeldung4").innerHTML ="ggT(a,b)=2<sup>max("+c[0]+","+d[0]+")</sup>"+"·3<sup>max("+c[1]+","+d[1]+")</sup>"+"·5<sup>max("+c[2]+","+d[2]+")</sup>"+"·7<sup>max("+c[3]+","+d[3]+")</sup>"+"·11<sup>max("+c[4]+","+d[4]+")</sup>"+"=2<sup>"+ErgO[0]+"</sup>"+"·3<sup>"+ErgO[1]+"</sup>"+"·5<sup>"+ErgO[2]+"</sup>"+"·7<sup>"+ErgO[3]+"</sup>"+"·11<sup>"+ErgO[4]+"</sup> = "+ggT;
+            } */
+
+            function EuklidEA() {
+                var meinArray = [];
+                var a = Math.abs(document.getElementById("SupernummerEA").value);
+
+                var b = Math.abs(document.getElementById("SupernummerEA1").value);
+
+                if (a < b) {
+
+                } else {
+                    var u = a;
+                    a= b;
+                    b= u;
+                }
+
+                if((a != "") && (b != "")) {
+                    while(b != 0 ) {
+                    let ganzZ = a/b;
+                let Rest = a % b;
+                a = b;
+                b = Rest;
+
+                }
+                return(a); 
+                } 
+              
+            }
+
+            function LoesungswegEA(){
+                meinArray=EuklidEEA();
+
+                var tableArr = [["a","b","a div b","a mod b"]];
+                tableArr = tableArr.concat(meinArray);
+                Array.prototype.slice.call(document.getElementsByTagName('table')).forEach(function(item) { item.parentNode.removeChild(item); } );
+                createTable(tableArr); 
+                document.getElementById("Rueckmeldung2EA").innerHTML = " ";
+                document.getElementById("Rueckmeldung3EA").innerHTML = " ";
+                document.getElementById("Rueckmeldung4EA").innerHTML = " ";
+                var gleichungsLoesung = "Euklidischer Algorithmus in Gleichungsform <br><br>";
+                for (i=0; i<meinArray.length;i++) {
+                gleichungsLoesung += meinArray[i][0]+" = "+meinArray[i][2]+" * " + meinArray[i][1] + " + " + meinArray[i][3] + "<br>";
+                }
+                gleichungsLoesung += "<br><br> Euklidischer Algorithmus in Tabellenform ";
+                document.getElementById("Rueckmeldung2EA").innerHTML = gleichungsLoesung; 
+                AngabeLoesungEA();
+ 
+            }
+
+
+                
+    
+                
+                
+
+                function createTable(tableData) {
+  var table = document.createElement('table');
+  var tableBody = document.createElement('tbody');
+
+  tableData.forEach(function(rowData) {
+    var row = document.createElement('tr');
+
+    rowData.forEach(function(cellData) {
+      var cell = document.createElement('td');
+      cell.appendChild(document.createTextNode(cellData));
+      row.appendChild(cell);
+    });
+
+    tableBody.appendChild(row);
+  });
+
+  table.appendChild(tableBody);
+  document.body.appendChild(table);
+}
+
+            function StartiEA() {
+                var c = Math.round(Math.random()*99+1);
+                var d = Math.round(Math.random()*99+1);
+
+                document.getElementById("RueckmeldungEA").innerHTML = " ";
+                document.getElementById("Rueckmeldung2EA").innerHTML = " ";
+                document.getElementById("Rueckmeldung3EA").innerHTML = " ";
+                document.getElementById("Rueckmeldung4EA").innerHTML = " ";
+                var ZwErg1 = c;
+                var ZwErg2 = d;
+                if (ZwErg1 < ZwErg2) {
+                    var u = ZwErg1;
+                    ZwErg1= ZwErg2;
+                    ZwErg2= u;
+                } else {
+                    
+                }
+
+                document.getElementById("SupernummerEA").value = ZwErg1;
+                document.getElementById("SupernummerEA1").value = ZwErg2;
+                document.getElementById("SupernummerEA2").value = "";
+                Array.prototype.slice.call(document.getElementsByTagName('table')).forEach(function(item) { 
+   item.parentNode.removeChild(item); 
+} );
+                }
+
+            function pruef1EA() {
+                let SErg = document.getElementById("SupernummerEA2").value;
+                let ggT;
+                ggT = EuklidEA();
+                if(SErg == ggT) {
+                    document.getElementById("RueckmeldungEA").innerHTML = "Super";
+                } else {
+                    document.getElementById("RueckmeldungEA").innerHTML = "Leider falsch";
+                }
+            }
+
+
+        </script>
+
+    </body>
+</html>

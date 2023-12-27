@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hassediagramm zweidimensional</title>
+        <style>
+            td {width: 80px; border: 1px solid black; text-align: center;}
+            table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+            .operator{  border: 2;
+                        outline: 2;
+                        width: 120px;
+                        height: 40px;
+                        border-radius: 10px;
+                        margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+            
+        </style>
+
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+           <div>
+            <div style="color: black;" class="calculator" >
+                <form> 
+                    <h2 style="text-align:center"> Hassediagramme zeichnen</h2> 
+                    <p style="text-align: center;">Zeichnen Sie ein Hassediagramm für folgende Zahl:</p>
+                   <div style="text-align:center;">
+                    <input  style="text-align: center;" value="" placeholder="Zahl eingeben" class="equal operator" id="Zahl">
+                    <input type="button" value="Neue Zahl" onclick=neuZahl() class="equal operator">
+<!--                    <input type="number" value="" placeholder="Primfaktor 1"  class="equal operator" id="B1">
+                        <input type="number" value="" placeholder="Exponent 1"  class="equal operator" id="E1">
+                    </div>
+                    <div style="text-align:center;">
+                        <input type="number" value="" placeholder="Primfaktor 2"  class="equal operator" id="B2">
+                        <input type="number" value="" placeholder="Exponent 2"  class="equal operator" id="E2">
+                    </div>
+                
+                    <div style="text-align:center;">
+                        <input type="number" value="" placeholder="Primfaktor 3"  class="equal operator" id="B3">
+                        <input type="number" value="" placeholder="Exponent 3"  class="equal operator" id="E3">
+                -->     </div>
+                <p style="text-align: center;">Prüfen Sie Ihre Zeichnung:</p>
+                    <div style="text-align:center;">
+                        <input type="button" value="Zeichnen lassen" onclick=Prüfung() class="equal operator">
+                        <input type="button" value="Reset" onclick=Reset() class="equal operator">
+                    </div>
+                    <p id="Antwort" style="text-align: center;"></p>
+                
+                </form>
+                <canvas id="myCanvas" width="800" height="400"></canvas>
+
+            </div>
+        </div>
+
+
+        <script>
+
+        function neuZahl(){
+            document.getElementById("Zahl").value = Math.floor(Math.random()*100+2)
+        }
+
+        function PFZ(n){
+            if (n>10000 || n<2){
+                document.getElementById("Antwort").innerHTML = "Bitte ganzzahlige Werte zwischen 2 und 10000 verwenden."
+            } else {
+            var hilfsArray=[];
+            for (i = 2; i<1001 ; i++) {
+                var exp = 0;
+                while ( n % i == 0) {
+                    exp = exp +1;
+                    n = n / i;
+                    }
+                hilfsArray[i]= [i, exp];
+
+            }
+            return hilfsArray;
+            }
+        }
+
+        function ArrayToPFZ(hilfsArray){
+            var k = 0;
+            var PFZArray = new Array([1,0],[1,0],[1,0]);
+            PFZArray[0]=[1,0];
+            PFZArray[1]=[1,0];
+            PFZArray[2]=[1,0];
+
+            for (i=2; i< hilfsArray.length-1 ; i++){
+                if (hilfsArray[i][1] != 0){
+                    
+                    PFZArray[k]=[hilfsArray[i][0],hilfsArray[i][1]];
+
+                    k=k+1;
+                }
+            }
+            if (k>3){
+                document.getElementById("Antwort").innerHTML = "Zu viele Primfaktoren. Nicht gut darstellbar."
+            } else {
+                return PFZArray;
+            }
+        }
+        
+        function Zeichnen(PFZArray) { 
+            Reset();
+
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+            var B1 = PFZArray[0][0];
+            var E1 = PFZArray[0][1];
+            var B2 = PFZArray[1][0];
+            var E2 = PFZArray[1][1];
+            var B3 = PFZArray[2][0];
+            var E3 = PFZArray[2][1];
+            console.log(B1,E1,B2,E2,B3,E3);
+
+            var diag = 0.1+0.4/(E3);
+            if (E3 == 0) {
+                diag = 0.5;
+            }
+            console.log("Bis hier");
+            var Abst = Math.min(c.width/(E1 + 2),c.height/(E2 + 2));
+
+            for (z=0;z<=E3;z++){
+                for (j=0;j<=E2;j++){    
+                    for (i=0;i<=E1;i++){
+                            ctx.moveTo(Abst*(0+1)+diag*Abst*z,Abst*(j+1)-diag*Abst*z);
+                            ctx.lineTo(Abst*(i+1)+diag*Abst*z,Abst*(j+1)-diag*Abst*z);
+
+                            if(j>0){
+                                ctx.moveTo(Abst*(i+1)+diag*Abst*z,Abst*((j-1)+1)-diag*Abst*z);
+                                ctx.lineTo(Abst*(i+1)+diag*Abst*z,Abst*(j+1)-diag*Abst*z);
+                            }
+                            if(z>0){
+                                ctx.moveTo(Abst*(i+1)+diag*Abst*(z-1),Abst*((j)+1)-diag*Abst*(z-1));
+                                ctx.lineTo(Abst*(i+1)+diag*Abst*z,Abst*(j+1)-diag*Abst*z);
+                            }
+
+                            ctx.stroke();
+                    }
+                }
+            }
+            for(z=0;z<=E3;z++){
+                for (j=0;j<=E2;j++){
+                    for (i=0;i<=E1;i++){
+                            ctx.beginPath();
+                            ctx.fillStyle = "#ff0000";
+                            if (z>0){
+                                ctx.fillStyle = "#00ff00";
+                            }
+                            if (z>1){
+                                ctx.fillStyle = "#ff00ff";
+                            }
+                            if (z>2){
+                                ctx.fillStyle = "#00ffff";
+                            }
+                            if (z>3){
+                                ctx.fillStyle = "#555555";
+                            }
+                            ctx.arc(Abst*(i+1)+diag*Abst*z, Abst*(j+1)-diag*Abst*z, Abst/8, 0, 2 * Math.PI);
+                            ctx.fill();
+                            ctx.fillStyle = "#000000";
+                            
+                            var Wert;
+                            Wert = (B1 ** i ) * (B2 ** j) * (B3 ** z);
+                            console.log(Wert);
+                            ctx.font = "20px Arial";
+                            ctx.fillText(Wert, Abst*(i+1)-5+(diag-0.02)*Abst*z, Abst*(j+1)+10-diag*Abst*z);
+
+                        }
+                }
+            }
+
+            
+        }
+
+
+        function Prüfung() {
+            Reset();
+            meinArray = ArrayToPFZ(PFZ(eval(document.getElementById("Zahl").value)));
+            var B1 = meinArray[0][0];
+            var E1 = meinArray[0][1];
+            var B2 = meinArray[1][0];
+            var E2 = meinArray[1][1];
+            var B3 = meinArray[2][0];
+            var E3 = meinArray[2][1];
+            console.log(ggT(B1,B2));
+            console.log(ggT(B1,B3));
+            console.log(ggT(B2,B3));
+            meinArray.sort(function(a,b){
+                return b[1]-a[1];
+            });
+            console.table(meinArray);
+            Zeichnen(meinArray);
+            // if (ggT(B1,B2) == 1 && ggT(B2,B3)==1 && ggT(B1,B3 == 1) && (B1 > 1) && (B2 > 1) && (B3 > 1)){
+            //     if (E3 > 4 || E2 > 6 || E1 > 10) {
+            //         document.getElementById("Antwort").innerHTML = "Bitte kleinere Werte für die Exponenten wählen, sonst wird es unübersichtlich";
+            //     }
+            //     else {
+            //         document.getElementById("Antwort").innerHTML = "";
+
+            //     }
+            // } else{
+
+            //     document.getElementById("Antwort").innerHTML = "Die Primfaktoren sind nicht teilerfremd oder keine Primzahlen";
+            // }
+    
+        }
+        
+
+        function Reset() {        
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");   
+            ctx.clearRect(0, 0, c.width, c.height);
+            ctx.beginPath();
+            document.getElementById("Antwort").innerHTML = "";
+            
+        }
+
+        
+
+        function ggT(e, f) {
+            if (e == f) return e;
+            if (f == 0) return e;
+            if ( e < f )
+                return ggT (e, f % e)
+            else
+                return ggT (f, e % f)
+        }// Ende der Funktion ggT
+        </script>
+    </body>
+</html>

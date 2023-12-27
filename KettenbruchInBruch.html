@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Von Kettenbruch in Bruch umwandeln</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            td {width: 80px; border: 1px solid black; text-align: center;}
+            table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+            .operator{  border: 2;
+                        outline: 2;
+                        width: 120px;
+                        height: 40px;
+                        border-radius: 10px;
+                        margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+            .display{    text-align: left;
+    flex: 1;
+    font-size: 25px;
+    box-shadow: none;
+    margin-bottom: 20px;
+    font-size: larger;
+}
+        </style>
+
+        <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+        
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+    <nav style="margin: 5px;">			
+        <ul>
+            <li><a id="info" href="index.html">Übersicht</a></li>
+            <li><a href="">Inhalte Zahlentheorie</a>          </li>
+            <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+            
+        </ul>		
+    </nav>	
+</div>
+       
+           <div class="container">
+            <div style="color: black;" class="calculator" >
+                <form> 
+                    <h2 style="text-align:center"> Von Kettenbruch in Bruch umwandeln</h2> 
+
+                  
+                   <div style="margin-top: 50px;text-align:center;">
+                    <label>Eingabe für den Kettenbruch bitte mit Komma trennen </label>
+                    
+                        <div style="text-align:center;"> 
+                            <label>[ </label><input id="EingabeKettenbruch" placeholder="1,1,2,3" class="BruchClass" style="text-align: center;font-size: larger; width:auto;"><label>] </label>
+                            <input type="button" value="Neues Beispiel" onclick=ZufallsKettenBruch() class="equal operator">
+                        </div> 
+                        <p></p>
+                        <div style="text-align:center;"> 
+                            <input id="EingabeZähler" placeholder="Zähler" style="text-align: center;font-size: larger; width:100px;"><label> / </label><input id="EingabeNenner" placeholder="Nenner"  style="text-align: center;font-size: larger; width:100px;">
+                            <input type="button" value="Lösung prüfen" onclick=Prüfen() class="equal operator">
+                        </div> 
+
+                    </div>
+                    <div style="text-align:center;">
+
+                        <input type="button" value="Lösung anzeigen" onclick=KettenBruchUmwandeln() class="equal operator">
+                    </div>
+
+       
+                    <p style="margin-left: 30%;" id="LösungsAusgabe"></p>
+                    <p style="text-align: center;" id="AngabeBruch"></p>
+                    <p style="text-align: center;" id="LösungsAusgabe2"></p>
+                    
+
+                </form>
+            </div>
+        </div>
+        <script>
+        
+   /*     function LöscheAlles(){
+            document.getElementById("LösungsBruch").innerHTML = ""; 
+        }
+     */   
+        
+        function ZufallsKettenBruch() {
+                //LöscheAlles();
+                document.getElementById("LösungsAusgabe").innerHTML = "";
+                document.getElementById("LösungsAusgabe2").innerHTML = "";
+                document.getElementById("AngabeBruch").innerHTML = "";
+                var StellenZahl = Math.floor(Math.random()*10+1);
+                var ZufallsWerte = [];
+                var KettBrStr = "";
+                for (i=0; i<StellenZahl; i++) {
+                    ZufallsWerte[i]=Math.floor(Math.random()*10);
+                    KettBrStr += ZufallsWerte[i] + ",";
+                }
+                KettBrStr = KettBrStr.substr(0,KettBrStr.length-1);
+                document.getElementById("EingabeKettenbruch").value = KettBrStr;
+
+            }
+
+           
+            function AusgabeAlsBruch(meinArray) {
+                console.table(meinArray);  
+                var AusgabeText = "";      
+                AusgabeText += meinArray[meinArray.length-1];
+                for (i= meinArray.length-2; i>=0 ; i--){
+                    AusgabeText = meinArray[i]+"+ \\frac{1}{"+AusgabeText+"}"
+                }
+                AusgabeText = " Als Bruch geschrieben: \$\$"+AusgabeText+"\$\$";
+                console.log(AusgabeText);  
+                document.getElementById("AngabeBruch").innerHTML = ""+AusgabeText;
+                
+            }
+
+
+            function KettenBruchUmwandeln() {        
+                var FeldStr = document.getElementById("EingabeKettenbruch").value;
+                var meinArray = [];
+                FeldStr = FeldStr.split(",");
+                
+                for (i=0; i < FeldStr.length; i++) {
+                    meinArray[i] = parseInt(FeldStr[i]);
+                }
+                console.table(meinArray);
+
+                
+
+                if (meinArray.length == 1){
+                    Zähler = meinArray[0];
+                    Nenner = 1
+                    document.getElementById("LösungsAusgabe2").innerHTML = "$$"+ Zähler/Nenner+"$$";
+                } else {
+
+                    var Nenner;
+                    var Zähler;
+                    Nenner = meinArray[meinArray.length-1];
+                    var Rest = 1;
+                    for (i=0; i < meinArray.length-2; i++) {
+                        Zähler = meinArray[meinArray.length-2-i]*Nenner+Rest;
+                        Rest = Nenner; 
+                        Nenner = Zähler;
+                        console.log(Zähler,Nenner);
+                    }
+                    Zähler = meinArray[0]*Nenner+Rest
+
+                document.getElementById("LösungsAusgabe2").innerHTML = "Lösung: $$ \\frac{";
+                document.getElementById("LösungsAusgabe2").innerHTML += Zähler + "}{"+Nenner+"} \\approx "+ Zähler/Nenner +"$$";
+                }
+                AusgabeAlsBruch(meinArray);
+                MathJax.typeset();
+
+            }
+
+            function Prüfen() {        
+                var FeldStr = document.getElementById("EingabeKettenbruch").value;
+                var meinArray = [];
+                FeldStr = FeldStr.split(",");
+                
+                for (i=0; i < FeldStr.length; i++) {
+                    meinArray[i] = parseInt(FeldStr[i]);
+                }
+                console.table(meinArray);
+
+                if (meinArray.length == 1){
+                    Zähler = meinArray[0];
+                    Nenner = 1
+                    
+                } else {
+
+                    var Nenner;
+                    var Zähler;
+                    Nenner = meinArray[meinArray.length-1];
+                    var Rest = 1;
+                    for (i=0; i < meinArray.length-2; i++) {
+                        Zähler = meinArray[meinArray.length-2-i]*Nenner+Rest;
+                        Rest = Nenner; 
+                        Nenner = Zähler;
+                        console.log(Zähler,Nenner);
+                    }
+                    Zähler = meinArray[0]*Nenner+Rest
+
+
+
+                }
+                if (Zähler/Nenner == (document.getElementById("EingabeZähler").value /document.getElementById("EingabeNenner").value )){
+                    document.getElementById("LösungsAusgabe").innerHTML = "Richtig";
+                } else {
+                    document.getElementById("LösungsAusgabe").innerHTML = "Leider nicht korrekt.";
+                }
+            }
+          
+
+                
+               
+        
+
+        </script>
+
+    </body>
+</html>
