@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Stöchiometrie-Start</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:140px; font-size:20px; text-align: center;}
+    .small{ width:50px; font-size:20px; text-align: center;}
+    .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+    .ElementTabelle td{ border-color: black;border: 1px solid;}
+    .ElementTabelle tr{ border-color: black;border: 1px solid;}
+    td{ white-space: nowrap;}
+    li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+    .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+    .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+    input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+    body{background-color: rgba(193, 247, 239, 0.336);}
+    #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+    h2{ font-size: 40px;}
+    .Bildchen:hover{scale: 1.1;}
+    .Bildchen{
+        box-shadow: 7px 4px 6px 2px #000000;background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
+        border-radius: 40px;; }
+    footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        </style>
+    
+    
+</head>
+<body>
+    <div style="text-align: center; margin-top: 4em;margin-bottom: 2em;"><h1 style="font-size: 4em; margin: 0.5em;text-shadow: 4px 4px 1px rgba(2,124,206,0.62);">Stöchiometrietrainer</h1></div>
+    <div style="display: flex;flex-direction: row;justify-content: space-around;margin: auto;">
+        
+        <div class="Bildchen" onclick="Klasse8()" style="height: 80vh; background-color: blue; width: 45vw;margin: 3%;margin-top: 0;"> <h2 style="text-align: center; margin-bottom: 0px;">Klasse 8</h2> <img src="img/Klasse8.png" alt="Klasse8" width="100%"  height="150%" style="margin-top: -38%;"/></div>
+        <div class="Bildchen" onclick="Klasse10()" style="height: 80vh; background-color: red; width: 45vw;margin: 3%;margin-top: 0;"> <h2 style="text-align: center; margin-bottom: 0px;">Klasse 10</h2> <img src="img/Klasse10.png" alt="Klasse8" width="100%"  height="75%" style="margin-top: 5%;"/></div>
+    </div>
+    <script>
+        function Klasse8(){
+            window.location = "Stöchiometrietrainer8.html";
+        }
+        function Klasse10(){
+            window.location = "Stöchiometrietrainer.html";
+        }
+    </script>
+</body>
+
+</html>
