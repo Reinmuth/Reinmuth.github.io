@@ -198,7 +198,7 @@ if (level == 1){
     for ( i = 0;  i < Reaktionsarray[0].length ; i++){
         var id = "";
         id = "E"+i;
-        Inneres += '<td> <input id='+id+' placeholder="Summenformel"> </td>';
+        Inneres += '<td> <input oninput="KoeffizientenVerkleinern(this.id)" id='+id+' placeholder="Summenformel"> </td>';
         if ( i != Reaktionsarray[0].length-1 ){
             Inneres += "<td>+</td>";
         } else {
@@ -208,7 +208,7 @@ if (level == 1){
     for ( i = 0;  i < Reaktionsarray[1].length ; i++){
         var id = "";
         id = "P"+i;
-        Inneres += '<td> <input id='+id+' placeholder="Summenformel"> </td>';
+        Inneres += '<td> <input oninput="KoeffizientenVerkleinern(this.id)" id='+id+' placeholder="Summenformel"> </td>';
         if ( i != Reaktionsarray[1].length-1 ){
             Inneres += "<td>+</td>";
         }
@@ -421,18 +421,43 @@ if (level == 1){
 
     }
 
-
-
-
-
-
-
-
-
-
     document.getElementById("myTable").innerHTML = Inneres;
 
 }
+
+function KoeffizientenVerkleinern(richtigeId){
+        let meineVariable = "";
+        meineVariable = document.getElementById(richtigeId).value;
+        meineVariable = meineVariable.replace("1", "₁");
+        meineVariable = meineVariable.replace("2", "₂");
+        meineVariable = meineVariable.replace("3", "₃");
+        meineVariable = meineVariable.replace("4", "₄");
+        meineVariable = meineVariable.replace("5", "₅");
+        meineVariable = meineVariable.replace("6", "₆");
+        meineVariable = meineVariable.replace("7", "₇");
+        meineVariable = meineVariable.replace("8", "₈");
+        meineVariable = meineVariable.replace("9", "₉");
+        meineVariable = meineVariable.replace("0", "₀");
+        document.getElementById(richtigeId).value = meineVariable;
+    }
+
+
+    function KoeffizientenVergrößern(meinText){
+        let meineVariable = "";
+        meineVariable = meinText;
+        meineVariable = meineVariable.replaceAll("₁", "1");
+        meineVariable = meineVariable.replaceAll("₂", "2");
+        meineVariable = meineVariable.replaceAll("₃", "3");
+        meineVariable = meineVariable.replaceAll("₄", "4");
+        meineVariable = meineVariable.replaceAll("₅", "5");
+        meineVariable = meineVariable.replaceAll("₆", "6");
+        meineVariable = meineVariable.replaceAll("₇", "7");
+        meineVariable = meineVariable.replaceAll("₈", "8");
+        meineVariable = meineVariable.replaceAll("₉", "9");
+        meineVariable = meineVariable.replaceAll("₀", "0");
+        return meineVariable;
+    }
+
 
     function FarbEinsteller(){
         document.getElementById("Anz0").style.color = "black";
@@ -470,13 +495,13 @@ if (level == 1){
                 var id = "";
                 id = "E"+i;
 
-                var Eigabe = document.getElementById(id).value;
+                var Eigabe = KoeffizientenVergrößern(document.getElementById(id).value);
                 document.getElementById(id).style.removeProperty("background-color");
                 var ArrayA = SummenformelArray(Eigabe);
                 
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[0][i][0];
-                if (document.getElementById(id).value != richtigeFormel) {
+                if (KoeffizientenVergrößern(document.getElementById(id).value) != richtigeFormel) {
                     Arrayidentisch = false;
                     document.getElementById(id).style.backgroundColor = "coral";
                 } else { document.getElementById(id).style.backgroundColor = "green";}
@@ -502,11 +527,11 @@ if (level == 1){
                 var id = "";
                 id = "P"+i;
                 document.getElementById(id).style.removeProperty("background-color");
-                var Eigabe = document.getElementById(id).value;
+                var Eigabe = KoeffizientenVergrößern(document.getElementById(id).value);
                 var ArrayA = SummenformelArray(Eigabe);
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[1][i][0];
-                if (document.getElementById(id).value != richtigeFormel) {
+                if (KoeffizientenVergrößern(document.getElementById(id).value) != richtigeFormel) {
                     Arrayidentisch = false;
                     document.getElementById(id).style.backgroundColor = "coral";
 
