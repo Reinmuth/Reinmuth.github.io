@@ -80,8 +80,9 @@
         </div>
         <script>
 var ganzesArray = [];
+var AnzahlKG;
         function KongruenzFelder(){
-            let AnzahlKG = document.getElementById("AnzKG").value;
+            AnzahlKG = document.getElementById("AnzKG").value;
   
             if (AnzahlKG > 1) {
                 document.getElementById("KG1").style.display = "block";
@@ -318,8 +319,29 @@ var ganzesArray = [];
            
 
             function Prüf(LösungAngeben) {
-                
                 var ganzesArray = WerteAusleser();
+                console.table(ganzesArray[1]);
+                console.log(AnzahlKG);
+                console.log(ganzesArray[1][0],ganzesArray[1][1],EuklidEA(ganzesArray[1][0],ganzesArray[1][1]))
+                var IstEsTeilerfremd = 1;
+                
+                
+                for (let i = 0; i < AnzahlKG; i++){
+                    for (let j = (i+1); j < AnzahlKG ; j++) {
+                        let ZahlA = ganzesArray[1][i];
+                        let ZahlB = ganzesArray[1][j];
+                        IstEsTeilerfremd = EuklidEA(ZahlA,ZahlB);
+                        console.log(IstEsTeilerfremd);
+                    }
+                }
+                
+
+            console.log("k ist")
+            
+
+
+                if (IstEsTeilerfremd == 1) {
+                
                 let AnzahlKG = document.getElementById("AnzKG").value;
                 var GesamtM = 1 ;
                 for (i = 0; i<AnzahlKG; i++){
@@ -373,7 +395,13 @@ var ganzesArray = [];
                         }
                     document.getElementById("LösungsLabel").innerHTML =AnzugebendeLösung;
                 }          
-        }
+           }else {
+            var AnzugebendeLösung = "";
+            AnzugebendeLösung = "Die Zahlen für m sind nicht teilerfremd!";
+            document.getElementById("LösungsLabel").innerHTML =AnzugebendeLösung;
+           }
+
+    }
 
 
         
