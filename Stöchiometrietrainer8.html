@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Stöchiometrie Klasse 10</title>
+    
     <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <title>Stöchiometrie Klasse 8</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -21,12 +22,53 @@
     #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
     h2{ font-size: 40px;}
     footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+    nav > input{
+            display: none;
+        }
+        ul{
+            display: none;
+        }
+        input[type=checkbox]:checked ~ ul {
+            display: block
+        }
+        nav li{display:flex;}
+        .OC td{
+        border: 1px solid;
+        border-collapse: collapse;
+      }
+      .center{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        
+      }
+      .Infos{
+        width: auto;
+      }
         </style>
     
     
 </head>
 <body>
     <h2 style="text-align: center;">Reaktionsgleichungen mit Stöchiometrie</h2>
+      
+     
+     <!-- <nav class="dropdown" style="position: absolute;right: 2%; top: 2%;background-color: aqua;"> 
+        <input type="checkbox" id="checkbox_toggle">
+        <label for="checkbox_toggle"><img src="HP2.ico" alt="toggle menue"/></label>
+        <ul>
+        <li><a href="#">Verbrennung Alkane</a></li>
+        <li><a href="#">Verbrennung Alkene</a></li>
+        <li><a href="#">Substitutionsreaktion</a></li>
+        <li><a href="#">Additionsreaktion</a></li>
+        <li><a href="#">Verbrennung Alkanale</a></li>
+        <li><a href="#">Oxidation von Alkanalen</a></li>
+        <li><a href="#">Oxidation von Aldehyden</a></li>
+        <li><a href="#">Reaktionen der Alkanone</a></li>
+        <li><a href="#">Reaktionen der Alkansäuren</a></li>
+        </ul>
+        </nav> -->
+ 
     <div style="align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3></div>
 
     <div style="text-align: center; box-sizing: border-box;">
@@ -63,8 +105,10 @@
 
 <script>
     var level = 0;
+    var textbool = 0;
+    var salzErklärung = 0;
     document.getElementById("Bilder").innerHTML="";
-
+    var failCounter = 0;
         var meinArray = [];
             meinArray.push([0,"Elementsymbol","Masse","PSE-Bild.jpg"]);
             meinArray.push([1,"H",1,"PSE-H.jpg"]);
@@ -137,15 +181,18 @@
     AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO2", "Kohlenstoffdioxid"]]]);
     AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO", "Kohlenstoffmonoxid"]]]);
 
-    AufgabenArray.push([[["B", "Bor"],["O2", "Sauerstoff"]],[["B2O3","Bortrioxid"]]]);
 
 
 
+    
     var Nummer = Math.floor(Math.random()*AufgabenArray.length);
     var Reaktionsarray = AufgabenArray[Nummer];
+    document.getElementById("myTable").innerHTML = "";
+
     Start();
     
 function Start(){ 
+    failCounter = 0;
     document.getElementById("Hilfestellung").innerHTML="";
     FarbEinsteller();
     document.getElementById("Bilder").innerHTML="";
@@ -425,7 +472,31 @@ if (level == 1){
 
 }
 
-function KoeffizientenVerkleinern(richtigeId){
+    function FarbEinsteller(){
+        document.getElementById("Anz0").style.color = "black";
+        document.getElementById("Anz1").style.color = "black";
+        document.getElementById("Anz2").style.color = "black";
+        document.getElementById("Anz3").style.color = "black";
+        document.getElementById("Anz4").style.color = "black";
+        document.getElementById("Anz0").style.borderColor = "black";
+        document.getElementById("Anz1").style.borderColor = "black";
+        document.getElementById("Anz2").style.borderColor = "black";
+        document.getElementById("Anz3").style.borderColor = "black";
+        document.getElementById("Anz4").style.borderColor = "black";
+        document.getElementById("Anz4").style.backgroundColor = "";
+        for (let i = 0 ; i < level ; i++){
+            document.getElementById("Anz"+i).style.color = "green";
+            document.getElementById("Anz"+i).style.borderColor = "green";
+            document.getElementById("Anz"+i).style.backgroundColor = "";
+        }
+        document.getElementById("Anz"+level).style.color = "white";
+        document.getElementById("Anz"+level).style.borderColor = "green";
+        document.getElementById("Anz"+level).style.backgroundColor = "green";
+       
+    }
+
+
+    function KoeffizientenVerkleinern(richtigeId){
         let meineVariable = "";
         meineVariable = document.getElementById(richtigeId).value;
         meineVariable = meineVariable.replace("1", "₁");
@@ -457,33 +528,6 @@ function KoeffizientenVerkleinern(richtigeId){
         meineVariable = meineVariable.replaceAll("₀", "0");
         return meineVariable;
     }
-
-
-    function FarbEinsteller(){
-        document.getElementById("Anz0").style.color = "black";
-        document.getElementById("Anz1").style.color = "black";
-        document.getElementById("Anz2").style.color = "black";
-        document.getElementById("Anz3").style.color = "black";
-        document.getElementById("Anz4").style.color = "black";
-        document.getElementById("Anz0").style.borderColor = "black";
-        document.getElementById("Anz1").style.borderColor = "black";
-        document.getElementById("Anz2").style.borderColor = "black";
-        document.getElementById("Anz3").style.borderColor = "black";
-        document.getElementById("Anz4").style.borderColor = "black";
-        for (let i = 0 ; i < level ; i++){
-            document.getElementById("Anz"+i).style.color = "green";
-            document.getElementById("Anz"+i).style.borderColor = "green";
-            document.getElementById("Anz"+i).style.backgroundColor = "";
-        }
-        document.getElementById("Anz"+level).style.color = "white";
-        document.getElementById("Anz"+level).style.borderColor = "green";
-        document.getElementById("Anz"+level).style.backgroundColor = "green";
-        //Grün füllen weiße Schrift
-    }
-
-
-
-
 
     function Überprüfen(){
         
@@ -564,7 +608,11 @@ function KoeffizientenVerkleinern(richtigeId){
                 document.getElementById("AntwortSatz").innerHTML += '<br><br><input type="button" value="Weiter" onclick=Ausgleich()>';
 
             } else {
-                document.getElementById("AntwortSatz").innerHTML = 'Leider falsch';
+                document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeAnzeigen0()">';
+                failCounter += 1;
+            }
+            if (failCounter >= 3){
+                document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="Ausgleich()">';
             }
         } else if (level == 1){
             document.getElementById("Hilfestellung").innerHTML="Hinweis: Die Faktoren können als Dezimalzahlen (z.B. 0,5) oder als Brüche (z.B: 1/2) eingegeben werden. ";
@@ -646,11 +694,15 @@ function KoeffizientenVerkleinern(richtigeId){
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeAusgleich()">';
+                
                 let KlassenElemente = document.getElementsByClassName("small");
                     for (let i=0; i< KlassenElemente.length; i++){
                         KlassenElemente[i].style.backgroundColor = "red";
                     }
             }
+            
+            
+
         } else if (level == 2) {
             var korrekt = true;
             for ( j = 0;  j < Reaktionsarray[0].length ; j++){
@@ -681,6 +733,10 @@ function KoeffizientenVerkleinern(richtigeId){
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeMolM()">';
+                failCounter += 1;
+            }
+            if (failCounter >= 3){
+                document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="StoffMBerechnen()">';
             }
         } else if (level == 3){
             var korrekt = true;
@@ -715,6 +771,10 @@ function KoeffizientenVerkleinern(richtigeId){
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe 1" onclick="HilfeStoffM1()"> &ensp; <input type="button" value="Hilfe 2" onclick="HilfeStoffM2()">';
+                failCounter += 1;
+            }
+            if (failCounter >= 3){
+                document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="MasseBerechnen()">';
             }
         }else if (level == 4){
             var korrekt = true;
@@ -752,10 +812,34 @@ function KoeffizientenVerkleinern(richtigeId){
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeMasse()">';
+                failCounter += 1;
+            }
+            if (failCounter >= 3){
+                document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="LösungStufe5()">';
             }
         }
     }
 
+    function LösungStufe5(){
+        for (let j = 1;  j < Reaktionsarray[0].length ; j++){
+            var id = "mE"+j;
+            document.getElementById(id).style.removeProperty("background-color");
+            var Eingabe ="";
+            Eingabe += Reaktionsarray[0][j][5];
+            Eingabe = Eingabe.replace(/\./, ",");
+            document.getElementById(id).value = Eingabe;
+                
+        }
+        for (let j = 0;  j < Reaktionsarray[1].length ; j++){
+            var id = "mP"+j;
+            document.getElementById(id).style.removeProperty("background-color");
+            var Eingabe ="";
+            Eingabe += Reaktionsarray[1][j][5];
+            Eingabe = Eingabe.replace(/\./, ",");
+            document.getElementById(id).value = Eingabe;
+                
+        }
+    }
 
     function FaktorNichtLeer(){
         var faktorNichtLeerVariable = true;
@@ -941,9 +1025,239 @@ function SchöneSummenformel(SummenformelText){
 }
 
 
+function HilfeAnzeigen0(){
+    document.getElementById("Hilfestellung").innerHTML="";
+
+    let hilfeTextGase = "";
+    let gibtEsGase = false;
+    let schwefelDrin = false;
+    let einAtomig = false;
+    let Beispiel=[];
+    let einAtomigBsp = [];
+    let organisch = false;
+    let organischBsp = [];
+    for (let j = 0;  j < Reaktionsarray[0].length ; j++){
+        let meinArray = SummenformelArray(Reaktionsarray[0][j][0]);
+        console.table(meinArray);
+        if (meinArray[0].includes("S")) {
+            schwefelDrin = true;
+        }
+        if ((meinArray.length == 1) && (meinArray[0][1] == 1)){
+            einAtomig = true;
+            einAtomigBsp.push([Reaktionsarray[0][j][0],Reaktionsarray[0][j][1]]);
+        }
+        if ((meinArray.length == 1) && (meinArray[0][1] == 2)){
+            gibtEsGase = true;
+            Beispiel.push([Reaktionsarray[0][j][0],Reaktionsarray[0][j][1]]);
+        }
+        if(meinArray.length>1){
+            if (meinArray[1].includes("H") && meinArray[0].includes("C") ) {
+                organisch = true;
+                organischBsp.push([Reaktionsarray[0][j][0],Reaktionsarray[0][j][1]]);
+            }
+        }
+    }
+    for (let j = 0;  j < Reaktionsarray[1].length ; j++){
+        let meinArray = SummenformelArray(Reaktionsarray[1][j][0])
+        if (meinArray[0].includes("S")) {
+            schwefelDrin = true;
+        }
+        if ((meinArray.length == 1) && (meinArray[0][1] == 1)){
+            einAtomig = true;
+            einAtomigBsp.push([Reaktionsarray[1][j][0],Reaktionsarray[1][j][1]]);
+        }
+        if ((meinArray.length == 1) && (meinArray[0][1] == 2)){
+            gibtEsGase = true;
+            Beispiel.push([Reaktionsarray[1][j][0],Reaktionsarray[1][j][1]]);
+        }
+        if(meinArray.length>1){
+            if (meinArray[1].includes("H") && meinArray[0].includes("C") ) {
+                organisch = true;
+                organischBsp.push([Reaktionsarray[1][j][0],Reaktionsarray[1][j][1]]);
+            }
+        }
+    }
+    console.log(organisch);
+    if (gibtEsGase == true){
+        hilfeTextGase="Elementare Gase (außer die Edelgase in der 8. Hauptgruppe) kommen oft zweiatomig vor. <br> Z.B. "+Beispiel[0][1]+"  "+SchöneSummenformel(Beispiel[0][0]);
+        for (let i=1; i<Beispiel.length;i++){
+            hilfeTextGase += "<br> und "+Beispiel[i][1]+"  "+SchöneSummenformel(Beispiel[i][0]);
+        }
+        document.getElementById("Hilfestellung").innerHTML = hilfeTextGase;
+    }
+    if (schwefelDrin == true) {
+        document.getElementById("Hilfestellung").innerHTML += "Schwefel kommt als 8-atomiges Molekül vor, also mit der Summenformel S<sub>8</sub>.";
+        }
+    if (einAtomig == true){
+        hilfeTextGase="<br> <br>Viele elementare Stoffe, z.B. alle Metalle, sind einatomig aufgebaut:<br> Z.B. "+einAtomigBsp[0][1]+"  "+SchöneSummenformel(einAtomigBsp[0][0]);
+        for (let i=1; i<einAtomigBsp.length;i++){
+            hilfeTextGase += "<br> und "+einAtomigBsp[i][1]+"  "+SchöneSummenformel(einAtomigBsp[i][0]);
+        }
+        document.getElementById("Hilfestellung").innerHTML += hilfeTextGase;
+    }    
+    if (organisch == true){
+        console.table(SummenformelArray(organischBsp[0][0]));
+        hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+SummenformelArray(organischBsp[0][0])[0][1]+" C-Atome.";
+        for (let i=1; i<einAtomigBsp.length;i++){
+            hilfeTextGase += "<br> und "+einAtomigBsp[i][1]+"  "+SchöneSummenformel(einAtomigBsp[i][0])+". <br><br>";
+        }
+        document.getElementById("Hilfestellung").innerHTML += hilfeTextGase;
+    }   
+    if (document.getElementById("Hilfestellung").innerHTML != "") {
+        document.getElementById("Hilfestellung").innerHTML += "<br><br>Weiter allgemeine Informationen findest du hier: ";
+    } else { document.getElementById("Hilfestellung").innerHTML += "Allgemeine Informationen findest du hier:";}
+    document.getElementById("Hilfestellung").innerHTML += "<br>";
+    document.getElementById("Hilfestellung").innerHTML += '<br> <input type="button" id="Input1" class="Infos" value="Organische Chemie" onclick="TextAnzeigen(1)">';
+    document.getElementById("Hilfestellung").innerHTML += '&ensp; <input type="button" id="Input2" class="Infos" value="molekulare Stoffe" onclick="TextAnzeigen(2)">';
+    document.getElementById("Hilfestellung").innerHTML += '&ensp; <input type="button" id="Input3" class="Infos" value="Salze" onclick="TextAnzeigen(3)">';
+    document.getElementById("Hilfestellung").innerHTML += '<br> <p id="allgemeineHilfe"></p>';
+}
+
+function TextAnzeigen(wert){
+    var text = [];
+    text.push("");
+    let OCText = "";
+    OCText = "In der organischen Chemie gibt uns der Name auskunft über die Anzahl der Kohlenstoffatome. Wir betrachten zunächst die Alkane."
+    OCText += "<br><img src='img/OC.jpg' width='70%'>";
+    OCText += "<br>Für weiter Stoffgruppen gilt folgendes:";
+    OCText += `<table style="display:flex; justify-content:space-around;" class="OC"'>
+    <tr>
+        <td>Stoffgruppe</td>
+        <td>Endung</td>
+        <td>Unterschied der Summenformel zu der von Alkanen</td>
+    </tr>
+    <tr>
+        <td>Alkene</td>
+        <td>"en" statt "an"</td>
+        <td>Pro Doppelbindung zwei Wasserstoffatome weniger.</td>
+    </tr>
+    <tr>
+        <td>Alkine</td>
+        <td>"in" statt "an"</td>
+        <td>Pro Dreifachbindung vier Wasserstoffatome weniger.</td>
+    </tr>
+    <tr>
+        <td>Alkanole/Alkohole</td>
+        <td>"-ol"</td>
+        <td>Ein Sauerstoffatom mehr in der Summenformel bei einfachen Alkanolen.</td>
+    </tr>
+    <tr>
+        <td>Alkanale/Aldehyde</td>
+        <td>"-al"</td>
+        <td>Ein Sauerstoffatom mehr und zwei Wasserstoffatome weniger.</td>
+    </tr>
+    <tr>
+        <td>Alkanone/Ketone</td>
+        <td>"-on"</td>
+        <td>Ein Sauerstoffatom mehr und zwei Wasserstoffatome weniger.</td>
+    </tr>
+    <tr>
+        <td>Alkansäuren/Carbonsäuren</td>
+        <td>"-säure"</td>
+        <td>Zwei Sauerstoffatome mehr und drei Wasserstoffatome weniger.</td>
+    </tr>
+</table>`
+
+    text.push(OCText);
+    text.push("Summenformeln von Nichtmetall-Nichtmetallverbindungen kann man mithilfe des Names bestimmen. <br> z.B. steht \"-oxid\" für eine Verbindung mit Sauerstoff.<br> Vorsilben helfen bei der Einordnung der Oxide. So besitzt <span  style='color:red'>Mono</span>xid <span style='color:red'>ein</span> Sauerstoffatom,  <span style='color:blue'>Di</span>oxid <span style='color:blue'>zwei</span>.<br> z.B. bei Kohlenstoffmonoxid  CO   &ensp; und Kohlenstoffdioxid CO<sub>2</sub>");
+    text.push("Salze, also Verbindungen aus Metallen und Nichtmetallen, können auf verschiedene Weisen erklärt werden.<br> Entweder mit dem Konzept der <input type='button' id='SalzInfo1' value='Wertigkeit' class='Infos' onclick='Salzinfos(1)'> oder durch die <input id='SalzInfo2' type='button' class='Infos' value='Ionenladung' onclick='Salzinfos(2)'>.<br><p id='SalzinfoText'></p>");
 
 
-            
+
+
+
+        if (textbool != wert){
+            textbool = wert;
+            } else {
+                textbool = 0;
+            }   
+
+            for (let i=1; i<=3; i++){
+            let id="";
+            id = "Input"+i;
+            if (i == textbool){
+                document.getElementById(id).style.backgroundColor = "green";
+            }else {
+                document.getElementById(id).style.backgroundColor = "burlywood";
+            }
+        }
+        let AusgabeText = "";
+        AusgabeText = text[textbool];
+        salzErklärung = 0;
+        document.getElementById("allgemeineHilfe").innerHTML = AusgabeText;
+    }
+
+function Salzinfos(wert){
+    var ErklärtextSalze = [];
+    ErklärtextSalze.push("");
+    let WertigkeitsErklärung = "a";
+    WertigkeitsErklärung = `
+    <p>
+    <h2>Die Wertigkeit</h2>
+    Die Wertigkeit ist eine vereinfachte Erklärung für Verbindungen, die aus zwei Elementen bestehen. <br>
+    Sie gibt für jedes Element an, wie viele Wasserstoffatome man an ein Atom dieses Elements binden oder in einer Verbindung ersetzen kann. <br>
+    Die Wertigkeiten hängen stark mit der Hauptgruppe im Periodensystem zusammen. Du findest die Wertigkeiten unten in der Tabelle: <br>
+    <img src="img/WertigkeitsBild.jpg" class="center" width="80%"> <br>
+    Die Wertigkeiten von Übergangsmetallen (z.B. Kuper) sind nicht immer eindeutig. Deshalb müssen sie im Namen angegeben werden (z.B. Kupfer(II)oxid).
+    <br> 
+    <h2>Bestimmen der Summenformel an einem Beispiel</h2> <br>
+    Wir können jetzt bestimmen, wie viele "Wasserstoffe" etwas Wert ist. <br>
+    In einer Verbindung müssen die einzelnen Elemente jeweils so oft vorkommen, dass sie gleich viel Wert sind. z.B. Mg (Wertigkeit II) und Cl (Wertigkeit I).<br>
+    Damit beide gleich viel Wert sind, benötigen wir doppelt so viele Cl-Atome. Die Summenformel lautet dann MgCl<sub>2</sub><div class=""></div> <br>
+    <img src="img/MgCl2.png" height="300px" class="center"> <br>
+    Bei Aluminiumoxid sieht es folgendermaßen aus: Al (Wertigkeit III), O (Wertigkeit II). <br>
+    Die kleinste Anzahl, bei der beide gleich viel Wert sind, ist hier bei zwei Aluminiumatomen und drei Sauerstoffatomen, also Al<sub>2</sub>O<sub>3</sub>. <br>
+    <img src="img/Al2O3.png" height="240px" class="center"> 
+</p>
+
+    `
+
+
+
+    let IonenladungsErklärung = "";
+    IonenladungsErklärung = `
+    <p>
+    <h2>Die Ionenladung</h2>
+    Salze setzen sich aus verschiedenen Ionen zusammen, den <span style="color: rgb(42, 156, 7)">Kationen</span>  (positiv geladen) und den <span style="color: fuchsia">Anionen</span> (negativ geladen.) <br>
+    <img src="img/PSEIonen.png" height="600px" class="center"> 
+    Metallatome der Hauptgruppen geben ihre Außenelektronen ab, um Edelgaskonfiguration zu erreichen. Sie bilden <span style="color: rgb(42, 156, 7)">Kationen</span>. <br>
+    Sie geben entsprechend ihrer Hauptgruppennummer Elektronen ab. Somit wird z.B. Aluminium (Al) aus der dritten Hauptgruppe zum <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span>. <br>
+    <br>
+    Die Nichtmetallatome nehmen so viele Elektronen auf, bis sie die Anzahl an Außenelektronen der Edelgase erreicht haben und werden so <span style="color: fuchsia">negativ geladen</span>. <br>
+    Für die Hauptgruppenatome der Nichtmetalle gilt hier, es werden acht minus die Hauptgruppennummer Elektronen aufgenommen. <br>
+    So wird z.B. aus dem Sauerstoffatom (O) in der sechsten Hauptgruppe das <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>.
+    <br> <br>
+    Die Ionen lagern sich nun in möglichst kleinzahligen Verhältnissen so zusammen, dass die Ladung nach außen null ergibt. <br>
+    Z.B. beim <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span> und dem <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>:  Al<sub>2</sub>O<sub>3</sub>, weil wir dann 6 positive Ladungen und sechs negative Ladungen haben.
+
+    
+</p>
+    `
+
+
+
+    ErklärtextSalze.push(WertigkeitsErklärung);
+    ErklärtextSalze.push(IonenladungsErklärung);
+    if (salzErklärung != wert){
+        salzErklärung = wert;
+            } else {
+                salzErklärung = 0;
+            }   
+        for (let i=1; i<=2; i++){
+            let id="";
+            id = "SalzInfo"+i;
+            if (i == salzErklärung){
+                document.getElementById(id).style.backgroundColor = "green";
+            }else {
+                document.getElementById(id).style.backgroundColor = "burlywood";
+            }
+        }
+        let AusgabeText = "";
+        AusgabeText = ErklärtextSalze[salzErklärung];
+        document.getElementById("SalzinfoText").innerHTML = AusgabeText;
+
+}   
+        
 function HilfeAusgleich(){
     document.getElementById("Hilfestellung").innerHTML="";
     var AusgabeDerSummenformeln = "";
@@ -1108,7 +1422,19 @@ function MasseBerechnen(){
 }
 
 function NeueAufgabeStarten(){
-    location.reload(true);
+    level = 0;
+    document.getElementById("myTable").innerHTML = "";
+
+    document.getElementById("Bilder").innerHTML="";
+    SchonArray = [];
+    ZählArrayE = [];
+    ZählArrayP = [];
+    Stoffmenge;
+    Stoffmenge = Math.floor(Math.random()*11+1)/2;
+    Nummer = Math.floor(Math.random()*AufgabenArray.length);
+    Reaktionsarray = [];
+    Reaktionsarray = AufgabenArray[Nummer];
+    Start();
 }
 
 function MolareMassen(){
