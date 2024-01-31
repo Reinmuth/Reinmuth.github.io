@@ -8,44 +8,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style> input{ width:140px; font-size:20px; text-align: center;}
-    .small{ width:50px; font-size:20px; text-align: center;}
-    .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
-    .ElementTabelle td{ border-color: black;border: 1px solid;}
-    .ElementTabelle tr{ border-color: black;border: 1px solid;}
-    td{ white-space: nowrap;}
-    li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
-    .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
-    .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
-    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
-    input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
-    body{background-color: rgba(193, 247, 239, 0.336);}
-    #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
-    h2{ font-size: 40px;}
-    footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
-    nav > input{
-            display: none;
-        }
-        ul{
-            display: none;
-        }
-        input[type=checkbox]:checked ~ ul {
-            display: block
-        }
-        nav li{display:flex;}
-        .OC td{
-        border: 1px solid;
-        border-collapse: collapse;
-      }
-      .center{
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        
-      }
-      .Infos{
-        width: auto;
-      }
-        </style>
+        .small{ width:50px; font-size:20px; text-align: center;}
+        .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+        .ElementTabelle td{ border-color: black;border: 1px solid;}
+        .ElementTabelle tr{ border-color: black;border: 1px solid;}
+        td{ white-space: nowrap;}
+        li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+        .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+        .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+        input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+        body{background-color: rgba(193, 247, 239, 0.336);}
+        #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+        h2{ font-size: 40px;}
+        footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        nav > input{
+                display: none;
+            }
+    
+            ul{
+                display: none;
+                margin: 0;
+                padding: 0;
+            }
+            input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+            nav li{display:flex;
+                margin-right: 0px;
+                padding:0px;
+                border: 0;
+                border-radius: 0px;
+            }
+            .OC td{
+            border: 1px solid;
+            border-collapse: collapse;
+          }
+          .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+          .Infos{
+            width: auto;
+          }
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+          div label input {margin-right: 100px;}
+          .container{width: 250px; height: 38px; margin: 100px auto;}
+    
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+    
+    .cat label {
+      float: left; line-height: 3.0em;
+      width: 11.0em; height: 3.0em;
+    }
+    
+    .cat label span {
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+    }
+    
+    .cat label input {
+      position: absolute;
+      display: none;
+      color: #fff !important;
+    }
+    .cat label input + span{color: #fff;}
+    
+    
+    .cat input:checked + span {
+        background-color: #82D44E;
+        color: #ffffff;
+        text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+    }
+            </style>
     
     
 </head>
@@ -138,58 +190,10 @@
     var Stoffmenge;
     Stoffmenge = Math.floor(Math.random()*11+1)/2;
     var AufgabenArray = [];
-    AufgabenArray.push([[["CuO", "Kuper(II)-Oxid"],["Mg","Magnesium"]],[["Cu", "Kupfer"],["MgO","Magnesiumoxid"]]]);
-    AufgabenArray.push([[["Ag2O", "Silber(I)-Oxid"],["C","Kohlenstoff"]],[["Ag", "Silber"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["N2","Stickstoff"],["Mg", "Magnesium"]],[["Mg3N2", "Magnesiumnitrid"]]]);
-    AufgabenArray.push([[["Na", "Natrium"],["Cl2","Chlor"]],[["NaCl", "Natriumchlorid"]]]);
-    AufgabenArray.push([[["Al", "Aluminium"],["F2","Fluor"]],[["AlF3", "Aluminiumfluorid"]]]);
-    AufgabenArray.push([[["Mg", "Magnesium"],["I2","Iod"]],[["MgI2", "Magnesiumiodid"]]]);
-    AufgabenArray.push([[["Ag", "Silber"],["O2","Sauerstoff"]],[["Ag2O", "Silber(I)oxid"]]]);
-    AufgabenArray.push([[["Ca", "Calcium"],["Br2","Brom"]],[["CaBr2", "Calciumbromid"]]]);
-    AufgabenArray.push([[["Be", "Beryllium"],["S8","Schwefel"]],[["BeS", "Berylliumsulfid"]]]);
-    AufgabenArray.push([[["Cu", "Kupfer"],["O2","Sauerstoff"]],[["CuO", "Kupfer(II)oxid"]]]);
-    AufgabenArray.push([[["FeO", "Eisen(II)oxid"],["C","Kohlenstoff"]],[["Fe", "Eisen"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["FeS", "Eisen(II)sulfid"],["O2","Sauerstoff"]],[["Fe2O3", "Eisen(III)oxid"],["SO2","Schwefeldioxid"]]]);
-    AufgabenArray.push([[["CuO", "Kuper(II)-Oxid"],["C","Kohlenstoff"]],[["Cu", "Kupfer"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["Cu2O", "Kupfer(I)oxid"],["Zn","Zink"]],[["Cu", "Kupfer"],["ZnO","Zink(II)oxid"]]]);
-    AufgabenArray.push([[["CuO", "Kupfer(II)oxid"],["Fe","Eisen"]],[["Fe2O3", "Eisen(III)oxid"],["Cu","Kupfer"]]]);
-    AufgabenArray.push([[["Al", "Aluminium"],["MgO", "Magnesiumoxid"]],[["Al2O3", "Aluminiumoxid"],["Mg","Magnesium"]]]);
-    AufgabenArray.push([[["Al2O3", "Aluminiumoxid"],["SO", "Schwefelmonoxid"]],[["Al", "Aluminium"],["SO3","Schwefeltrioxid"]]]);
-    AufgabenArray.push([[["MgO","Magnesiumoxid"],["HCl", "Chlorwasserstoff"]],[["MgCl2", "Magnesiumchlorid"],["H2O", "Wasser"]]]);
 
-    AufgabenArray.push([[["Mg", "Magnesium"],["CO2","Kohlenstoffdioxid"]],[["MgO","Magnesiumoxid"],["C","Kohlenstoff"]]]);
-    AufgabenArray.push([[["CO", "Kohlenstoffmonoxid"],["H2O", "Wasser"]],[["CO2","Kohlenstoffdioxid"],["H2","Wasserstoff"]]]);
-    AufgabenArray.push([[["H2", "Wasserstoff"],["O2", "Sauerstoff"]],[["H2O", "Wasser"]]]);
-    AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO2", "Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO", "Kohlenstoffmonoxid"]]]);
-
-
-
-
-    AufgabenArray.push([[["C2H6O", "Ethanol"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["CH4", "Methan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C2H6", "Ethan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C3H8", "Propan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C4H10", "Butan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C5H12", "Pentan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C6H14", "Hexan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C7H16", "Heptan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C8H18", "Oktan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C9H20", "Nonan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C10H22", "Decan"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-
-    AufgabenArray.push([[["C2H4", "Ethen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C3H6", "Propen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C4H8", "Buten"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C5H10", "Penten"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C6H12", "Hexen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C7H14", "Hepten"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C8H16", "Octen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C9H18", "Nonen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
-    AufgabenArray.push([[["C10H20", "Decen"],["O2","Sauerstoff"]],[["H2O", "Wasser"],["CO2","Kohlenstoffdioxid"]]]);
 
     var Nummer = Math.floor(Math.random()*AufgabenArray.length);
-    var Reaktionsarray = AufgabenArray[Nummer];
+
     document.getElementById("myTable").innerHTML = "";
     var AnzE;
     var AnzP;
@@ -245,7 +249,7 @@ function Frühstart(){
     for ( i = 0;  i < AnzE ; i++){
         var id = "";
         id = "E"+i;
-        Inneres += '<td> <input id='+id+' placeholder="Summenformel"> </td>';
+        Inneres += '<td> <input oninput="KoeffizientenVerkleinern(this.id)" id='+id+' placeholder="Summenformel"> </td>';
         if ( i != AnzE-1 ){
             Inneres += "<td>+</td>";
         } else {
@@ -255,7 +259,7 @@ function Frühstart(){
     for ( i = 0;  i < AnzP; i++){
         var id = "";
         id = "P"+i;
-        Inneres += '<td> <input id='+id+' placeholder="Summenformel"> </td>';
+        Inneres += '<td> <input oninput="KoeffizientenVerkleinern(this.id)" id='+id+' placeholder="Summenformel"> </td>';
         if ( i != AnzP-1 ){
             Inneres += "<td>+</td>";
         }
@@ -294,6 +298,7 @@ function Start(){
 
 
 if (level == 1){
+
     document.getElementById("Aufgabenstellung").innerHTML="Aufgabe: Gleiche die Reaktionsgleichung aus mithilfe der Vorfaktoren.";
     document.getElementById("Hilfestellung").innerHTML="Hinweis: Die Faktoren können als Dezimalzahlen (z.B. 0,5) oder als Brüche (z.B: 1/2) eingegeben werden. ";
     Inneres += "<tr><td>Reaktionsgleichung:</td>";
@@ -548,41 +553,37 @@ if (level == 1){
 
 }
 
-    function KoeffizientenVerkleinern(richtigeId){
-        let meineVariable = "";
-        meineVariable = document.getElementById(richtigeId).value;
-        meineVariable = meineVariable.replace("1", "₁");
-        meineVariable = meineVariable.replace("2", "₂");
-        meineVariable = meineVariable.replace("3", "₃");
-        meineVariable = meineVariable.replace("4", "₄");
-        meineVariable = meineVariable.replace("5", "₅");
-        meineVariable = meineVariable.replace("6", "₆");
-        meineVariable = meineVariable.replace("7", "₇");
-        meineVariable = meineVariable.replace("8", "₈");
-        meineVariable = meineVariable.replace("9", "₉");
-        meineVariable = meineVariable.replace("0", "₀");
-        document.getElementById(richtigeId).value = meineVariable;
+
+function Abwählaktion(){
+        for (let i = 0; i<=7; i++){
+            KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+        }
+        if (KategorienArray.includes(true) == false){
+            for (let i = 0; i<=7; i++){
+            document.getElementById("Ausw"+i).checked = true;
+            }
+        } else {
+        for (let i = 0; i<=7; i++){
+            document.getElementById("Ausw"+i).checked = false;
+        }
     }
+}
+    function Speichern(){
+        for (let i = 0; i<=7; i++){
+            KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+        }
 
-
-    function KoeffizientenVergrößern(meinText){
-        let meineVariable = "";
-        meineVariable = meinText;
-        meineVariable = meineVariable.replaceAll("₁", "1");
-        meineVariable = meineVariable.replaceAll("₂", "2");
-        meineVariable = meineVariable.replaceAll("₃", "3");
-        meineVariable = meineVariable.replaceAll("₄", "4");
-        meineVariable = meineVariable.replaceAll("₅", "5");
-        meineVariable = meineVariable.replaceAll("₆", "6");
-        meineVariable = meineVariable.replaceAll("₇", "7");
-        meineVariable = meineVariable.replaceAll("₈", "8");
-        meineVariable = meineVariable.replaceAll("₉", "9");
-        meineVariable = meineVariable.replaceAll("₀", "0");
-        return meineVariable;
+        if (KategorienArray.includes(true) == false){
+            document.getElementById("Ausw1").checked = true;
+        }
+        for (let i = 0; i<=7; i++){
+            KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+        }
+        document.getElementById("checkbox_toggle").disabled = false;
+        document.getElementById("checkbox_toggle").checked = false;
+        AufgabenArrayFestleger();
+        NeueAufgabeStarten();
     }
-
-
-
 
     function FarbEinsteller(){
         document.getElementById("Anz0").style.color = "black";
@@ -595,25 +596,85 @@ if (level == 1){
         document.getElementById("Anz2").style.borderColor = "black";
         document.getElementById("Anz3").style.borderColor = "black";
         document.getElementById("Anz4").style.borderColor = "black";
+        document.getElementById("Anz4").style.backgroundColor = "";
         for (let i = 0 ; i < level ; i++){
             document.getElementById("Anz"+i).style.color = "green";
             document.getElementById("Anz"+i).style.borderColor = "green";
             document.getElementById("Anz"+i).style.backgroundColor = "";
         }
+        for (let i = 4 ; i > level ; i--){
+            document.getElementById("Anz"+i).style.color = "black";
+            document.getElementById("Anz"+i).style.borderColor = "black";
+            document.getElementById("Anz"+i).style.backgroundColor = "";
+        }
         document.getElementById("Anz"+level).style.color = "white";
         document.getElementById("Anz"+level).style.borderColor = "green";
         document.getElementById("Anz"+level).style.backgroundColor = "green";
-        //Grün füllen weiße Schrift
+       
     }
 
 
+    function KoeffizientenVerkleinern(richtigeId){
+        let meineVariable = "";
+        meineVariable = document.getElementById(richtigeId).value;
+        meineVariable = meineVariable.replace("^1", "¹");
+        meineVariable = meineVariable.replace("^2", "²");
+        meineVariable = meineVariable.replace("^3", "³");
+        meineVariable = meineVariable.replace("^4", "⁴");
+        meineVariable = meineVariable.replace("^5", "⁵");
+        meineVariable = meineVariable.replace("^6", "⁶");
+        meineVariable = meineVariable.replace("^7", "⁷");
+        meineVariable = meineVariable.replace("^8", "⁸");
+        meineVariable = meineVariable.replace("^9", "⁹");
+        meineVariable = meineVariable.replace("^0", "⁰");
+        meineVariable = meineVariable.replace("1", "₁");
+        meineVariable = meineVariable.replace("2", "₂");
+        meineVariable = meineVariable.replace("3", "₃");
+        meineVariable = meineVariable.replace("4", "₄");
+        meineVariable = meineVariable.replace("5", "₅");
+        meineVariable = meineVariable.replace("6", "₆");
+        meineVariable = meineVariable.replace("7", "₇");
+        meineVariable = meineVariable.replace("8", "₈");
+        meineVariable = meineVariable.replace("9", "₉");
+        meineVariable = meineVariable.replace("0", "₀");
+        meineVariable = meineVariable.replace("+", "⁺");
+        meineVariable = meineVariable.replace("-", "⁻");
+        document.getElementById(richtigeId).value = meineVariable;
+    }
 
 
+    function KoeffizientenVergrößern(meinText){
+        let meineVariable = "";
+        meineVariable = meinText;
+        meineVariable = meineVariable.replaceAll("⁺","+");
+        meineVariable = meineVariable.replaceAll("⁻","-");
+        meineVariable = meineVariable.replaceAll("¹","^1");
+        meineVariable = meineVariable.replaceAll("²","^2");
+        meineVariable = meineVariable.replaceAll("³","^3");
+        meineVariable = meineVariable.replaceAll("⁴","^4");
+        meineVariable = meineVariable.replaceAll("⁵","^5");
+        meineVariable = meineVariable.replaceAll("⁶","^6");
+        meineVariable = meineVariable.replaceAll("⁷","^7");
+        meineVariable = meineVariable.replaceAll("⁸","^8");
+        meineVariable = meineVariable.replaceAll("⁹","^9");
+        meineVariable = meineVariable.replaceAll("⁰","^0");
+        meineVariable = meineVariable.replaceAll("₁", "1");
+        meineVariable = meineVariable.replaceAll("₂", "2");
+        meineVariable = meineVariable.replaceAll("₃", "3");
+        meineVariable = meineVariable.replaceAll("₄", "4");
+        meineVariable = meineVariable.replaceAll("₅", "5");
+        meineVariable = meineVariable.replaceAll("₆", "6");
+        meineVariable = meineVariable.replaceAll("₇", "7");
+        meineVariable = meineVariable.replaceAll("₈", "8");
+        meineVariable = meineVariable.replaceAll("₉", "9");
+        meineVariable = meineVariable.replaceAll("₀", "0");
 
+        return meineVariable;
+    }
+
+    
+        
     function Überprüfen(){
-
-        
-        
         
         if (level == 0) {
             var korrektE =1;
@@ -624,17 +685,23 @@ if (level == 1){
                 id = "E"+i;
 
                 var Eigabe = KoeffizientenVergrößern(document.getElementById(id).value);
+                if (Eigabe == "") { 
+                    korrektE = 0;
+                    document.getElementById(id).style.backgroundColor = "red";
+                } else {
                 document.getElementById(id).style.removeProperty("background-color");
                 var ArrayA = SummenformelArray(Eigabe);
                 
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[0][i][0];
+                
+
+
                 if (KoeffizientenVergrößern(document.getElementById(id).value) != richtigeFormel) {
                     Arrayidentisch = false;
                     document.getElementById(id).style.backgroundColor = "coral";
                 } else { document.getElementById(id).style.backgroundColor = "green";}
                 var ArrayB = SummenformelArray(richtigeFormel);
-                
                 var test = SchonVorhanden(ArrayA,ArrayB);
                 ArrayA=ZählArray(ArrayA,test);
                 ArrayB=ZählArray(ArrayB,test);
@@ -646,7 +713,7 @@ if (level == 1){
                 } 
 
 
-
+            }
             }
             
                 
@@ -656,6 +723,10 @@ if (level == 1){
                 id = "P"+i;
                 document.getElementById(id).style.removeProperty("background-color");
                 var Eigabe = KoeffizientenVergrößern(document.getElementById(id).value);
+                if (Eigabe == "") { 
+                    korrektP = 0;
+                    document.getElementById(id).style.backgroundColor = "red";
+                } else {
                 var ArrayA = SummenformelArray(Eigabe);
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[1][i][0];
@@ -682,6 +753,7 @@ if (level == 1){
 
 
             }
+        }
             
             if (korrektE*korrektP == 1) {
                 document.getElementById("AntwortSatz").innerHTML = "Super, alles richtig";
@@ -910,14 +982,14 @@ if (level == 1){
                 let NameEdukt = document.getElementById(id).value;
                 id = "E"+i;
                 let SummenformelE = document.getElementById(id).value;
-                Reaktionsarray[0].push([SummenformelE,NameEdukt]);
+                Reaktionsarray[0].push([KoeffizientenVergrößern(SummenformelE),NameEdukt]);
             }
             for (let i=0; i < AnzP ; i++){
                 id = "NameP"+i;
                 let NameEdukt = document.getElementById(id).value;
                 id = "P"+i;
                 let SummenformelE = document.getElementById(id).value;
-                Reaktionsarray[1].push([SummenformelE,NameEdukt]);
+                Reaktionsarray[1].push([KoeffizientenVergrößern(SummenformelE),NameEdukt]);
             }
             level = 1;
             Start();
@@ -1118,19 +1190,32 @@ function SummenGleich(ZählArrayE,ZählArrayP){
 
 
 function SchöneSummenformel(SummenformelText){
-    
-        
             var summenArray = SummenformelArray(SummenformelText);
             var ausgabeAlsText = "";
             for (let i=0;i<summenArray.length;i++){
-                if (summenArray[i][1] != 1){
-                    ausgabeAlsText += summenArray[i][0]+"<sub>"+summenArray[i][1]+"</sub>"; 
-                } else {
-                    ausgabeAlsText += summenArray[i][0]; 
+                if (summenArray[i][0] != "J"){
+                    if (Math.abs(summenArray[i][1]) != 1){
+                        ausgabeAlsText += summenArray[i][0]+"<sub>"+summenArray[i][1]+"</sub>"; 
+                    } else {
+                        ausgabeAlsText += summenArray[i][0]; 
+                    }
+                }
+            }
+            for (let i=0;i<summenArray.length;i++){
+                if (summenArray[i][0] == "J"){
+                    if ((Math.abs(summenArray[i][1]) != 1) && (summenArray[i][1] != 0) ){
+                        ausgabeAlsText += "<sup>"+Math.abs(summenArray[i][1])+"</sup>";
+                    }
+                    if (summenArray[i][1] > 0){
+                        ausgabeAlsText += "<sup>"+"+"+"</sup>"
+                    } else if (summenArray[i][1] < 0) {
+                        ausgabeAlsText += "<sup>"+"-"+"</sup>"
+                    } 
+                    
                 }
             }
             return ausgabeAlsText;
-}
+        }
 
 
 function HilfeAnzeigen0(){
@@ -1146,7 +1231,6 @@ function HilfeAnzeigen0(){
     let organischBsp = [];
     for (let j = 0;  j < Reaktionsarray[0].length ; j++){
         let meinArray = SummenformelArray(Reaktionsarray[0][j][0]);
-        console.table(meinArray);
         if (meinArray[0].includes("S")) {
             schwefelDrin = true;
         }
@@ -1204,7 +1288,6 @@ function HilfeAnzeigen0(){
         document.getElementById("Hilfestellung").innerHTML += hilfeTextGase;
     }    
     if (organisch == true){
-        console.table(SummenformelArray(organischBsp[0][0]));
         hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+SummenformelArray(organischBsp[0][0])[0][1]+" C-Atome.";
         for (let i=1; i<einAtomigBsp.length;i++){
             hilfeTextGase += "<br> und "+einAtomigBsp[i][1]+"  "+SchöneSummenformel(einAtomigBsp[i][0])+". <br><br>";
@@ -1531,7 +1614,23 @@ function MasseBerechnen(){
 }
 
 function NeueAufgabeStarten(){
-    location.reload(true);
+    level = -2;
+    document.getElementById("myTable").innerHTML = "";
+    var AnzE;
+    var AnzP;
+    document.getElementById("myTable").innerHTML = "";
+
+    document.getElementById("Bilder").innerHTML="";
+    SchonArray = [];
+    ZählArrayE = [];
+    ZählArrayP = [];
+    Stoffmenge;
+    Stoffmenge = Math.floor(Math.random()*11+1)/2;
+    Nummer = Math.floor(Math.random()*AufgabenArray.length);
+    Reaktionsarray = [];
+    AufgabenArray = [];
+    FarbEinsteller();
+    VorFrühstart();
 }
 
 function MolareMassen(){
@@ -1540,9 +1639,37 @@ function MolareMassen(){
     document.getElementById("AntwortSatz").innerHTML = "";
 }
 
-    function SummenformelArray(summenFormel){
+function SummenformelArray(summenFormel){
+            
             const Formel = summenFormel;
-            const Ergebnis = Formel.split(/(?=[A-Z])/);
+            let teste;
+            let Ergebnis = [];
+            Ergebnis = Formel.split(/(?=[A-Z])/);
+            if (summenFormel.indexOf("^") != -1){
+                
+            
+                let Ladung = Formel.split("^");
+
+                Ergebnis = Ladung[0];
+                teste = Ladung[1].match(/[0-9]/g);
+                if (teste == null){
+                    teste = 1;
+                }
+                Ladung = Ladung[1].match(/[^0-9]/g);
+                if (Ladung[0] == "-"){
+                    teste = teste * (-1);
+                }
+                if (Ladung[0] == "+"){
+                    teste = parseInt(teste);
+                }
+                
+            } else if (summenFormel.includes("+") == true){
+                teste = 1;
+            } else if (summenFormel.includes("-") == true){
+                teste = -1;
+            } else { teste = 0;}
+            
+
             var summenArray = [];
             for (i=0;i<Ergebnis.length;i++){
                 let Element = Ergebnis[i].match(/[a-z]+/gi);
@@ -1560,9 +1687,13 @@ function MolareMassen(){
                 summenArray.push([Element[0], parseInt(Zahl)]);
             }
             }
+            if((summenArray.length == 1) && (summenArray[0][0] == "e")){
+                summenArray.pop();
+            }
+            summenArray.push(["J",teste]);
+
             return summenArray;
         }
-
 
 </script>
 </body>
