@@ -1475,7 +1475,10 @@ function HilfeAnzeigen0(){
         document.getElementById("Hilfestellung").innerHTML += hilfeTextGase;
     }    
     if (organisch == true){
-        hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+SummenformelArray(organischBsp[0][0])[0][1]+" C-Atome.";
+        let Hilfsarray = ["C"];
+        Hilfsarray = ZählArray(SummenformelArray(organischBsp[0][0]),Hilfsarray);
+        console.table(Hilfsarray);
+        hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+Hilfsarray[0]+" C-Atome.";
         for (let i=1; i<einAtomigBsp.length;i++){
             hilfeTextGase += "<br> und "+einAtomigBsp[i][1]+"  "+SchöneSummenformel(einAtomigBsp[i][0])+". <br><br>";
         }

@@ -1487,7 +1487,7 @@ function HilfeAnzeigen0(){
         document.getElementById("Hilfestellung").innerHTML += "<br><br>Weiter allgemeine Informationen findest du hier: ";
     } else { document.getElementById("Hilfestellung").innerHTML += "Allgemeine Informationen findest du hier:";}
     document.getElementById("Hilfestellung").innerHTML += "<br>";
-    document.getElementById("Hilfestellung").innerHTML += '<br> <input type="button" id="Input1" class="Infos" value="Organische Chemie" onclick="TextAnzeigen(1)">';
+   // document.getElementById("Hilfestellung").innerHTML += '<br> <input type="button" id="Input1" class="Infos" value="Organische Chemie" onclick="TextAnzeigen(1)">';
     document.getElementById("Hilfestellung").innerHTML += '&ensp; <input type="button" id="Input2" class="Infos" value="molekulare Stoffe" onclick="TextAnzeigen(2)">';
     document.getElementById("Hilfestellung").innerHTML += '&ensp; <input type="button" id="Input3" class="Infos" value="Salze" onclick="TextAnzeigen(3)">';
     document.getElementById("Hilfestellung").innerHTML += '<br> <p id="allgemeineHilfe"></p>';
@@ -1552,7 +1552,7 @@ function TextAnzeigen(wert){
                 textbool = 0;
             }   
 
-            for (let i=1; i<=3; i++){
+            for (let i=2; i<=3; i++){
             let id="";
             id = "Input"+i;
             if (i == textbool){
@@ -1609,7 +1609,7 @@ function Salzinfos(wert){
     So wird z.B. aus dem Sauerstoffatom (O) in der sechsten Hauptgruppe das <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>.
     <br> <br>
     Die Ionen lagern sich nun in möglichst kleinzahligen Verhältnissen so zusammen, dass die Ladung nach außen null ergibt. <br>
-    Z.B. beim <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span> und dem <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>:  Al<sub>2</sub>O<sub>3</sub>, weil wir dann 6 positive Ladungen und sechs negative Ladungen haben.
+    Z.B. beim <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span> und dem <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>:  Al<sub>2</sub>O<sub>3</sub>, weil wir dann sechs positive Ladungen und sechs negative Ladungen haben.
 
     
 </p>

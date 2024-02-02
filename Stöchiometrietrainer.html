@@ -1554,7 +1554,10 @@ function HilfeAnzeigen0(){
         document.getElementById("Hilfestellung").innerHTML += hilfeTextGase;
     }    
     if (organisch == true){
-        hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+SummenformelArray(organischBsp[0][0])[0][1]+" C-Atome.";
+        let Hilfsarray = ["C"];
+        Hilfsarray = ZählArray(SummenformelArray(organischBsp[0][0]),Hilfsarray);
+        console.table(Hilfsarray);
+        hilfeTextGase="<br> <br>Moleküle der organischen Chemie sind v.a. aus Kohlenstoffatomen und Wasserstoffatomen aufgebaut.<br> Am Namen erkennt man die Anzahl der C-Atome Z.B. "+organischBsp[0][1]+" besitzt "+Hilfsarray[0]+" C-Atome.";
         for (let i=1; i<einAtomigBsp.length;i++){
             hilfeTextGase += "<br> und "+einAtomigBsp[i][1]+"  "+SchöneSummenformel(einAtomigBsp[i][0])+". <br><br>";
         }
@@ -1685,7 +1688,7 @@ function Salzinfos(wert){
     So wird z.B. aus dem Sauerstoffatom (O) in der sechsten Hauptgruppe das <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>.
     <br> <br>
     Die Ionen lagern sich nun in möglichst kleinzahligen Verhältnissen so zusammen, dass die Ladung nach außen null ergibt. <br>
-    Z.B. beim <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span> und dem <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>:  Al<sub>2</sub>O<sub>3</sub>, weil wir dann 6 positive Ladungen und sechs negative Ladungen haben.
+    Z.B. beim <span style="color:rgb(42, 156, 7) ">Aluminiumion (Al<sup>3+</sup>)</span> und dem <span style="color: fuchsia">Oxidion (O<sup>2-</sup>)</span>:  Al<sub>2</sub>O<sub>3</sub>, weil wir dann sechs positive Ladungen und sechs negative Ladungen haben.
 
     
 </p>
