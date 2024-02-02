@@ -76,7 +76,7 @@
     
     .cat label {
       float: left; line-height: 3.0em;
-      width: 11.0em; height: 3.0em;
+      width: 12.0em; height: 3.0em;
     }
     
     .cat label span {
@@ -100,12 +100,17 @@
         color: #ffffff;
         text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
     }
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
             </style>
     
     
 </head>
 <body>
     <h2 style="text-align: center;">Reaktionsgleichungen mit Stöchiometrie</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+     
     <div style="align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3></div>
 
     <div style="text-align: center; box-sizing: border-box;">
@@ -166,7 +171,6 @@
             meinArray.push([16,"S",32,"PSE-S.jpg"]);
             meinArray.push([17,"Cl",35,"PSE-Cl.jpg"]);
             meinArray.push([18,"Ar",40,"PSE-Ar.jpg"]);
-
             meinArray.push([19,"K",39,"PSE-K.jpg"]);
             meinArray.push([20,"Ca",40,"PSE-Ca.jpg"]);
             meinArray.push([21,"Sc",45,"PSE-Sc.jpg"]);
@@ -185,8 +189,44 @@
             meinArray.push([34,"Se",79,"PSE-Se.jpg"]);
             meinArray.push([35,"Br",80,"PSE-Br.jpg"]);
             meinArray.push([36,"Kr",84,"PSE-Kr.jpg"]);
+            meinArray.push([37,"Rb",85,"PSE-Rb.jpg"]);
+            meinArray.push([38,"Sr",88,"PSE-Sr.jpg"]);
+            meinArray.push([39,"Y",89,"PSE-Y.jpg"]);
+            meinArray.push([40,"Z",91,"PSE-Z.jpg"]);
+            meinArray.push([41,"Nb",93,"PSE-Nb.jpg"]);
+            meinArray.push([42,"Mo",96,"PSE-Mo.jpg"]);
+            meinArray.push([43,"Tc",98,"PSE-Tc.jpg"]);
+            meinArray.push([44,"Ru",101,"PSE-Ru.jpg"]);
+            meinArray.push([45,"Rh",103,"PSE-Rh.jpg"]);
+            meinArray.push([46,"Pd",106,"PSE-Pd.jpg"]);
             meinArray.push([47,"Ag",108,"PSE-Ag.jpg"]);
+            meinArray.push([48,"Cd",112,"PSE-Cd.jpg"]);
+            meinArray.push([49,"In",115,"PSE-In.jpg"]);
+            meinArray.push([50,"Sn",119,"PSE-Sn.jpg"]);
+            meinArray.push([51,"Sb",122,"PSE-Sb.jpg"]);
+            meinArray.push([52,"Te",128,"PSE-Te.jpg"]);
             meinArray.push([53,"I",127,"PSE-I.jpg"]);
+            meinArray.push([54,"Xe",131,"PSE-Xe.jpg"]);
+            meinArray.push([55,"Cs",133,"PSE-Cs.jpg"]);
+            meinArray.push([56,"Ba",137,"PSE-Ba.jpg"]);
+            meinArray.push([57,"La",139,"PSE-La.jpg"]);
+            meinArray.push([72,"Hf",178,"PSE-Hf.jpg"]);
+            meinArray.push([73,"Ta",181,"PSE-Ta.jpg"]);
+            meinArray.push([74,"W",184,"PSE-W.jpg"]);
+            meinArray.push([75,"Re",186,"PSE-Re.jpg"]);
+            meinArray.push([76,"Os",190,"PSE-Os.jpg"]);
+            meinArray.push([77,"Ir",192,"PSE-Ir.jpg"]);
+            meinArray.push([78,"Pt",195,"PSE-Pt.jpg"]);
+            meinArray.push([79,"Au",197,"PSE-Au.jpg"]);
+            meinArray.push([80,"Hg",201,"PSE-Hg.jpg"]);
+            meinArray.push([81,"Tl",204,"PSE-Tl.jpg"]);
+            meinArray.push([82,"Pb",207,"PSE-Pb.jpg"]);
+            meinArray.push([83,"Bi",209,"PSE-Bi.jpg"]);
+            meinArray.push([84,"Po",210,"PSE-Po.jpg"]);
+            meinArray.push([85,"At",210,"PSE-At.jpg"]);
+            meinArray.push([86,"Rn",222,"PSE-Rn.jpg"]);
+            meinArray.push([87,"Fr",223,"PSE-Fr.jpg"]);
+            meinArray.push([88,"Ra",226,"PSE-Ra.jpg"]);
             meinArray.push([0,"J",0,"PSE-J.jpg"]); // Elementarladung
     var SchonArray = [];
     var ZählArrayE = [];
@@ -274,10 +314,9 @@ function Frühstart(){
     level = -1;
 }
 
-    
+     
 function Start(){ 
     failCounter = 0;
-    document.getElementById("ÜberprüfButton").value = "Überprüfen";
     document.getElementById("Hilfestellung").innerHTML="";
     FarbEinsteller();
     document.getElementById("Bilder").innerHTML="";
@@ -302,7 +341,7 @@ function Start(){
 
 
 if (level == 1){
-
+    document.getElementById("ÜberprüfButton").value = "Überprüfen";
     document.getElementById("Aufgabenstellung").innerHTML="Aufgabe: Gleiche die Reaktionsgleichung aus mithilfe der Vorfaktoren.";
     document.getElementById("Hilfestellung").innerHTML="Hinweis: Die Faktoren können als Dezimalzahlen (z.B. 0,5) oder als Brüche (z.B: 1/2) eingegeben werden. ";
     Inneres += "<tr><td>Reaktionsgleichung:</td>";
@@ -326,7 +365,7 @@ if (level == 1){
 } else if (level == 0 ){
     document.getElementById("Aufgabenstellung").innerHTML="Aufgabe: Ergänze die Summenformeln der einzelnen Stoffe.";
     document.getElementById("AntwortSatz").innerHTML = "";
-    document.getElementById("Hilfestellung").innerHTML="Hinweis: Gib die Summenformel folgendermaßen ein: z.B. H2O ";
+    document.getElementById("Hilfestellung").innerHTML="Hinweis: Gib Summenformeln folgendermaßen ein: z.B. H2O (wird zu H<sub>2</sub>O),  Cu^2+ (wird zu Cu<sup>2+</sup>)";
     Inneres += "<tr><td>Reaktionsgleichung:</td>";
     for ( i = 0;  i < Reaktionsarray[0].length ; i++){
         var id = "";
@@ -553,6 +592,7 @@ if (level == 1){
 
 
     }
+
     document.getElementById("myTable").innerHTML = Inneres;
 
 }
@@ -647,7 +687,62 @@ function Abwählaktion(){
     }
 
 
+    function KoeffizientenVerkleinernSummenformel(meineVariable){
+        meineVariable = meineVariable.replace("^1", "¹");
+        meineVariable = meineVariable.replace("^2", "²");
+        meineVariable = meineVariable.replace("^3", "³");
+        meineVariable = meineVariable.replace("^4", "⁴");
+        meineVariable = meineVariable.replace("^5", "⁵");
+        meineVariable = meineVariable.replace("^6", "⁶");
+        meineVariable = meineVariable.replace("^7", "⁷");
+        meineVariable = meineVariable.replace("^8", "⁸");
+        meineVariable = meineVariable.replace("^9", "⁹");
+        meineVariable = meineVariable.replace("^0", "⁰");
+        meineVariable = meineVariable.replace("1", "₁");
+        meineVariable = meineVariable.replace("2", "₂");
+        meineVariable = meineVariable.replace("3", "₃");
+        meineVariable = meineVariable.replace("4", "₄");
+        meineVariable = meineVariable.replace("5", "₅");
+        meineVariable = meineVariable.replace("6", "₆");
+        meineVariable = meineVariable.replace("7", "₇");
+        meineVariable = meineVariable.replace("8", "₈");
+        meineVariable = meineVariable.replace("9", "₉");
+        meineVariable = meineVariable.replace("0", "₀");
+        meineVariable = meineVariable.replace("+", "⁺");
+        meineVariable = meineVariable.replace("-", "⁻");
+        return meineVariable;
+    }
+
     function KoeffizientenVergrößern(meinText){
+        let meineVariable = "";
+        meineVariable = meinText;
+        meineVariable = meineVariable.replaceAll("⁺","+");
+        meineVariable = meineVariable.replaceAll("⁻","-");
+        meineVariable = meineVariable.replaceAll("¹","^1");
+        meineVariable = meineVariable.replaceAll("²","^2");
+        meineVariable = meineVariable.replaceAll("³","^3");
+        meineVariable = meineVariable.replaceAll("⁴","^4");
+        meineVariable = meineVariable.replaceAll("⁵","^5");
+        meineVariable = meineVariable.replaceAll("⁶","^6");
+        meineVariable = meineVariable.replaceAll("⁷","^7");
+        meineVariable = meineVariable.replaceAll("⁸","^8");
+        meineVariable = meineVariable.replaceAll("⁹","^9");
+        meineVariable = meineVariable.replaceAll("⁰","^0");
+        meineVariable = meineVariable.replaceAll("₁", "1");
+        meineVariable = meineVariable.replaceAll("₂", "2");
+        meineVariable = meineVariable.replaceAll("₃", "3");
+        meineVariable = meineVariable.replaceAll("₄", "4");
+        meineVariable = meineVariable.replaceAll("₅", "5");
+        meineVariable = meineVariable.replaceAll("₆", "6");
+        meineVariable = meineVariable.replaceAll("₇", "7");
+        meineVariable = meineVariable.replaceAll("₈", "8");
+        meineVariable = meineVariable.replaceAll("₉", "9");
+        meineVariable = meineVariable.replaceAll("₀", "0");
+        meineVariable = KlammerVersteher(meineVariable);
+        return meineVariable;
+    }
+
+    function KoeffizientenVergrößernOhneKlammerÄnderung(meinText){
         let meineVariable = "";
         meineVariable = meinText;
         meineVariable = meineVariable.replaceAll("⁺","+");
@@ -676,8 +771,6 @@ function Abwählaktion(){
         return meineVariable;
     }
 
-    
-        
     function Überprüfen(){
         
         if (level == 0) {
@@ -694,21 +787,23 @@ function Abwählaktion(){
                     document.getElementById(id).style.backgroundColor = "red";
                 } else {
                 document.getElementById(id).style.removeProperty("background-color");
+
                 var ArrayA = SummenformelArray(Eigabe);
-                
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[0][i][0];
                 
 
 
-                if (KoeffizientenVergrößern(document.getElementById(id).value) != richtigeFormel) {
+                if (KoeffizientenVergrößern(document.getElementById(id).value) != KoeffizientenVergrößern(richtigeFormel)) {
                     Arrayidentisch = false;
                     document.getElementById(id).style.backgroundColor = "coral";
                 } else { document.getElementById(id).style.backgroundColor = "green";}
                 var ArrayB = SummenformelArray(richtigeFormel);
+
                 var test = SchonVorhanden(ArrayA,ArrayB);
                 ArrayA=ZählArray(ArrayA,test);
                 ArrayB=ZählArray(ArrayB,test);
+
 
                 
                 if (SummenGleich(ArrayA,ArrayB)!= true){
@@ -734,7 +829,7 @@ function Abwählaktion(){
                 var ArrayA = SummenformelArray(Eigabe);
                 var richtigeFormel = "";
                 richtigeFormel = Reaktionsarray[1][i][0];
-                if (KoeffizientenVergrößern(document.getElementById(id).value) != richtigeFormel) {
+                if (KoeffizientenVergrößern(document.getElementById(id).value) != KoeffizientenVergrößern(richtigeFormel)) {
                     Arrayidentisch = false;
                     document.getElementById(id).style.backgroundColor = "coral";
 
@@ -742,14 +837,12 @@ function Abwählaktion(){
 
                 }else { document.getElementById(id).style.backgroundColor = "green";}
                 var ArrayB = SummenformelArray(richtigeFormel);
-                
-                
 
                 var test = SchonVorhanden(ArrayA,ArrayB);
+                
                 ArrayA=ZählArray(ArrayA,test);
                 ArrayB=ZählArray(ArrayB,test);
 
-                
                 if (SummenGleich(ArrayA,ArrayB)!= true){
                     korrektE *= 0;
                     document.getElementById(id).style.backgroundColor = "red";
@@ -777,51 +870,117 @@ function Abwählaktion(){
         } else if (level == 1){
             document.getElementById("Hilfestellung").innerHTML="Hinweis: Die Faktoren können als Dezimalzahlen (z.B. 0,5) oder als Brüche (z.B: 1/2) eingegeben werden. ";
 
+
+
+
+
+
             var EduktArray = [];
-            for(i=0; i<Reaktionsarray[0].length; i++){
+            for(let i=0; i<Reaktionsarray[0].length; i++){
                 var id = "ZahlE"+i;
                 var Faktor = document.getElementById(id).value;
-                Faktor=Faktor.replace(/\,/, ".");
-                
-                
+                Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
-                
-                var Formel = Reaktionsarray[0][i][0];
-                const Ergebnis = Formel.split(/(?=[A-Z])/);
-                
-                for (var j = 0;j<Ergebnis.length;j++){
-                    let Element = Ergebnis[j].match(/[a-z]+/gi);
-                    let Zahl;
-                    if (Ergebnis[j].match(/\d+/g) == null){
-                        Zahl = [1,0];
-                    } else {
-                        Zahl = Ergebnis[j].match(/\d+/g);
+                var Formel = KoeffizientenVergrößern(Reaktionsarray[0][i][0]);
+                let Ergebnis = [];
+                Ergebnis = Formel.split(/(?=[A-Z])/);
+                let teste;
+                if (Formel.indexOf("^") != -1){    
+                    let Ladung = Formel.split("^");
+                    
+                    teste = Ladung[1].match(/[0-9]/g);
+                    if (teste == null){
+                        teste = 1;
                     }
-                EduktArray.push([Element[0], parseInt(Zahl[0]*Faktor)]);
+                    Ladung = Ladung[1].match(/[^0-9]/g);
+                    if (Ladung[0] == "-"){
+                        teste = teste * (-1);
+                    }
+                    if (Ladung[0] == "+"){
+                        teste = parseInt(teste);
+                    }
+                
+                    } else if (Formel.includes("+") == true){
+                        teste = 1;
+                    } else if (Formel.includes("-") == true){
+                        teste = -1;
+                    } else { teste = 0;}
+                    EduktArray.push(["J",teste*Faktor]);
+                
+                
+            for (let j=0;j<Ergebnis.length;j++){
+                let Element = Ergebnis[j].match(/[a-z]+/gi);
+                if (Element == null){
+                    break;
+                } else {
+                let Zahl;
+                if (Ergebnis[j].match(/\d+/g) == null){
+                    Zahl = 1;
+                } else {
+                    Zahl = Ergebnis[j].match(/\d+/g);
+                }
+
+                if (Element[0] != "e"){
+                    EduktArray.push([Element[0], parseInt(Zahl)*Faktor]);
+
+                }
+            }
                 }
             }
             var ProduktArray = [];
-            for( i=0; i<Reaktionsarray[1].length; i++){
+            for(let i=0; i<Reaktionsarray[1].length; i++){
+                
+                
                 var id = "ZahlP"+i;
                 var Faktor = document.getElementById(id).value;
-                Faktor=Faktor.replace(/\,/, ".");
+                Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
-                var Formel = Reaktionsarray[1][i][0];
-                const Ergebnis = Formel.split(/(?=[A-Z])/);
-                
-                for (var j = 0;j<Ergebnis.length;j++){
-                    let Element = Ergebnis[j].match(/[a-z]+/gi);
-                    let Zahl;
-                    if (Ergebnis[j].match(/\d+/g) == null){
-                        Zahl = [1,0];
-                    } else {
-                        Zahl = Ergebnis[j].match(/\d+/g);
+                var Formel = KoeffizientenVergrößern(Reaktionsarray[1][i][0]);
+                let Ergebnis = [];
+                Ergebnis = Formel.split(/(?=[A-Z])/);
+                let teste;
+                if (Formel.indexOf("^") != -1){    
+                    let Ladung = Formel.split("^");
+                    
+                    teste = Ladung[1].match(/[0-9]/g);
+                    if (teste == null){
+                        teste = 1;
                     }
-                ProduktArray.push([Element[0], parseInt(Zahl[0]*Faktor)]);
+                    Ladung = Ladung[1].match(/[^0-9]/g);
+                    if (Ladung[0] == "-"){
+                        teste = teste * (-1);
+                    }
+                    if (Ladung[0] == "+"){
+                        teste = parseInt(teste);
+                    }
+                
+                    } else if (Formel.includes("+") == true){
+                        teste = 1;
+                    } else if (Formel.includes("-") == true){
+                        teste = -1;
+                    } else { teste = 0;}
+                    ProduktArray.push(["J",teste*Faktor]);
+                
+                
+            for (let j=0;j<Ergebnis.length;j++){
+                let Element = Ergebnis[j].match(/[a-z]+/gi);
+                if (Element == null){
+                    break;
+                } else {
+                let Zahl;
+                if (Ergebnis[j].match(/\d+/g) == null){
+                    Zahl = 1;
+                } else {
+                    Zahl = Ergebnis[j].match(/\d+/g);
+                }
 
+                if (Element[0] != "e"){
+                    ProduktArray.push([Element[0], parseInt(Zahl)*Faktor]);
+                }
             }
-            
+                }
             }
+
    
             SchonArray = [];
             SchonArray = SchonVorhanden(EduktArray,ProduktArray);
@@ -986,14 +1145,14 @@ function Abwählaktion(){
                 let NameEdukt = document.getElementById(id).value;
                 id = "E"+i;
                 let SummenformelE = document.getElementById(id).value;
-                Reaktionsarray[0].push([KoeffizientenVergrößern(SummenformelE),NameEdukt]);
+                Reaktionsarray[0].push([KoeffizientenVergrößernOhneKlammerÄnderung(SummenformelE),NameEdukt]);
             }
             for (let i=0; i < AnzP ; i++){
                 id = "NameP"+i;
                 let NameEdukt = document.getElementById(id).value;
                 id = "P"+i;
                 let SummenformelE = document.getElementById(id).value;
-                Reaktionsarray[1].push([KoeffizientenVergrößern(SummenformelE),NameEdukt]);
+                Reaktionsarray[1].push([KoeffizientenVergrößernOhneKlammerÄnderung(SummenformelE),NameEdukt]);
             }
             level = 1;
             Start();
@@ -1003,7 +1162,6 @@ function Abwählaktion(){
             Frühstart();
         }
     }
-
     function LösungStufe5(){
         for (let j = 1;  j < Reaktionsarray[0].length ; j++){
             var id = "mE"+j;
@@ -1043,20 +1201,34 @@ function Abwählaktion(){
 
     function bilderEinfüger(SchonArray){
             
-            for (i=0; i<SchonArray.length;i++){             
+            for (i=0; i<SchonArray.length;i++){  
+                    if (SchonArray[i]!="J"){          
                     let img = new Image();
                     img.className ="image";
                     img.src = "img/PSE-"+SchonArray[i]+".jpg";
                     img.width = 200;
                     document.getElementById('Bilder').appendChild(img);
-                    
+                    }
                 }
             }
         
 
 
-    function SummenformelArray(summenFormel){
+        function SummenformelArray(summenFormel){
+            
             const Formel = summenFormel;
+            let Ladung = Formel.split("^");
+            let teste = Ladung[1].match(/[0-9]/g);
+            if (teste == null){
+                teste = 1;
+            }
+            Ladung = Ladung[1].match(/[^0-9]/g);
+            if (Ladung[0] == "-"){
+                teste = teste * (-1);
+            }
+            if (Ladung[0] == "+"){
+                teste = parseInt(teste);
+            }
             const Ergebnis = Formel.split(/(?=[A-Z])/);
             var summenArray = [];
             for (i=0;i<Ergebnis.length;i++){
@@ -1069,12 +1241,13 @@ function Abwählaktion(){
                 }
                 summenArray[i] = [Element[0], parseInt(Zahl[0])];
             }
+            summenArray.push(["J",teste]);
             return summenArray;
         }
 
         function formelZerstückler(summenFormel){
             var summenArray = SummenformelArray(summenFormel);
-
+            
             
             const neuesArray = [];
             for (i=0;i<meinArray.length;i++){
@@ -1194,6 +1367,7 @@ function SummenGleich(ZählArrayE,ZählArrayP){
 
 
 function SchöneSummenformel(SummenformelText){
+        if (SummenformelText.indexOf("(") == -1) {
             var summenArray = SummenformelArray(SummenformelText);
             var ausgabeAlsText = "";
             for (let i=0;i<summenArray.length;i++){
@@ -1209,6 +1383,8 @@ function SchöneSummenformel(SummenformelText){
                 if (summenArray[i][0] == "J"){
                     if ((Math.abs(summenArray[i][1]) != 1) && (summenArray[i][1] != 0) ){
                         ausgabeAlsText += "<sup>"+Math.abs(summenArray[i][1])+"</sup>";
+                    } else if ((Math.abs(summenArray[i][1]) == 1) && (summenArray.length == 1)){
+                        ausgabeAlsText += "e";
                     }
                     if (summenArray[i][1] > 0){
                         ausgabeAlsText += "<sup>"+"+"+"</sup>"
@@ -1219,6 +1395,9 @@ function SchöneSummenformel(SummenformelText){
                 }
             }
             return ausgabeAlsText;
+        } else {
+            return KoeffizientenVerkleinernSummenformel(SummenformelText);
+        }
         }
 
 
@@ -1235,6 +1414,7 @@ function HilfeAnzeigen0(){
     let organischBsp = [];
     for (let j = 0;  j < Reaktionsarray[0].length ; j++){
         let meinArray = SummenformelArray(Reaktionsarray[0][j][0]);
+        meinArray.pop();
         if (meinArray[0].includes("S")) {
             schwefelDrin = true;
         }
@@ -1255,6 +1435,10 @@ function HilfeAnzeigen0(){
     }
     for (let j = 0;  j < Reaktionsarray[1].length ; j++){
         let meinArray = SummenformelArray(Reaktionsarray[1][j][0])
+
+        
+        meinArray.pop();
+
         if (meinArray[0].includes("S")) {
             schwefelDrin = true;
         }
@@ -1273,7 +1457,6 @@ function HilfeAnzeigen0(){
             }
         }
     }
-    console.log(organisch);
     if (gibtEsGase == true){
         hilfeTextGase="Elementare Gase (außer die Edelgase in der 8. Hauptgruppe) kommen oft zweiatomig vor. <br> Z.B. "+Beispiel[0][1]+"  "+SchöneSummenformel(Beispiel[0][0]);
         for (let i=1; i<Beispiel.length;i++){
@@ -1452,11 +1635,23 @@ function Salzinfos(wert){
         document.getElementById("SalzinfoText").innerHTML = AusgabeText;
 
 }   
-
-            
+        
 function HilfeAusgleich(){
     document.getElementById("Hilfestellung").innerHTML="";
     var AusgabeDerSummenformeln = "";
+    let esGibtLadungen = false;
+    for (let i = 0; i<Reaktionsarray[0].length; i++){
+        if ((Reaktionsarray[0][i][0].includes("+") == true ) || (Reaktionsarray[0][i][0].includes("-") == true) ){
+            esGibtLadungen = true;
+        }
+    }
+    for (let i = 0; i<Reaktionsarray[1].length; i++){
+        if ((Reaktionsarray[1][i][0].includes("+") == true ) || (Reaktionsarray[1][i][0].includes("-") == true) ){
+            esGibtLadungen = true;
+        }
+    }
+
+
     if (ZählArrayP.includes(NaN) || ZählArrayE.includes(NaN) ){
         AusgabeDerSummenformeln = "Achtung, du scheinst nicht alle Faktoren eingetragen zu haben."
     } else {
@@ -1464,7 +1659,17 @@ function HilfeAusgleich(){
         AusgabeDerSummenformeln += "<table class='ElementTabelle'>";
         AusgabeDerSummenformeln += "<tr> <td>Element</td><td>Eduktsumme</td><td>Produktsumme</td> </tr>";
         for (i=0;i<SchonArray.length;i++){
-            AusgabeDerSummenformeln += "<tr> <td>"+SchonArray[i]+"</td><td>"+ZählArrayE[i]+"</td><td>"+ZählArrayP[i]+"</td> </tr>"
+            if (esGibtLadungen == true){
+                if (SchonArray[i] != "J") {
+                    AusgabeDerSummenformeln += "<tr> <td>"+SchonArray[i]+"</td><td>"+ZählArrayE[i]+"</td><td>"+ZählArrayP[i]+"</td> </tr>"
+                } else if (SchonArray[i] == "J"){
+                    AusgabeDerSummenformeln += "<tr> <td>elektrische Ladung</td><td>"+ZählArrayE[i]+"</td><td>"+ZählArrayP[i]+"</td> </tr>"
+                }
+            } else {
+                if (SchonArray[i] != "J") {
+                    AusgabeDerSummenformeln += "<tr> <td>"+SchonArray[i]+"</td><td>"+ZählArrayE[i]+"</td><td>"+ZählArrayP[i]+"</td> </tr>"
+                }
+            }
         }
         AusgabeDerSummenformeln += "</table>"
     }
@@ -1476,11 +1681,12 @@ function HilfeAusgleich(){
 function HilfeMolM(){
     document.getElementById("Hilfestellung").innerHTML="";
     var AusgabeText = "";
-
+    let ElektronenHinweis = false;
 
         AusgabeText = "Die molare Masse berechnest Du folgendermaßen: <br><br> M(";
         AusgabeText += SchöneSummenformel(Reaktionsarray[0][0][0])+") = ";
         summenArray = formelZerstückler(Reaktionsarray[0][0][0]);
+        
         for (i=0; i<summenArray.length-1;i++){
             AusgabeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") +";
             }
@@ -1492,11 +1698,24 @@ function HilfeMolM(){
             AusgabeText = AusgabeText.substring(0, AusgabeText.length-1)
 
             AusgabeText += "= "+Reaktionsarray[0][0][3]+" g/mol";
-
+    for (let i = 0; i<Reaktionsarray[0].length; i++){
+        if (Reaktionsarray[0][i][0] == "e-"){
+            ElektronenHinweis = true;
+        }
+    }
+    for (let i = 0; i<Reaktionsarray[1].length; i++){
+        if (Reaktionsarray[1][i][0] == "e-"){
+            ElektronenHinweis = true;
+        }
+    }
+    if (ElektronenHinweis == true){
+        AusgabeText += "<br><br> Elektronen (e<sup>-</sup>) besitzen eine molare Masse von 0 g/mol.";
+    }
                 
     
         
     AusgabeText += "<br><br> Probiere es nochmal und klicke dann auf Überprüfen";
+
     document.getElementById("Hilfestellung").innerHTML=AusgabeText;
 }
 
@@ -1645,7 +1864,7 @@ function MolareMassen(){
 
 function SummenformelArray(summenFormel){
             
-            const Formel = summenFormel;
+            const Formel = KoeffizientenVergrößern(summenFormel);
             let teste;
             let Ergebnis = [];
             Ergebnis = Formel.split(/(?=[A-Z])/);
@@ -1699,9 +1918,30 @@ function SummenformelArray(summenFormel){
             return summenArray;
         }
 
+        function KlammerVersteher(Formel){
+            var nummer ;    //Die Zahl nach der Klammer
+            var KlammerTeiler =[]; //Array, dass den String teilt (vor der Klammer und in der Klammer)
+            var Ausgabe =""; 
+            var RestFormel ="";   //Der Sting, der noch nicht durchsucht wurde. 
+            RestFormel = Formel;
+            while (RestFormel.indexOf(")") != -1) {
+            KlammerTeiler = (RestFormel.substring(0,RestFormel.indexOf(")")+1)).split(/[(,)]/,2);
+            RestFormel = (RestFormel.substring(RestFormel.indexOf(")")+1,RestFormel.length));
+            nummer =parseInt(RestFormel)
+            Ausgabe += KlammerTeiler[0];
+            for (let i = 0; i<nummer; i++){
+                Ausgabe += KlammerTeiler[1];
+            }
+            nummer = ""+nummer;
+            RestFormel = RestFormel.substring(RestFormel.indexOf(nummer)+nummer.length,RestFormel.length);
+            }
+            Ausgabe += RestFormel;
+            return Ausgabe;
+            }
+
 </script>
 </body>
 <footer>
-    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://reinmuth.github.io/">Kevin Reinmuth</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 </footer>
 </html>
