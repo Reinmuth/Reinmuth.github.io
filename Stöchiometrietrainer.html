@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style> input{ width:140px; font-size:20px; text-align: center;}
+    <style> input{ width:150px; font-size:20px; text-align: center;}
     .small{ width:50px; font-size:20px; text-align: center;}
     .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
     .ElementTabelle td{ border-color: black;border: 1px solid;}
@@ -182,7 +182,7 @@
 
 
          <input type="button" value="Überprüfen" onclick=Überprüfen()>
-        <p>&ensp; </p>
+         <p id = "LebensAnzeige">&ensp; </p>
         <p id="AntwortSatz"></p>
         
         <div style="align-items: center; font-size: 20px;"><p id="Hilfestellung"></p></div>
@@ -301,7 +301,6 @@
     var Nummer = Math.floor(Math.random()*AufgabenArray.length);
     var Reaktionsarray = AufgabenArray[Nummer];
     document.getElementById("myTable").innerHTML = "";
-
     Start();
 
 function AufgabenArrayFestleger(){
@@ -449,6 +448,8 @@ function MenüAnzeigen(){
     
 function Start(){ 
     failCounter = 0;
+    LebensAnzeiger();
+
     document.getElementById("Hilfestellung").innerHTML="";
     FarbEinsteller();
     document.getElementById("Bilder").innerHTML="";
@@ -1115,7 +1116,7 @@ function Abwählaktion(){
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeAusgleich()">';
-                
+                failCounter += 1;
                 let KlassenElemente = document.getElementsByClassName("small");
                     for (let i=0; i< KlassenElemente.length; i++){
                         KlassenElemente[i].style.backgroundColor = "red";
@@ -1229,7 +1230,7 @@ function Abwählaktion(){
             
             if (korrekt == true) {
                 document.getElementById("AntwortSatz").innerHTML = "Super, alles richtig. Du bist fertig!";
-                document.getElementById("AntwortSatz").innerHTML += '<br><br><input type="button" value="Neue Aufgabe starten" onclick=NeueAufgabeStarten() >';
+                document.getElementById("AntwortSatz").innerHTML += '<br><br><input type="button" value="Neue Aufgabe" onclick=NeueAufgabeStarten() >';
 
             } else {
                 document.getElementById("AntwortSatz").innerHTML = 'Leider falsch <br><br><input type="button" value="Hilfe anzeigen" onclick="HilfeMasse()">';
@@ -1239,6 +1240,7 @@ function Abwählaktion(){
                 document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="LösungStufe5()">';
             }
         }
+        LebensAnzeiger();
     }
 
     function LösungStufe5(){
@@ -2018,9 +2020,29 @@ function SummenformelArray(summenFormel){
             return Ausgabe;
             }
 
+        function LebensAnzeiger(){
+            let ReagenzglasBilder = "";
+            document.getElementById('LebensAnzeige').innerHTML = "";
+            for (let i=0; i<(Math.min(failCounter,3)); i++){
+                let img = new Image();
+                img.className ="Reagenzi";
+                img.src = "img/Reagenzglas-rot.png";
+                img.width = 30;
+                document.getElementById('LebensAnzeige').appendChild(img);
+            }
+            for (let i=0; i<(3-failCounter); i++){
+                let img = new Image();
+                img.className ="Reagenzi";
+                img.src = "img/Reagenzglas-grün.png";
+                img.width = 30;
+                document.getElementById('LebensAnzeige').appendChild(img);
+            }
+            
+        }
+
 </script>
 </body>
 <footer>
-    <p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
 </footer>
 </html>
