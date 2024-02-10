@@ -403,7 +403,7 @@ document.getElementById("Hilfestellung").innerHTML="Hinweis: Die Faktoren könne
 Inneres += "<tr><td>Reaktionsgleichung:</td>";
 for ( j = 0;  j < Reaktionsarray[0].length ; j++){
     var id = "ZahlE"+j;
-    Inneres += "<td> <input class='small' id="+id+" >"+ SchöneSummenformel(Reaktionsarray[0][j][0])+"</td>";
+    Inneres += "<td> <input class='small' id="+id+" > "+ SchöneSummenformel(Reaktionsarray[0][j][0])+"</td>";
     if ( j != Reaktionsarray[0].length-1 ){
         Inneres += "<td>+</td>";
     } else {
@@ -412,7 +412,7 @@ for ( j = 0;  j < Reaktionsarray[0].length ; j++){
 }
 for ( j = 0;  j < Reaktionsarray[1].length ; j++){
     var id = "ZahlP"+j;
-    Inneres += "<td> <input class='small' id="+id+" >"+ SchöneSummenformel(Reaktionsarray[1][j][0])+"</td>";
+    Inneres += "<td> <input class='small' id="+id+" > "+ SchöneSummenformel(Reaktionsarray[1][j][0])+"</td>";
     if ( j != Reaktionsarray[1].length-1 ){
         Inneres += "<td>+</td>";
     }
