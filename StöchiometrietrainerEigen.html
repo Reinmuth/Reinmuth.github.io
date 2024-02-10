@@ -417,7 +417,7 @@ if (level == 1){
     Inneres += "<tr><td>Molare Masse:</td>";
     for ( j = 0;  j < Reaktionsarray[0].length ; j++){
         var id = "MoMaE"+j;
-        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+') =</label><input id='+id+' placeholder=" g/mol  "></td>';
+        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+') = </label><input id='+id+' placeholder=" g/mol  "></td>';
         if ( j != Reaktionsarray[0].length-1 ){
             Inneres += "<td> &ensp;  </td>";
         } else {
@@ -426,7 +426,7 @@ if (level == 1){
     }
     for ( j = 0;  j < Reaktionsarray[1].length ; j++){
         var id = "MoMaP"+j;
-        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') =</label><input id='+id+' placeholder=" g/mol  "></td>';
+        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') = </label><input id='+id+' placeholder=" g/mol  "></td>';
         if ( j != Reaktionsarray[1].length-1 ){
             Inneres += "<td> &ensp; </td>";
         }
@@ -457,7 +457,7 @@ if (level == 1){
     Inneres += "<tr><td>Molare Masse:</td>";
     for ( j = 0;  j < Reaktionsarray[0].length ; j++){
         var id = "MoMaE"+j;
-        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+')= </label>'+Reaktionsarray[0][j][3]+' g/mol  </td>';
+        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+') = </label>'+Reaktionsarray[0][j][3]+' g/mol  </td>';
         if ( j != Reaktionsarray[0].length-1 ){
             Inneres += "<td> &ensp;  </td>";
         } else {
@@ -466,7 +466,7 @@ if (level == 1){
     }
     for ( j = 0;  j < Reaktionsarray[1].length ; j++){
         var id = "MoMaP"+j;
-        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') =</label>'+Reaktionsarray[1][j][3]+' g/mol  </td>';
+        Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') = </label>'+Reaktionsarray[1][j][3]+' g/mol  </td>';
         if ( j != Reaktionsarray[1].length-1 ){
             Inneres += "<td> &ensp; </td>";
         }
@@ -478,7 +478,7 @@ if (level == 1){
         Reaktionsarray[0][j].push(Stoffmenge * Reaktionsarray[0][j][2]/Reaktionsarray[0][0][2]);
         
         
-        Inneres += '<td> <label <span id="Span'+id+'">n('+SchöneSummenformel(Reaktionsarray[0][j][0])+') </span></label>=<input id='+id+' placeholder=" mol  "></td>';
+        Inneres += '<td> <label <span id="Span'+id+'">n('+SchöneSummenformel(Reaktionsarray[0][j][0])+') </span></label> = <input id='+id+' placeholder=" mol  "></td>';
         if ( j != Reaktionsarray[0].length-1 ){
             Inneres += "<td> &ensp;  </td>";
         } else {
@@ -488,7 +488,7 @@ if (level == 1){
     for ( j = 0;  j < Reaktionsarray[1].length ; j++){
         var id = "NP"+j;
         Reaktionsarray[1][j].push(Stoffmenge * Reaktionsarray[1][j][2]/Reaktionsarray[0][0][2]);
-        Inneres += '<td> <label> <span id="Span'+id+'"> n('+SchöneSummenformel(Reaktionsarray[1][j][0])+') </span></label>=<input id='+id+' placeholder=" mol  "></td>';
+        Inneres += '<td> <label> <span id="Span'+id+'"> n('+SchöneSummenformel(Reaktionsarray[1][j][0])+') </span></label> = <input id='+id+' placeholder=" mol  "></td>';
         if ( j != Reaktionsarray[1].length-1 ){
             Inneres += "<td> &ensp; </td>";
         }
@@ -527,7 +527,7 @@ if (level == 1){
         Inneres += "<tr><td>Molare Masse M:</td>";
         for ( j = 0;  j < Reaktionsarray[0].length ; j++){
             var id = "MoMaE"+j;
-            Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+')= </label>'+Reaktionsarray[0][j][3]+' g/mol  </td>';
+            Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[0][j][0])+') = </label>'+Reaktionsarray[0][j][3]+' g/mol  </td>';
             if ( j != Reaktionsarray[0].length-1 ){
                 Inneres += "<td> &ensp;  </td>";
             } else {
@@ -536,7 +536,7 @@ if (level == 1){
         }
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             var id = "MoMaP"+j;
-            Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') =</label>'+Reaktionsarray[1][j][3]+' g/mol  </td>';
+            Inneres += '<td> <label>M('+SchöneSummenformel(Reaktionsarray[1][j][0])+') = </label>'+Reaktionsarray[1][j][3]+' g/mol  </td>';
             if ( j != Reaktionsarray[1].length-1 ){
                 Inneres += "<td> &ensp; </td>";
             }
@@ -546,7 +546,7 @@ if (level == 1){
         for ( j = 0;  j < Reaktionsarray[0].length ; j++){
             var id = "NE"+j;
             
-            Inneres += '<td> <label>n('+SchöneSummenformel(Reaktionsarray[0][j][0])+') =</label>'+AusgabeMitKomma(Reaktionsarray[0][j][4])+' mol </td>';
+            Inneres += '<td> <label>n('+SchöneSummenformel(Reaktionsarray[0][j][0])+') = </label>'+AusgabeMitKomma(Reaktionsarray[0][j][4])+' mol </td>';
             if ( j != Reaktionsarray[0].length-1 ){
                 Inneres += "<td> &ensp;  </td>";
             } else {
@@ -556,7 +556,7 @@ if (level == 1){
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             
             
-            Inneres += '<td> <label>n('+SchöneSummenformel(Reaktionsarray[1][j][0])+') =</label>'+AusgabeMitKomma(Reaktionsarray[1][j][4])+' mol  </td>';
+            Inneres += '<td> <label>n('+SchöneSummenformel(Reaktionsarray[1][j][0])+') = </label>'+AusgabeMitKomma(Reaktionsarray[1][j][4])+' mol  </td>';
             if ( j != Reaktionsarray[1].length-1 ){
                 Inneres += "<td> &ensp; </td>";
             }
@@ -570,7 +570,7 @@ if (level == 1){
         for ( j = 1;  j < Reaktionsarray[0].length ; j++){
             var id = "mE"+j;
             Reaktionsarray[0][j].push(Reaktionsarray[0][j][3] * Reaktionsarray[0][j][4]);
-            Inneres += '<td> <label>m('+SchöneSummenformel(Reaktionsarray[0][j][0])+') =</label><input id='+id+' placeholder=" g  "></td>';
+            Inneres += '<td> <label>m('+SchöneSummenformel(Reaktionsarray[0][j][0])+') = </label><input id='+id+' placeholder=" g  "></td>';
             if ( j != Reaktionsarray[0].length-1 ){
                 Inneres += "<td> &ensp;  </td>";
             } else {
@@ -580,7 +580,7 @@ if (level == 1){
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             var id = "mP"+j;
             Reaktionsarray[1][j].push(Reaktionsarray[1][j][3] * Reaktionsarray[1][j][4]);
-            Inneres += '<td> <label>m('+SchöneSummenformel(Reaktionsarray[1][j][0])+') =</label><input id='+id+' placeholder=" g  "></td>';
+            Inneres += '<td> <label>m('+SchöneSummenformel(Reaktionsarray[1][j][0])+') = </label><input id='+id+' placeholder=" g  "></td>';
             if ( j != Reaktionsarray[1].length-1 ){
                 Inneres += "<td> &ensp; </td>";
             }
@@ -1767,8 +1767,8 @@ function HilfeStoffM2(){
 
 
         AusgabeText = "Mit der berechneten Stoffmenge berechnest Du die weiteren Stoffmengen so: <br><br> Wir betrachten dafür die Stoffmengenverhältnisse z.B. <br> ";
-        AusgabeText += "<span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> /<span style='color: #db9e02; font-weight:bold;'> n("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span> = <span style='color: blue; font-weight:bold;'>Vorfaktor("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> / <span style='color: #db9e02; font-weight:bold;'>Vorfaktor("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span>= <span style='color: blue; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2])+"</span>/<span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][2])+"</span> = <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2])+"</span>";
-        AusgabeText += "<br><br> Nach Multiplikation der Gleichung gilt <br><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span>=<span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901;"+"<span style='color: #db9e02; font-weight:bold;'>n("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span>=  <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901; <span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][4])+" </span> mol = "+AusgabeMitKomma(Reaktionsarray[1][0][4])+" mol";
+        AusgabeText += "<span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> /<span style='color: #db9e02; font-weight:bold;'> n("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span> = <span style='color: blue; font-weight:bold;'>Vorfaktor("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> / <span style='color: #db9e02; font-weight:bold;'>Vorfaktor("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span> = <span style='color: blue; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2])+"</span>/<span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][2])+"</span> = <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2])+"</span>";
+        AusgabeText += "<br><br> Nach Multiplikation der Gleichung gilt <br><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> = <span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901;"+"<span style='color: #db9e02; font-weight:bold;'>n("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span> =  <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901; <span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][4])+" </span> mol = "+AusgabeMitKomma(Reaktionsarray[1][0][4])+" mol";
         
 
     
