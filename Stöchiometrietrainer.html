@@ -448,7 +448,7 @@ function MenüAnzeigen(){
     
 function Start(){ 
     failCounter = 0;
-    LebensAnzeiger();
+    // LebensAnzeiger();
 
     document.getElementById("Hilfestellung").innerHTML="";
     FarbEinsteller();
@@ -981,9 +981,13 @@ function Abwählaktion(){
             var EduktArray = [];
             for(let i=0; i<Reaktionsarray[0].length; i++){
                 var id = "ZahlE"+i;
+                if (document.getElementById(id).value == ""){
+                    document.getElementById(id).value = 1;
+                }
                 var Faktor = document.getElementById(id).value;
                 Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
+
                 var Formel = KoeffizientenVergrößern(Reaktionsarray[0][i][0]);
                 let Ergebnis = [];
                 Ergebnis = Formel.split(/(?=[A-Z])/);
@@ -1035,6 +1039,9 @@ function Abwählaktion(){
                 
                 
                 var id = "ZahlP"+i;
+                if (document.getElementById(id).value == ""){
+                    document.getElementById(id).value = 1;
+                }
                 var Faktor = document.getElementById(id).value;
                 Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
@@ -1240,7 +1247,7 @@ function Abwählaktion(){
                 document.getElementById("AntwortSatz").innerHTML += '&ensp; <input type="button" value="Lösung zeigen" onclick="LösungStufe5()">';
             }
         }
-        LebensAnzeiger();
+        // LebensAnzeiger();
     }
 
     function LösungStufe5(){
@@ -2020,25 +2027,25 @@ function SummenformelArray(summenFormel){
             return Ausgabe;
             }
 
-        function LebensAnzeiger(){
-            let ReagenzglasBilder = "";
-            document.getElementById('LebensAnzeige').innerHTML = "";
-            for (let i=0; i<(Math.min(failCounter,3)); i++){
-                let img = new Image();
-                img.className ="Reagenzi";
-                img.src = "img/Reagenzglas-rot.png";
-                img.width = 30;
-                document.getElementById('LebensAnzeige').appendChild(img);
-            }
-            for (let i=0; i<(3-failCounter); i++){
-                let img = new Image();
-                img.className ="Reagenzi";
-                img.src = "img/Reagenzglas-grün.png";
-                img.width = 30;
-                document.getElementById('LebensAnzeige').appendChild(img);
-            }
+        // function LebensAnzeiger(){
+        //     let ReagenzglasBilder = "";
+        //     document.getElementById('LebensAnzeige').innerHTML = "";
+        //     for (let i=0; i<(Math.min(failCounter,3)); i++){
+        //         let img = new Image();
+        //         img.className ="Reagenzi";
+        //         img.src = "img/Reagenzglas-rot.png";
+        //         img.width = 30;
+        //         document.getElementById('LebensAnzeige').appendChild(img);
+        //     }
+        //     for (let i=0; i<(3-failCounter); i++){
+        //         let img = new Image();
+        //         img.className ="Reagenzi";
+        //         img.src = "img/Reagenzglas-grün.png";
+        //         img.width = 30;
+        //         document.getElementById('LebensAnzeige').appendChild(img);
+        //     }
             
-        }
+        // }
 
 </script>
 </body>

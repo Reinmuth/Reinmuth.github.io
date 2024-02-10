@@ -878,6 +878,9 @@ function Abwählaktion(){
             var EduktArray = [];
             for(let i=0; i<Reaktionsarray[0].length; i++){
                 var id = "ZahlE"+i;
+                if (document.getElementById(id).value == ""){
+                    document.getElementById(id).value = 1;
+                }
                 var Faktor = document.getElementById(id).value;
                 Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
@@ -932,6 +935,9 @@ function Abwählaktion(){
                 
                 
                 var id = "ZahlP"+i;
+                if (document.getElementById(id).value == ""){
+                    document.getElementById(id).value = 1;
+                }
                 var Faktor = document.getElementById(id).value;
                 Faktor=Faktor.replace(/\,/, ".");            
                 Faktor = eval(Faktor);
