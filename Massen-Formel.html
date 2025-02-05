@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Vom Massenverhältnis zur Verhältnisformel</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <style>
+            td {width: 80px; border: 1px solid black; text-align: center;}
+            table{margin-left: auto;margin-right: auto;margin-top: 50px;}
+            .operator{  border: 2;
+                        outline: 2;
+                        width: 150px;
+                        height: 40px;
+                        border-radius: 10px;
+                        margin-left: 2px;margin-right: 2px;margin-top: 2px;margin-bottom: 2px;}
+            .display{    text-align: left;
+    flex: 1;
+    font-size: 25px;
+    box-shadow: none;
+    margin-bottom: 20px;
+    font-size: larger;
+}
+        </style>
+
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+            
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <a style="margin-left: 5px;" href="index.html"> <img src="Banner2.PNG" width="200 px" name="Logo" title="Startseite" alt="Logo"> </a>		
+
+        <nav style="margin: 5px;">			
+            <ul>
+                <li><a id="info" href="index.html">Übersicht</a></li>
+                <li><a href="">Inhalte Zahlentheorie</a>          </li>
+                <li><a class="current" href="DigitalTrainer.html">Übungen Zahlentheorie</a>	</li>
+
+                
+            </ul>		
+        </nav>	
+    </div>
+       
+           <div class="container">
+            <div style="color: black;" class="calculator" >
+                <form> 
+                    <h2 style="text-align:center"> Vom Massenverhältnis zur Verhältnisformel</h2> 
+                    <p style="text-align:center" id="Aufgabenstellung"></p> 
+                    <p style="text-align:center" id="PruefButton1"></p> 
+                    <p style="text-align:center" id="Antwort1"></p> 
+                    <p style="text-align:center" id="PruefButton2"></p> 
+                    <p style="text-align:center" id="Antwort2"></p> 
+                    
+     
+
+
+                </form>
+            </div>
+        </div>
+        <script>
+            var AufgabenArray = [];
+            var c= Math.floor(Math.random()*5+1);
+
+            AufgabenArray.push([["Eisen","Fe",56,2],["Sauerstoff","O",16,3]]);
+            AufgabenArray.push([["Eisen","Fe",56,2],["Schwefel","S",32,3]]);
+            AufgabenArray.push([["Wasserstoff","H",1,2],["Sauerstoff","O",16,1]]);            
+            AufgabenArray.push([["Eisen","Fe",56,1],["Sauerstoff","O",16,1]]);
+            AufgabenArray.push([["Eisen","Fe",56,1],["Schwefel","S",32,1]]);
+
+            AufgabenArray.push([["Lithium","Li",7,2],["Sauerstoff","O",16,1]]);
+            AufgabenArray.push([["Natrium","Na",23,2],["Schwefel","S",32,1]]);
+            AufgabenArray.push([["Lithium","Li",7,2],["Sauerstoff","O",16,1]]);            
+            AufgabenArray.push([["Natrium","Na",23,2],["Schwefel","S",32,1]]);
+
+            AufgabenArray.push([["Magnesium","Mg",24,1],["Chlor","Cl",35,2]]);
+            AufgabenArray.push([["Magnesium","Mg",24,1],["Fluor","F",19,2]]);
+            AufgabenArray.push([["Magnesium","Mg",24,1],["Sauerstoff","O",16,1]]);
+            AufgabenArray.push([["Magnesium","Mg",24,1],["Schwefel","S",32,1]]);
+
+            AufgabenArray.push([["Aluminium","Al",27,2],["Schwefel","S",32,3]]);
+
+            AufgabenArray.push([["Silber","Ag",108,2],["Sauerstoff","O",16,3]]);
+
+            var meinArray = [];
+            meinArray = AufgabenArray[Math.floor(Math.random()*AufgabenArray.length)];
+
+
+            var x = c*meinArray[0][2]*meinArray[0][3];
+            var y = c*meinArray[1][2]*meinArray[1][3];
+            document.getElementById("Aufgabenstellung").innerHTML="Das folgende Massenverhältnis ist gegeben $$ \\frac{m("+meinArray[0][0]+")}{m("+meinArray[1][0]+")}=\\frac{"+x+"}{"+y+"}$$<br>Berechne die Verhältnisformel der Verbindung";
+
+            document.getElementById("Aufgabenstellung").innerHTML+="<br> $$ \\frac{N("+meinArray[0][0]+")*m(1-"+meinArray[0][0]+"Atom) }{N("+meinArray[1][0]+")*m(1-"+meinArray[1][0]+"Atom)}=\\frac{"+x+"}{"+y+"}$$"
+            document.getElementById("Aufgabenstellung").innerHTML+="m(1-"+meinArray[0][0]+"Atom) =<input id='MasseA' style='font-size: larger; width:90px;margin-left: 5px; margin-right: 5px; text-align: center' placeholder='gerundet' >";
+            document.getElementById("Aufgabenstellung").innerHTML+="&ensp; m(1-"+meinArray[1][0]+"Atom) =<input id='MasseB' style='font-size: larger; width:90px;margin-left: 5px; margin-right: 5px; text-align: center' placeholder='gerundet' >";
+            document.getElementById("PruefButton1").innerHTML+='<br><input type="button" value="Prüfen" onclick=Massentest() class="equal operator">';
+            function Massentest(){
+                var AntwMasseA = document.getElementById("MasseA").value;
+                var AntwMasseB = document.getElementById("MasseB").value;
+                if ((AntwMasseA == meinArray[0][2]) && (AntwMasseB == meinArray[1][2]))
+                {
+                    document.getElementById("Antwort1").innerHTML="Richtig, weiter gehts";
+                    document.getElementById("Antwort1").innerHTML+="<br> $$ \\frac{N("+meinArray[0][0]+")*"+meinArray[0][2]+"}{N("+meinArray[1][0]+")*"+meinArray[1][2]+"}=\\frac{"+x+"}{"+y+"} \\qquad \\vert *\\frac{"+meinArray[1][2]+"}{"+meinArray[0][2]+"} $$"
+                    document.getElementById("Antwort1").innerHTML+="Nach dem Kürzen folgt für die Verhältnisformel <br>";
+                    document.getElementById("Antwort1").innerHTML+= meinArray[0][1]+"<input id='IndexA' oninput=KoeffizientenVerkleinern() style='font-size: larger; width:20px;margin-left: 5px; margin-right: 5px; text-align: center' placeholder='' >"+meinArray[1][1]+"<input id='IndexB' oninput=KoeffizientenVerkleinern() style='font-size: larger; width:20px;margin-left: 5px; margin-right: 5px; text-align: center' placeholder='' >";
+                    document.getElementById("PruefButton2").innerHTML+='<br><input type="button" value="Prüfen" onclick=Verbindungstest() class="equal operator">';
+                    document.getElementById("PruefButton1").innerHTML="";
+                    MathJax.typesetPromise();
+                    
+                } else{
+                    document.getElementById("Antwort1").innerHTML="Leider falsch. Bitte nochmal prüfen.";
+                }
+            }
+            function Verbindungstest(){
+                console.log(document.getElementById("IndexA").value);
+                var AntwIndexA = KoeffizientenVergrößern(document.getElementById("IndexA").value);
+                console.log(AntwIndexA);
+                var AntwIndexB = KoeffizientenVergrößern(document.getElementById("IndexB").value);
+                console.log(AntwIndexB);
+                if (AntwIndexA == ""){
+                    AntwIndexA = "1";
+                }
+                if (AntwIndexB == ""){
+                    AntwIndexB = "1";
+                }
+                if ((AntwIndexA == meinArray[0][3]) && (AntwIndexB == meinArray[1][3]))
+                {
+                    if ((meinArray[0][3]!=1)&&(meinArray[1][3]!=1)){
+                    document.getElementById("Antwort2").innerHTML="Richtig, die Formel lautet "+meinArray[0][1]+"<sub>"+meinArray[0][3]+"</sub>"+meinArray[1][1]+"<sub>"+meinArray[1][3]+"</sub>";
+                    } else if((meinArray[0][3]!=1)&&(meinArray[1][3]==1) ){
+                        document.getElementById("Antwort2").innerHTML="Richtig, die Formel lautet "+meinArray[0][1]+"<sub>"+meinArray[0][3]+"</sub>"+meinArray[1][1];
+                        console.log("erster Fall");
+                    } else if((meinArray[0][3]==1)&&(meinArray[1][3]!=1) ){
+                        document.getElementById("Antwort2").innerHTML="Richtig, die Formel lautet "+meinArray[0][1]+meinArray[1][1]+"<sub>"+meinArray[1][3]+"</sub>";
+                        console.log("zw Fall");
+                    } else if((meinArray[0][3]==1)&&(meinArray[1][3]==1) ){
+                        document.getElementById("Antwort2").innerHTML="Richtig, die Formel lautet "+meinArray[0][1]+meinArray[1][1];
+                        console.log("dritter Fall");
+                    }
+                    document.getElementById("Antwort2").innerHTML+='<br><input type="button" value="Neue Aufgabe" onclick=location.reload() class="equal operator">';
+                    document.getElementById("PruefButton2").innerHTML="";
+                } else{
+                    document.getElementById("Antwort2").innerHTML="Leider falsch. Bitte nochmal prüfen.";
+                }
+            
+            }
+            function KoeffizientenVerkleinern(){
+                let meineVariable = "";
+                meineVariable = document.getElementById("IndexA").value;
+
+
+                meineVariable = meineVariable.replace("1", "₁");
+                meineVariable = meineVariable.replace("2", "₂");
+                meineVariable = meineVariable.replace("3", "₃");
+                meineVariable = meineVariable.replace("4", "₄");
+                meineVariable = meineVariable.replace("5", "₅");
+                meineVariable = meineVariable.replace("6", "₆");
+                meineVariable = meineVariable.replace("7", "₇");
+                meineVariable = meineVariable.replace("8", "₈");
+                meineVariable = meineVariable.replace("9", "₉");
+                meineVariable = meineVariable.replace("0", "₀");
+                document.getElementById("IndexA").value = meineVariable;
+                let meineVariable2 = "";
+                meineVariable2 = document.getElementById("IndexB").value;
+                meineVariable2 = meineVariable2.replace("1", "₁");
+                meineVariable2 = meineVariable2.replace("2", "₂");
+                meineVariable2 = meineVariable2.replace("3", "₃");
+                meineVariable2 = meineVariable2.replace("4", "₄");
+                meineVariable2 = meineVariable2.replace("5", "₅");
+                meineVariable2 = meineVariable2.replace("6", "₆");
+                meineVariable2 = meineVariable2.replace("7", "₇");
+                meineVariable2 = meineVariable2.replace("8", "₈");
+                meineVariable2 = meineVariable2.replace("9", "₉");
+                meineVariable2 = meineVariable2.replace("0", "₀");
+                document.getElementById("IndexB").value = meineVariable2;
+            }
+            function KoeffizientenVergrößern(meinText){
+                let meineVariable = meinText;
+
+                meineVariable = meineVariable.replaceAll("⁺","+");
+                meineVariable = meineVariable.replaceAll("⁻","-");
+                meineVariable = meineVariable.replaceAll("¹","^1");
+                meineVariable = meineVariable.replaceAll("²","^2");
+                meineVariable = meineVariable.replaceAll("³","^3");
+                meineVariable = meineVariable.replaceAll("⁴","^4");
+                meineVariable = meineVariable.replaceAll("⁵","^5");
+                meineVariable = meineVariable.replaceAll("⁶","^6");
+                meineVariable = meineVariable.replaceAll("⁷","^7");
+                meineVariable = meineVariable.replaceAll("⁸","^8");
+                meineVariable = meineVariable.replaceAll("⁹","^9");
+                meineVariable = meineVariable.replaceAll("⁰","^0");
+                meineVariable = meineVariable.replaceAll("₁", "1");
+                meineVariable = meineVariable.replaceAll("₂", "2");
+                meineVariable = meineVariable.replaceAll("₃", "3");
+                meineVariable = meineVariable.replaceAll("₄", "4");
+                meineVariable = meineVariable.replaceAll("₅", "5");
+                meineVariable = meineVariable.replaceAll("₆", "6");
+                meineVariable = meineVariable.replaceAll("₇", "7");
+                meineVariable = meineVariable.replaceAll("₈", "8");
+                meineVariable = meineVariable.replaceAll("₉", "9");
+                meineVariable = meineVariable.replaceAll("₀", "0");
+                console.log(meineVariable);
+                return meineVariable;
+            }
+        </script>
+
+    </body>
+</html>
