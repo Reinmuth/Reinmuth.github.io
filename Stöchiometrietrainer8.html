@@ -123,12 +123,12 @@
              </div></li>
         <li><div class="cat Oxidation">
             <label>
-               <input id="Ausw1" type="checkbox" checked value="1"><span>Verbrennungen/Oxidationen</span>
+               <input id="Ausw1" type="checkbox"  value="0"><span>Verbrennungen/Oxidationen</span>
             </label>
          </div></li>
         <li><div class="cat Wasserstoff">
             <label>
-               <input id="Ausw2" type="checkbox" checked value="1"><span>Wasserstoff und Wasser</span>
+               <input id="Ausw2" type="checkbox"  value="0"><span>Wasserstoff und Wasser</span>
             </label>
          </div></li>
         <!-- <li><div class="cat Substitution">
@@ -675,7 +675,7 @@ function Speichern(){
     }
 
     if (KategorienArray.includes(true) == false){
-        document.getElementById("Ausw1").checked = true;
+        document.getElementById("Ausw0").checked = true;
     }
     for (let i = 0; i<KategorienArray.length; i++){
         KategorienArray[i]=document.getElementById("Ausw"+i).checked;
