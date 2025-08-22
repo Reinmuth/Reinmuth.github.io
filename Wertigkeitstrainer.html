@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Wertigkeitstrainer</title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:140px; font-size:20px; text-align: center;}
+    p{font-size: 25px;}
+    .small{ width:50px; font-size:20px; text-align: center;}
+    .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+    .ElementTabelle td{ border-color: black;border: 1px solid;}
+    .ElementTabelle tr{ border-color: black;border: 1px solid;}
+    td{ white-space: nowrap;}
+    li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+    .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+    .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+    input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+    body{background-color: rgba(193, 247, 239, 0.336);}
+    #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+    h2{ font-size: 40px;}
+    .Bildchen:hover{scale: 1.07;}
+    .Bildchen{
+        box-shadow: 7px 4px 6px 2px #000000;background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
+        border-radius: 40px;; }
+    footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+        </style>
+    
+    
+</head>
+<body>
+   <div style="text-align: center;" >
+    <h2>Wertigkeitstrainer</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+    <h3 style="text-align: center;padding: 0 6px; color: coral;font-size:x-large;"  id="Aufgabenstellung"></h3>
+    <input oninput="KoeffizientenVerkleinern(this.id)" id="Eingabezeile" placeholder="Summenformel">
+    <input type="button" value="Prüfen" id="Antwort" onclick ="Vorpruefung()" > <p></p>
+    <input type="button" style="width: 200px;" value="Tipps anzeigen" id="tippButton" onclick ="TippsAnzeigen()" >  <input type="button" style="width: 200px;" id="loesungsButton" value="Lösung anzeigen" onclick ="LoesungAnzeigen()" >
+    <p id="AusgabeFeld"></p>
+    <p id="Tippfeld1"></p>
+    <p id="LoesungsFeld1"></p>
+    <canvas id="canvas" width="700" height="380"></canvas>    
+    <p id="LoesungsFeld2"></p>
+    <canvas id="canvas2" width="500" height="130"></canvas>
+    <p id="LoesungsFeld3"></p>
+   </div>
+    <script>
+        var ElemWertigkeitKation = [];
+        ElemWertigkeitKation.push(["Natrium", "Na",1,"H","Natrium"]);
+        ElemWertigkeitKation.push(["Kupfer(II)", "Cu",2,"N","Kupfer"]);
+        ElemWertigkeitKation.push(["Aluminium", "Al",3,"H","Aluminium"]);
+        ElemWertigkeitKation.push(["Lithium", "Li", 1, "H", "Lithium"]);
+        ElemWertigkeitKation.push(["Natrium", "Na", 1, "H", "Natrium"]);
+        ElemWertigkeitKation.push(["Kalium", "K", 1, "H", "Kalium"]);
+        ElemWertigkeitKation.push(["Beryllium", "Be", 2, "H", "Beryllium"]);
+        ElemWertigkeitKation.push(["Magnesium", "Mg", 2, "H", "Magnesium"]);
+        ElemWertigkeitKation.push(["Calcium", "Ca", 2, "H", "Calcium"]);
+        ElemWertigkeitKation.push(["Strontium", "Sr", 2, "H", "Strontium"]);
+        ElemWertigkeitKation.push(["Barium", "Ba", 2, "H", "Barium"]);
+        ElemWertigkeitKation.push(["Bor", "B", 3, "H", "Bor"]);
+        ElemWertigkeitKation.push(["Aluminium", "Al", 3, "H", "Aluminium"]);
+        ElemWertigkeitKation.push(["Gallium", "Ga", 3, "H", "Gallium"]);
+
+        ElemWertigkeitKation.push(["Eisen(II)", "Fe", 2, "N", "Eisen"]);
+        ElemWertigkeitKation.push(["Eisen(III)", "Fe", 3, "N", "Eisen"]);
+        ElemWertigkeitKation.push(["Kupfer(I)", "Cu", 1, "N", "Kupfer"]);
+        ElemWertigkeitKation.push(["Kupfer(II)", "Cu", 2, "N", "Kupfer"]);
+        ElemWertigkeitKation.push(["Zink(II)", "Zn", 2, "N", "Zink"]);
+        ElemWertigkeitKation.push(["Silber(I)", "Ag", 1, "N", "Silber"]);
+        ElemWertigkeitKation.push(["Gold(I)", "Au", 1, "N", "Gold"]);
+
+
+
+
+
+
+
+
+        var ElemWertigkeitAnion = [];
+        ElemWertigkeitAnion.push(["nitrid", "N", 3, "H", "Stickstoff"]);
+        ElemWertigkeitAnion.push(["phosphid", "P", 3, "H", "Phosphor"]);
+        ElemWertigkeitAnion.push(["oxid", "O", 2, "H", "Sauerstoff"]);
+        ElemWertigkeitAnion.push(["sulfid", "S", 2, "H", "Schwefel"]);
+        ElemWertigkeitAnion.push(["fluorid", "F", 1, "H", "Fluor"]);
+        ElemWertigkeitAnion.push(["chlorid", "Cl", 1, "H", "Chlor"]);
+        ElemWertigkeitAnion.push(["bromid", "Br", 1, "H", "Brom"]);
+        ElemWertigkeitAnion.push(["iodid", "I", 1, "H", "Iod"]);
+
+        var level = 0;
+        var tipps = 0;
+        var Nummer = Math.floor(Math.random()*ElemWertigkeitKation.length);
+        var Kation = ElemWertigkeitKation[Nummer];
+        var Nummer = Math.floor(Math.random()*ElemWertigkeitAnion.length);
+        var Anion = ElemWertigkeitAnion[Nummer];
+        document.getElementById("Aufgabenstellung").innerHTML = "<h3> Bestimme die Verhältnisformel von "+Kation[0]+Anion[0]+".</h3>";
+        var ggT;
+        ggT = EA(Kation[2],Anion[2]);
+        Kation[5]=Anion[2]/ggT;
+        Anion[5]=Kation[2]/ggT;
+        var LoesungsArray = [];
+        var LoesungsSummenformelText = "";
+        if (Kation[5]==1){
+            LoesungsSummenformelText += Kation[1];
+        } else{
+            LoesungsSummenformelText += Kation[1]+Kation[5];
+        }
+        if (Anion[5]==1){
+            LoesungsSummenformelText += Anion[1];
+        } else{
+            LoesungsSummenformelText += Anion[1]+Anion[5];
+        }  
+        var c = document.getElementById("canvas");
+        var ctx = c.getContext("2d");
+        var c2 = document.getElementById("canvas2");
+        var ctx2 = c2.getContext("2d");
+
+        function LoesungAnzeigen(){
+            tipps = -1;
+            TippsAnzeigen();
+            document.getElementById("tippButton").disabled = true;
+            document.getElementById("loesungsButton").disabled = true;
+            document.getElementById("Antwort").value = "Neue Aufgabe";
+            level = 1;
+            var c = document.getElementById("canvas");
+            var ctx = c.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = "24px serif";
+            var x = 50;
+            var y = 50;
+            ctx.beginPath();
+            ctx.roundRect(x-10, y-10, 70*Kation[2], 70, 10);
+            ctx.strokeStyle = "blue";
+            ctx.stroke();
+            ctx.fillStyle = "blue";
+            ctx.fillText(Kation[1], x-22+35*Kation[2], y-25);        
+            for (let i=0; i<Kation[2];i++){
+                drawH(x,50);
+                x+=70;
+            }
+            
+            x=350;
+            y=50;
+            ctx.beginPath();
+            ctx.roundRect(x-10, y-10, 70*Anion[2], 70, 10);
+            ctx.strokeStyle = "red";
+            ctx.stroke();
+            ctx.fillStyle = "red";
+            ctx.fillText(Anion[1], x-22+35*Anion[2], y-25);        
+            for (let i=0; i<Anion[2];i++){
+                drawH(x,50);
+                x+=70;
+            }
+            x=50;
+            y=200;
+            for (let i=0; i<Kation[5]; i++){
+                ctx.beginPath();
+                ctx.roundRect(x-10, y-10, 70*Kation[2], 70, 10);
+                ctx.strokeStyle = "blue";
+                ctx.stroke();
+                ctx.fillStyle = "blue";
+                ctx.fillText(Kation[1], x-22+35*Kation[2], y-25);        
+                for (let i=0; i<Kation[2];i++){
+                    drawH(x,y);
+                    x+=70;
+                }
+            }
+            y=280;
+            x=50;
+            for (let i=0; i<Anion[5]; i++){
+                ctx.beginPath();
+                ctx.roundRect(x-10, y-10, 70*Anion[2], 70, 10);
+                ctx.strokeStyle = "red";
+                ctx.stroke();
+                ctx.fillStyle = "red";
+                ctx.fillText(Anion[1], x-22+35*Anion[2], y+85);        
+                for (let i=0; i<Anion[2];i++){
+                    drawH(x,y);
+                    x+=70;
+                }
+            }
+            ctx.font = "220px serif";
+            ctx.fillText("}", x-20+4*Anion[2]*Anion[5], y+40); 
+            ctx.font = "24px serif";
+            ctx.fillStyle = "red";
+            ctx.fillText(KoeffizientenVerkleinernSummenformel(LoesungsSummenformelText), x+65+4*Anion[2]*Anion[5], y-7); 
+            var LoesungsSummenformelTextKation = "";
+            if (Kation[5]==1){
+                LoesungsSummenformelTextKation += Kation[1];
+            } else{
+                LoesungsSummenformelTextKation += Kation[1]+Kation[5];
+            }
+            ctx.fillStyle = "white";
+            ctx.fillText(KoeffizientenVerkleinernSummenformel(LoesungsSummenformelTextKation), x+65+4*Anion[2]*Anion[5], y-7); 
+            ctx.fillStyle = "blue";
+            ctx.fillText(KoeffizientenVerkleinernSummenformel(LoesungsSummenformelTextKation), x+65+4*Anion[2]*Anion[5], y-7); 
+            
+            var Loesung1 ="<h1>Lösungen - Wertigkeit bestimmen</h1>";
+            
+            if(Kation[3]=="H"){
+                Loesung1 += Kation[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
+            } else {
+                Loesung1 += Kation[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
+            }
+            Loesung1 += Anion[4]+" hat die Wertigkeit <b> <span style='color: red;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem ";
+            var HauptgruppeAnion;
+            HauptgruppeAnion = 8-Anion[2];
+            Loesung1 += "Hauptgruppenelement daran, dass es in der "+HauptgruppeAnion+". Hauptgruppe steht.<br>"
+            Loesung1 +=`<h1> Graphische Lösung </h1>`;
+
+
+            document.getElementById("LoesungsFeld1").innerHTML = Loesung1; 
+
+            var Loesung2 ="";
+            Loesung2 = "<h1> Mathematische Lösung </h1>";
+            Loesung2 += "Wir berechnen das kleinste gemeinsame Vielfache (kgV) der beiden Wertigkeiten. <br> kgV(<b> <span style='color: blue;'>"+Kation[2]+"</span> </b>,<b> <span style='color: red;'>"+Anion[2]+"</span> </b>) = <b> <span style='color: purple;'>"+Kation[2]*Kation[5]+"</span> </b>.<br>";
+            Loesung2 += "Dann schauen wir, wie oft wir "+Kation[4]+"atome benötigen, um auf dieses Vielfache zu kommen: <br>"
+            Loesung2 += "<b> <span style='color: purple;'>" +Kation[2]*Kation[5]+"</span> </b> / <b> <span style='color: blue;'> "+Kation[2]+" </span> </b> = <b> <span style='color: #088F8F;'> "+Kation[5]+"</span> </b>";
+            if (Kation[5]==1){
+                Loesung2 += "&rArr; Wir benötigen also <b> <span style='color: #088F8F	;'>"+Kation[5]+"</span> </b>"+Kation[4]+"atom.<br>";
+            }else{
+                Loesung2 += "&rArr; Wir benötigen also <b> <span style='color: #088F8F	;'>"+Kation[5]+"</span> </b>"+Kation[4]+"atome.<br>";
+
+            }
+
+            Loesung2 += "Anschließend prüfen wir, wie oft wir "+Anion[4]+"atome benötigen, um auf dieses Vielfache zu kommen: <br>"
+            Loesung2 += "<b> <span style='color: purple;'>" +Anion[2]*Anion[5]+"</span> </b> / <b> <span style='color: red;'> "+Anion[2]+"</span> </b> = <b> <span style='color: #CC5500;'>"+Anion[5]+"</span> </b>";
+            if (Anion[5]==1){
+                Loesung2 += "&rArr; Wir benötigen also <b> <span style='color: #CC5500	;'>"+Anion[5]+"</span> </b>"+Anion[4]+"atom.<br>";
+            }else{
+                Loesung2 += "&rArr; Wir benötigen also <b> <span style='color: #CC5500	;'>"+Anion[5]+"</span> </b>"+Anion[4]+"atome.<br>";
+            }     
+            Loesung2 += "<br><br> Die Summenformel muss deshalb lauten: ";
+            if(Kation[5]==1){
+                Loesung2 += "<span style='color: blue;'>"+Kation[1]+"</span>";
+            } else{
+                Loesung2 += "<span style='color: blue;'>"+Kation[1]+"</span>"+"<sub><b><span style='color: #088F8F;'>"+Kation[5]+"</span></b></sub>";
+            }
+            if(Anion[5]==1){
+                Loesung2 += "<span style='color: red;'>"+Anion[1]+"</span>";
+            } else{
+                Loesung2 += "<span style='color: red;'>"+Anion[1]+"</span>"+"<sub><b><span style='color: #CC5500;'>"+Anion[5]+"</span></b></sub>";
+            }
+            Loesung2 += "<h1> Vertausch-Trick </h1>";    
+            Loesung2 += "Wir notieren zunächst die Wertigkeiten der beteiligten Atome mittels römischer Zahlen über ihnen.";
+            document.getElementById("LoesungsFeld2").innerHTML = Loesung2; 
+
+            var Loesung3 = "";
+
+            
+            var c2 = document.getElementById("canvas2");
+            var ctx2 = c2.getContext("2d");
+            ctx2.font = "24px serif";
+            ctx2.fillStyle = "blue";
+            ctx2.fillText(Kation[1], 30, 45);        
+            ctx2.fillText(roemisch(Kation[2]), 39-Kation[2]*2, 20);  
+            ctx2.fillStyle = "red";
+            ctx2.fillText(Anion[1], 230, 45);        
+            ctx2.fillText(roemisch(Anion[2]), 239-Anion[2]*4, 20);
+            
+
+            ctx2.beginPath();
+            ctx2.moveTo(45, 20); // Startpunkt der Linie
+            ctx2.lineTo(175, 115); // Endpunkt der Linie
+            ctx2.lineWidth = 2; // Strichstärke
+            ctx2.strokeStyle = 'aqua'; // Linienfarbe
+            ctx2.stroke();
+
+            ctx2.beginPath();
+            ctx2.moveTo(230, 20); // Startpunkt der Linie
+            ctx2.lineTo(135, 115); // Endpunkt der Linie
+            ctx2.lineWidth = 2; // Strichstärke
+            ctx2.strokeStyle = 'coral'; // Linienfarbe
+            ctx2.stroke();
+
+            ctx2.fillStyle = "black";
+            ctx2.font = "20px serif";
+            ctx2.fillText("Nun vertauschen wir die Wertigkeiten und schreiben" , 10, 68); 
+            ctx2.fillText("sie als Indizes zu den Elementsymbolen (siehe Pfeile)" , 10, 90); 
+            ctx2.font = "24px serif";
+            ctx2.fillStyle = "blue";
+            ctx2.fillText(Kation[1], 100, 120);   
+            ctx2.font = "16px serif";     
+            ctx2.fillText(Kation[2], 175, 125);  
+            ctx2.font = "24px serif";
+            ctx2.fillStyle = "red";
+            ctx2.fillText(Anion[1], 150, 120);     
+            ctx2.font = "16px serif";   
+            ctx2.fillText(Anion[2], 135, 125);
+
+
+
+
+
+            Loesung3 += "Falls möglich, teilen wir die Indizes noch durch die größte gemeinsame Zahl.<br> Ähnlich wie beim Kürzen von Zähler und Nenner in einem Bruch und erhalten ";
+            if(Kation[5]==1){
+                Loesung3 += "<span style='color: blue;'>"+Kation[1]+"</span>";
+            } else{
+                Loesung3 += "<span style='color: blue;'>"+Kation[1]+"</span>"+"<sub><b><span style='color: red;'>"+Kation[5]+"</span></b></sub>";
+            }
+            if(Anion[5]==1){
+                Loesung3 += "<span style='color: red;'>"+Anion[1]+"</span>";
+            } else{
+                Loesung3 += "<span style='color: red;'>"+Anion[1]+"</span>"+"<sub><b><span style='color: blue;'>"+Anion[5]+"</span></b></sub>";
+            }
+            document.getElementById("LoesungsFeld3").innerHTML = Loesung3; 
+        }
+
+        function roemisch(zahl){
+            let meineVariable = "";
+            meineVariable += zahl;
+            meineVariable = meineVariable.replace("1", "I");
+            meineVariable = meineVariable.replace("2", "II");
+            meineVariable = meineVariable.replace("3", "III");
+            meineVariable = meineVariable.replace("4", "IV");
+            return meineVariable;
+        }
+
+        function TippsAnzeigen(){
+            tipps +=1;
+            var tippsText = "";
+            if (tipps==0){
+                tippsText = "";
+            }
+            if (tipps>0){
+                tippsText += "<h1>Tipp 1</h1> Überlege dir, wie die Wertigkeit der beiden Stoffe sein muss. Bei Hauptgruppenelemente ist die Gruppennummer wichtig, bei Nebengruppenelementen steht die Wertigkeit in Klammern dabei.<br><br>"
+                document.getElementById("tippButton").value = "Mehr Tipps";
+            } 
+            if (tipps>1){
+                tippsText += "<h1>Tipp 2</h1>";
+                if(Kation[3]=="H"){
+                tippsText += Kation[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
+                } else {
+                tippsText += Kation[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
+                }
+                tippsText += "Versuche die Wertigkeit von "+Anion[4]+" selbst zu ermitteln. <br> <br>"
+            } 
+            if (tipps>2){
+                tippsText += "<h1>Tipp 3</h1>";
+                if(Kation[3]=="H"){
+                tippsText += Anion[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
+                } else {
+                tippsText += Anion[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
+                }
+                tippsText += "Überlege dir, mithilfe der Graphik, wie oft man die einzelnen Atome benötigt, damit sie den gleichen Wert haben und erstelle daraus eine Summenformel."
+
+                    var c = document.getElementById("canvas");
+                    var ctx = c.getContext("2d");
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    ctx.font = "24px serif";
+                    var x = 50;
+                    var y = 50;
+                    ctx.beginPath();
+                    ctx.roundRect(x-10, y-10, 70*Kation[2], 70, 10);
+                    ctx.strokeStyle = "blue";
+                    ctx.stroke();
+                    ctx.fillStyle = "blue";
+                    ctx.fillText(Kation[1], x-22+35*Kation[2], y-25);        
+                    for (let i=0; i<Kation[2];i++){
+                        drawH(x,50);
+                        x+=70;
+                    }
+                    
+                    x=350;
+                    y=50;
+                    ctx.beginPath();
+                    ctx.roundRect(x-10, y-10, 70*Anion[2], 70, 10);
+                    ctx.strokeStyle = "red";
+                    ctx.stroke();
+                    ctx.fillStyle = "red";
+                    ctx.fillText(Anion[1], x-22+35*Anion[2], y-25);        
+                    for (let i=0; i<Anion[2];i++){
+                        drawH(x,50);
+                        x+=70;
+                    }
+
+
+
+
+            } 
+            
+        document.getElementById("Tippfeld1").innerHTML = tippsText; 
+
+        }
+
+        function drawH(x,y){
+            ctx.beginPath();
+            ctx.roundRect(x, y, 50, 50, 10);
+            ctx.fillStyle = "lightgreen";
+            ctx.fill();
+            ctx.closePath();
+            ctx.fillStyle = "#000000";
+            ctx.fillText("H", x+17, y+33);
+        }
+
+        function Vorpruefung(){
+            if (level == 0){
+                if (document.getElementById("Eingabezeile").value == "") {
+                    document.getElementById("AusgabeFeld").innerHTML = "Bitte eine Formel eingeben."
+                } else {
+                    level = 1;
+                    Pruefen();
+                    document.getElementById("Antwort").value = "Neue Aufgabe";
+                }
+            } else {
+                location.reload();
+            }
+        }
+
+
+        function Pruefen(){
+            var leereEingabezeile = false;
+            var LoesungsArray = [];
+            LoesungsArray.push([Kation[1],Kation[5]]);        
+            LoesungsArray.push([Anion[1],Anion[5]]);            
+            if (document.getElementById("Eingabezeile").value == "") {
+                leereEingabezeile = true;
+            }
+            if (leereEingabezeile != true){
+                var AntwortArray = [];
+                var AntwortArray = SummenformelArray(KoeffizientenVergrößern(document.getElementById("Eingabezeile").value));
+                var GleicheArrays=true;
+                for (let i=0;i<LoesungsArray.length;i++){
+                    for (let j=0;j<LoesungsArray[0].length;j++){
+                        if (LoesungsArray[i][j] != AntwortArray[i][j]){
+                            GleicheArrays = false;
+                        }
+                    }
+                }
+                if (LoesungsArray.length != AntwortArray.length){
+                            GleicheArrays = false;
+                        }
+                       
+                }
+
+                var reihenfolgeVertauscht=false;
+                    if ((LoesungsArray[0][0] == AntwortArray[1][0])&&(LoesungsArray[1][0] == AntwortArray[0][0])){
+                            reihenfolgeVertauscht = true;
+                        }
+                var nichtTeilerfremd = false;
+                nichtTeilerfremd = FaktorenNichtTeilerfremd(AntwortArray);
+                var inSummeRichtig = true;
+                
+                for (let i=0;i<LoesungsArray.length;i++){
+                    LoesungsArray[i][2]=0;
+                    for (let j=0;j<AntwortArray.length;j++){
+                        if(AntwortArray[j][0]==LoesungsArray[i][0]){
+                            LoesungsArray[i][2]+=AntwortArray[j][1];
+                        }
+                    }
+                }       
+                for(let i=0;i<LoesungsArray.length;i++){
+                    if(LoesungsArray[i][1]!=LoesungsArray[i][2]){
+                        inSummeRichtig = false;
+                    }
+                }
+                var LoesungsElemente = [];
+                var AntwortElemente = [];
+                for(let i=0;i<LoesungsArray.length;i++){
+                    LoesungsElemente.push(LoesungsArray[i][0]);
+                }
+                for(let i=0;i<AntwortArray.length;i++){
+                    AntwortElemente.push(AntwortArray[i][0]);
+                }
+                for (let j=0;j<AntwortElemente.length;j++){
+                        if(LoesungsElemente.includes(AntwortElemente[j])==false){
+                            inSummeRichtig = false;
+                        }
+                    }
+
+
+            var Ausgabe = "";
+            console.table(LoesungsElemente);
+            console.table(LoesungsArray);
+            console.table(AntwortArray);
+            console.log("Gleich "+GleicheArrays+"; inSummeRichtig "+inSummeRichtig+"; reihenfolge "+reihenfolgeVertauscht);
+
+            if (GleicheArrays == true){
+                Ausgabe = "Super, alles richtig!";
+                document.getElementById("Eingabezeile").style.backgroundColor = "green";
+            } else {
+                LoesungAnzeigen();
+            }
+            document.getElementById("AusgabeFeld").innerHTML = Ausgabe;                
+            if ((inSummeRichtig==true) && (GleicheArrays==false)){
+                Ausgabe = "Die Antwort ist prinzipiell richtig, aber leider stimmt die Summenformel nicht ganz. Wir schreiben es so:"+KoeffizientenVerkleinernSummenformel(LoesungsSummenformelText)+"<br>";
+                document.getElementById("Eingabezeile").style.backgroundColor = "coral";
+            }       
+            if (reihenfolgeVertauscht == true){
+                Ausgabe += "Die Reihenfolge ist vertauscht.";
+
+            }
+                   
+            if (inSummeRichtig == false){
+                Ausgabe = "Da stimmt etwas nicht. Schau hier in den Lösungen nach, was du anders machen musst. <br>";
+                document.getElementById("Eingabezeile").style.backgroundColor = "red";
+
+            }
+            if (nichtTeilerfremd==true){
+                    Ausgabe += "Achtung, man kann die Koeffizienten noch durch die gleiche Zahl "+EA(AntwortArray[0][1],AntwortArray[1][1])+" teilen. Du hast nicht die einfachste Summenformel gefunden.<br>";
+                }
+
+                        document.getElementById("AusgabeFeld").innerHTML = Ausgabe; 
+      
+        }
+
+function SchöneSummenformel(SummenformelText){
+            return KoeffizientenVerkleinernSummenformel(SummenformelText);
+        }
+        function SummenformelArray(summenFormel){
+            
+            const Formel = summenFormel;
+
+            const Ergebnis = Formel.split(/(?=[A-Z])/);
+            var summenArray = [];
+            for (i=0;i<Ergebnis.length;i++){
+                let Element = Ergebnis[i].match(/[a-z]+/gi);
+                let Zahl;
+                if (Ergebnis[i].match(/\d+/g) == null){
+                    Zahl = [1,0];
+                } else {
+                    Zahl = Ergebnis[i].match(/\d+/g);
+                }
+                summenArray[i] = [Element[0], parseInt(Zahl[0])];
+            }
+
+            return summenArray;
+        }
+
+
+
+    function FaktorenNichtTeilerfremd(summenArray){
+    ggT=EA(summenArray[0][1],summenArray[1][1]);    
+    if (ggT == 1) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+    function EA(a,b){
+        while(b != 0){
+            let ganzZ = a/b;
+            let Rest = a % b;
+            a=b;
+            b= Rest;
+        }
+    return(a);
+    }
+
+    function KoeffizientenVerkleinern(richtigeId){
+    let meineVariable = "";
+    meineVariable = document.getElementById(richtigeId).value;
+    meineVariable = meineVariable.replace("^1", "¹");
+    meineVariable = meineVariable.replace("^2", "²");
+    meineVariable = meineVariable.replace("^3", "³");
+    meineVariable = meineVariable.replace("^4", "⁴");
+    meineVariable = meineVariable.replace("^5", "⁵");
+    meineVariable = meineVariable.replace("^6", "⁶");
+    meineVariable = meineVariable.replace("^7", "⁷");
+    meineVariable = meineVariable.replace("^8", "⁸");
+    meineVariable = meineVariable.replace("^9", "⁹");
+    meineVariable = meineVariable.replace("^0", "⁰");
+    meineVariable = meineVariable.replace("1", "₁");
+    meineVariable = meineVariable.replace("2", "₂");
+    meineVariable = meineVariable.replace("3", "₃");
+    meineVariable = meineVariable.replace("4", "₄");
+    meineVariable = meineVariable.replace("5", "₅");
+    meineVariable = meineVariable.replace("6", "₆");
+    meineVariable = meineVariable.replace("7", "₇");
+    meineVariable = meineVariable.replace("8", "₈");
+    meineVariable = meineVariable.replace("9", "₉");
+    meineVariable = meineVariable.replace("0", "₀");
+    meineVariable = meineVariable.replace("+", "⁺");
+    meineVariable = meineVariable.replace("-", "⁻");
+    document.getElementById(richtigeId).value = meineVariable;
+}
+
+    function KoeffizientenVerkleinernSummenformel(meineVariable){
+    meineVariable = meineVariable.replace("^1", "¹");
+    meineVariable = meineVariable.replace("^2", "²");
+    meineVariable = meineVariable.replace("^3", "³");
+    meineVariable = meineVariable.replace("^4", "⁴");
+    meineVariable = meineVariable.replace("^5", "⁵");
+    meineVariable = meineVariable.replace("^6", "⁶");
+    meineVariable = meineVariable.replace("^7", "⁷");
+    meineVariable = meineVariable.replace("^8", "⁸");
+    meineVariable = meineVariable.replace("^9", "⁹");
+    meineVariable = meineVariable.replace("^0", "⁰");
+    meineVariable = meineVariable.replace("1", "₁");
+    meineVariable = meineVariable.replace("2", "₂");
+    meineVariable = meineVariable.replace("3", "₃");
+    meineVariable = meineVariable.replace("4", "₄");
+    meineVariable = meineVariable.replace("5", "₅");
+    meineVariable = meineVariable.replace("6", "₆");
+    meineVariable = meineVariable.replace("7", "₇");
+    meineVariable = meineVariable.replace("8", "₈");
+    meineVariable = meineVariable.replace("9", "₉");
+    meineVariable = meineVariable.replace("0", "₀");
+    meineVariable = meineVariable.replace("+", "⁺");
+    meineVariable = meineVariable.replace("-", "⁻");
+    return meineVariable;
+}
+
+function KoeffizientenVergrößern(meinText){
+    let meineVariable = "";
+    meineVariable = meinText;
+    meineVariable = meineVariable.replaceAll("⁺","+");
+    meineVariable = meineVariable.replaceAll("⁻","-");
+    meineVariable = meineVariable.replaceAll("¹","^1");
+    meineVariable = meineVariable.replaceAll("²","^2");
+    meineVariable = meineVariable.replaceAll("³","^3");
+    meineVariable = meineVariable.replaceAll("⁴","^4");
+    meineVariable = meineVariable.replaceAll("⁵","^5");
+    meineVariable = meineVariable.replaceAll("⁶","^6");
+    meineVariable = meineVariable.replaceAll("⁷","^7");
+    meineVariable = meineVariable.replaceAll("⁸","^8");
+    meineVariable = meineVariable.replaceAll("⁹","^9");
+    meineVariable = meineVariable.replaceAll("⁰","^0");
+    meineVariable = meineVariable.replaceAll("₁", "1");
+    meineVariable = meineVariable.replaceAll("₂", "2");
+    meineVariable = meineVariable.replaceAll("₃", "3");
+    meineVariable = meineVariable.replaceAll("₄", "4");
+    meineVariable = meineVariable.replaceAll("₅", "5");
+    meineVariable = meineVariable.replaceAll("₆", "6");
+    meineVariable = meineVariable.replaceAll("₇", "7");
+    meineVariable = meineVariable.replaceAll("₈", "8");
+    meineVariable = meineVariable.replaceAll("₉", "9");
+    meineVariable = meineVariable.replaceAll("₀", "0");
+
+    return meineVariable;
+}
+    </script>
+</body>
+
+</html>
