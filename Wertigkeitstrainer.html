@@ -38,6 +38,7 @@
     <h2>Wertigkeitstrainer</h2>
     <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
     <h3 style="text-align: center;padding: 0 6px; color: coral;font-size:x-large;"  id="Aufgabenstellung"></h3>
+    <p id = "hinweis">Du benötigst ein Periodensystem der Elemente</p>
     <input oninput="KoeffizientenVerkleinern(this.id)" id="Eingabezeile" placeholder="Summenformel">
     <input type="button" value="Prüfen" id="Antwort" onclick ="Vorpruefung()" > <p></p>
     <input type="button" style="width: 200px;" value="Tipps anzeigen" id="tippButton" onclick ="TippsAnzeigen()" >  <input type="button" style="width: 200px;" id="loesungsButton" value="Lösung anzeigen" onclick ="LoesungAnzeigen()" >
@@ -210,6 +211,7 @@
             var HauptgruppeAnion;
             HauptgruppeAnion = 8-Anion[2];
             Loesung1 += "Hauptgruppenelement daran, dass es in der "+HauptgruppeAnion+". Hauptgruppe steht.<br>"
+
             Loesung1 +=`<h1> Graphische Lösung </h1>`;
 
 
@@ -307,6 +309,12 @@
             } else{
                 Loesung3 += "<span style='color: red;'>"+Anion[1]+"</span>"+"<sub><b><span style='color: blue;'>"+Anion[5]+"</span></b></sub>";
             }
+
+            Loesung3 += `    <h2>Die Wertigkeit allgemein</h2>
+                Die Wertigkeit ist eine vereinfachte Erklärung für Verbindungen, die aus zwei Elementen bestehen. <br>
+                Sie gibt für jedes Element an, wie viele Wasserstoffatome man an ein Atom dieses Elements binden oder in einer Verbindung ersetzen kann. <br>
+                Die Wertigkeiten hängen stark mit der Hauptgruppe im Periodensystem zusammen. Du findest die Wertigkeiten unten in der Tabelle: <br>
+                <img src="img/WertigkeitsBild.jpg" class="center" width="80%"> <br>`;
             document.getElementById("LoesungsFeld3").innerHTML = Loesung3; 
         }
 
@@ -332,7 +340,13 @@
             }
             if (tipps>0){
                 tippsText += "<h1>Tipp 1</h1> Überlege dir, wie die Wertigkeit der beiden Stoffe sein muss. Bei Hauptgruppenelementen ist die Gruppennummer wichtig, bei Nebengruppenelementen steht die Wertigkeit in Klammern dabei.<br><br>"
+                tippsText += `<h2>Die Wertigkeit allgemein</h2>
+                    Die Wertigkeit ist eine vereinfachte Erklärung für Verbindungen, die aus zwei Elementen bestehen. <br>
+                    Sie gibt für jedes Element an, wie viele Wasserstoffatome man an ein Atom dieses Elements binden oder in einer Verbindung ersetzen kann. <br>
+                    Die Wertigkeiten hängen stark mit der Hauptgruppe im Periodensystem zusammen. Du findest die Wertigkeiten unten in der Tabelle: <br>
+                    <img src="img/WertigkeitsBild.jpg" class="center" width="80%"> <br>`;
                 document.getElementById("tippButton").value = "Zweiter Tipp";
+
             } 
             if (tipps>1){
                 tippsText2 += "<h1>Tipp 2</h1>";
@@ -341,7 +355,10 @@
                 } else {
                 tippsText2 += Kation[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement an den römischen Zahlen in den Klammern.<br> <br>"
                 }
-                tippsText2 += "Versuche die Wertigkeit von "+Anion[4]+" selbst zu ermitteln. <br> <br>"
+                tippsText2 += "Versuche die Wertigkeit von "+Anion[4]+" selbst zu ermitteln. <br> <br>";
+
+
+
                 tippsText = tippsText2+tippsText;
                 document.getElementById("tippButton").value = "Letzter Tipp"
             } 
