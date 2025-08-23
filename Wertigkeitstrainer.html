@@ -44,16 +44,15 @@
     <p id="AusgabeFeld"></p>
     <p id="Tippfeld1"></p>
     <p id="LoesungsFeld1"></p>
-    <canvas id="canvas" width="700" height="380"></canvas>    
+    <canvas id="canvas" width="700" height="10"></canvas>    
+    <p id="Tippfeld2"></p>
     <p id="LoesungsFeld2"></p>
     <canvas id="canvas2" width="500" height="130"></canvas>
     <p id="LoesungsFeld3"></p>
    </div>
     <script>
         var ElemWertigkeitKation = [];
-        ElemWertigkeitKation.push(["Natrium", "Na",1,"H","Natrium"]);
-        ElemWertigkeitKation.push(["Kupfer(II)", "Cu",2,"N","Kupfer"]);
-        ElemWertigkeitKation.push(["Aluminium", "Al",3,"H","Aluminium"]);
+
         ElemWertigkeitKation.push(["Lithium", "Li", 1, "H", "Lithium"]);
         ElemWertigkeitKation.push(["Natrium", "Na", 1, "H", "Natrium"]);
         ElemWertigkeitKation.push(["Kalium", "K", 1, "H", "Kalium"]);
@@ -122,6 +121,7 @@
         function LoesungAnzeigen(){
             tipps = -1;
             TippsAnzeigen();
+            document.getElementById("canvas").height = 400;
             document.getElementById("tippButton").disabled = true;
             document.getElementById("loesungsButton").disabled = true;
             document.getElementById("Antwort").value = "Neue Aufgabe";
@@ -279,8 +279,8 @@
 
             ctx2.fillStyle = "black";
             ctx2.font = "20px serif";
-            ctx2.fillText("Nun vertauschen wir die Wertigkeiten und schreiben" , 10, 68); 
-            ctx2.fillText("sie als Indizes zu den Elementsymbolen (siehe Pfeile)" , 10, 90); 
+            ctx2.fillText("Nun vertauschen wir die Wertigkeiten und schreiben" , 0, 68); 
+            ctx2.fillText("sie als Indizes zu den Elementsymbolen (siehe Pfeile)" , 0, 90); 
             ctx2.font = "24px serif";
             ctx2.fillStyle = "blue";
             ctx2.fillText(Kation[1], 100, 120);   
@@ -323,30 +323,39 @@
         function TippsAnzeigen(){
             tipps +=1;
             var tippsText = "";
+            var tippsText2 = "";
             if (tipps==0){
-                tippsText = "";
+
+                document.getElementById("Tippfeld2").innerHTML = "";
+                document.getElementById("Tippfeld1").innerHTML = "";
+
             }
             if (tipps>0){
-                tippsText += "<h1>Tipp 1</h1> Überlege dir, wie die Wertigkeit der beiden Stoffe sein muss. Bei Hauptgruppenelemente ist die Gruppennummer wichtig, bei Nebengruppenelementen steht die Wertigkeit in Klammern dabei.<br><br>"
-                document.getElementById("tippButton").value = "Mehr Tipps";
+                tippsText += "<h1>Tipp 1</h1> Überlege dir, wie die Wertigkeit der beiden Stoffe sein muss. Bei Hauptgruppenelementen ist die Gruppennummer wichtig, bei Nebengruppenelementen steht die Wertigkeit in Klammern dabei.<br><br>"
+                document.getElementById("tippButton").value = "Zweiter Tipp";
             } 
             if (tipps>1){
-                tippsText += "<h1>Tipp 2</h1>";
+                tippsText2 += "<h1>Tipp 2</h1>";
                 if(Kation[3]=="H"){
-                tippsText += Kation[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
+                tippsText2 += Kation[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
                 } else {
-                tippsText += Kation[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
+                tippsText2 += Kation[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Kation[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement an den römischen Zahlen in den Klammern.<br> <br>"
                 }
-                tippsText += "Versuche die Wertigkeit von "+Anion[4]+" selbst zu ermitteln. <br> <br>"
+                tippsText2 += "Versuche die Wertigkeit von "+Anion[4]+" selbst zu ermitteln. <br> <br>"
+                tippsText = tippsText2+tippsText;
+                document.getElementById("tippButton").value = "Letzter Tipp"
             } 
             if (tipps>2){
-                tippsText += "<h1>Tipp 3</h1>";
+                tippsText2 = "";
+                document.getElementById("tippButton").disabled = true;
+                tippsText2 += "<h1>Tipp 3</h1>";
                 if(Kation[3]=="H"){
-                tippsText += Anion[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
+                tippsText2 += Anion[4]+" hat die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Hauptgruppenelement daran, dass es in der "+Kation[2]+". Hauptgruppe steht.<br> <br>"
                 } else {
-                tippsText += Anion[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
+                tippsText2 += Anion[4]+" hat hier die Wertigkeit <b> <span style='color: blue;'>"+Anion[2]+"</span> </b>.<br> Das erkennt man bei diesem Nebengruppenelement daran, dass es in der geschweiften Klammer in römischen Zahlen steht.<br> <br>"
                 }
-                tippsText += "Überlege dir, mithilfe der Graphik, wie oft man die einzelnen Atome benötigt, damit sie den gleichen Wert haben und erstelle daraus eine Summenformel."
+                tippsText2 += "Überlege dir, mithilfe der Graphik unten nach den Tipps, wie oft man die einzelnen Atome benötigt, damit sie den gleichen Wert haben und erstelle daraus eine Summenformel."
+                    document.getElementById("canvas").height = 120;
 
                     var c = document.getElementById("canvas");
                     var ctx = c.getContext("2d");
@@ -377,13 +386,15 @@
                         drawH(x,50);
                         x+=70;
                     }
-
-
-
-
+                document.getElementById("Tippfeld2").innerHTML = tippsText;
+                document.getElementById("Tippfeld1").innerHTML = tippsText2;
+                document.getElementById("ctx").height = 200;
             } 
-            
-        document.getElementById("Tippfeld1").innerHTML = tippsText; 
+        if ( tipps <= 2){
+            document.getElementById("Tippfeld1").innerHTML = tippsText; 
+        }
+
+        
 
         }
 
@@ -402,12 +413,12 @@
                 if (document.getElementById("Eingabezeile").value == "") {
                     document.getElementById("AusgabeFeld").innerHTML = "Bitte eine Formel eingeben."
                 } else {
-                    level = 1;
+                    
                     Pruefen();
-                    document.getElementById("Antwort").value = "Neue Aufgabe";
+                  //  document.getElementById("Antwort").value = "Neue Aufgabe";
                 }
             } else {
-                location.reload();
+               location.reload();
             }
         }
 
@@ -474,16 +485,15 @@
 
 
             var Ausgabe = "";
-            console.table(LoesungsElemente);
-            console.table(LoesungsArray);
-            console.table(AntwortArray);
-            console.log("Gleich "+GleicheArrays+"; inSummeRichtig "+inSummeRichtig+"; reihenfolge "+reihenfolgeVertauscht);
+
 
             if (GleicheArrays == true){
                 Ausgabe = "Super, alles richtig!";
+                document.getElementById("Antwort").value = "Neue Aufgabe";
+                level = 1;
                 document.getElementById("Eingabezeile").style.backgroundColor = "green";
             } else {
-                LoesungAnzeigen();
+              //  LoesungAnzeigen();
             }
             document.getElementById("AusgabeFeld").innerHTML = Ausgabe;                
             if ((inSummeRichtig==true) && (GleicheArrays==false)){
@@ -496,7 +506,8 @@
             }
                    
             if (inSummeRichtig == false){
-                Ausgabe = "Da stimmt etwas nicht. Schau hier in den Lösungen nach, was du anders machen musst. <br>";
+                document.getElementById("Eingabezeile").style.backgroundColor = "red";
+                Ausgabe = "Da stimmt etwas nicht. Schau hier in den Tipps nach, was du anders machen musst. <br>";
                 document.getElementById("Eingabezeile").style.backgroundColor = "red";
 
             }
