@@ -631,7 +631,7 @@ Inneres += "</tr>";
     Inneres += "</tr>";
     Inneres += "<tr><td>Masse m:</td>";
         var MasseZahl = Stoffmenge * Reaktionsarray[0][0][3];
-        Inneres += "<td> m("+SchöneSummenformel(Reaktionsarray[0][0][0])+ ") ="+AusgabeMitKomma(MasseZahl) +" &ensp; g </td>";
+        Inneres += "<td> m("+SchöneSummenformel(Reaktionsarray[0][0][0])+ ") = "+AusgabeMitKomma(MasseZahl) +" &ensp; g </td>";
         Reaktionsarray[0][0].push(MasseZahl);
         Inneres += "<td> &ensp;  </td>";
     for ( j = 1;  j < Reaktionsarray[0].length ; j++){
@@ -1073,22 +1073,25 @@ function Überprüfen(){
 
             var id = "MoMaE"+j;
             document.getElementById(id).style.removeProperty("background-color");
-
-             if (document.getElementById(id).value != molareMasseRechner(formelZerstückler(Reaktionsarray[0][j][0]))) {
+             if (document.getElementById(id).value.replace(/[a-zA-Z\/]/g, '') != molareMasseRechner(formelZerstückler(Reaktionsarray[0][j][0]))) {
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            } else { document.getElementById(id).style.backgroundColor = "green";}
+            } else { document.getElementById(id).style.backgroundColor = "green";
+                document.getElementById(id).value = molareMasseRechner(formelZerstückler(Reaktionsarray[0][j][0]))+" g/mol";
+            }
         }
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             var id = "MoMaP"+j;
             document.getElementById(id).style.removeProperty("background-color");
 
-            if (document.getElementById(id).value != molareMasseRechner(formelZerstückler(Reaktionsarray[1][j][0]))) {
+            if (document.getElementById(id).value.replace(/[a-zA-Z\/]/g, '') != molareMasseRechner(formelZerstückler(Reaktionsarray[1][j][0]))) {
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            } else { document.getElementById(id).style.backgroundColor = "green";}
+            } else { document.getElementById(id).style.backgroundColor = "green";
+                document.getElementById(id).value = molareMasseRechner(formelZerstückler(Reaktionsarray[1][j][0]))+" g/mol";
+            }
         }
         
         if (korrekt == true) {
@@ -1106,27 +1109,42 @@ function Überprüfen(){
         var korrekt = true;
         for ( j = 0;  j < Reaktionsarray[0].length ; j++){
             var id = "NE"+j;
-            var Eingabe = document.getElementById(id).value;
+            var Eingabe = "";
+            Eingabe = document.getElementById(id).value;
+            Eingabe = Eingabe.replace(/[a-zA-Z]/g, '');
             document.getElementById(id).style.removeProperty("background-color");
             Eingabe = Eingabe.replace(/\,/, ".");
+
             Eingabe = eval(Eingabe);
              if (Eingabe != Reaktionsarray[0][j][4]) {
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            }else { document.getElementById(id).style.backgroundColor = "green";}
+            }else { document.getElementById(id).style.backgroundColor = "green";
+                let ausgeben = "";
+                ausgeben = Reaktionsarray[0][j][4]+"";
+                ausgeben = ausgeben.replace(/\./, ",");
+                document.getElementById(id).value = ausgeben +" mol";
+            }
         }
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             var id = "NP"+j;
             document.getElementById(id).style.removeProperty("background-color");
-            var Eingabe = document.getElementById(id).value;
+            var Eingabe = "";
+            Eingabe = document.getElementById(id).value;
+            Eingabe = Eingabe.replace(/[a-zA-Z]/g, '');
             Eingabe = Eingabe.replace(/\,/, ".");
             Eingabe = eval(Eingabe);
             if (Eingabe != Reaktionsarray[1][j][4]) {
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            }else { document.getElementById(id).style.backgroundColor = "green";}
+            }else { document.getElementById(id).style.backgroundColor = "green";
+                let ausgeben = "";
+                ausgeben = Reaktionsarray[1][j][4]+"";
+                ausgeben = ausgeben.replace(/\./, ",");
+                document.getElementById(id).value = ausgeben +" mol";
+            }
         }
         
         if (korrekt == true) {
@@ -1145,19 +1163,27 @@ function Überprüfen(){
         for ( j = 1;  j < Reaktionsarray[0].length ; j++){
             var id = "mE"+j;
             document.getElementById(id).style.removeProperty("background-color");
-
-            var Eingabe = document.getElementById(id).value;
+            var Eingabe = "";
+            Eingabe = document.getElementById(id).value;
+            Eingabe.replace(/[a-zA-Z]/g, '');
             Eingabe = Eingabe.replace(/\,/, ".");
             Eingabe = eval(Eingabe);
              if (Eingabe != Reaktionsarray[0][j][5]) {
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            }else { document.getElementById(id).style.backgroundColor = "green";}
+            }else { document.getElementById(id).style.backgroundColor = "green";
+                let ausgeben = "";
+                ausgeben = Reaktionsarray[0][j][5]+"";
+                ausgeben = ausgeben.replace(/\./, ",");
+                document.getElementById(id).value = ausgeben +" g";
+            }
         }
         for ( j = 0;  j < Reaktionsarray[1].length ; j++){
             var id = "mP"+j;
-            var Eingabe = document.getElementById(id).value;
+            var Eingabe = "";
+            Eingabe = document.getElementById(id).value;
+            Eingabe.replace(/[a-zA-Z]/g, '');
             document.getElementById(id).style.removeProperty("background-color");
 
             Eingabe = Eingabe.replace(/\,/, ".");
@@ -1167,7 +1193,12 @@ function Überprüfen(){
                 korrekt = false; 
                 document.getElementById(id).style.backgroundColor = "red";
 
-            }else { document.getElementById(id).style.backgroundColor = "green";}
+            }else { document.getElementById(id).style.backgroundColor = "green";
+                let ausgeben = "";
+                ausgeben = Reaktionsarray[1][j][5]+"";
+                ausgeben = ausgeben.replace(/\./, ",");
+                document.getElementById(id).value = ausgeben +" g";; 
+            }
         }
         
         if (korrekt == true) {
