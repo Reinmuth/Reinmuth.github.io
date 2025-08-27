@@ -1814,13 +1814,48 @@ function HilfeStoffM2(){
         document.getElementById("SpanNE0").style.fontWeight = "bold";
 
        // <math><mfrac><mn>g</mn><mn>mol</mn></mfrac>
-        AusgabeText = "Mit der berechneten Stoffmenge berechnest Du die weiteren Stoffmengen so: <br><br> Wir betrachten dafür die Stoffmengenverhältnisse z.B. <br> ";
+        AusgabeText +="<h2>Berechnung mittels Soffmengenverhältnis </h2>";
+        AusgabeText += "Mit der berechneten Stoffmenge berechnest Du die weiteren Stoffmengen so: <br><br> Wir betrachten dafür die Stoffmengenverhältnisse z.B. <br> ";
         AusgabeText += "<math><mfrac><mn><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+")</span></mn><mn><span style='color: #db9e02; font-weight:bold;'> n("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span></mn></mfrac></math> = <math><mfrac><mn><span style='color: blue; font-weight:bold;'>Vorfaktor("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span></mn><mn><span style='color: #db9e02; font-weight:bold;'>Vorfaktor("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span></mn></mfrac></math> = <math><mfrac><mn><span style='color: blue; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2])+"</span></mn><mn><span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][2])+"</span></mn></mfrac></math> = <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2])+"</span>";
         AusgabeText += "<br><br> Nach Multiplikation der Gleichung gilt <br><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> = <span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901;"+"<span style='color: #db9e02; font-weight:bold;'>n("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span> =  <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901; <span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][4])+" </span> mol = "+AusgabeMitKomma(Reaktionsarray[1][0][4])+" mol";
         
 
+    AusgabeText +="<h2>Alternative Erklärung mithilfe eines proportionalen Zusammenhangs </h2>";
+    AusgabeText +="Wir notieren die Vorfaktoren und die gegebene Stoffmenge in einer Tabelle";
+    AusgabeText +=  "<table border='1' style='width:30%' align='center'>";
+        for (let i=0;i<Reaktionsarray[0].length;i++){
+            AusgabeText +=`<th style='color: grey;'>`+SchöneSummenformel(Reaktionsarray[0][i][0])+`</th>`;
+        }
+        for (let i=0;i<Reaktionsarray[1].length;i++){
+            AusgabeText +=`<th style='color: grey;'>`+SchöneSummenformel(Reaktionsarray[1][i][0])+`</th>`;
+        }
+        AusgabeText +=`</tr><tr>`;
+            AusgabeText +=`<th><span style='color: #db9e02; font-weight:bold;'>`+Reaktionsarray[0][0][2]+`</span></th>`
+        for (let i=1;i<Reaktionsarray[0].length;i++){
+            AusgabeText +=`<th>`+Reaktionsarray[0][i][2]+`</th>`;
+        }
+        AusgabeText +=`<th><span style='color: blue; font-weight:bold;'>`+Reaktionsarray[1][0][2]+`</span></th>`;
+        for (let i=1;i<Reaktionsarray[1].length;i++){
+            AusgabeText +=`<th>`+Reaktionsarray[1][i][2]+`</th>`;
+        }                    
+        AusgabeText +=`</tr><tr>`;
+        AusgabeText +=`<th>`+AusgabeMitKomma(Reaktionsarray[0][0][4])+` mol</th>`;
+        for (let i=1;i<Reaktionsarray[0].length;i++){
+            AusgabeText +=`<th>&emsp; mol</th>`;
+        }
+        AusgabeText +=`<th>`+AusgabeMitKomma(Reaktionsarray[1][0][4])+` mol</th>`;
+        for (let i=1;i<Reaktionsarray[1].length;i++){
+            AusgabeText +=`<th>&emsp; mol</th>`;
+        }                    
+        AusgabeText +=`</tr></table>`;                    
+
+                   
     
-        
+    
+ 
+
+
+
     AusgabeText += "<br><br> Probiere es nochmal und klicke dann auf Überprüfen";
     document.getElementById("Hilfestellung").innerHTML=AusgabeText;
 }
