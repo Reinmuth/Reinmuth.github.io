@@ -11,9 +11,9 @@
         
         .small{ width:50px; font-size:20px; text-align: center;}
         .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
-        .ElementTabelle td{ border-color: black;border: 1px solid;}
+        .ElementTabelle td{ border-color: black;border: 1px solid; padding-top: 0px;}
         .ElementTabelle tr{ border-color: black;border: 1px solid;}
-        td{ white-space: nowrap;}
+        td{ white-space: nowrap; padding-top: 15px;}
         li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
         .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
         .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
@@ -109,7 +109,7 @@
     
 </head>
 <body>
-    <h2 style="text-align: center;">Reaktionsgleichungen mit Stöchiometrie</td></h2>
+    <h2 style="text-align: center;">Reaktionsgleichungen mit Stöchiometrie</h2>
     <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
 
      
@@ -296,6 +296,7 @@
     var SchonArray = [];
     var ZählArrayE = [];
     var ZählArrayP = [];
+    var gemeinsamerFaktor;
     var Stoffmenge;
     Stoffmenge = Math.floor(Math.random()*11+1)/2;
     AufgabenArrayFestleger();
@@ -339,7 +340,7 @@ function AufgabenArrayFestleger(){
             AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO2", "Kohlenstoffdioxid"]]]);
             AufgabenArray.push([[["C", "Kohlenstoff"],["O2", "Sauerstoff"]],[["CO", "Kohlenstoffmonoxid"]]]);
             AufgabenArray.push([[["Ag2O", "Silber(I)-Oxid"],["C","Kohlenstoff"]],[["Ag", "Silber"],["CO2","Kohlenstoffdioxid"]]]);
-            AufgabenArray.push([[["CuO", "Kuper(II)-Oxid"],["C","Kohlenstoff"]],[["Cu", "Kupfer"],["CO2","Kohlenstoffdioxid"]]]);
+            AufgabenArray.push([[["CuO", "Kupfer(II)-Oxid"],["C","Kohlenstoff"]],[["Cu", "Kupfer"],["CO2","Kohlenstoffdioxid"]]]);
             AufgabenArray.push([[["FeO", "Eisen(II)oxid"],["C","Kohlenstoff"]],[["Fe", "Eisen"],["CO2","Kohlenstoffdioxid"]]]);
             AufgabenArray.push([[["Mg", "Magnesium"],["CO2","Kohlenstoffdioxid"]],[["MgO","Magnesiumoxid"],["C","Kohlenstoff"]]]);
             AufgabenArray.push([[["Mg", "Magnesium"],["O2","Sauerstoff"]],[["MgO","Magnesiumoxid"]]]);
@@ -358,7 +359,7 @@ function AufgabenArrayFestleger(){
             AufgabenArray.push([[["CO", "Kohlenstoffmonoxid"],["H2O", "Wasser"]],[["CO2","Kohlenstoffdioxid"],["H2","Wasserstoff"]]]);
             AufgabenArray.push([[["MgO","Magnesiumoxid"],["HCl", "Chlorwasserstoff"]],[["MgCl2", "Magnesiumchlorid"],["H2O", "Wasser"]]]);
             AufgabenArray.push([[["H3O+", "Oxoniumion"],["OH-","Hydroxidion"]],[["H2O", "Wasser"]]]);
-            AufgabenArray.push([[["CuO", "Kuper(II)-Oxid"],["H2","Wasserstoff"]],[["Cu", "Kupfer"],["H2O","Wasser"]]]);
+            AufgabenArray.push([[["CuO", "Kupfer(II)-Oxid"],["H2","Wasserstoff"]],[["Cu", "Kupfer"],["H2O","Wasser"]]]);
 
             
         }
@@ -1041,19 +1042,21 @@ function Überprüfen(){
         if ((summenGleichVar == true) && (FaktorNichtLeerVar == true)){
             
             if (FaktorenNichtTeilerfremd() == true && FaktorNichtLeer() ==true){
-                document.getElementById("AntwortSatz").innerHTML = "Super. Man hätte die Koeffizienten noch durch die gleiche Zahl teilen können.";
+                document.getElementById("AntwortSatz").innerHTML = "Super. Man hätte die Koeffizienten noch durch die gleiche Zahl (hier "+AusgabeMitKomma(gemeinsamerFaktor)+") teilen können.";
                 let KlassenElemente = document.getElementsByClassName("small");
                 for (let i=0; i< KlassenElemente.length; i++){
                     KlassenElemente[i].style.backgroundColor = "coral";
+                    
                 }
             } else {
                 document.getElementById("AntwortSatz").innerHTML = "Super, alles richtig";
                 let KlassenElemente = document.getElementsByClassName("small");
                 for (let i=0; i< KlassenElemente.length; i++){
                     KlassenElemente[i].style.backgroundColor = "green";
+                   
                 }
             }
-
+            
             document.getElementById("AntwortSatz").innerHTML += '<br><br><input type="button" value="Weiter" onclick=MolareMassen()>';
 
         } else {
@@ -1250,7 +1253,7 @@ function LösungStufe5(){
                     faktorNichtLeerVariable = false;
                 }
             }
-            return faktorNichtLeerVariable
+            return faktorNichtLeerVariable;
 
 
     }
@@ -1330,7 +1333,10 @@ function LösungStufe5(){
         }
 
 function FaktorenNichtTeilerfremd(){
-    ggT = document.getElementById("ZahlE0").value;
+    var ggT = document.getElementById("ZahlE0").value;
+    ggT=ggT.replace(/\,/, ".");
+    ggT=eval(ggT);
+
     for(i=0; i<Reaktionsarray[0].length; i++){
                 var id = "ZahlE"+i;
                 var Faktor = document.getElementById(id).value;
@@ -1355,12 +1361,16 @@ function FaktorenNichtTeilerfremd(){
     if (ggT == 1) {
         return false;
     } else {
+        gemeinsamerFaktor = ggT;
         return true;
     }
 }
 
 function FaktorenEintrager(){
-    ggT = document.getElementById("ZahlE0").value;
+    var ggT = document.getElementById("ZahlE0").value;
+    ggT=ggT.replace(/\,/, ".");
+    ggT=eval(ggT);
+    
     for(i=0; i<Reaktionsarray[0].length; i++){
                 var id = "ZahlE"+i;
                 var Faktor = document.getElementById(id).value;
@@ -1594,7 +1604,7 @@ function TextAnzeigen(wert){
 
     text.push(OCText);
     text.push("Summenformeln von Nichtmetall-Nichtmetallverbindungen kann man mithilfe des Names bestimmen. <br> z.B. steht \"-oxid\" für eine Verbindung mit Sauerstoff.<br> Vorsilben helfen bei der Einordnung der Oxide. So besitzt <span  style='color:red'>Mono</span>xid <span style='color:red'>ein</span> Sauerstoffatom,  <span style='color:blue'>Di</span>oxid <span style='color:blue'>zwei</span>.<br> z.B. bei Kohlenstoffmonoxid  CO   &ensp; und Kohlenstoffdioxid CO<sub>2</sub>");
-    text.push("Salze, also Verbindungen aus Metallen und Nichtmetallen, können auf verschiedene Weisen erklärt werden.<br> Entweder mit dem Konzept der <input type='button' id='SalzInfo1' value='Wertigkeit' class='Infos' onclick='Salzinfos(1)'> oder durch die <input id='SalzInfo2' type='button' class='Infos' value='Ionenladung' onclick='Salzinfos(2)'>.<br><p id='SalzinfoText'></p>");
+    text.push("Summenformeln von Salzen, also Verbindungen aus Metallen und Nichtmetallen, können auf verschiedene Weisen erklärt werden.<br> Entweder mit dem Konzept der <input type='button' id='SalzInfo1' value='Wertigkeit' class='Infos' onclick='Salzinfos(1)'> oder durch die <input id='SalzInfo2' type='button' class='Infos' value='Ionenladung' onclick='Salzinfos(2)'>.<br><p id='SalzinfoText'></p>");
 
 
 
@@ -1740,7 +1750,7 @@ function HilfeMolM(){
     var AusgabeText = "";
     let ElektronenHinweis = false;
 
-        AusgabeText = "Die molare Masse berechnest Du folgendermaßen: <br><br> M(";
+        AusgabeText = "Die molare Masse berechnest Du folgendermaßen: <br> Du sucht die Anzahl der Atome in der Summenformel und multiplizierst diese mit der gerundeten Massezahl. Zum Schluss addierst du all diese Produkte <br><br> M(";
         AusgabeText += SchöneSummenformel(Reaktionsarray[0][0][0])+") = ";
         summenArray = formelZerstückler(Reaktionsarray[0][0][0]);
         
@@ -1781,7 +1791,7 @@ function HilfeStoffM1(){
     var AusgabeText = "";
 
 
-        AusgabeText = "Die Stoffmenge des ersten Stoffes berechnest Du folgendermaßen: <br><br> n(";
+        AusgabeText = "Die Stoffmenge des ersten Stoffes berechnest Du folgendermaßen: <br> Du teilst die Masse des Stoffs durch die molare Masse.<br> <br> n(";
         AusgabeText += SchöneSummenformel(Reaktionsarray[0][0][0])+") = <math><mfrac><mn><span>m("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span></mn><mn><span>M("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span></mn></mfrac></math>";
     
 
@@ -1815,21 +1825,21 @@ function HilfeStoffM2(){
 
        // <math><mfrac><mn>g</mn><mn>mol</mn></mfrac>
         AusgabeText +="<h2>Berechnung mittels Soffmengenverhältnis </h2>";
-        AusgabeText += "Mit der berechneten Stoffmenge berechnest Du die weiteren Stoffmengen so: <br><br> Wir betrachten dafür die Stoffmengenverhältnisse z.B. <br> ";
+        AusgabeText += "Mit der berechneten Stoffmenge berechnest Du die weiteren Stoffmengen so: <br>Das Verhältnis der Stoffmengen zueinander entspricht dem Verhältnis der Vorfaktoren zueinander. <br><br> Wir betrachten dafür die Stoffmengenverhältnisse z.B. <br> ";
         AusgabeText += "<math><mfrac><mn><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+")</span></mn><mn><span style='color: #db9e02; font-weight:bold;'> n("+SchöneSummenformel(Reaktionsarray[0][0][0])+")</span></mn></mfrac></math> = <math><mfrac><mn><span style='color: blue; font-weight:bold;'>Vorfaktor("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span></mn><mn><span style='color: #db9e02; font-weight:bold;'>Vorfaktor("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span></mn></mfrac></math> = <math><mfrac><mn><span style='color: blue; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2])+"</span></mn><mn><span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][2])+"</span></mn></mfrac></math> = <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2])+"</span>";
         AusgabeText += "<br><br> Nach Multiplikation der Gleichung gilt <br><span style='color: blue; font-weight:bold;'> n("+ SchöneSummenformel(Reaktionsarray[1][0][0])+") </span> = <span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901;"+"<span style='color: #db9e02; font-weight:bold;'>n("+SchöneSummenformel(Reaktionsarray[0][0][0])+") </span> =  <span style='color: fuchsia; font-weight:bold;'>"+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> &#8901; <span style='color: #db9e02; font-weight:bold;'>"+AusgabeMitKomma(Reaktionsarray[0][0][4])+" </span> mol = "+AusgabeMitKomma(Reaktionsarray[1][0][4])+" mol";
         
 
     AusgabeText +="<h2>Alternative Erklärung mithilfe eines proportionalen Zusammenhangs </h2>";
     AusgabeText +="Wir notieren die Vorfaktoren und die gegebene Stoffmenge in einer Tabelle";
-    AusgabeText +=  "<table border='1' style='width:30%' align='center'>";
+    AusgabeText +=  "<table border='1' style='width:40%' align='center'><tr><th style='color: grey;'></th>";
         for (let i=0;i<Reaktionsarray[0].length;i++){
             AusgabeText +=`<th style='color: grey;'>`+SchöneSummenformel(Reaktionsarray[0][i][0])+`</th>`;
         }
         for (let i=0;i<Reaktionsarray[1].length;i++){
             AusgabeText +=`<th style='color: grey;'>`+SchöneSummenformel(Reaktionsarray[1][i][0])+`</th>`;
         }
-        AusgabeText +=`</tr><tr>`;
+        AusgabeText +=`</tr><tr><th>Vorfaktoren</th>`;
             AusgabeText +=`<th><span style='color: #db9e02; font-weight:bold;'>`+Reaktionsarray[0][0][2]+`</span></th>`
         for (let i=1;i<Reaktionsarray[0].length;i++){
             AusgabeText +=`<th>`+Reaktionsarray[0][i][2]+`</th>`;
@@ -1838,17 +1848,21 @@ function HilfeStoffM2(){
         for (let i=1;i<Reaktionsarray[1].length;i++){
             AusgabeText +=`<th>`+Reaktionsarray[1][i][2]+`</th>`;
         }                    
-        AusgabeText +=`</tr><tr>`;
+        AusgabeText +=`</tr><tr><th>Stoffmenge</th>`;
         AusgabeText +=`<th>`+AusgabeMitKomma(Reaktionsarray[0][0][4])+` mol</th>`;
         for (let i=1;i<Reaktionsarray[0].length;i++){
-            AusgabeText +=`<th>&emsp; mol</th>`;
+            AusgabeText +=`<th> ? mol</th>`;
         }
         AusgabeText +=`<th>`+AusgabeMitKomma(Reaktionsarray[1][0][4])+` mol</th>`;
         for (let i=1;i<Reaktionsarray[1].length;i++){
-            AusgabeText +=`<th>&emsp; mol</th>`;
+            AusgabeText +=`<th> ? mol</th>`;
         }                    
-        AusgabeText +=`</tr></table>`;                    
-
+        AusgabeText +=`</tr></table>`;   
+        AusgabeText +=`<br>Um vom Vorfaktor <span style='color: #db9e02; font-weight:bold;'>`+Reaktionsarray[0][0][2]+`</span> auf den Vorfaktor <span style='color: blue; font-weight:bold;'>`+Reaktionsarray[1][0][2]+`</span> zu kommen, müssen wir `;
+       
+        
+        AusgabeText += "mit <span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> multiplizieren.";                 
+        AusgabeText += "<br>Deshalb multiplizieren wir auch die Stoffmenge von "+SchöneSummenformel(Reaktionsarray[0][0][0])+" hier "+AusgabeMitKomma(Reaktionsarray[0][0][4])+" mol mit <span style='color: fuchsia; font-weight:bold;'> "+AusgabeMitKomma((Reaktionsarray[1][0][2]/Reaktionsarray[0][0][2]))+"</span> um die Stoffmenge von "+SchöneSummenformel(Reaktionsarray[1][0][0])+", also "+AusgabeMitKomma(Reaktionsarray[1][0][4])+" mol, zu erhalten";
                    
     
     
@@ -1865,7 +1879,7 @@ function HilfeMasse(){
     var AusgabeText = "";
 
 
-        AusgabeText = "Die Masse des ersten Stoffes berechnest Du folgendermaßen: <br><br> m(";
+        AusgabeText = "Die Masse des ersten Stoffes berechnest Du folgendermaßen: <br> Du multiplizierst die Stoffmenge n mit der molaren Masse M.<br><br> m(";
         AusgabeText += SchöneSummenformel(Reaktionsarray[0][0][0])+") = n("+SchöneSummenformel(Reaktionsarray[0][0][0])+") &#8901; M("+SchöneSummenformel(Reaktionsarray[0][0][0])+")  ";
 
         AusgabeText += "= "+AusgabeMitKomma(Stoffmenge)  +" mol  &#8901; "+ AusgabeMitKomma(Reaktionsarray[0][0][3])+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> = "+AusgabeMitKomma(Reaktionsarray[0][0][5])+"   g";
