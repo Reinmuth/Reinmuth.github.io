@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <title>Redoxreaktionen Klasse 9</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:150px; font-size:20px; text-align: center;}
+        
+        .small{ width:50px; font-size:20px; text-align: center;}
+        .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+        .ElementTabelle td{ border-color: black;border: 1px solid; padding-top: 0px;}
+        .ElementTabelle tr{ border-color: black;border: 1px solid;}
+        .PfeilRechts{ 
+          font-weight: bolder;
+          padding-bottom: 0px;
+          padding-top: 0px;
+          text-align: left;
+          padding-left: 0px;}
+
+        .PfeilLinks{ 
+        font-weight: bolder;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        text-align: right;
+        padding-right: 0px;}
+
+        #Wahl {font-size: x-large;text-align: center;}
+        table, th, td {
+        border: 1px solid none;
+        border-collapse: collapse;
+        padding: 10px;
+        }
+        select { font-size: 20px;        }
+        li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+        .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+        .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+        input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+        body{background-color: rgba(193, 247, 239, 0.336);}
+        #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+        h2{ font-size: 40px;}
+        footer {  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        nav > input{
+                display: none;
+            }
+    
+            ul{
+                display: none;
+                margin: 0;
+                padding: 5px;
+            }
+            input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+            nav li{display:flex;
+                margin-right: 0px;
+                padding:0px;
+                border: 0;
+                border-radius: 0px;
+            }
+            .OC td{
+            border: 1px solid;
+            border-collapse: collapse;
+          }
+          .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+          .Infos{
+            width: auto;
+          }
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+          div label input {margin-right: 100px;}
+          .container{width: 250px; height: 38px; margin: 100px auto;}
+    
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+    
+    .cat label {
+      float: left; line-height: 3.0em;
+      width: 12.0em; height: 3.0em;
+    }
+    
+    .cat label span {
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+    }
+    
+    .cat label input {
+      position: absolute;
+      display: none;
+      color: #fff !important;
+    }
+    /* selects all of the text within the input element and changes the color of the text */
+    .cat label input + span{color: #fff;}
+    
+    
+    /* This will declare how a selected input will look giving generic properties */
+    .cat input:checked + span {
+        background-color: #82D44E;
+        color: #ffffff;
+        text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+    }
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+            </style>
+    
+    
+</head>
+<body>
+    <h2 style="text-align: center;">Redoxreaktionen Klasse 9</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+
+     
+ 
+    <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3><button value="Neuladen" onclick="javascript:location.reload()"><img src="img/refresh.png" width="25px"></button></div>
+    <p id = "Wahl"></p>
+    <div id="AufgabenTabelle" style="visibility: hidden ;text-align: center; box-sizing: border-box;">
+
+
+    </div>
+    <div style="text-align: center; box-sizing: border-box;" id="LoesungsFeld"><input value="Hilfe" type="button" onclick="Hilfe()"></div>
+        <p style="text-align: center; font-size: large;" id="HilfeFeld"></p><p><br></p>
+
+<script>
+    var meinArray = [];
+    meinArray.push([["Eisen","Fe"],["Eisen(II)ionen","Fe^2+"],2,-0.41]);
+    meinArray.push([["Silber","Ag"],["Silber(I)ionen","Ag+"],1,0.8]);
+    meinArray.push([["Gold","Au"],["Gold(III)ionen","Au^3+"],3,1.42]);
+    meinArray.push([["Magnesium","Mg"],["Magnesiumionen","Mg^2+"],2,-2.37]);
+    meinArray.push([["Zink","Zn"],["Zink(II)ionen","Zn^2+"],2,-0.76]);
+    meinArray.push([["Kupfer","Cu"],["Kupfer(II)ionen","Cu^2+"],2,0.34]);
+    meinArray.push([["Quecksilber","Hg"],["Quecksilber(II)ionen","Hg^2+"],2,0.85]);
+    var level = 0;
+    var fehlversuch = 0;
+    var zahl1 = Math.floor(Math.random()*meinArray.length);
+    var Zwischenspeicher1 = meinArray[zahl1];
+    meinArray.splice(zahl1,1);
+    var zahl2 = Math.floor(Math.random()*meinArray.length);
+    var Zwischenspeicher2 = meinArray[zahl2];
+    var EduktArray = [];
+    var ProduktArray = [];
+    var ElZahl1;
+    var ElZahl2;
+    var geschafft = 0;
+    if(Zwischenspeicher1[3]<Zwischenspeicher2[3]){
+        EduktArray.push(Zwischenspeicher1[0]);
+        ElZahl1= Zwischenspeicher1[2];
+        EduktArray.push(Zwischenspeicher2[1]);
+        ProduktArray.push(Zwischenspeicher1[1]);
+        ProduktArray.push(Zwischenspeicher2[0]);
+        ElZahl2= Zwischenspeicher2[2];
+    } else {
+        EduktArray.push(Zwischenspeicher2[0]);
+        ElZahl1= Zwischenspeicher2[2];
+        EduktArray.push(Zwischenspeicher1[1]);
+        ProduktArray.push(Zwischenspeicher2[1]);
+        ProduktArray.push(Zwischenspeicher1[0]);
+        ElZahl2= Zwischenspeicher1[2];
+    }
+    ggT = EA(Zwischenspeicher1[2],Zwischenspeicher2[2]);
+    var Koeffizienten = [];
+    var Elektronen = ElZahl2*ElZahl1/ggT;
+    Koeffizienten = [ElZahl2/ggT,ElZahl1/ggT,ElZahl2/ggT,ElZahl1/ggT]
+    var gemeinsamerTeiler;
+
+
+    let Ausgabe = "";
+    Vorstart();
+
+function Vorstart(){
+  let richtigerVorstart = false;
+  document.getElementById("Aufgabenstellung").innerHTML="Gib an, welche der beiden Reaktionen wirklich stattfindet:";
+  let Aufgabe = "";
+  if (Math.random()<0.5){
+    if (Math.random()<0.5){
+      Aufgabe = "<br> "+EduktArray[0][0]+" reagiert mit "+EduktArray[1][0]+"&emsp; <input type='button' onclick='AuswertungRichtig()' value='Diese hier'>.<br><br> "+ProduktArray[1][0]+" reagiert mit "+ProduktArray[0][0]+"&emsp;<input onclick='AuswertungFalsch()' type='button' value='Diese hier'>."
+    } else {
+      Aufgabe = "<br> "+ProduktArray[1][0]+" reagiert mit "+ProduktArray[0][0]+"&emsp;<input type='button' onclick='AuswertungFalsch()' value='Diese hier'>.<br><br> "+EduktArray[0][0]+" reagiert mit "+EduktArray[1][0]+"&emsp;<input onclick='AuswertungRichtig()' type='button' value='Diese hier'>."
+    }
+  } else {
+    if (Math.random()<0.5){
+      Aufgabe = "<br> "+EduktArray[1][0]+" reagieren mit "+EduktArray[0][0]+"&emsp; <input type='button' onclick='AuswertungRichtig()' value='Diese hier'>.<br><br> "+ProduktArray[0][0]+" reagieren mit "+ProduktArray[1][0]+"&emsp;<input onclick='AuswertungFalsch()' type='button' value='Diese hier'>."
+    } else {
+      Aufgabe = "<br> "+ProduktArray[0][0]+" reagieren mit "+ProduktArray[1][0]+"&emsp;<input type='button' onclick='AuswertungFalsch()' value='Diese hier'>.<br><br> "+EduktArray[1][0]+" reagieren mit "+EduktArray[0][0]+"&emsp;<input onclick='AuswertungRichtig()' type='button' value='Diese hier'>."
+    }
+  }
+    document.getElementById("Wahl").innerHTML=Aufgabe;
+}
+
+function Hilfe(){
+  var hilfeText ="";
+  if (level == 0){
+    hilfeText = "Der edlere Stoff will elementar vorliegen. Überlege dir mithilfe der Redoxreihe der Metalle welche Reaktion ablaufen wird. <br><br> Geordnet von unedel nach edel: Magnesium, Zink, Eisen, Kupfer, Silber, Quecksilber, Gold"
+  }
+  if (level == 1){
+    hilfeText = "<span style='color: red; font-weight:bold;'>Oxidation</span> ist die <span style='color: red; '>Abgabe von Elektronen</span>. Überlege dir, welcher der beiden möglichen Edukte Elektronen abgeben kann und was daraus wird. <br><br> Überlege anschließend, wie viele Elektronen abgegeben bzw. aufgenommen werden müssen und ändere die Vorfaktoren so, dass die Zahl der ausgetauschten Elektronen gleich groß ist.";
+  }
+  document.getElementById("HilfeFeld").innerHTML = hilfeText;
+}
+
+function AuswertungRichtig(){
+    let Aufgabe = "";
+    document.getElementById("Wahl").innerHTML=Aufgabe;
+    document.getElementById("AufgabenTabelle").style.visibility = "visible";
+    level = 1;
+    document.getElementById("HilfeFeld").innerHTML = "";
+    Start();
+  }
+
+  function AuswertungFalsch(){
+    let Aufgabe = "Leider Falsch, probiere es noch einmal";
+    document.getElementById("Wahl").innerHTML=Aufgabe;
+
+  }
+    
+   // Ausgabe = '<input class="small" ></input> '+KoeffizientenVerkleinernSummenformel(EduktArray[0][1]);
+function Start(){
+
+  document.getElementById("AufgabenTabelle").innerHTML = `        <table style=" text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;">
+            <tbody id ="myTable" style="border-color: black;border: 1px solid;">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="6" style="border-bottom: 2px solid red;"><span style="font-weight: bold; color: red;">Oxidation:</span> Abgabe von insgesamt <input class="small" id="AntwOxEl"></input> Elektronen</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid red; color: red;"></td>
+                    <td class="PfeilRechts" style="color: red;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid red; color: red;"></td>
+                    <td class="PfeilRechts" style="color: red;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
+                  <tr>
+                    <td>Reaktionsgl.</td>
+                    <td colspan="2"  id="EdRedMittel"></td>
+                    <td>+</td>
+                    <td colspan="2" id="EdOxMittel"><input class="small" ></input></td>
+                    <td>&#10141;</td>
+                    <td colspan="2" id="ProdOxMittel"><input class="small" ></input></td>
+                    <td>+</td>
+                    <td colspan="2" id="ProdRedMittel"><input class="small" ></input></td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid blue; color: blue;"></td>
+                    <td class="PfeilRechts" style="color: blue;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid blue; color: blue;"></td>
+                    <td class="PfeilRechts" style="color: blue;"></td>
+
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>                    
+                    <td></td>
+                    <td></td>
+                    <td colspan="6" style="border-top: 2px solid blue;"><span style="font-weight: bold; color: blue;">Reduktion:</span> Aufnahme  von insgesamt <input class="small" id="AntwRedEl"></input> Elektronen</td>
+                    <td></td>
+
+                  </tr>
+            </tbody>
+
+        </table>
+        <p>&ensp; </p>
+
+
+         <input id="pruefButton" type="button" value="Überprüfen" onclick="Pruefen()" >
+        <p id="ausgabeFeld"></p>
+        `;
+
+
+
+  document.getElementById("Aufgabenstellung").innerHTML="Gleiche die Reaktionsgleichung aus:";
+  document.getElementById("Wahl").innerHTML="<br> "+EduktArray[0][0]+" reagiert mit "+EduktArray[1][0];
+  if (Math.random() < 0.5){
+      Ausgabe = '<input id="A0" class="small" ></input> '+`<select name="E1" id="ChooseE1">
+    <option value="0" selected disabled hidden>Wählen</option>;
+    <option value="E1">`+KoeffizientenVerkleinernSummenformel(EduktArray[0][1])+`</option>
+    <option value="E2">`+KoeffizientenVerkleinernSummenformel(EduktArray[1][1])+`</option>
+    </select>`;
+    } else {
+      Ausgabe = '<input id="A0" class="small" ></input> '+`<select name="E1" id="ChooseE1">
+    <option value="0" selected disabled hidden>Wählen</option>;
+    <option value="E2">`+KoeffizientenVerkleinernSummenformel(EduktArray[1][1])+`</option>
+    <option value="E1">`+KoeffizientenVerkleinernSummenformel(EduktArray[0][1])+`</option>
+    </select>`;
+    }
+    
+    document.getElementById("EdRedMittel").innerHTML=Ausgabe;
+    Ausgabe = "";
+    if (Math.random() < 0.5){
+    Ausgabe = '<input id="A1"  class="small" ></input> '+`<select name="E2" id="ChooseE2">
+    <option value="0" selected disabled hidden>Wählen</option>
+    <option value="E1">`+KoeffizientenVerkleinernSummenformel(EduktArray[0][1])+`</option>
+    <option value="E2">`+KoeffizientenVerkleinernSummenformel(EduktArray[1][1])+`</option>
+    </select>`;
+    } else {
+      Ausgabe = '<input id="A1" class="small" ></input> '+`<select name="E2" id="ChooseE2">
+    <option value="0" selected disabled hidden>Wählen</option>
+    <option value="E2">`+KoeffizientenVerkleinernSummenformel(EduktArray[1][1])+`</option>
+    <option value="E1">`+KoeffizientenVerkleinernSummenformel(EduktArray[0][1])+`</option>
+    </select>`;
+    }
+    document.getElementById("EdOxMittel").innerHTML=Ausgabe;
+    Ausgabe = "";
+    if (Math.random() < 0.5){
+    Ausgabe = '<input id="A2" class="small" ></input> '+`<select name="E2" id="ChooseP1">
+      <option value="0" selected disabled hidden>Wählen</option>
+    <option value="P1">`+KoeffizientenVerkleinernSummenformel(ProduktArray[0][1])+`</option>
+    <option value="P2">`+KoeffizientenVerkleinernSummenformel(ProduktArray[1][1])+`</option>
+    </select>`;
+    } else {
+      Ausgabe = '<input id="A2" class="small" ></input> '+`<select name="E2" id="ChooseP1">
+      <option value="0" selected disabled hidden>Wählen</option>
+      <option value="P2">`+KoeffizientenVerkleinernSummenformel(ProduktArray[1][1])+`</option>
+      <option value="P1">`+KoeffizientenVerkleinernSummenformel(ProduktArray[0][1])+`</option>
+      </select>`;
+    }
+    document.getElementById("ProdOxMittel").innerHTML=Ausgabe;
+    Ausgabe = "";
+    if (Math.random() < 0.5){
+      Ausgabe = '<input id="A3" class="small" ></input> '+`<select name="E2" id="ChooseP2">
+        <option value="0" selected disabled hidden>Wählen</option>
+        <option value="P1">`+KoeffizientenVerkleinernSummenformel(ProduktArray[0][1])+`</option>
+        <option value="P2">`+KoeffizientenVerkleinernSummenformel(ProduktArray[1][1])+`</option>
+        </select>`;
+      } else {
+        Ausgabe = '<input id="A3" class="small" ></input> '+`<select name="E2" id="ChooseP2">
+        <option value="0" selected disabled hidden>Wählen</option>
+        <option value="P2">`+KoeffizientenVerkleinernSummenformel(ProduktArray[1][1])+`</option>
+        <option value="P1">`+KoeffizientenVerkleinernSummenformel(ProduktArray[0][1])+`</option>
+        </select>`;
+      }
+    document.getElementById("ProdRedMittel").innerHTML=Ausgabe;
+    
+  }
+
+
+    function KoeffizientenVerkleinernSummenformel(meineVariable){
+        meineVariable = meineVariable.replace("^1", "¹");
+        meineVariable = meineVariable.replace("^2", "²");
+        meineVariable = meineVariable.replace("^3", "³");
+        meineVariable = meineVariable.replace("^4", "⁴");
+        meineVariable = meineVariable.replace("^5", "⁵");
+        meineVariable = meineVariable.replace("^6", "⁶");
+        meineVariable = meineVariable.replace("^7", "⁷");
+        meineVariable = meineVariable.replace("^8", "⁸");
+        meineVariable = meineVariable.replace("^9", "⁹");
+        meineVariable = meineVariable.replace("^0", "⁰");
+        meineVariable = meineVariable.replace("1", "₁");
+        meineVariable = meineVariable.replace("2", "₂");
+        meineVariable = meineVariable.replace("3", "₃");
+        meineVariable = meineVariable.replace("4", "₄");
+        meineVariable = meineVariable.replace("5", "₅");
+        meineVariable = meineVariable.replace("6", "₆");
+        meineVariable = meineVariable.replace("7", "₇");
+        meineVariable = meineVariable.replace("8", "₈");
+        meineVariable = meineVariable.replace("9", "₉");
+        meineVariable = meineVariable.replace("0", "₀");
+        meineVariable = meineVariable.replace("+", "⁺");
+        meineVariable = meineVariable.replace("-", "⁻");
+        return meineVariable;
+    }
+
+    function Pruefen(){
+      var allesRichtig;
+      if (geschafft == 1){
+        javascript:location.reload();
+      }
+      allesRichtig = true;
+      ausgabeText = "";
+      document.getElementById("ausgabeFeld").innerHTML = ausgabeText;
+      let fehler = false;
+      if (document.getElementById("AntwOxEl").value == ""){
+        document.getElementById("AntwOxEl").value = "1";
+      }
+      if (document.getElementById("AntwRedEl").value == ""){
+        document.getElementById("AntwRedEl").value = "1";
+      }
+      if (document.getElementById("A0").value == ""){
+        document.getElementById("A0").value = "1";
+      }
+      if (document.getElementById("A1").value == ""){
+        document.getElementById("A1").value = "1";
+      }
+      if (document.getElementById("A2").value == ""){
+        document.getElementById("A2").value = "1";
+      }
+      if (document.getElementById("A3").value == ""){
+        document.getElementById("A3").value = "1";
+      }
+      var ausgabeText = "";
+      if(document.getElementById("ChooseE1").value != "E1")
+      {
+        allesRichtig = false;
+        document.getElementById("ChooseE1").style.backgroundColor = "red";
+      } else {
+        document.getElementById("ChooseE1").style.backgroundColor = "green";
+      }
+      if(document.getElementById("ChooseE2").value!="E2")
+      {
+        allesRichtig = false;
+        document.getElementById("ChooseE2").style.backgroundColor = "red";
+      } else {
+        document.getElementById("ChooseE2").style.backgroundColor = "green";
+      }
+      if(document.getElementById("ChooseP1").value!="P1")
+      {
+        allesRichtig = false;
+        document.getElementById("ChooseP1").style.backgroundColor = "red";
+      }else {
+        document.getElementById("ChooseP1").style.backgroundColor = "green";
+      }
+      if(document.getElementById("ChooseP2").value!="P2")
+      {
+        allesRichtig = false;
+        document.getElementById("ChooseP2").style.backgroundColor = "red";
+      }else {
+        document.getElementById("ChooseP2").style.backgroundColor = "green";
+      }
+      if (allesRichtig == false ){
+        document.getElementById("ausgabeFeld").innerHTML = "Achtung, die Summenformeln stimmen nicht!.";
+      }
+      if (allesRichtig == false ){
+        fehler = true;
+        ausgabeText += "Achtung, die Summenformeln stimmen nicht!.";
+      } else {
+        ausgabeText += "Super, die Summenformeln sind richtig!";
+      }
+      if((document.getElementById("ChooseE1").value == "E2")&&(document.getElementById("ChooseE2").value == "E1")&&(document.getElementById("ChooseP1").value == "P2")&&(document.getElementById("ChooseP2").value == "P1")){
+        ausgabeText += "<br>Die Oxidation und die Reduktion sind vertauscht.";
+        fehler = true;
+      }
+      if ((document.getElementById("ChooseE1").value == "0")||(document.getElementById("ChooseE2").value == "0")||(document.getElementById("ChooseP1").value == "0")||(document.getElementById("ChooseP2").value == "0")){
+        ausgabeText = "Achtung, bitte erst alle Summenformeln wählen.";
+        fehler = true;
+      }
+
+      if (document.getElementById("AntwOxEl").value != document.getElementById("AntwRedEl").value){
+        ausgabeText += "<br> Achtung, die Elektronenanzahlen müssen gleich sein.";
+        fehler = true;
+      }
+      var ElektronenzahlenFehler = false;
+      if (document.getElementById("AntwOxEl").value == Elektronen){
+        document.getElementById("AntwOxEl").style.backgroundColor = "green";
+      } else {
+        document.getElementById("AntwOxEl").style.backgroundColor = "red";
+        ElektronenzahlenFehler = true;
+        fehler = true;
+      }
+      if (document.getElementById("AntwRedEl").value == Elektronen){
+        document.getElementById("AntwRedEl").style.backgroundColor = "green";
+      } else {
+        document.getElementById("AntwRedEl").style.backgroundColor = "red";
+        ElektronenzahlenFehler = true;
+        fehler = true;
+      }
+      if (ElektronenzahlenFehler == true ){
+        ausgabeText += "<br> Die Anzahl der Elektronen stimmt nicht.";
+      } else {
+        ausgabeText += "<br> Die Anzahl der Elektronen stimmt.";
+      }
+
+
+      var gegebeneAnzahl;
+      gegebeneAnzahl = [];
+      gegebeneAnzahl.push(document.getElementById("A0").value);
+      gegebeneAnzahl.push(document.getElementById("A1").value);
+      gegebeneAnzahl.push(document.getElementById("A2").value);
+      gegebeneAnzahl.push(document.getElementById("A3").value);  
+      gegebeneAnzahl.push(document.getElementById("AntwOxEl").value);
+      gegebeneAnzahl.push(document.getElementById("AntwRedEl").value);
+      var faktorenRichtig = true;
+      for (let j=0;j<4;j++){
+        if (gegebeneAnzahl[j]!=Koeffizienten[j]){
+          faktorenRichtig = false;
+          document.getElementById("A"+j).style.backgroundColor = "red";
+          fehler = true;
+        } else {
+          document.getElementById("A"+j).style.backgroundColor = "green";
+        }
+      }
+      if (faktorenRichtig == false){
+        ausgabeText += "<br> Achtung, die Vorfaktoren stimmen nicht."
+        fehler = true;
+      } else {
+        ausgabeText += "<br> Die Faktoren stimmen!"
+      }
+
+      gemeinsamerTeiler = EA(gegebeneAnzahl[0],gegebeneAnzahl[0])
+      for (let i = 1; i< (gegebeneAnzahl.length); i++){ 
+        gemeinsamerTeiler = EA(gegebeneAnzahl[i],gemeinsamerTeiler)
+      }
+
+      if (((gegebeneAnzahl[0]/gemeinsamerTeiler)==Koeffizienten[0])&&((gegebeneAnzahl[1]/gemeinsamerTeiler)==Koeffizienten[1])&&((gegebeneAnzahl[2]/gemeinsamerTeiler)==Koeffizienten[2])&&((gegebeneAnzahl[3]/gemeinsamerTeiler)==Koeffizienten[3])&&(document.getElementById("AntwOxEl").value/gemeinsamerTeiler==Elektronen)&&(document.getElementById("AntwRedEl").value/gemeinsamerTeiler==Elektronen)){
+        if (gemeinsamerTeiler != 1){
+        document.getElementById("AntwOxEl").style.backgroundColor = "coral";
+        document.getElementById("AntwRedEl").style.backgroundColor = "coral";
+        document.getElementById("A1").style.backgroundColor = "coral";
+        document.getElementById("A2").style.backgroundColor = "coral";
+        document.getElementById("A0").style.backgroundColor = "coral";
+        document.getElementById("A3").style.backgroundColor = "coral";
+        ausgabeText += "<br> Du kannst alle Zahlen noch durch "+gemeinsamerTeiler+" teilen." ;
+        fehler = true;
+
+        }
+      }
+      if (fehler == true){
+        fehlversuch += 1;
+      } else {
+        var button = document.getElementById("pruefButton");
+        button.value = "Neue Aufgabe";
+        geschafft = 1;
+      }
+      if (fehlversuch > 3){
+        document.getElementById("LoesungsFeld").innerHTML = '<input value="Hilfe" type="button" onclick="Hilfe()"> &ensp; <input value="Lösung" type="button" onclick="Loesung()">';
+      }
+
+      document.getElementById("ausgabeFeld").innerHTML = ausgabeText;
+    }
+
+    function Loesung(){
+      document.getElementById("ChooseE1").value = "E1";
+      document.getElementById("ChooseE2").value = "E2";
+      document.getElementById("ChooseP1").value = "P1";
+      document.getElementById("ChooseP2").value = "P2";
+      document.getElementById("A0").value = Koeffizienten[0];
+      document.getElementById("A1").value = Koeffizienten[1];
+      document.getElementById("A2").value = Koeffizienten[2];
+      document.getElementById("A3").value = Koeffizienten[3];
+      document.getElementById("AntwOxEl").value = Elektronen;
+      document.getElementById("AntwRedEl").value = Elektronen;
+    }
+
+    function EA(a,b){
+    while(b != 0){
+        let ganzZ = a/b;
+        let Rest = a % b;
+        a=b;
+        b= Rest;
+        
+    }
+    return(a);
+  }
+</script>
+</body>
+<footer>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+</footer>
+</html>
