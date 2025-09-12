@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <title>Molare Masse Trainer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:180px; font-size:20px; text-align: center;}
+        
+        .small{ width:50px; font-size:20px; text-align: center;}
+        .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+        .ElementTabelle td{ border-color: black;border: 1px solid; padding-top: 0px;}
+        .ElementTabelle tr{ border-color: black;border: 1px solid;}
+        td{ white-space: nowrap; padding-top: 15px;}
+        li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+        .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+        .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+        input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+        body{background-color: rgba(193, 247, 239, 0.336);}
+        #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+        h2{ font-size: 40px;}
+        footer {  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        nav > input{
+                display: none;
+            }
+    
+            ul{
+                display: none;
+                margin: 0;
+                padding: 5px;
+            }
+            input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+            nav li{display:flex;
+                margin-right: 0px;
+                padding:0px;
+                border: 0;
+                border-radius: 0px;
+            }
+            .OC td{
+            border: 1px solid;
+            border-collapse: collapse;
+          }
+          .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+          .Infos{
+            width: auto;
+          }
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+          div label input {margin-right: 100px;}
+          .container{width: 250px; height: 38px; margin: 100px auto;}
+    
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+    
+    .cat label {
+      float: left; line-height: 3.0em;
+      width: 12.0em; height: 3.0em;
+    }
+    
+    .cat label span {
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+    }
+    
+    .cat label input {
+      position: absolute;
+      display: none;
+      color: #fff !important;
+    }
+    /* selects all of the text within the input element and changes the color of the text */
+    .cat label input + span{color: #fff;}
+    
+    
+    /* This will declare how a selected input will look giving generic properties */
+    .cat input:checked + span {
+        background-color: #82D44E;
+        color: #ffffff;
+        text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+    }
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+            </style>
+    
+    
+</head>
+<body>
+    <h2 style="text-align: center;">Molare Masse Trainer</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+
+     
+ 
+ 
+    <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3><button value="Neuladen" onclick=window.location.reload();><img src="img/refresh.png" width="25px"></button></div>
+
+    <div style="text-align: center; box-sizing: border-box;">
+        <p id="Antwort"></p>
+
+        <input type="button" value="Überprüfen" onclick=Überprüfen() id="PruefButton"> &emsp; <input type="button" id="HilfeButton" value="Hilfe" onclick=Hilfe()>
+
+        <p id="AntwortSatz"></p>
+        
+        <div style="align-items: center; font-size: 20px;"><p id="Hilfestellung"></p></div>
+        
+        <div id="Bilder">
+            
+        </div>
+
+    </div>
+
+<script>
+
+    var elementArray = [];
+        elementArray.push([0,"Elementsymbol","Masse","PSE-Bild.jpg"]);
+        elementArray.push([1,"H",1,"PSE-H.jpg"]);
+        elementArray.push([2,"He",4,"PSE-He.jpg"]);
+        elementArray.push([3,"Li",7,"PSE-Li.jpg"]);
+        elementArray.push([4,"Be",9,"PSE-Be.jpg"]);
+        elementArray.push([5,"B",11,"PSE-B.jpg"]);
+        elementArray.push([6,"C",12,"PSE-C.jpg"]);
+        elementArray.push([7,"N",14,"PSE-N.jpg"]);
+        elementArray.push([8,"O",16,"PSE-O.jpg"]);
+        elementArray.push([9,"F",19,"PSE-F.jpg"]);
+        elementArray.push([10,"Ne",20,"PSE-Ne.jpg"]);
+        elementArray.push([11,"Na",23,"PSE-Na.jpg"]);
+        elementArray.push([12,"Mg",24,"PSE-Mg.jpg"]);
+        elementArray.push([13,"Al",27,"PSE-Al.jpg"]);
+        elementArray.push([14,"Si",28,"PSE-Si.jpg"]);
+        elementArray.push([15,"P",31,"PSE-P.jpg"]);
+        elementArray.push([16,"S",32,"PSE-S.jpg"]);
+        elementArray.push([17,"Cl",35,"PSE-Cl.jpg"]);
+        elementArray.push([18,"Ar",40,"PSE-Ar.jpg"]);
+        elementArray.push([19,"K",39,"PSE-K.jpg"]);
+        elementArray.push([20,"Ca",40,"PSE-Ca.jpg"]);
+        elementArray.push([21,"Sc",45,"PSE-Sc.jpg"]);
+        elementArray.push([22,"Ti",48,"PSE-Ti.jpg"]);
+        elementArray.push([23,"V",51,"PSE-V.jpg"]);
+        elementArray.push([24,"Cr",52,"PSE-Cr.jpg"]);
+        elementArray.push([25,"Mn",55,"PSE-Mn.jpg"]);
+        elementArray.push([26,"Fe",56,"PSE-Fe.jpg"]);
+        elementArray.push([27,"Co",59,"PSE-Co.jpg"]);
+        elementArray.push([28,"Ni",59,"PSE-Ni.jpg"]);
+        elementArray.push([29,"Cu",64,"PSE-Cu.jpg"]);
+        elementArray.push([30,"Zn",65,"PSE-Zn.jpg"]);
+        elementArray.push([31,"Ga",70,"PSE-Ga.jpg"]);
+        elementArray.push([32,"Ge",72,"PSE-Ge.jpg"]);
+        elementArray.push([33,"As",75,"PSE-As.jpg"]);
+        elementArray.push([34,"Se",79,"PSE-Se.jpg"]);
+        elementArray.push([35,"Br",80,"PSE-Br.jpg"]);
+        elementArray.push([36,"Kr",84,"PSE-Kr.jpg"]);
+        elementArray.push([37,"Rb",85,"PSE-Rb.jpg"]);
+        elementArray.push([38,"Sr",88,"PSE-Sr.jpg"]);
+        elementArray.push([39,"Y",89,"PSE-Y.jpg"]);
+        elementArray.push([40,"Z",91,"PSE-Z.jpg"]);
+        elementArray.push([41,"Nb",93,"PSE-Nb.jpg"]);
+        elementArray.push([42,"Mo",96,"PSE-Mo.jpg"]);
+        elementArray.push([43,"Tc",98,"PSE-Tc.jpg"]);
+        elementArray.push([44,"Ru",101,"PSE-Ru.jpg"]);
+        elementArray.push([45,"Rh",103,"PSE-Rh.jpg"]);
+        elementArray.push([46,"Pd",106,"PSE-Pd.jpg"]);
+        elementArray.push([47,"Ag",108,"PSE-Ag.jpg"]);
+        elementArray.push([48,"Cd",112,"PSE-Cd.jpg"]);
+        elementArray.push([49,"In",115,"PSE-In.jpg"]);
+        elementArray.push([50,"Sn",119,"PSE-Sn.jpg"]);
+        elementArray.push([51,"Sb",122,"PSE-Sb.jpg"]);
+        elementArray.push([52,"Te",128,"PSE-Te.jpg"]);
+        elementArray.push([53,"I",127,"PSE-I.jpg"]);
+        elementArray.push([54,"Xe",131,"PSE-Xe.jpg"]);
+        elementArray.push([55,"Cs",133,"PSE-Cs.jpg"]);
+        elementArray.push([56,"Ba",137,"PSE-Ba.jpg"]);
+        elementArray.push([57,"La",139,"PSE-La.jpg"]);
+        elementArray.push([72,"Hf",178,"PSE-Hf.jpg"]);
+        elementArray.push([73,"Ta",181,"PSE-Ta.jpg"]);
+        elementArray.push([74,"W",184,"PSE-W.jpg"]);
+        elementArray.push([75,"Re",186,"PSE-Re.jpg"]);
+        elementArray.push([76,"Os",190,"PSE-Os.jpg"]);
+        elementArray.push([77,"Ir",192,"PSE-Ir.jpg"]);
+        elementArray.push([78,"Pt",195,"PSE-Pt.jpg"]);
+        elementArray.push([79,"Au",197,"PSE-Au.jpg"]);
+        elementArray.push([80,"Hg",201,"PSE-Hg.jpg"]);
+        elementArray.push([81,"Tl",204,"PSE-Tl.jpg"]);
+        elementArray.push([82,"Pb",207,"PSE-Pb.jpg"]);
+        elementArray.push([83,"Bi",209,"PSE-Bi.jpg"]);
+        elementArray.push([84,"Po",210,"PSE-Po.jpg"]);
+        elementArray.push([85,"At",210,"PSE-At.jpg"]);
+        elementArray.push([86,"Rn",222,"PSE-Rn.jpg"]);
+        elementArray.push([87,"Fr",223,"PSE-Fr.jpg"]);
+        elementArray.push([88,"Ra",226,"PSE-Ra.jpg"]);
+        elementArray.push([0,"J",0,"PSE-J.jpg"]); 
+
+    var aufgabenArray = [];
+        aufgabenArray.push(["Wasser","H2O"]);
+        aufgabenArray.push(["Kohlenstoffdioxid","CO2"]);
+
+    var aufgabenTyp = Math.floor(Math.random()*3);
+    var aufgabenTyp = 2;
+    var zahl;
+    zahl= Math.floor(Math.random()*aufgabenArray.length);
+    
+    var aktuelleAufgabe = [];
+    aktuelleAufgabe= aufgabenArray[zahl];
+    aktuelleAufgabe[2]=molareMasseRechner(formelZerstückler(aktuelleAufgabe[1]));
+    var StoffmengeN = (Math.floor(Math.random()*11))/2+0.5;
+    aktuelleAufgabe[3]=StoffmengeN;
+    aktuelleAufgabe[4]=StoffmengeN*aktuelleAufgabe[2];
+    
+    var ElementSymbol = elementArray[Math.floor(Math.random()*19)+1];
+    ElementSymbol[4]=StoffmengeN;
+    ElementSymbol[5]=StoffmengeN*ElementSymbol[2];
+    console.table(ElementSymbol);
+    var HilfeCounter = 0;
+    Start(aufgabenTyp);
+
+    function Start(aufgabenTyp){
+        if (aufgabenTyp == 0){ 
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Masse m von "+aktuelleAufgabe[3]+" mol "+aktuelleAufgabe[0]+".";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> g'
+        }
+        if (aufgabenTyp == 1){ 
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Stoffmenge n von "+aktuelleAufgabe[4]+" g "+aktuelleAufgabe[0]+".";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> mol'
+        }
+        if (aufgabenTyp == 2){ 
+            document.getElementById("Aufgabenstellung").innerHTML = ElementSymbol[4]+" mol eines einatomigen Elements haben eine Masse von "+ElementSymbol[5]+" g. <br> Gib das Elementsymbol an.";
+            document.getElementById("Antwort").innerHTML = 'Elementsymbol: <input class="small" id="Eingabefeld">'
+        }
+
+    }
+
+    function Überprüfen(){
+        var AusgabeText ="";
+        if (aufgabenTyp == 0){ 
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replace(/\,/, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == aktuelleAufgabe[4]){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","window.location.reload()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 1){ 
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replace(/\,/, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == aktuelleAufgabe[3]){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","window.location.reload()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 2){ 
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                if(Ergebnis == ElementSymbol[1]){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","window.location.reload()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        document.getElementById("AntwortSatz").innerHTML = AusgabeText;
+    }
+    function Hilfe(){
+        var HilfeText ="";
+        document.getElementById("Bilder").innerHTML="";
+        HilfeCounter +=1;
+        if (aufgabenTyp == 0){ 
+            if (HilfeCounter > 0){
+                HilfeText = "<h2>Hilfe (1 von 5)</h2>Überlege dir, wie die Summenformel von "+aktuelleAufgabe[0]+" lautet und bestimme dann die molare Masse von "+aktuelleAufgabe[0]+".";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText = "<h2>Hilfe (2 von 5)</h2><br> Die Summenformel von "+aktuelleAufgabe[0]+" lautet "+SchöneSummenformel(aktuelleAufgabe[1])+". Bestimme jetzt die molare Masse von "+aktuelleAufgabe[0]+".";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                bilderEinfüger(formelZerstückler(aktuelleAufgabe[1]));
+            }
+            if (HilfeCounter > 2){
+                HilfeText = "<h2>Hilfe (3 von 5)</h2>Die molare Masse berechnest Du folgendermaßen: <br> Du sucht die Anzahl der Atome in der Summenformel und multiplizierst diese mit der gerundeten Massezahl. Zum Schluss addierst du all diese Produkte. <br><br> M(";
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") +";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> +";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-1)
+
+                HilfeText += "<br><br> Probiere es nochmal.";
+            }
+            if (HilfeCounter > 3){
+                HilfeText = "<h2>Hilfe (4 von 5)</h2>Die molare Masse beträgt:<br> M(";  
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") +";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> +";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-1)
+                HilfeText += "= "+aktuelleAufgabe[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math>";
+                HilfeText += "<br><br> Überlege dir, wie du jetzt die Masse mithilfe der Molaren Masse und der Stoffmenge bestimmst.";
+            }
+            if (HilfeCounter > 4){
+                HilfeText = "<h2>Hilfe (5 von 5)</h2>Du berechnest die Masse als Produkt der molaren Masse M und der Stoffmenge n. <br>"
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901; n("+SchöneSummenformel(aktuelleAufgabe[1])+") = "+aktuelleAufgabe[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> &#8901; "+aktuelleAufgabe[3]+" mol <br>"
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+            }
+            if (HilfeCounter > 5){
+                HilfeText = "<h2>Lösung</h2>Die Lösung steht im Eingabe Feld. Der Rechenweg ist folgender:<br>";
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901; n("+SchöneSummenformel(aktuelleAufgabe[1])+") = "+aktuelleAufgabe[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> &#8901; "+aktuelleAufgabe[3]+" mol = "+aktuelleAufgabe[4]+" g<br>"
+                HilfeText += "<br><br> Versuche dein Wissen bei einer neue Aufgabe!";
+                document.getElementById("Eingabefeld").value = aktuelleAufgabe[4];
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 1){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText = "<h2>Hilfe (1 von 5)</h2>Überlege dir, wie die Summenformel von "+aktuelleAufgabe[0]+" lautet und bestimme dann die molare Masse von "+aktuelleAufgabe[0]+".";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText = "<h2>Hilfe (2 von 5)</h2><br> Die Summenformel von "+aktuelleAufgabe[0]+" lautet "+SchöneSummenformel(aktuelleAufgabe[1])+". Bestimme jetzt die molare Masse von "+aktuelleAufgabe[0]+".";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                bilderEinfüger(formelZerstückler(aktuelleAufgabe[1]));
+            }
+            if (HilfeCounter > 2){
+                HilfeText = "<h2>Hilfe (3 von 5)</h2>Die molare Masse berechnest Du folgendermaßen: <br> Du sucht die Anzahl der Atome in der Summenformel und multiplizierst diese mit der gerundeten Massezahl. Zum Schluss addierst du all diese Produkte. <br><br> M(";
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") +";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> +";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-1)
+
+                HilfeText += "<br><br> Probiere es nochmal.";
+            }
+            if (HilfeCounter > 3){
+                HilfeText = "<h2>Hilfe (4 von 5)</h2>Die molare Masse beträgt:<br> M(";  
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") +";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> +";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-1)
+                HilfeText += "= "+aktuelleAufgabe[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math>";
+                HilfeText += "<br><br> Überlege dir, wie du jetzt die Stoffmenge mithilfe der Molaren Masse und der Masse bestimmst.";
+            }
+            if (HilfeCounter > 4){
+                HilfeText = "<h2>Hilfe (5 von 5)</h2>Du berechnest die Stoffmenge als Quotient der Masse m und der molaren Masse M. <br>"
+                HilfeText += "n("+SchöneSummenformel(aktuelleAufgabe[1])+") = <math><mfrac><mn><span>m("+aktuelleAufgabe[0]+")</span></mn><mn><span>M("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math> = <math><mfrac><mn>"+AusgabeMitKomma(aktuelleAufgabe[4]) +" g</mn><mrow><mo>"+aktuelleAufgabe[2]+"</mo><mfrac><mn>g</mn><mn>mol</mn></mfrac> </math> "
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+            }
+            if (HilfeCounter > 5){
+                HilfeText = "<h2>Lösung</h2>Die Lösung steht im Eingabe Feld. Der Rechenweg ist folgender:<br>";
+                HilfeText += "n("+SchöneSummenformel(aktuelleAufgabe[1])+") = <math><mfrac><mn><span>m("+aktuelleAufgabe[0]+")</span></mn><mn><span>M("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math> = <math><mfrac><mn>"+AusgabeMitKomma(aktuelleAufgabe[4]) +" g</mn><mrow><mo>"+aktuelleAufgabe[2]+"</mo><mfrac><mn>g</mn><mn>mol</mn></mfrac> </math>  = "+aktuelleAufgabe[3]+" mol<br>"
+                HilfeText += "<br><br> Versuche dein Wissen bei einer neue Aufgabe!";
+                document.getElementById("Eingabefeld").value = aktuelleAufgabe[3];
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 2){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText = "<h2>Hilfe (1 von 3)</h2>Überlege dir, wie man die molare Masse M eines Stoffes mithilfe der Stoffmenge n und der Masse m berechnen kann."
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+            }
+            if (HilfeCounter > 1){
+                HilfeText = "<h2>Hilfe (2 von 3)</h2><br> Die molare Masse kannst du berechnen, indem du die Masse m durch die Stoffmenge n teilst. <br><br>"
+                HilfeText += "M(Elementsymbol) = <math><mfrac><mn>m(Stoffportion)</mn><mn>n(Elementsymbol)</mn></mfrac></math>."
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+            }
+            if (HilfeCounter > 2){
+                HilfeText = "<h2>Hilfe (3 von 3)</h2>Die molare Masse beträgt "+ElementSymbol[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> <br><br>";
+                HilfeText += "M(Elementsymbol) = <math><mfrac><mn>m(Stoffportion)</mn><mn>n(Elementsymbol)</mn></mfrac></math> = <math><mfrac><mn>"+ElementSymbol[5]+" g</mn><mn>"+ElementSymbol[4]+" mol</mn></mfrac></math> = "+ElementSymbol[2]+"<math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math>";
+                HilfeText += "<br><br> Überlege dir, wie du das einatomige Element mithilfe des Periodensystems hierzu findest.";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+            }
+
+
+            if (HilfeCounter > 3){
+                HilfeText = "<h2>Lösung</h2>Die Lösung steht im Eingabe Feld. Du vergleichst nun die molare Masse ("+ElementSymbol[2]+")  <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> mit der verschiedener Elemente.<br>";
+                HilfeText += "<br><br> Versuche dein Wissen bei einer neue Aufgabe!";
+                bilderEinfüger(formelZerstückler(ElementSymbol[1]));
+                document.getElementById("Eingabefeld").value = ElementSymbol[1];
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        document.getElementById("Hilfestellung").innerHTML = HilfeText;
+    }
+
+    function molareMasseRechner(summenArray){
+            var molareMasse = 0;
+            for (i=0; i<summenArray.length;i++){
+                molareMasse += summenArray[i][1]*summenArray[i][3];
+            }
+            return molareMasse;
+        }
+
+        function SummenformelArray(summenFormel){
+            let Ergebnis = summenFormel.split(/(?=[A-Z])/);
+            var summenArray = [];
+            for (i=0;i<Ergebnis.length;i++){
+                let Element = Ergebnis[i].match(/[a-z]+/gi);
+                let Zahl;
+                if (Ergebnis[i].match(/\d+/g) == null){
+                    Zahl = [1,0];
+                } else {
+                    Zahl = Ergebnis[i].match(/\d+/g);
+                }
+                summenArray[i] = [Element[0], parseInt(Zahl[0])];
+            }
+
+            return summenArray;
+        }
+
+        function SchöneSummenformel(SummenformelText){
+
+            var summenArray = SummenformelArray(SummenformelText);
+            var ausgabeAlsText = "";
+            for (let i=0;i<summenArray.length;i++){
+  
+                    if (Math.abs(summenArray[i][1]) != 1){
+                        ausgabeAlsText += summenArray[i][0]+"<sub>"+summenArray[i][1]+"</sub>"; 
+                    } else {
+                        ausgabeAlsText += summenArray[i][0]; 
+                    }
+                
+            }
+
+  
+            return ausgabeAlsText;
+        
+        }
+
+        function formelZerstückler(summenFormel){
+            var summenArray = SummenformelArray(summenFormel);        
+            const neuesArray = [];
+            for (i=0;i<elementArray.length;i++){
+                neuesArray[i] = elementArray[i][1];
+            }
+            for (i=0; i<summenArray.length;i++){
+                summenArray[i].push(neuesArray.indexOf(summenArray[i][0]));
+                summenArray[i].push(elementArray[summenArray[i][2]][2]);
+                summenArray[i].push(elementArray[summenArray[i][2]][3]);
+            }
+            return (summenArray);
+            
+        }
+
+        function bilderEinfüger(SchonArray){
+            for (i=0; i<SchonArray.length;i++){  
+                          
+                    let img = new Image();
+                    img.className ="image";
+                    img.src = "img/PSE-"+SchonArray[i][0]+".jpg";
+                    img.width = 200;
+                    document.getElementById('Bilder').appendChild(img);
+                    
+                }
+            }
+
+        function AusgabeMitKomma(TextMitPunkt){
+            var OhneKomma = "";
+            OhneKomma += TextMitPunkt;
+            OhneKomma = OhneKomma.replace(/\./, ",");
+            return OhneKomma;
+        }
+
+        function KoeffizientenVerkleinernSummenformel(meineVariable){
+            meineVariable = meineVariable.replace("^1", "¹");
+            meineVariable = meineVariable.replace("^2", "²");
+            meineVariable = meineVariable.replace("^3", "³");
+            meineVariable = meineVariable.replace("^4", "⁴");
+            meineVariable = meineVariable.replace("^5", "⁵");
+            meineVariable = meineVariable.replace("^6", "⁶");
+            meineVariable = meineVariable.replace("^7", "⁷");
+            meineVariable = meineVariable.replace("^8", "⁸");
+            meineVariable = meineVariable.replace("^9", "⁹");
+            meineVariable = meineVariable.replace("^0", "⁰");
+            meineVariable = meineVariable.replace("1", "₁");
+            meineVariable = meineVariable.replace("2", "₂");
+            meineVariable = meineVariable.replace("3", "₃");
+            meineVariable = meineVariable.replace("4", "₄");
+            meineVariable = meineVariable.replace("5", "₅");
+            meineVariable = meineVariable.replace("6", "₆");
+            meineVariable = meineVariable.replace("7", "₇");
+            meineVariable = meineVariable.replace("8", "₈");
+            meineVariable = meineVariable.replace("9", "₉");
+            meineVariable = meineVariable.replace("0", "₀");
+            meineVariable = meineVariable.replace("+", "⁺");
+            meineVariable = meineVariable.replace("-", "⁻");
+            return meineVariable;
+        }
+
+</script>
+
+</body>
+<footer>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+</footer>
+</html>
