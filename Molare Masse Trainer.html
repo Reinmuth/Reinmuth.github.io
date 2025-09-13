@@ -217,7 +217,7 @@
         aufgabenArray.push(["Kohlenstoffdioxid","CO2"]);
 
     var aufgabenTyp = Math.floor(Math.random()*3);
-    var aufgabenTyp = 2;
+
     var zahl;
     zahl= Math.floor(Math.random()*aufgabenArray.length);
     
@@ -245,7 +245,10 @@
             document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> mol'
         }
         if (aufgabenTyp == 2){ 
-            document.getElementById("Aufgabenstellung").innerHTML = ElementSymbol[4]+" mol eines einatomigen Elements haben eine Masse von "+ElementSymbol[5]+" g. <br> Gib das Elementsymbol an.";
+            let ausgeben = "";
+            ausgeben = ElementSymbol[4]+"";
+            ausgeben = ausgeben.replace(/\./, ",");
+            document.getElementById("Aufgabenstellung").innerHTML = ausgeben+" mol eines einatomigen Elements haben eine Masse von "+ElementSymbol[5]+" g. <br> Gib das Elementsymbol an.";
             document.getElementById("Antwort").innerHTML = 'Elementsymbol: <input class="small" id="Eingabefeld">'
         }
 
@@ -446,7 +449,7 @@
             }
             if (HilfeCounter > 1){
                 HilfeText = "<h2>Hilfe (2 von 3)</h2><br> Die molare Masse kannst du berechnen, indem du die Masse m durch die Stoffmenge n teilst. <br><br>"
-                HilfeText += "M(Elementsymbol) = <math><mfrac><mn>m(Stoffportion)</mn><mn>n(Elementsymbol)</mn></mfrac></math>."
+                HilfeText += "M(Elementsymbol) = <math><mfrac><mn>m(Stoffportion)</mn><mn>n(Elementsymbol)</mn></mfrac></math>"
                 document.getElementById("HilfeButton").value = "weitere Hilfe";
             }
             if (HilfeCounter > 2){
@@ -458,7 +461,7 @@
 
 
             if (HilfeCounter > 3){
-                HilfeText = "<h2>Lösung</h2>Die Lösung steht im Eingabe Feld. Du vergleichst nun die molare Masse ("+ElementSymbol[2]+")  <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> mit der verschiedener Elemente.<br>";
+                HilfeText = "<h2>Lösung</h2>Die Lösung steht im Eingabe Feld. Du vergleichst nun die molare Masse ("+ElementSymbol[2]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math>) mit der verschiedener Elemente.<br>";
                 HilfeText += "<br><br> Versuche dein Wissen bei einer neue Aufgabe!";
                 bilderEinfüger(formelZerstückler(ElementSymbol[1]));
                 document.getElementById("Eingabefeld").value = ElementSymbol[1];
