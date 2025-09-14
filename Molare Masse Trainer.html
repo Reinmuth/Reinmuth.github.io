@@ -251,21 +251,25 @@
 
     function Start(aufgabenTyp){
         if (aufgabenTyp == 0){ 
-            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Masse m von "+aktuelleAufgabe[3]+" mol "+aktuelleAufgabe[0]+".";
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Masse m von "+AusgabeMitKomma(aktuelleAufgabe[3])+" mol "+aktuelleAufgabe[0]+".";
             document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> g'
         }
         if (aufgabenTyp == 1){ 
-            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Stoffmenge n von "+aktuelleAufgabe[4]+" g "+aktuelleAufgabe[0]+".";
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Stoffmenge n von "+AusgabeMitKomma(aktuelleAufgabe[4])+" g "+aktuelleAufgabe[0]+".";
             document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> mol'
         }
         if (aufgabenTyp == 2){ 
-            let ausgeben = "";
-            ausgeben = ElementSymbol[4]+"";
-            ausgeben = ausgeben.replace(/\./, ",");
-            document.getElementById("Aufgabenstellung").innerHTML = ausgeben+" mol eines einatomigen Elements haben eine Masse von "+ElementSymbol[5]+" g. <br> Gib das Elementsymbol an.";
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(ElementSymbol[4])+" mol eines einatomigen Elements haben eine Masse von "+AusgabeMitKomma(ElementSymbol[5])+" g. <br> Gib das Elementsymbol an.";
             document.getElementById("Antwort").innerHTML = 'Elementsymbol: <input class="small" id="Eingabefeld">'
         }
 
+    }
+
+    function AusgabeMitKomma(text){
+        let ausgeben = "";
+        ausgeben = text+"";
+        ausgeben = ausgeben.replace(/\./, ",");
+        return ausgeben;
     }
 
     function Überprüfen(){
