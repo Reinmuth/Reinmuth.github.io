@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schalenmodell erstellen</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: #f7f7f8;
+    }
+    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(10,10,10,0.06);
+      text-align: center;
+    }
+    svg { display: block; }
+    .circle-button {
+      cursor: pointer;
+      transition: transform 120ms ease;
+      outline: none;
+    }
+    .circle-button:active { transform: scale(0.98); }
+    .hint { margin-top: 12px; color: #555; font-size: 14px; }
+    input { width: 160px;font-size:20px; text-align: center;}
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+
+
+  </style>
+</head>
+<body style="    flex-direction: column;    align-items: stretch;">
+    <h2 style="top: 20px;text-align: center;">Schalenmodell Übungen</h2>
+    <div  id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+    <div>
+      <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld"></h3>
+      <p style="text-align: center;"><input id="PruefButton" type="button" value="Prüfen" onclick="Prüfen()"></p>
+      <p id="RückmeldungsFeld" style="text-align: center;"></p>
+  <div style="    display: flex;   justify-content: center;" class="card" id="großesDiv"><svg width="800" height="600" viewBox="0 0 800 600" role="img">
+
+    
+
+  </svg>
+ 
+</div>
+
+</div>
+  <script>
+    var ElektronenArray = [];
+    for (let i = 0; i<18; i++){
+      ElektronenArray[i]=0;
+      }
+    var ElektronenZufall = Math.floor(Math.random()*17+1)
+
+    var meinArray = [];
+        meinArray.push([0,"Elementsymbol","Masse","PSE-Bild.jpg"]);
+            meinArray.push([1,"H",1,"Wasserstoff"]);
+            meinArray.push([2,"He",4,"Helium"]);
+            meinArray.push([3,"Li",7,"Lithium"]);
+            meinArray.push([4,"Be",9,"Beryllium"]);
+            meinArray.push([5,"B",11,"Bor"]);
+            meinArray.push([6,"C",12,"Kohlenstoff"]);
+            meinArray.push([7,"N",14,"Stickstoff"]);
+            meinArray.push([8,"O",16,"Sauerstoff"]);
+            meinArray.push([9,"F",19,"Fluor"]);
+            meinArray.push([10,"Ne",20,"Neon"]);
+            meinArray.push([11,"Na",23,"Natrium"]);
+            meinArray.push([12,"Mg",24,"Magnesium"]);
+            meinArray.push([13,"Al",27,"Aluminium"]);
+            meinArray.push([14,"Si",28,"Silizium"]);
+            meinArray.push([15,"P",31,"Phosphor"]);
+            meinArray.push([16,"S",32,"Schwefel"]);
+            meinArray.push([17,"Cl",35,"Chlor"]);
+            meinArray.push([18,"Ar",40,"Argon"]);
+    var Periodensystem = "";
+    var Ausgabe = "";
+    var Versuch = 0;
+    Zeichnen(18);
+
+    function Prüfen(){
+      if (Versuch==1){
+            location.reload();
+        }
+      let Rückmeldung="";
+      let richtig = true;
+      let gesamtZahl = 0;
+      if (ElektronenZufall >2){
+        if ((ElektronenArray[0]==1) && (ElektronenArray[0]==1)){
+          }else{
+            Rückmeldung += "Die innere Schale ist nicht voll!<br>"
+            richtig = false;
+          }
+      }
+      if (ElektronenZufall >10){
+        let mittlereZahl = 0;
+        for (let i=0; i<10;i++){
+          mittlereZahl+= ElektronenArray[i];
+        }
+        if ((mittlereZahl!=10)){
+            Rückmeldung += "Die inneren Schalen sind nicht voll!<br>";
+            richtig = false;
+          }
+      }
+      if (ElektronenZufall <=2){
+        let innereZahl=0;
+        for (let i=0; i<2;i++){
+          innereZahl+= ElektronenArray[i];
+        }
+        if (innereZahl!=ElektronenZufall){
+          richtig = false;
+        }
+      }
+      if (ElektronenZufall <=10){
+        let innereZahlen=0;
+        for (let i=0; i<10;i++){
+          innereZahlen+= ElektronenArray[i];
+        }
+        if (innereZahlen!=ElektronenZufall){
+          richtig = false;
+          Rückmeldung += "Leider falsch! Die inneren Schalen zuerst befüllen!<br>"
+        }
+      }
+      for (let i=0; i<18;i++){
+        gesamtZahl+= ElektronenArray[i];
+        }
+        console.log(gesamtZahl,ElektronenZufall);
+      if (gesamtZahl!=ElektronenZufall){
+        richtig = false;
+        Rückmeldung = "Die Gesamtzahl stimmt nicht!<br>"
+      }
+      if (richtig==true){
+        Rückmeldung = "Super, alles richtig!"
+        document.getElementById("PruefButton").style.backgroundColor ="green";
+        document.getElementById("PruefButton").value="Neue Aufgabe"; 
+        Versuch =1;
+      } else {
+        document.getElementById("PruefButton").style.backgroundColor ="red";
+      }
+      console.table(ElektronenArray);
+      document.getElementById("RückmeldungsFeld").innerHTML = Rückmeldung; 
+        
+    }
+
+
+    function Zeichnen(Elektronen){
+    let Aufgabenstellung = "";
+    Aufgabenstellung = "Erstelle durch anklicken ein Schalenmodell eines "+meinArray[ElektronenZufall][3]+"-Atoms.";
+
+    document.getElementById("AufgabenstellungsFeld").innerHTML = Aufgabenstellung;
+     Ausgabe = ' <svg width="800" height="500" viewBox="0 0 800 500" role="img">';
+
+
+    if (Elektronen > 10){
+        Ausgabe +=`        <circle cx="400" cy="220" r="215" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="215" fill="#FFFF00" opacity="0.5" stroke="#000000" stroke-width="4"></circle>`; 
+    }
+    if (Elektronen > 2){
+        Ausgabe +=`        <circle cx="400" cy="220" r="145" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="145" fill="#A0FFFF" opacity="0.5" stroke="#000000" stroke-width="4"></circle>`; 
+    } 
+    
+        Ausgabe +=`        <circle cx="400" cy="220" r="75" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="75" fill="#0000FF" opacity="0.5" stroke="#000000" stroke-width="4"></circle>   `; 
+        Ausgabe +=`        <circle cx="400" cy="220" r="5" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="5" fill="#000000" opacity="1" stroke="#000000" stroke-width="4"></circle>   `
+    
+        
+
+
+    if (Elektronen > 10){
+        ersteSchale(2);
+        zweiteSchale(10);
+        dritteSchale(Elektronen);
+    } else if (Elektronen > 2){
+        ersteSchale(2);
+        zweiteSchale(Elektronen);
+    } else {
+        ersteSchale(Elektronen);
+    }
+
+
+
+
+
+    Ausgabe += `
+      </svg>`;
+      
+    document.getElementById("großesDiv").innerHTML = Ausgabe;
+
+    // Nach dem Einfügen Eventlistener hinzufügen
+
+
+    (function () {
+      const red = 'red';
+      const blass = 'red';
+
+      // Alle Kreise durchlaufen
+      for (let i = 0; i < Elektronen; i++) {
+        const btn = document.getElementById('circleButton' + i);
+        const circle = btn.querySelector('circle');
+        const line = btn.querySelector('line');
+        // Klick-Handler für jeden Kreis
+        btn.addEventListener('click', function () {
+          const currentColor = circle.getAttribute('opacity');
+          if (currentColor == 0.15) {
+            circle.setAttribute('opacity', 1);
+            line.setAttribute('opacity', 1);
+            btn.setAttribute('aria-pressed', 'true');
+            ElektronenArray[i]=1;
+          } else {
+            circle.setAttribute('opacity', 0.15);
+            line.setAttribute('opacity', 0.15);
+            btn.setAttribute('aria-pressed', 'false');
+            ElektronenArray[i]=0;
+          }
+        });
+      }
+    })();
+    
+   
+
+}
+    function ersteSchale(Zahl){
+        for (let i = 0; i < Zahl; i++) {
+      let x= 400 + Math.sin(2*Math.PI/Zahl*i) * 40;
+      let y=220 - Math.cos(2*Math.PI/Zahl*i) * 40;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="0.15" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="0.15" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+
+    function zweiteSchale(Zahl){
+        for (let i = 2; i < Zahl; i++) {
+      let x= 400 + Math.cos(2*Math.PI/(Zahl-2)*i) * 110;
+      let y=220 - Math.sin(2*Math.PI/(Zahl-2)*i) * 110;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="0.15" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="0.15" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+
+    function dritteSchale(Zahl){
+        for (let i = 10; i < Zahl; i++) {
+      let x= 400 + Math.sin(2*Math.PI/(Zahl-10)*i) * 180;
+      let y=220 - Math.cos(2*Math.PI/(Zahl-10)*i) * 180;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="0.15" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="0.15" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+  </script>
+</body>
+</html>

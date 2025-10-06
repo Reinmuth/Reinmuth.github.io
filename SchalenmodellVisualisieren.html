@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Schalenmodell zeichnen</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: #f7f7f8;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(10,10,10,0.06);
+      text-align: center;
+    }
+    svg { display: block; }
+    .circle-button {
+      cursor: pointer;
+      transition: transform 120ms ease;
+      outline: none;
+    }
+    .circle-button:active { transform: scale(0.98); }
+    .hint { margin-top: 12px; color: #555; font-size: 14px; }
+    input { width: 110px;font-size:20px; text-align: center;}
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+
+
+
+  </style>
+</head>
+
+   <div  id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+   <div><h2 style="top: 20px;text-align: center;">Schalenmodell zeichnen</h2>  <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld">Klicke auf ein Elementsymbol</h3>
+  <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
+  <div class="card" id="großesDiv"><svg width="800" height="800" viewBox="0 0 800 800" role="img">
+
+    
+
+  </svg>
+</div>
+
+</div>
+  <script>
+    var ElektronenArray = [];
+    
+    var meinArray = [];
+        meinArray.push([0,"Elementsymbol","Masse","PSE-Bild.jpg"]);
+            meinArray.push([1,"H",1,"Wasserstoff"]);
+            meinArray.push([2,"He",4,"Helium"]);
+            meinArray.push([3,"Li",7,"Lithium"]);
+            meinArray.push([4,"Be",9,"Beryllium"]);
+            meinArray.push([5,"B",11,"Bor"]);
+            meinArray.push([6,"C",12,"Kohlenstoff"]);
+            meinArray.push([7,"N",14,"Stickstoff"]);
+            meinArray.push([8,"O",16,"Sauerstoff"]);
+            meinArray.push([9,"F",19,"Fluor"]);
+            meinArray.push([10,"Ne",20,"Neon"]);
+            meinArray.push([11,"Na",23,"Natrium"]);
+            meinArray.push([12,"Mg",24,"Magnesium"]);
+            meinArray.push([13,"Al",27,"Aluminium"]);
+            meinArray.push([14,"Si",28,"Silizium"]);
+            meinArray.push([15,"P",31,"Phosphor"]);
+            meinArray.push([16,"S",32,"Schwefel"]);
+            meinArray.push([17,"Cl",35,"Chlor"]);
+            meinArray.push([18,"Ar",40,"Argon"]);
+    var Periodensystem = "";
+    Periodensystem = `   <svg width="800" height="800" viewBox="0 0 800 800" role="img"> <g class="rect-button" id="rectButton1" role="button" aria-pressed="false">
+        <rect width="95" height="100" x="5" y="410" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2" />
+        <text x="30" y="480" fill="black" font-size="50">H</text>
+      </g>
+      <g class="rect-button" id="rectButton2" role="button" aria-pressed="false">
+        <rect width="95" height="100" x="${5+98*(10-3)}" y="410" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2"/>
+        <text x="710" y="480" fill="black" font-size="50">He</text>
+      </g>;
+    `;
+    for (let i = 3; i<11; i++){
+      Periodensystem += `   <g class="rect-button" id="rectButton${i}" role="button" aria-pressed="false">
+        <rect width="95" height="100" x="${5+98*(i-3)}" y="513" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2" />
+        <text x="${47+98*(i-3)-10*meinArray[i][1].length}" y="580" fill="black" font-size="50">`+meinArray[i][1]+`</text>
+      </g>`;
+    }
+    for (let i = 11; i<19; i++){
+      Periodensystem += `   <g class="rect-button" id="rectButton${i}" role="button" aria-pressed="false">
+        <rect width="95" height="100" x="${5+98*(i-11)}" y="616" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2" />
+        <text x="${45+98*(i-11)-10*meinArray[i][1].length}" y="683" fill="black" font-size="50">`+meinArray[i][1]+`</text>
+      </g>`;
+    }
+    document.getElementById("großesDiv").innerHTML = Periodensystem;
+
+
+    (function () {
+      const blue = '#007bff';
+      const green = '#28a745';
+      for (let j = 1; j < 19; j++) {
+        const btn = document.getElementById('rectButton'+j);
+        const rect = btn.querySelector('rect');
+
+        // Klick-Handler für jeden Kreis
+        btn.addEventListener('click', function () {
+          const currentColor = rect.getAttribute('fill');
+          if (currentColor === green) {
+            rect.setAttribute('fill', blue);
+            btn.setAttribute('aria-pressed', 'true');
+
+          } else {
+            rect.setAttribute('fill', green);
+            btn.setAttribute('aria-pressed', 'false');
+            Zeichnen(j);
+          }
+        });
+      }
+    })();
+    var Ausgabe = "";
+    
+    function ZeichnenAusFeld(){
+        Zeichnen(document.getElementById("ElektronenFeld").value)
+    }
+
+
+    function Zeichnen(Elektronen){
+    let Aufgabenstellung = "";
+    Aufgabenstellung = "Das gezeigte Schalenmodell gehört zu einem "+meinArray[Elektronen][3]+"-Atom.";
+
+    document.getElementById("AufgabenstellungsFeld").innerHTML = Aufgabenstellung;
+     Ausgabe = "";
+     Ausgabe = Periodensystem;
+
+    if (Elektronen > 10){
+        Ausgabe +=`        <circle cx="400" cy="220" r="215" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="215" fill="#FFFF00" opacity="0.5" stroke="#000000" stroke-width="4"></circle>`; 
+    }
+    if (Elektronen > 2){
+        Ausgabe +=`        <circle cx="400" cy="220" r="145" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="145" fill="#A0FFFF" opacity="0.5" stroke="#000000" stroke-width="4"></circle>`; 
+    } 
+    
+        Ausgabe +=`        <circle cx="400" cy="220" r="75" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="75" fill="#0000FF" opacity="0.5" stroke="#000000" stroke-width="4"></circle>   `; 
+        Ausgabe +=`        <circle cx="400" cy="220" r="5" fill="#FFFFFF" opacity="1" stroke="#000000" stroke-width="4"></circle>
+        <circle cx="400" cy="220" r="5" fill="#000000" opacity="1" stroke="#000000" stroke-width="4"></circle>   `
+    
+        
+
+
+    if (Elektronen > 10){
+        ersteSchale(2);
+        zweiteSchale(10);
+        dritteSchale(Elektronen);
+    } else if (Elektronen > 2){
+        ersteSchale(2);
+        zweiteSchale(Elektronen);
+    } else {
+        ersteSchale(Elektronen);
+    }
+
+
+
+
+
+    Ausgabe += `
+      </svg>`;
+      
+    document.getElementById("großesDiv").innerHTML = Ausgabe;
+    if (Elektronen != 0){
+      let btn = document.getElementById('rectButton'+Elektronen);
+      let rect = btn.querySelector('rect');
+      rect.setAttribute('fill', "yellow");
+    }
+    // Nach dem Einfügen Eventlistener hinzufügen
+
+
+
+    
+    (function () {
+      const red = 'red';
+      const blass = 'red';
+
+      // Alle Kreise durchlaufen
+      for (let i = 0; i < Elektronen; i++) {
+        const btn = document.getElementById('circleButton' + i);
+        const circle = btn.querySelector('circle');
+        const line = btn.querySelector('line');
+        // Klick-Handler für jeden Kreis
+        btn.addEventListener('click', function () {
+          const currentColor = circle.getAttribute('opacity');
+          if (currentColor == 0.15) {
+            circle.setAttribute('opacity', 1);
+            line.setAttribute('opacity', 1);
+            btn.setAttribute('aria-pressed', 'true');
+          } else {
+            circle.setAttribute('opacity', 0.15);
+            line.setAttribute('opacity', 0.15);
+            btn.setAttribute('aria-pressed', 'false');
+          }
+        });
+      }
+    })();
+    (function () {
+      const blue = '#007bff';
+      const green = '#28a745';
+      for (let j = 1; j < 19; j++) {
+        const btn = document.getElementById('rectButton'+j);
+        const rect = btn.querySelector('rect');
+
+        // Klick-Handler für jeden Kreis
+        btn.addEventListener('click', function () {
+          const currentColor = rect.getAttribute('fill');
+          if (currentColor === green) {
+            rect.setAttribute('fill', blue);
+            btn.setAttribute('aria-pressed', 'true');
+
+          } else {
+            rect.setAttribute('fill', green);
+            btn.setAttribute('aria-pressed', 'false');
+            Zeichnen(j);
+          }
+        });
+      }
+    })();
+}
+    function ersteSchale(Zahl){
+        for (let i = 0; i < Zahl; i++) {
+      let x= 400 + Math.sin(2*Math.PI/Zahl*i) * 40;
+      let y=220 - Math.cos(2*Math.PI/Zahl*i) * 40;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="1" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="1" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+
+    function zweiteSchale(Zahl){
+        for (let i = 2; i < Zahl; i++) {
+      let x= 400 + Math.cos(2*Math.PI/(Zahl-2)*i) * 110;
+      let y=220 - Math.sin(2*Math.PI/(Zahl-2)*i) * 110;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="1" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="1" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+
+    function dritteSchale(Zahl){
+        for (let i = 10; i < Zahl; i++) {
+      let x= 400 + Math.sin(2*Math.PI/(Zahl-10)*i) * 180;
+      let y=220 - Math.cos(2*Math.PI/(Zahl-10)*i) * 180;
+
+      Ausgabe += `
+        <g class="circle-button" id="circleButton${i}" role="button" aria-pressed="false">
+          <circle cx="${x}" cy="${y}" r="25" fill="red" opacity="1" stroke="#000000" stroke-width="4"></circle>
+          <line x1="${x-10}" y1="${y}" x2="${x+10}" y2="${y}" opacity="1" style="stroke:black;stroke-width:4" />
+        </g>`;
+    }
+    }
+  </script>
+</body>
+</html>

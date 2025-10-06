@@ -61,6 +61,12 @@
         <div class="Bildchen" onclick="Wertigkeitstrainer()" style="display:flex; height: 10vh; background-color: red; width: 92vw;justify-content: center;align-content: center; margin: 2vb;"> <h2 style="text-align: center; margin:auto; font-size: 3vw;">Wertigkeitstrainer</h2></div>
         <div class="Bildchen" onclick="MolareMasseTrainer()" style="display:flex; height: 10vh; background-color: red; width: 92vw;justify-content: center;align-content: center; margin: 2vb;"> <h2 style="text-align: center; margin:auto; font-size: 3vw;">Molare Masse Trainer</h2></div>
     </div>      
+    <div style="display: flex;flex-direction: row;justify-content: space-around;margin: auto;">
+        <div class="Bildchen" onclick="SchalenmodellVisualisieren()" style="height: 10vh; background-color: red; width: 33vw;margin: 3%;margin-top: 0;"> <h2>Schalenmodell der verschiedenen Elemente</h2></div>
+        <div class="Bildchen" onclick="SchalenmodellZuordnen()" style="height: 10vh; background-color: blue; width: 33vw;margin: 3%;margin-top: 0;"> <h2>Schalenmodell<br>zuordnen</h2> </div>
+        <div class="Bildchen" onclick="SchalenmodellErstellen()" style="position: relative; display: inline-block; height: 10vh; background-color: red; width: 33vw;margin: 3%;margin-top: 0;"> <h2>Schalenmodell<br>erstellen</h2> </div>
+        
+    </div>
     <script>
         function Klasse8(){
             window.location = "Stöchiometrietrainer8.html";
@@ -84,6 +90,15 @@
             document.getElementById("RedoxFeld").setAttribute("style","height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 12vh; align-items: center; display:block;");
             document.getElementById("SäureBaseFeld").setAttribute("style","height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 30vh; align-items: center;display:block;");
 
+        }
+        function SchalenmodellZuordnen(){
+            window.location = "SchalenmodellZuordnen.html";
+        }
+        function SchalenmodellVisualisieren(){
+            window.location = "SchalenmodellVisualisieren.html";
+        }
+        function SchalenmodellErstellen(){
+            window.location = "SchalenmodellErstellen.html";
         }
     </script>
 </body>
