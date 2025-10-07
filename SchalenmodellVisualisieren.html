@@ -20,6 +20,8 @@
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(10,10,10,0.06);
       text-align: center;
+      width: 60vw;
+      height: 60vh;
     }
     svg { display: block; }
     .circle-button {
@@ -42,7 +44,7 @@
    <div  id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
    <div><h2 style="top: 20px;text-align: center;">Schalenmodell zeichnen</h2>  <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld">Klicke auf ein Elementsymbol</h3>
   <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
-  <div class="card" id="großesDiv"><svg width="800" height="800" viewBox="0 0 800 800" role="img">
+  <div class="card" id="großesDiv"><svg viewBox="0 0 800 800" role="img">
 
     
 
@@ -74,7 +76,7 @@
             meinArray.push([17,"Cl",35,"Chlor"]);
             meinArray.push([18,"Ar",40,"Argon"]);
     var Periodensystem = "";
-    Periodensystem = `   <svg width="800" height="800" viewBox="0 0 800 800" role="img"> <g class="rect-button" id="rectButton1" role="button" aria-pressed="false">
+    Periodensystem = `   <svg viewBox="0 0 800 800" role="img"> <g class="rect-button" id="rectButton1" role="button" aria-pressed="false">
         <rect width="95" height="100" x="5" y="410" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2" />
         <text x="30" y="480" fill="black" font-size="50">H</text>
       </g>
