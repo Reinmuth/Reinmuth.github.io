@@ -183,30 +183,7 @@
 
 
     
-    (function () {
-      const red = 'red';
-      const blass = 'red';
 
-      // Alle Kreise durchlaufen
-      for (let i = 0; i < Elektronen; i++) {
-        const btn = document.getElementById('circleButton' + i);
-        const circle = btn.querySelector('circle');
-        const line = btn.querySelector('line');
-        // Klick-Handler für jeden Kreis
-        btn.addEventListener('click', function () {
-          const currentColor = circle.getAttribute('opacity');
-          if (currentColor == 0.15) {
-            circle.setAttribute('opacity', 1);
-            line.setAttribute('opacity', 1);
-            btn.setAttribute('aria-pressed', 'true');
-          } else {
-            circle.setAttribute('opacity', 0.15);
-            line.setAttribute('opacity', 0.15);
-            btn.setAttribute('aria-pressed', 'false');
-          }
-        });
-      }
-    })();
     (function () {
       const blue = '#007bff';
       const green = '#28a745';
