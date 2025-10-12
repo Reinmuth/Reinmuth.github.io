@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Schalenmodell erkennen</title>
+  <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
   <style>
     body {
       display: flex;
@@ -47,6 +48,7 @@
       <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld"></h3>
       <p style="text-align: center;"><input id="AntwortFeld" placeholder="Elementsymbol"><input id="PruefButton" type="button" value="Prüfen" onclick="Prüfen()"></p>
       <p id="RückmeldungsFeld" style="text-align: center;"></p>
+      <p style="text-align: center;" id="Hilfe"></p>
   <div style="    display: flex;   justify-content: center;" class="card" id="großesDiv"><svg width="800" height="600" viewBox="0 0 800 600" role="img">
 
     
@@ -97,10 +99,30 @@
             document.getElementById("RückmeldungsFeld").innerHTML = "Das stimmt leider nicht. Das Schalenmodell zeigt ein "+meinArray[ElektronenZufall][3]+"-Atom."; 
             document.getElementById("AntwortFeld").style.backgroundColor ="red";
             document.getElementById("PruefButton").value="Neue Aufgabe"; 
+            document.getElementById("Hilfe").innerHTML="<input id='erklärungButton' type='button' value='Erklärung' onclick='Erklärung()'>";
         }
         Versuch =1;
     }
 
+    function Erklärung(){
+      let ErklärText = "";
+      ErklärText = "Es gibt verschiedene zusammenhänge zwischen den Informationen des Periodensystems und denen des Atomaufbaus, die im Schalenmodell dargestellt werden: <h1>1. Gesamtelektronenzahl</h1><br>";
+      ErklärText += "Die Gesamtanzahl an Elektronen entspricht der Ordnungszahl der Elemente. Diese findest du links oben auf der Elementkachel. <br> <p id='Bilder'></p><br>";
+      if(meinArray[ElektronenZufall][0] != 1){
+        ErklärText += "Es müssen hier also "+meinArray[ElektronenZufall][0]+" Elektronen dargestellt werden. <br>";
+      } else {
+        ErklärText += "Es muss hier also nur "+meinArray[ElektronenZufall][0]+" Elektron dargestellt werden. <br>";
+      }
+      let img = new Image();
+      img.className ="image";
+      img.src = "img/PSE-"+meinArray[ElektronenZufall][1]+".jpg";
+      img.width = 200;
+      ErklärText += "Die verschiedenen Schalen werden dann von innen nach außer aufgefüllt. <br> Die <span style='font-weight:bold;color: #7e7eff'>erste (innerste) Schale</span> kann höchstens zwei, die <span style='font-weight:bold;color: #afCfCf'> zweite Schale</span> höchstens acht und die <span style='font-weight:bold;color: #cfcf4e'>dritte Schale</span> ebenfalls höchstens acht Elektronen aufnehmen.";
+      ErklärText += "<h1>2. Stellung im Periodensystem</h1>";
+      ErklärText += "Die Anzahl der Schalen gibt die Periodennummer/Zeilennummer des Elements im Periodensystem an.<br>Die Anzahl der Elektronen der äußersten Schale entspricht der Hauptgruppennummer des Elements im Periodensystem.";
+      document.getElementById("Hilfe").innerHTML=ErklärText;
+      document.getElementById("Bilder").appendChild(img);
+    }
 
     function Zeichnen(Elektronen){
     let Aufgabenstellung = "";
