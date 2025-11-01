@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <title>Stoffmengenkonzentration Trainer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:180px; font-size:20px; text-align: center;}
+        
+        .small{ width:50px; font-size:20px; text-align: center;}
+        .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+        .ElementTabelle td{ border-color: black;border: 1px solid; padding-top: 0px;}
+        .ElementTabelle tr{ border-color: black;border: 1px solid;}
+        td{ white-space: nowrap; padding-top: 15px;}
+        li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+        .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+        .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+        input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+        body{background-color: rgba(193, 247, 239, 0.336);}
+        #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+        h2{ font-size: 40px;}
+        footer {  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        nav > input{
+                display: none;
+            }
+    
+            ul{
+                display: none;
+                margin: 0;
+                padding: 5px;
+            }
+            input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+            nav li{display:flex;
+                margin-right: 0px;
+                padding:0px;
+                border: 0;
+                border-radius: 0px;
+            }
+            .OC td{
+            border: 1px solid;
+            border-collapse: collapse;
+          }
+          .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+          .Infos{
+            width: auto;
+          }
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+          div label input {margin-right: 100px;}
+          .container{width: 250px; height: 38px; margin: 100px auto;}
+    
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+    
+    .cat label {
+      float: left; line-height: 3.0em;
+      width: 13.0em; height: 3.0em;
+    }
+    
+    .cat label span {
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+    }
+    
+    .cat label input {
+      position: absolute;
+      display: none;
+      color: #fff !important;
+    }
+    /* selects all of the text within the input element and changes the color of the text */
+    .cat label input + span{color: #fff;}
+    
+    
+    /* This will declare how a selected input will look giving generic properties */
+    .cat input:checked + span {
+        background-color: #82D44E;
+        color: #ffffff;
+        text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+    }
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+            </style>
+    
+    
+</head>
+<body>
+    <h2 style="text-align: center;">Stoffmengenkonzentration Trainer</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+<nav class="dropdown" style="position: absolute;right: 2%; top: 2%;"> 
+        <input type="checkbox" id="checkbox_toggle" onclick="MenüAnzeigen()">
+        <label style="margin-left: 85%;margin-right: 13em;"  for="checkbox_toggle"><img src="img/menu.png" width="30px" alt="toggle menue"/></label>
+        <ul id="ListenMenü" style="background-color: darkcyan;">
+        <li><div class="cat null">
+                <label>
+                   <input id="Ausw0" type="checkbox" checked value="1"><span>gesucht: c gegeben: n, V</span>
+                </label>
+             </div></li>
+        <li><div class="cat eins">
+            <label>
+               <input id="Ausw1" type="checkbox" checked value="1"><span>gesucht: n gegeben: c, V</span>
+            </label>
+         </div></li>
+        <li><div class="cat zwei">
+            <label>
+               <input id="Ausw2" type="checkbox" checked value="1"><span>gesucht: V gegeben: n, c</span>
+            </label>
+         </div></li>
+        <li><div class="cat drei">
+            <label>
+               <input id="Ausw3" type="checkbox"  value="0"><span>gesucht: c<sub>1</sub> gegeben: V<sub>1</sub>, V<sub>2</sub>, c<sub>2</sub></span>
+            </label>
+         </div></li>
+        <li><div class="cat vier">
+            <label>
+               <input id="Ausw4" type="checkbox"  value="0"><span>gesucht: V<sub>1</sub> gegeben: c<sub>1</sub>, V<sub>2</sub>, c<sub>2</sub></span>
+            </label>
+         </div></li>
+        <li><div class="cat fünf">
+            <label>
+               <input id="Ausw5" type="checkbox"  value="0"><span>gesucht: &Delta;V gegeben: m, c</span>
+            </label>
+         </div></li>
+        <li><div class="cat sechs">
+            <label>
+               <input id="Ausw6" type="checkbox"  value="0"><span>gesucht: c gegeben: m, V</span>
+            </label>
+         </div></li>
+        <li>  <div class="cat sieben">
+            <label>
+               <input id="Ausw7" type="checkbox"  value="0"><span>gesucht: V gegeben: m, c</span>
+            </label>
+         </div></li>
+                 <li>  <div class="cat acht">
+            <label>
+               <input id="Ausw8" type="checkbox"  value="0"><span>gesucht: m gegeben: c, V</span>
+            </label>
+         </div></li>
+        <li><div class="cat Auswahl">
+            <label>
+               <input type="button" onclick="Abwählaktion()"><span>Alles ab-/anwählen</span>
+            </label>
+         </div></li>        
+         <li><div class="cat Speichern">
+            <label>
+               <input type="button" onclick="Speichern()"><span>Zurück</span>
+            </label>
+         </div></li>
+        </ul>
+        </nav>
+     
+ 
+ 
+    <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3><button value="Neuladen" onclick=Aufgabenstart();><img src="img/refresh.png" width="25px"></button></div>
+
+    <div style="text-align: center; box-sizing: border-box;">
+        <p id="Antwort"></p>
+
+        <input type="button" value="Überprüfen" onclick=Überprüfen() id="PruefButton"> &emsp; <input type="button" id="HilfeButton" value="Hilfe" onclick=Hilfe()>
+
+        <p id="AntwortSatz"></p>
+        
+        <div style="align-items: center; font-size: 20px;"><p id="Hilfestellung"></p></div>
+        
+        <div id="Bilder">
+            
+        </div>
+
+    </div>
+
+<script>
+
+    var elementArray = [];
+        elementArray.push([0,"Elementsymbol","Masse","PSE-Bild.jpg"]);
+        elementArray.push([1,"H",1,"PSE-H.jpg"]);
+        elementArray.push([2,"He",4,"PSE-He.jpg"]);
+        elementArray.push([3,"Li",7,"PSE-Li.jpg"]);
+        elementArray.push([4,"Be",9,"PSE-Be.jpg"]);
+        elementArray.push([5,"B",11,"PSE-B.jpg"]);
+        elementArray.push([6,"C",12,"PSE-C.jpg"]);
+        elementArray.push([7,"N",14,"PSE-N.jpg"]);
+        elementArray.push([8,"O",16,"PSE-O.jpg"]);
+        elementArray.push([9,"F",19,"PSE-F.jpg"]);
+        elementArray.push([10,"Ne",20,"PSE-Ne.jpg"]);
+        elementArray.push([11,"Na",23,"PSE-Na.jpg"]);
+        elementArray.push([12,"Mg",24,"PSE-Mg.jpg"]);
+        elementArray.push([13,"Al",27,"PSE-Al.jpg"]);
+        elementArray.push([14,"Si",28,"PSE-Si.jpg"]);
+        elementArray.push([15,"P",31,"PSE-P.jpg"]);
+        elementArray.push([16,"S",32,"PSE-S.jpg"]);
+        elementArray.push([17,"Cl",35,"PSE-Cl.jpg"]);
+        elementArray.push([18,"Ar",40,"PSE-Ar.jpg"]);
+        elementArray.push([19,"K",39,"PSE-K.jpg"]);
+        elementArray.push([20,"Ca",40,"PSE-Ca.jpg"]);
+        elementArray.push([21,"Sc",45,"PSE-Sc.jpg"]);
+        elementArray.push([22,"Ti",48,"PSE-Ti.jpg"]);
+        elementArray.push([23,"V",51,"PSE-V.jpg"]);
+        elementArray.push([24,"Cr",52,"PSE-Cr.jpg"]);
+        elementArray.push([25,"Mn",55,"PSE-Mn.jpg"]);
+        elementArray.push([26,"Fe",56,"PSE-Fe.jpg"]);
+        elementArray.push([27,"Co",59,"PSE-Co.jpg"]);
+        elementArray.push([28,"Ni",59,"PSE-Ni.jpg"]);
+        elementArray.push([29,"Cu",64,"PSE-Cu.jpg"]);
+        elementArray.push([30,"Zn",65,"PSE-Zn.jpg"]);
+        elementArray.push([31,"Ga",70,"PSE-Ga.jpg"]);
+        elementArray.push([32,"Ge",72,"PSE-Ge.jpg"]);
+        elementArray.push([33,"As",75,"PSE-As.jpg"]);
+        elementArray.push([34,"Se",79,"PSE-Se.jpg"]);
+        elementArray.push([35,"Br",80,"PSE-Br.jpg"]);
+        elementArray.push([36,"Kr",84,"PSE-Kr.jpg"]);
+        elementArray.push([37,"Rb",85,"PSE-Rb.jpg"]);
+        elementArray.push([38,"Sr",88,"PSE-Sr.jpg"]);
+        elementArray.push([39,"Y",89,"PSE-Y.jpg"]);
+        elementArray.push([40,"Z",91,"PSE-Z.jpg"]);
+        elementArray.push([41,"Nb",93,"PSE-Nb.jpg"]);
+        elementArray.push([42,"Mo",96,"PSE-Mo.jpg"]);
+        elementArray.push([43,"Tc",98,"PSE-Tc.jpg"]);
+        elementArray.push([44,"Ru",101,"PSE-Ru.jpg"]);
+        elementArray.push([45,"Rh",103,"PSE-Rh.jpg"]);
+        elementArray.push([46,"Pd",106,"PSE-Pd.jpg"]);
+        elementArray.push([47,"Ag",108,"PSE-Ag.jpg"]);
+        elementArray.push([48,"Cd",112,"PSE-Cd.jpg"]);
+        elementArray.push([49,"In",115,"PSE-In.jpg"]);
+        elementArray.push([50,"Sn",119,"PSE-Sn.jpg"]);
+        elementArray.push([51,"Sb",122,"PSE-Sb.jpg"]);
+        elementArray.push([52,"Te",128,"PSE-Te.jpg"]);
+        elementArray.push([53,"I",127,"PSE-I.jpg"]);
+        elementArray.push([54,"Xe",131,"PSE-Xe.jpg"]);
+        elementArray.push([55,"Cs",133,"PSE-Cs.jpg"]);
+        elementArray.push([56,"Ba",137,"PSE-Ba.jpg"]);
+        elementArray.push([57,"La",139,"PSE-La.jpg"]);
+        elementArray.push([72,"Hf",178,"PSE-Hf.jpg"]);
+        elementArray.push([73,"Ta",181,"PSE-Ta.jpg"]);
+        elementArray.push([74,"W",184,"PSE-W.jpg"]);
+        elementArray.push([75,"Re",186,"PSE-Re.jpg"]);
+        elementArray.push([76,"Os",190,"PSE-Os.jpg"]);
+        elementArray.push([77,"Ir",192,"PSE-Ir.jpg"]);
+        elementArray.push([78,"Pt",195,"PSE-Pt.jpg"]);
+        elementArray.push([79,"Au",197,"PSE-Au.jpg"]);
+        elementArray.push([80,"Hg",201,"PSE-Hg.jpg"]);
+        elementArray.push([81,"Tl",204,"PSE-Tl.jpg"]);
+        elementArray.push([82,"Pb",207,"PSE-Pb.jpg"]);
+        elementArray.push([83,"Bi",209,"PSE-Bi.jpg"]);
+        elementArray.push([84,"Po",210,"PSE-Po.jpg"]);
+        elementArray.push([85,"At",210,"PSE-At.jpg"]);
+        elementArray.push([86,"Rn",222,"PSE-Rn.jpg"]);
+        elementArray.push([87,"Fr",223,"PSE-Fr.jpg"]);
+        elementArray.push([88,"Ra",226,"PSE-Ra.jpg"]);
+        elementArray.push([0,"J",0,"PSE-J.jpg"]); 
+    var KategorienArray = new Array(9);
+    var aufgabenArray = [];
+        aufgabenArray.push(["Schwefelsäure","H2SO4"]);
+
+    var guteZahlen = [];
+    guteZahlen.push(2);
+    guteZahlen.push(4);
+    guteZahlen.push(5);
+    guteZahlen.push(10);
+    guteZahlen.push(20);
+    var zahl;
+    var aufgabenAuswahlArray = [0,1,2];
+    var aufgabenTyp;
+    var aktuelleAufgabe = [];
+    var HilfeCounter = 0;
+    Aufgabenstart();
+
+    function Aufgabenstart(){
+        aufgabenTyp = aufgabenAuswahlArray[Math.floor(Math.random()*aufgabenAuswahlArray.length)];
+        document.getElementById("PruefButton").value = "Überprüfen";
+        document.getElementById("PruefButton").setAttribute("onclick","Überprüfen()");
+        document.getElementById("HilfeButton").disabled = false;
+        document.getElementById("HilfeButton").value = "Hilfe anzeigen";
+        zahl= Math.floor(Math.random()*aufgabenArray.length);
+        document.getElementById("Hilfestellung").innerHTML = "";
+        document.getElementById("Bilder").innerHTML = "";
+        document.getElementById("AntwortSatz").innerHTML = "";
+        document.getElementById("Antwort").innerHTML = "";
+        aktuelleAufgabe= aufgabenArray[zahl];
+        aktuelleAufgabe[2]=molareMasseRechner(formelZerstückler(aktuelleAufgabe[1]));
+        var Volumen = (Math.floor(Math.random()*20)+1)/10;
+        aktuelleAufgabe[3]=Volumen;
+        var Konz = (Math.floor(Math.random()*20)+1)/10;
+        aktuelleAufgabe[4]=Konz;
+        aktuelleAufgabe[5]=Volumen*Konz;
+        aktuelleAufgabe[5]=(Math.round(1000*aktuelleAufgabe[5])/1000);
+        aktuelleAufgabe[6]=(guteZahlen[Math.floor(Math.random()*guteZahlen.length)])*Volumen;
+        aktuelleAufgabe[7]=aktuelleAufgabe[5]/(aktuelleAufgabe[6]);
+        aktuelleAufgabe[7]=(Math.round(10000*aktuelleAufgabe[7])/10000);
+        aktuelleAufgabe[8]=aktuelleAufgabe[5]*aktuelleAufgabe[2];
+        aktuelleAufgabe[8]=(Math.round(10000*aktuelleAufgabe[8])/10000);
+        //0. Summenformel/ 1. Name / 2. M / 3. V / 4. c / 5. n / 6. V2 / 7. c2 / 8. m / 9. 
+       // console.table(aktuelleAufgabe);
+        HilfeCounter = 0;
+        Start(aufgabenTyp);
+    }
+
+
+    function Start(aufgabenTyp){
+        if (aufgabenTyp == 0){ 
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Stoffmenge n von "+AusgabeMitKomma(aktuelleAufgabe[3])+" Litern "+aktuelleAufgabe[0]+" mit einer Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L");
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> mol';
+        }
+        if (aufgabenTyp == 1){ 
+            document.getElementById("Aufgabenstellung").innerHTML = "Bestimme die Stoffmengenkonzentration c von "+AusgabeMitKomma(aktuelleAufgabe[5])+" mol "+aktuelleAufgabe[0]+", mit einem Volumen von "+AusgabeMitKomma(aktuelleAufgabe[3])+" Litern.";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> '+Quotient("mol","L");
+        }
+        if (aufgabenTyp == 2){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[5])+" mol einer "+aktuelleAufgabe[0]+"-Lösung mit der Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" sind gegeben. <br> Gib das Volumen an.";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> L';
+        }
+        if (aufgabenTyp == 3){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[3])+" Liter einer "+aktuelleAufgabe[0]+"-Lösung mit der Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" werden auf ein Volumen von "+AusgabeMitKomma(aktuelleAufgabe[6])+" Litern mit Wasser aufgefüllt.<br> Gib die neue Konzentration c an.";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> '+Quotient("mol","L");
+        }
+        if (aufgabenTyp == 4){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[3])+" Liter einer "+aktuelleAufgabe[0]+"-Lösung mit der Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" sollen mit Wasser aufgefüllt werden bis eine Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+" erreicht ist. <br> Gib das neue Gesamtvolumen an.";
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> L';
+        }
+        if (aufgabenTyp == 5){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[3])+" Liter einer "+aktuelleAufgabe[0]+"-Lösung mit der Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" soll mit Wasser aufgefüllt werden, bis eine Stoffmengenkonzentration von "+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+" erreicht ist. <br> Gib an, welches Volumen an Wasser hinzu gegeben werden muss.";
+            document.getElementById("Antwort").innerHTML = 'Zusätzliches Wasservolumen:<input class="small" id="Eingabefeld"> L';
+        }
+        if (aufgabenTyp == 6){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[8])+" Gramm "+aktuelleAufgabe[0]+" werden in "+AusgabeMitKomma(aktuelleAufgabe[3])+" Liter Wasser gelöst. Bestimme die Stoffmengenkonzentration c."
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> '+Quotient("mol","L");
+        }
+        if (aufgabenTyp == 7){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[8])+" Gramm "+aktuelleAufgabe[0]+" sollen eine Lösung mit der Stoffmengenkonzentration c von "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" ergeben. Bestimme das benötigte Volumen der Lösung."
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> L';
+        }
+        if (aufgabenTyp == 8){ 
+            document.getElementById("Aufgabenstellung").innerHTML = AusgabeMitKomma(aktuelleAufgabe[3])+" Liter einer "+AusgabeMitKomma(aktuelleAufgabe[4])+"-molaren "+aktuelleAufgabe[0]+"-Lösung sollen hergestellt werden. Bestimme die benötigte Masse."
+            document.getElementById("Antwort").innerHTML = '<input class="small" id="Eingabefeld"> g';
+        }
+    }
+
+    function Quotient(a,b){
+        let ausgeben = "";
+        ausgeben = " <math><mfrac><mn>"+a+"</mn><mn>"+b+"</mn></mfrac></math>";
+        return ausgeben;
+    }
+
+    function AusgabeMitKomma(text){
+        let ausgeben = "";
+        ausgeben = text+"";
+        ausgeben = ausgeben.replace(/\./, ",");
+        return ausgeben;
+    }
+
+    function Überprüfen(){
+        var AusgabeText ="";
+        if (aufgabenTyp == 0){ 
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+
+                if(Ergebnis == (Math.round(1000*aktuelleAufgabe[5])/1000)){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 1){   //Hier weitermachen. Richtiges Lösungsfeld müsste schon passen, aber noch Runden und alle Slashes ersetzen g
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == (Math.round(1000*aktuelleAufgabe[4])/1000)){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 2){ 
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == (Math.round(1000*aktuelleAufgabe[3])/1000)){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 3){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == (Math.round(1000*aktuelleAufgabe[7])/1000)){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 4){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == (Math.round(1000*aktuelleAufgabe[6])/1000)){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 5){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == ((Math.round(1000*(aktuelleAufgabe[6]-aktuelleAufgabe[3]))/1000))){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 6){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == ((Math.round(1000*(aktuelleAufgabe[4]))/1000))){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 7){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == ((Math.round(1000*(aktuelleAufgabe[3]))/1000))){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        if (aufgabenTyp == 8){   
+            if (document.getElementById("Eingabefeld").value == ""){
+                AusgabeText = "Bitte eine Lösung eingeben.";
+                document.getElementById("Eingabefeld").style.backgroundColor = "red";
+            }else{
+                var Ergebnis = "";
+                Ergebnis = document.getElementById("Eingabefeld").value;
+                Ergebnis=Ergebnis.replaceAll(/\,/g, ".");
+                Ergebnis = eval(Ergebnis);
+                if(Ergebnis == ((Math.round(1000*(aktuelleAufgabe[8]))/1000))){
+                    document.getElementById("Eingabefeld").style.backgroundColor = "green";
+                    AusgabeText = "Super, du hast die Aufgabe richtig."
+                    document.getElementById("PruefButton").value = "Nächste Aufgabe";
+                    document.getElementById("PruefButton").setAttribute("onclick","Aufgabenstart()");
+                } else {
+                    document.getElementById("Eingabefeld").style.backgroundColor = "red";
+                    AusgabeText = "Achtung, hier stimmt etwas nicht. Probiere es nochmal."
+                }
+            }
+        }
+        document.getElementById("AntwortSatz").innerHTML = AusgabeText;
+    }
+    function Hilfe(){
+        var HilfeText ="";
+        document.getElementById("Bilder").innerHTML="";
+        HilfeCounter +=1;
+        if (aufgabenTyp == 0){ 
+
+
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 3)</h2>";
+                HilfeText += "Überlege dir, wie du die Stoffmenge n mithilfe der Stoffmengenkonzentration c und dem Volumen V bestimmst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 3)</h2><br> Du berechnest die Stoffmenge n als Produkt der Stoffmengenkonzentration c und des Volumens V.<br>";
+                HilfeText += "n("+SchöneSummenformel(aktuelleAufgabe[1])+") = c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901; V("+aktuelleAufgabe[0]+") "
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";
+                
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 3)</h2><br> Du berechnest die Stoffmenge n als Produkt der Stoffmengenkonzentration c und des Volumens V.<br>";
+                HilfeText += "n("+SchöneSummenformel(aktuelleAufgabe[1])+") = c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901; V("+aktuelleAufgabe[0]+") = "+AusgabeMitKomma(aktuelleAufgabe[3])+" <math><mfrac><mn>mol</mn><mn>L</mn></mfrac></math> &#8901; "+AusgabeMitKomma(aktuelleAufgabe[4])+" L = "+AusgabeMitKomma(aktuelleAufgabe[5])+" mol<br>";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";
+                
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Lösung</h2><br> Du berechnest die Stoffmenge n als Produkt der Stoffmengenkonzentration c und des Volumens V.<br>";
+                HilfeText += "n("+SchöneSummenformel(aktuelleAufgabe[1])+") = c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901; V("+aktuelleAufgabe[0]+") = "+AusgabeMitKomma(aktuelleAufgabe[3])+" <math><mfrac><mn>mol</mn><mn>L</mn></mfrac></math> &#8901; "+AusgabeMitKomma(aktuelleAufgabe[4])+" L = "+AusgabeMitKomma(aktuelleAufgabe[5])+" mol<br>";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma(aktuelleAufgabe[5]);
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 1){ 
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 3)</h2>";
+                HilfeText += "Überlege dir, wie du die Stoffmengenkonzentration c mithilfe der Stoffmengen n und dem Volumen V bestimmst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 3)</h2><br> Du berechnest die Stoffmengenkonzentration c als Quotient der Stoffmenge n und des Volumens V.<br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn>V("+aktuelleAufgabe[0]+")</mn></mfrac></math>";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";
+                
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 3)</h2><br> Du berechnest die Stoffmengenkonzentration c als Quotient der Stoffmenge n und des Volumens V.<br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn>V("+aktuelleAufgabe[0]+")</mn></mfrac></math> =<math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[5])+"</mn><mo> mol</mo> </mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[3])+"</mn><mo> L</mo></mrow></mfrac></math> ";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";
+                //  <math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[5])+"</mn><mo> </mo><mfrac><mn>mol</mn><mn>L</mn></mfrac></mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[4])+"</mn><mo> L</mo></mrow></mfrac></math>
+                
+            
+
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Lösung</h2><br> Du berechnest die Stoffmengenkonzentration c als Quotient der Stoffmenge n und des Volumens V.<br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn>V("+aktuelleAufgabe[0]+")</mn></mfrac></math> =<math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[5])+"</mn><mo> mol</mo></mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[3])+"</mn><mo> L</mo></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L");
+                document.getElementById("Eingabefeld").value = aktuelleAufgabe[4];
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+           
+        }
+        if (aufgabenTyp == 2){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 3)</h2>";
+                HilfeText += "Überlege dir, wie du das Volumen V mithilfe der Stoffmengen n und der Stoffmengenkonzentration c bestimmst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 3)</h2><br> Du berechnest das Volumen V als Quotient der Stoffmenge n und der Stoffmengenkonzentration c.<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn><span>c("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math>";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 3)</h2><br> Du berechnest das Volumen V als Quotient der Stoffmenge n und der Stoffmengenkonzentration c.<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn><span>c("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math> =<math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[5])+"</mn><mo> mol</mo> </mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[4])+"</mn><mo> </mo><mfrac><mn>mol</mn><mn>L</mn></mfrac></mrow></mfrac></math> ";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Lösung</h2><br> Du berechnest das Volumen V als Quotient der Stoffmenge n und der Stoffmengenkonzentration c.<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") =  <math><mfrac><mn>"+"<span>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn><span>c("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math> =<math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[5])+"</mn><mo> mol</mo> </mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[4])+"</mn><mo> </mo><mfrac><mn>mol</mn><mn>L</mn></mfrac></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L";
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma(aktuelleAufgabe[3]);
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 3){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 4)</h2>";
+                HilfeText += "Überlege dir, was für die Stoffmenge vorher und nachher gilt und wie du das als Formel aufschreiben kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt:<br>";
+                HilfeText += "<span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>1</sub>("+aktuelleAufgabe[0]+") =  <span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>2</sub>("+aktuelleAufgabe[0]+")";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Alternativ: Berechne zuerst die Stoffmenge n und mithilfe dieser und dem neuen Volumen die neue Stoffmengenkonzentration.";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen, die Gleichung umzustellen und den Wert zu berechnen.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> = <span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; <math><mfrac><mrow><mn><span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow><mrow><mn><span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow></mfrac></math>";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";               
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Hilfe (4 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> = <span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; <math><mfrac><mrow><mn><span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow><mrow><mn><span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" &#8901; <math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[3])+" L</mn></mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[6])+" L</mn></mrow></mfrac></math>  ";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Lösung</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> = <span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; <math><mfrac><mrow><mn><span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow><mrow><mn><span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+" &#8901; <math><mfrac><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[3])+" L</mn></mrow><mrow><mn>"+AusgabeMitKomma(aktuelleAufgabe[6])+" L</mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L");
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma(aktuelleAufgabe[7]);
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 4){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 4)</h2>";
+                HilfeText += "Überlege dir, was für die Stoffmenge vorher und nachher gilt und wie du das als Formel aufschreiben kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt:<br>";
+                HilfeText += "<span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>1</sub>("+aktuelleAufgabe[0]+") =  <span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>2</sub>("+aktuelleAufgabe[0]+")";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Alternativ: Berechne zuerst die Stoffmenge n und mithilfe dieser und der neuen Stoffmengenkonzentration dann das neue Volumen.";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen, die Gleichung umzustellen und den Wert zu berechnen.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math>";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";               
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Hilfe (4 von 4)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L &#8901; <math><mfrac><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+"</span></mn></mrow><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+"</span></mn></mrow></mfrac></math>";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Lösung</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L &#8901; <math><mfrac><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+"</span></mn></mrow><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+"</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[6])+" L";
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma(aktuelleAufgabe[6]);
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 5){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 5)</h2>";
+                HilfeText += "Überlege dir, was für die Stoffmenge vorher und nachher gilt und wie du das als Formel aufschreiben kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 5)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt:<br>";
+                HilfeText += "<span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>1</sub>("+aktuelleAufgabe[0]+") =  <span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span> &#8901; V<sub>2</sub>("+aktuelleAufgabe[0]+")";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Alternativ: Berechne zuerst die Stoffmenge n und mithilfe dieser und der neuen Stoffmengenkonzentration dann das neue Volumen.";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen, die Gleichung umzustellen und den Wert zu berechnen.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 5)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Versuche die richtigen Werte einzusetzen und den Wert zu berechnen.";               
+            }
+            if (HilfeCounter > 3){
+                HilfeText += "<h2>Hilfe (4 von 5)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L &#8901; <math><mfrac><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+"</span></mn></mrow><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+"</span></mn></mrow></mfrac></math>";
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Versuche das Ergebnis selbst zu berechnen und überlege wie es weiter geht.";               
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Hilfe (5 von 5)</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L &#8901; <math><mfrac><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+"</span></mn></mrow><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+"</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[6])+" L";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br>Nun muss die Differenz des berechneten und des gegebenen Volumens berechnet werden. Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 5){
+                HilfeText += "<h2>Lösung</h2><br> Die Stoffmenge bleibt gleich, damit gilt, dass das Produkt der Stoffmengenkonzentration und des Volumens gleich bleibt.<br> Durch Umstellen bekommt man folgende Gleichung:<br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span> = <span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> &#8901; <math><mfrac><mrow><mn><span>c<sub>1</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow><mrow><mn><span>c<sub>2</sub>("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[3])+" L &#8901; <math><mfrac><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient("mol","L")+"</span></mn></mrow><mrow><mn><span>"+AusgabeMitKomma(aktuelleAufgabe[7])+Quotient("mol","L")+"</span></mn></mrow></mfrac></math> = "+AusgabeMitKomma(aktuelleAufgabe[6])+" L";
+                HilfeText += "<br> Nun bestimmen wir die Differenz der Volumina <br>";
+                HilfeText += "<span>V<sub>2</sub>("+aktuelleAufgabe[0]+")</span>-<span>V<sub>1</sub>("+aktuelleAufgabe[0]+")</span> = "+AusgabeMitKomma(aktuelleAufgabe[6])+" - "+AusgabeMitKomma(aktuelleAufgabe[3])+" = "+AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[6]-aktuelleAufgabe[3]))/1000));
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[6]-aktuelleAufgabe[3]))/1000));
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+            }
+        }
+        if (aufgabenTyp == 6){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 5)</h2>";
+                HilfeText += "Überlege dir, wie du die Stoffmengenkonzentration berechnen kannst und wie du die entsprechenden Größen berechnen kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 5)</h2><br>Du berechnest die Stoffmengenkonzentration c als Quotient der Stoffmenge n und des Volumens V. <br> ";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span style='color: red; font-weight: bold;'>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn>V("+aktuelleAufgabe[0]+")</mn></mfrac></math>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Überlege, wie du <span style='color: red; font-weight: bold;'>die Stoffmenge</span> mithilfe der Masse berechnen kannst.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 5)</h2><br> Die Stoffmenge kann als Quotient der Masse m und der Molaren Masse M berechnet werden.<br>";
+                HilfeText += "<span style='color: red;'>n("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span>m("+aktuelleAufgabe[0]+")</span></mn><mn><span>M("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math></span>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Versuche die Gleichungen ineinander einzusetzen und die richtigen Werte einzusetzen.";               
+            }
+            if (HilfeCounter > 3){ 
+                HilfeText += "<h2>Hilfe (4 von 5)</h2><br> Aus den beiden vorherigen Gleichungen folgt:<br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") ="; 
+                HilfeText +=`
+                <math>
+                    <mfrac>
+                        <mrow>
+                            
+                                <mfrac>
+                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                    </mo></mrow>
+                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                    </mo></mrow>
+                                </mfrac>
+                            
+                        </mrow>
+                        <mrow>
+                            <mn>V(`+aktuelleAufgabe[0]+`)</mn>
+                        </mrow>
+                    </mfrac>
+                </math>`;
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Die molare Masse bekommst du mithilfe der Summenformel und dem Periodensystem. <br>Versuche die gegebenen Werte einzusetzen und weiter zu rechnen.";
+                bilderEinfüger(formelZerstückler(aktuelleAufgabe[1]));         
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Hilfe (5 von 5)</h2>Für die molare Masse gilt: M(";
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") + ";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> + ";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-2)
+                HilfeText += " = "+aktuelleAufgabe[2]+Quotient("g","mol")+"<br>";
+                HilfeText +="<br>Durch Umformen und Einsetzen erhält man folgenden Ausdruck<br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") ="; 
+                                HilfeText +=`
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                <mfrac>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo></mrow>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                                    </mo></mrow>
+                                                </mfrac>
+                                            
+                                        </mrow>
+                                        <mrow>
+                                            <mn>V(`+aktuelleAufgabe[0]+`)</mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;  
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span> &#8901 V(`+aktuelleAufgabe[0]+`)</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;      
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[8])+`g</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient("g","mol")+`</span> &#8901 `+AusgabeMitKomma(aktuelleAufgabe[3])+`L</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math> = `;             
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br>Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 5){
+                HilfeText += "<h2>Lösung</h2><br> Hier das Ergebnis der obigen Rechnung <br>";
+                HilfeText += "c("+SchöneSummenformel(aktuelleAufgabe[1])+") ="; 
+                                HilfeText +=`
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                <mfrac>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo></mrow>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                                    </mo></mrow>
+                                                </mfrac>
+                                            
+                                        </mrow>
+                                        <mrow>
+                                            <mn>V(`+aktuelleAufgabe[0]+`)</mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;  
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span> &#8901 V(`+aktuelleAufgabe[0]+`)</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;      
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[8])+`g</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient("g","mol")+`</span> &#8901 `+AusgabeMitKomma(aktuelleAufgabe[3])+`L</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math> = `+AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[4]))/1000))+Quotient("mol","L");             
+
+                
+                
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[4]))/1000));
+            }
+        }
+        if (aufgabenTyp == 7){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 5)</h2>";
+                HilfeText += "Überlege dir, wie du das Volumen berechnen kannst und wie du die entsprechenden Größen berechnen kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 5)</h2><br>Du berechnest das Volumen V als Quotient der Stoffmenge n und der Stoffmengenkonzentration c. <br> ";
+                HilfeText += "V("+aktuelleAufgabe[0]+") =  <math><mfrac><mn>"+"<span style='color: red; font-weight: bold;'>n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn><mn><span>c("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Überlege, wie du <span style='color: red; font-weight: bold;'>die Stoffmenge</span> mithilfe der Masse berechnen kannst.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 5)</h2><br> Die Stoffmenge kann als Quotient der Masse m und der Molaren Masse M berechnet werden.<br>";
+                HilfeText += "<span style='color: red;'>n("+SchöneSummenformel(aktuelleAufgabe[1])+") =  <math><mfrac><mn>"+"<span>m("+aktuelleAufgabe[0]+")</span></mn><mn><span>M("+SchöneSummenformel(aktuelleAufgabe[1])+")</span></mn></mfrac></math></span>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Versuche die Gleichungen ineinander einzusetzen und die richtigen Werte einzusetzen.";               
+            }
+            if (HilfeCounter > 3){ 
+                HilfeText += "<h2>Hilfe (4 von 5)</h2><br> Aus den beiden vorherigen Gleichungen folgt:<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") ="; 
+                HilfeText +=`
+                <math>
+                    <mfrac>
+                        <mrow>
+                            
+                                <mfrac>
+                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                    </mo></mrow>
+                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                    </mo></mrow>
+                                </mfrac>
+                            
+                        </mrow>
+                        <mrow>
+                            <mn><span>c(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span></mn>
+                        </mrow>
+                    </mfrac>
+                </math>`;
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br> Die molare Masse bekommst du mithilfe der Summenformel und dem Periodensystem. <br><br> Versuche die gegebenen Werte einzusetzen und weiter zu rechnen.";               
+                bilderEinfüger(formelZerstückler(aktuelleAufgabe[1]));   
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Hilfe (5 von 5)</h2>"
+                HilfeText += "Für die molare Masse gilt: M(";
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") + ";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> + ";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-2)
+                HilfeText += " = "+aktuelleAufgabe[2]+Quotient("g","mol")+"<br>";
+                HilfeText += "<br>Durch Umformen und Einsetzen erhält man folgenden Ausdruck<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") ="; 
+                                HilfeText +=`
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                <mfrac>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo></mrow>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                                    </mo></mrow>
+                                                </mfrac>
+                                            
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span>c(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;  
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span> &#8901 <span>c(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span></span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;      
+    //BRUCH!!
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[8])+` g</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow> 
+                                           <mo><span><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient('g','mol')+"</span>"+` &#8901 `+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient('mol','L')+`</span></mo>
+                                        </mrow>
+                                    </mfrac>
+                                </math>  `;             
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br>Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 5){
+                HilfeText += "<h2>Hilfe (5 von 5)</h2><br>Durch Umformen und Einsetzen erhält man folgenden Ausdruck<br>";
+                HilfeText += "V("+aktuelleAufgabe[0]+") ="; 
+                                HilfeText +=`
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                <mfrac>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo></mrow>
+                                                    <mrow><mo><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span>
+                                                    </mo></mrow>
+                                                </mfrac>
+                                            
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span>c(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;  
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>m(`+aktuelleAufgabe[0]+`)</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow>
+                                            <mn><span><span style='color: red; font-weight: bold;'>M(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span> &#8901 <span>c(`+SchöneSummenformel(aktuelleAufgabe[1])+`)</span></span></mn>
+                                        </mrow>
+                                    </mfrac>
+                                </math>`;      
+    //BRUCH!!
+                HilfeText +=` =
+                                <math>
+                                    <mfrac>
+                                        <mrow>
+                                            
+                                                
+                                                    <mo><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[8])+` g</span>
+                                                    </mo>
+
+                                        </mrow>
+                                        <mrow> 
+                                           <mo><span><span style='color: red; font-weight: bold;'>`+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient('g','mol')+"</span>"+` &#8901 `+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient('mol','L')+`</span></mo>
+                                        </mrow>
+                                    </mfrac>
+                                </math>  `+AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[3]))/1000))+" L";             
+
+                
+                
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[3]))/1000));
+            }
+        }
+        if (aufgabenTyp == 8){ 
+            
+            if (HilfeCounter > 0){
+                HilfeText += "<h2>Hilfe (1 von 5)</h2>";
+                HilfeText += "Überlege dir, wie du die Masse berechnen kannst und wie du die entsprechenden Größen hierfür bestimmen kannst.";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                
+            }
+            if (HilfeCounter > 1){
+                HilfeText += "<h2>Hilfe (2 von 5)</h2><br>Du berechnest das die Masse m als Produkt der molaren Masse M und der Stoffmenge n. <br> ";
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 <span style='color: red; font-weight: bold;'> n("+SchöneSummenformel(aktuelleAufgabe[1])+")</span>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Überlege, wie du <span style='color: red; font-weight: bold;'>die Stoffmenge</span> mithilfe des Volumens V und der Stoffmengenkonzentration c berechnen kannst.";
+            }
+            if (HilfeCounter > 2){
+                HilfeText += "<h2>Hilfe (3 von 5)</h2><br> Die Stoffmenge kann als Produkt der Stoffmengenkonzentration c und des Volumens V berechnet werden.<br>";
+                HilfeText += "<span style='color: red;'>n("+SchöneSummenformel(aktuelleAufgabe[1])+") =  c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 V("+aktuelleAufgabe[0]+")</span>";
+                document.getElementById("HilfeButton").value = "weitere Hilfe";
+                HilfeText += "<br><br> Versuche die Gleichungen ineinander einzusetzen und die richtigen Werte einzusetzen.";               
+            }
+            if (HilfeCounter > 3){ 
+                HilfeText += "<h2>Hilfe (4 von 5)</h2><br> Aus den beiden vorherigen Gleichungen folgt:<br>";
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 <span style='color: red; font-weight: bold;'>c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 V("+aktuelleAufgabe[0]+")</span>"; 
+
+
+                document.getElementById("HilfeButton").value = "letzte Hilfe";
+                HilfeText += "<br><br> Die molare Masse bekommst du mithilfe der Summenformel und dem Periodensystem. <br><br> Versuche die gegebenen Werte einzusetzen und weiter zu rechnen. Die molare Masse bekommst du durch die Massezahl der Summenformel";               
+                bilderEinfüger(formelZerstückler(aktuelleAufgabe[1]));   
+            }
+            if (HilfeCounter > 4){
+                HilfeText += "<h2>Hilfe (5 von 5)</h2>"
+                HilfeText += "Für die molare Masse gilt: M(";
+                HilfeText += SchöneSummenformel(aktuelleAufgabe[1])+") = ";
+                var summenArray = formelZerstückler(aktuelleAufgabe[1]);
+                    
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; M("+summenArray[i][0]+") + ";
+                        }
+                        HilfeText = HilfeText.substring(0, HilfeText.length-1)+" = ";
+            
+                    for (i=0; i<summenArray.length;i++){
+                        HilfeText += summenArray[i][1]+" &#8901; "+summenArray[i][3]+" <math><mfrac><mn>g</mn><mn>mol</mn></mfrac></math> + ";
+                        } 
+                HilfeText = HilfeText.substring(0, HilfeText.length-2)
+                HilfeText += " = "+aktuelleAufgabe[2]+Quotient("g","mol")+"<br>";
+                HilfeText += "<br>Durch Umformen und Einsetzen erhält man folgenden Ausdruck<br>";
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 <span style='color: red; font-weight: bold;'>c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 V("+aktuelleAufgabe[0]+")</span>"; 
+                HilfeText += " = "+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient('g','mol')+" &#8901 <span style='color: red; font-weight: bold;'> "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient('mol','L')+" &#8901 "+AusgabeMitKomma(aktuelleAufgabe[3])+" L</span>";
+                document.getElementById("HilfeButton").value = "Lösung anzeigen";
+                HilfeText += "<br><br>Versuche das Ergebnis selbst zu berechnen und klicke dann auf Überprüfen.";               
+            }
+            if (HilfeCounter > 5){
+                HilfeText += "<h2>Lösung</h2><br>Durch Umformen und Einsetzen erhält man folgenden Ausdruck<br>";
+                HilfeText += "m("+aktuelleAufgabe[0]+") = M("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 <span style='color: red; font-weight: bold;'>c("+SchöneSummenformel(aktuelleAufgabe[1])+") &#8901 V("+aktuelleAufgabe[0]+")</span>"; 
+                HilfeText += " = "+AusgabeMitKomma(aktuelleAufgabe[2])+Quotient('g','mol')+" &#8901 <span style='color: red; font-weight: bold;'> "+AusgabeMitKomma(aktuelleAufgabe[4])+Quotient('mol','L')+" &#8901 "+AusgabeMitKomma(aktuelleAufgabe[3])+" L</span> = "+AusgabeMitKomma(aktuelleAufgabe[8])+" g";
+
+                
+                
+                HilfeText += "<br><br> Versuche die nächste Aufgabe selbst zu lösen.";
+                document.getElementById("HilfeButton").disabled = true;
+                document.getElementById("Eingabefeld").value = AusgabeMitKomma((Math.round(1000*(aktuelleAufgabe[8]))/1000));
+            }
+        }
+        document.getElementById("Hilfestellung").innerHTML = HilfeText;
+    }
+
+    function molareMasseRechner(summenArray){
+            var molareMasse = 0;
+            for (i=0; i<summenArray.length;i++){
+                molareMasse += summenArray[i][1]*summenArray[i][3];
+            }
+            return molareMasse;
+        }
+
+        function SummenformelArray(summenFormel){
+            let Ergebnis = summenFormel.split(/(?=[A-Z])/);
+            var summenArray = [];
+            for (i=0;i<Ergebnis.length;i++){
+                let Element = Ergebnis[i].match(/[a-z]+/gi);
+                let Zahl;
+                if (Ergebnis[i].match(/\d+/g) == null){
+                    Zahl = [1,0];
+                } else {
+                    Zahl = Ergebnis[i].match(/\d+/g);
+                }
+                summenArray[i] = [Element[0], parseInt(Zahl[0])];
+            }
+
+            return summenArray;
+        }
+
+        function AufgabenArrayFestleger(){
+            aufgabenAuswahlArray=[];
+            for (let i=0; i<9;i++){
+            if (KategorienArray[i] == true){
+                aufgabenAuswahlArray.push(i);
+            }
+        }
+    }
+
+        function SchöneSummenformel(SummenformelText){
+
+            var summenArray = SummenformelArray(SummenformelText);
+            var ausgabeAlsText = "";
+            for (let i=0;i<summenArray.length;i++){
+  
+                    if (Math.abs(summenArray[i][1]) != 1){
+                        ausgabeAlsText += summenArray[i][0]+"<sub>"+summenArray[i][1]+"</sub>"; 
+                    } else {
+                        ausgabeAlsText += summenArray[i][0]; 
+                    }
+                
+            }
+
+  
+            return ausgabeAlsText;
+        
+        }
+
+        function formelZerstückler(summenFormel){
+            var summenArray = SummenformelArray(summenFormel);        
+            const neuesArray = [];
+            for (i=0;i<elementArray.length;i++){
+                neuesArray[i] = elementArray[i][1];
+            }
+            for (i=0; i<summenArray.length;i++){
+                summenArray[i].push(neuesArray.indexOf(summenArray[i][0]));
+                summenArray[i].push(elementArray[summenArray[i][2]][2]);
+                summenArray[i].push(elementArray[summenArray[i][2]][3]);
+            }
+            return (summenArray);
+            
+        }
+
+        function bilderEinfüger(SchonArray){
+            for (i=0; i<SchonArray.length;i++){  
+                          
+                    let img = new Image();
+                    img.className ="image";
+                    img.src = "img/PSE-"+SchonArray[i][0]+".jpg";
+                    img.width = 200;
+                    document.getElementById('Bilder').appendChild(img);
+                    
+                }
+            }
+
+        function AusgabeMitKomma(TextMitPunkt){
+            var OhneKomma = "";
+            OhneKomma += TextMitPunkt;
+            OhneKomma = OhneKomma.replace(/\./, ",");
+            return OhneKomma;
+        }
+
+        function KoeffizientenVerkleinernSummenformel(meineVariable){
+            meineVariable = meineVariable.replace("^1", "¹");
+            meineVariable = meineVariable.replace("^2", "²");
+            meineVariable = meineVariable.replace("^3", "³");
+            meineVariable = meineVariable.replace("^4", "⁴");
+            meineVariable = meineVariable.replace("^5", "⁵");
+            meineVariable = meineVariable.replace("^6", "⁶");
+            meineVariable = meineVariable.replace("^7", "⁷");
+            meineVariable = meineVariable.replace("^8", "⁸");
+            meineVariable = meineVariable.replace("^9", "⁹");
+            meineVariable = meineVariable.replace("^0", "⁰");
+            meineVariable = meineVariable.replace("1", "₁");
+            meineVariable = meineVariable.replace("2", "₂");
+            meineVariable = meineVariable.replace("3", "₃");
+            meineVariable = meineVariable.replace("4", "₄");
+            meineVariable = meineVariable.replace("5", "₅");
+            meineVariable = meineVariable.replace("6", "₆");
+            meineVariable = meineVariable.replace("7", "₇");
+            meineVariable = meineVariable.replace("8", "₈");
+            meineVariable = meineVariable.replace("9", "₉");
+            meineVariable = meineVariable.replace("0", "₀");
+            meineVariable = meineVariable.replace("+", "⁺");
+            meineVariable = meineVariable.replace("-", "⁻");
+            return meineVariable;
+        }
+
+
+function Abwählaktion(){
+    for (let i = 0; i<KategorienArray.length; i++){
+        KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+    }
+    if (KategorienArray.includes(true) == false){
+        for (let i = 0; i<KategorienArray.length; i++){
+        document.getElementById("Ausw"+i).checked = true;
+        }
+    } else {
+    for (let i = 0; i<KategorienArray.length; i++){
+        document.getElementById("Ausw"+i).checked = false;
+        }
+    }
+}
+function Speichern(){
+    for (let i = 0; i<KategorienArray.length; i++){
+        KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+    }
+
+    if (KategorienArray.includes(true) == false){
+        document.getElementById("Ausw0").checked = true;
+    }
+    for (let i = 0; i<KategorienArray.length; i++){
+        KategorienArray[i]=document.getElementById("Ausw"+i).checked;
+    }
+    document.getElementById("checkbox_toggle").disabled = false;
+    document.getElementById("checkbox_toggle").checked = false;
+    AufgabenArrayFestleger();
+    Aufgabenstart();
+}
+function MenüAnzeigen(){
+
+document.getElementById("checkbox_toggle").onlick = 'Speichern()';
+
+}
+</script>
+
+</body>
+<footer>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+</footer>
+</html>
