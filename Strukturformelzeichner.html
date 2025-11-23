@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Strukturformel zeichnen</title>
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: #f7f7f8;
+    }
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(10,10,10,0.06);
+      text-align: center;
+      
+    }
+    svg { display: block; width: 80vh; }
+    .circle-button {
+      cursor: pointer;
+      transition: transform 120ms ease;
+      outline: none;
+    }
+    .circle-button:active { transform: scale(0.98); }
+    .hint { margin-top: 12px; color: #555; font-size: 14px; }
+    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+    input { width: 110px;font-size:20px; text-align: center;}
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+
+
+
+  </style>
+</head>
+
+   <div  id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+   <div><h2 style="top: 20px;text-align: center;">Strukturformel zeichnen lassen</h2>  <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld">Gib den Namen eines Stoffes ein</h3> <input id="Eingabe" style="width: 400px" placeholder="Name des Stoffes"><input type="button" value="Zeichnen" onclick="Zeichnen()">
+  <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
+  <p id="RückmeldungFeld"></p>
+  <div class="card" id="großesDiv"><svg viewBox="0 0 800 800" role="img">
+
+    
+
+  </svg>
+</div>
+
+</div>
+  <script>
+    
+    var hauptketteLänge;
+    var benennungsArray = [];
+    benennungsArray.push([1,"Methan","Methyl","",3]);
+    benennungsArray.push([2,"Ethan","Ethyl","Di",1]);
+    benennungsArray.push([3,"Propan","Propyl","Tri",0]);
+    benennungsArray.push([4,"Butan","Butyl","Tetra",4]);
+    benennungsArray.push([5,"Pentan","Pentyl","Penta",2]);
+    benennungsArray.push([6,"Hexan","Hexyl","Hexa"]);
+    benennungsArray.push([7,"Heptan","Heptyl","Hepta"]);
+    benennungsArray.push([8,"Octan","Octyl","Octa"]);
+    benennungsArray.push([9,"Nonan","Nonyl","Nona"]);
+    benennungsArray.push([10,"Decan","Decyl","Deca"]);
+    document.getElementById("RückmeldungFeld").innerHTML ="";
+    var strukturArray = [];
+    var ausgabe = "";
+    var nebenkette;
+    var vonRechtsNachLinks = true;
+    var seitenketten = [];
+    var antwortHauptgruppenlänge;
+    var array1 = [];
+    var array2 = [];
+    var hauptgruppenname
+    var antwortArray =[]
+    var array3 = [];
+    var test;
+    
+
+
+    function Zeichnen(){
+        strukturArray = [];
+        ausgabe = "";
+        Prüfung();
+        //hauptketteLänge=document.getElementById("Eingabe").value;
+        strukturArray.push([0,2,"H"]);
+        for (let i = 0; i<hauptketteLänge;i++){
+        strukturArray.push([i,1,"H"]);
+        strukturArray.push([i,-1,"H"]);
+        }
+        strukturArray.push([hauptketteLänge-1,0,"H"]);
+        
+        
+
+        zeichneHauptkette(hauptketteLänge);
+
+        Nebenkette();
+        console.table(strukturArray);
+        zeichneHauptkettenWasserstoff(hauptketteLänge,strukturArray);
+        document.getElementById("großesDiv").innerHTML = ausgabe+"</svg>";
+        namensBestimmer();
+    }
+
+
+    
+
+    function zeichneHauptkette(z){
+        ausgabe = "<svg viewBox='0 100 1600 1500' role='img'>";
+        for (let i=0; i<hauptketteLänge;i++){
+            ausgabe+=`<text x="${130+150*i}" y="800" fill="black" font-size="50">C</text>`;
+        }
+        for (let i=0; i<hauptketteLänge-1;i++){
+            ausgabe+=`<line x1="${160+150*i}" y1="${780}" x2="${270+i*150}" y2="${400+380}" opacity="1" style="stroke:black;stroke-width:4" />`;
+        }
+    }
+
+    function zufallsNebenkette(nebenkette){
+        let j = 0;
+        while (j<Math.min(nebenkette,hauptketteLänge*2-4)) {
+          let zufallszahl = Math.floor(Math.random()*(strukturArray.length));
+          if (strukturArray[zufallszahl][2] == "H" ){
+            let möglicheLängen = Math.min(strukturArray[zufallszahl][0],hauptketteLänge-strukturArray[zufallszahl][0]-1);
+            if (möglicheLängen != 0){
+              let nebenlänge = Math.floor(Math.random()*(möglicheLängen)+1);
+              strukturArray[zufallszahl][2] = nebenlänge;
+              j = j+1;
+            }
+          }
+        }
+
+    }
+
+    function Nebenkette(){
+      for (let i =1;i<=5;i++){
+        let z=0;
+        while (z<seitenketten[i].length){
+          for(let j =0;j<strukturArray.length;j++){
+            if((strukturArray[j][2]=='H')&&(strukturArray[j][0]==seitenketten[i][z])){
+              strukturArray[j][2]=i;
+              z+=1;
+            }
+            
+          }
+
+        }
+      }
+
+
+
+
+
+
+
+
+      for (let i=0; i<strukturArray.length;i++){
+            if(Number.isInteger(strukturArray[i][2])){
+              for (let j=0;j<strukturArray[i][2];j++){
+            ausgabe+=`<text x="${131+150*strukturArray[i][0]+150*(j+1)*Math.cos(strukturArray[i][1]*Math.PI/2)}" y="${400+397+150*(j+1)*Math.sin(strukturArray[i][1]*Math.PI/2)}" fill="black" font-size="50">C</text>`;
+            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+20*Math.cos(strukturArray[i][1]*Math.PI/2)}" y1="${400+380+(25+150*j)*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+60*Math.cos(strukturArray[i][1]*Math.PI/2)}" y2="${400+380+(150*(j+1)-32)*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:4" />`;
+            ausgabe+=`<text x="${135+150*strukturArray[i][0]+50}" y="${400+394+150*strukturArray[i][1]*(j+1)}" fill="black" font-size="40">H</text>`;
+            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+18}" y1="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+32}" y2="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
+            ausgabe+=`<line x1="${148+150*strukturArray[i][0]-18}" y1="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]-32}" y2="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
+            ausgabe+=`<text x="${135+150*strukturArray[i][0]-50}" y="${400+394+150*strukturArray[i][1]*(j+1)}" fill="black" font-size="40">H</text>`;
+            if(j==strukturArray[i][2]-1){
+              ausgabe+=`<text x="${135+150*strukturArray[i][0]}" y="${400+394+(150*(j+1)+55)*strukturArray[i][1]}" fill="black" font-size="40">H</text>`;
+              ausgabe+=`<line x1="${148+150*strukturArray[i][0]}" y1="${400+380+(150*(j+1)+22)*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]}" y2="${400+380+(150*(j+1)+37)*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
+            }
+          }  
+          }
+        }
+
+    }
+
+    function zeichneHauptkettenWasserstoff(hauptketteLänge,strukturArray){
+        
+        for (let i=0; i<strukturArray.length;i++){
+            if(strukturArray[i][2] == 'H'){
+            ausgabe+=`<text x="${135+150*strukturArray[i][0]+80*Math.cos(strukturArray[i][1]*Math.PI/2)}" y="${400+394+80*Math.sin(strukturArray[i][1]*Math.PI/2)}" fill="black" font-size="40">H</text>`;
+            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+20*Math.cos(strukturArray[i][1]*Math.PI/2)}" y1="${400+380+25*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+60*Math.cos(strukturArray[i][1]*Math.PI/2)}" y2="${400+380+55*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
+            }
+        }
+
+    }
+
+    function namensBestimmer(){
+        seitenketten = [];
+        for (let i=1;i<=5;i++){
+          seitenketten[i]=[];
+        }
+        for (let i=1;i<strukturArray.length;i++){
+          if (strukturArray[i][2] != 'H'){
+            let z = strukturArray[i][2];
+            seitenketten[z].push(strukturArray[i][0]);
+          }
+        }
+
+        var summeLR=0;
+        var summeRL=0;
+        
+          for (let j=1;j<=5;j++){
+            for (let i=0;i<seitenketten[j].length;i++){
+              summeLR += (seitenketten[j][i]+1);
+              summeRL += (hauptketteLänge)-(seitenketten[j][i]);
+            }
+          }
+          
+          if (summeLR>summeRL){
+            vonRechtsNachLinks = true;
+          } else if(summeLR<=summeRL){
+            vonRechtsNachLinks = false;
+          }
+        
+
+        
+        var namensArray = [];
+        if (hauptketteLänge > 2){
+        for(let i=1;i<=5;i++){
+          namensArray[i]="";
+          if(vonRechtsNachLinks==true){
+            for(let j=0;j<seitenketten[i].length;j++){
+              namensArray[i]=namensArray[i]+","+(hauptketteLänge-(seitenketten[i][seitenketten[i].length-j-1])); // hier j ändern
+
+            }
+          } else{ 
+            for(let j=0;j<seitenketten[i].length;j++){
+              namensArray[i]=namensArray[i]+","+(seitenketten[i][j]+1);
+            }
+          }
+          if (namensArray[i].length !=0){
+            namensArray[i]=namensArray[i].slice(1,namensArray[i].length)+"-"; //Komma wegmachen
+            namensArray[i]+=""+benennungsArray[seitenketten[i].length-1][3];
+            namensArray[i]+=""+benennungsArray[i-1][2]+"-";
+            
+          }
+          namensArray[i]+="-";
+          namensArray[i]=namensArray[i].slice(0,namensArray[i].length-1);
+        }
+      } 
+
+        let NameDesStoffes = "";
+        for (let i=0;i<5;i++){
+          NameDesStoffes += namensArray[benennungsArray[i][4]+1];
+        }
+        NameDesStoffes = NameDesStoffes.slice(0,NameDesStoffes.length-1)+benennungsArray[hauptketteLänge-1][1];
+        let großBuchstabe = NameDesStoffes.search(/[A-Z]/);
+        NameDesStoffes = NameDesStoffes.toLowerCase();
+        NameDesStoffes = NameDesStoffes.slice(0,großBuchstabe)+NameDesStoffes.charAt(großBuchstabe).toUpperCase()+NameDesStoffes.slice(großBuchstabe+1,NameDesStoffes.length);
+        
+        if(hauptketteLänge<3){
+          NameDesStoffes = benennungsArray[hauptketteLänge-1][1];
+        }
+
+      }
+        //mit Doppelschleife Anzahl zählen, dann in Alphabetischer Reihenfolge mit Zahlwort und entsprechenden Zahlen ausgeben lassen
+        // TEST ab hier
+       function Prüfung(){
+        test = "";
+        test = document.getElementById("Eingabe").value;
+        array1 = [];
+        array2 = [];
+        hauptgruppenname="";
+        antwortArray =[];
+        array3 = [];
+
+
+        array1 = test.split("-");
+
+        if (array1[array1.length-1].indexOf("yl")!=-1){
+          hauptgruppenname = array1[array1.length-1].slice(2+array1[array1.length-1].indexOf("yl"),array1[array1.length-1].length);
+          array1[array1.length-1]=array1[array1.length-1].slice(0,2+array1[array1.length-1].indexOf("yl"));
+          for ( let i=0; i<(array1.length/2);i++){
+            array2[i]=[array1[2*i],array1[2*i+1]];
+          }
+        } else {
+          hauptgruppenname = test;
+        }
+        for (let i=1;i<=5;i++){
+          antwortArray[i]=[];
+        }
+        for(let i=0; i<array2.length;i++){
+          if ((array2[i][1].indexOf("Methyl")!=-1)||(array2[i][1].indexOf("methyl")!=-1)){
+            antwortArray[1]=array2[i][0].split(",");
+          } else if ((array2[i][1].indexOf("Ethyl")!=-1)||(array2[i][1].indexOf("ethyl")!=-1)){
+            antwortArray[2]=(array2[i][0].split(","));
+          }
+          if ((array2[i][1].indexOf("propyl")!=-1)||(array2[i][1].indexOf("Propyl")!=-1)){
+            antwortArray[3]=array2[i][0].split(",");
+          }
+          if ((array2[i][1].indexOf("butyl")!=-1)||(array2[i][1].indexOf("Butyl")!=-1)){
+            antwortArray[4]=array2[i][0].split(",");
+          }
+          if ((array2[i][1].indexOf("pentyl")!=-1)||(array2[i][1].indexOf("Pentyl")!=-1)){
+            antwortArray[5]=array2[i][0].split(",");
+          }
+        }
+        for (let i=1;i<=5;i++){
+          for (let j=0;j<(antwortArray[i].length);j++){
+            antwortArray[i][j]=parseInt(antwortArray[i][j])-1;
+          }
+        }
+        for(let i=0;i<10;i++){
+        if (hauptgruppenname.toLowerCase()==benennungsArray[i][1].toLowerCase()){
+          antwortHauptgruppenlänge = benennungsArray[i][0];
+        }
+      }
+        hauptketteLänge=antwortHauptgruppenlänge;
+        seitenketten = antwortArray;
+        console.table(seitenketten);
+        console.table(hauptketteLänge);
+
+
+
+    }
+
+      /*  <svg viewBox="0 0 800 800" role="img"> <g class="rect-button" id="rectButton1" role="button" aria-pressed="false">
+        <rect width="95" height="100" x="5" y="410" rx="5" ry="5" fill="#007bff" stroke="#000000" stroke-width="2" />
+        <text x="30" y="480" fill="black" font-size="50">H</text>
+      </g> */
+  </script>
+</body>
+</html>

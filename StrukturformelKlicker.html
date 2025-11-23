@@ -44,7 +44,19 @@
     text {
     pointer-events: none;
     }
-
+    table {
+      align-items: center;
+      text-align: center;
+      width: 90vh;
+      border-style:solid;
+      border-collapse: collapse;
+    }
+    td {
+      border: 1px solid black;
+    }
+    th {
+      border: 1px solid black;
+    }
 
   </style>
 </head>
@@ -53,10 +65,12 @@
    <div><h2 style="top: 20px;text-align: center;">Strukturformel zeichnen</h2>  <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld">Gib zuerst die längste Kette des folgenden Stoffes an: </h3>
     <h2 id="Namensfeld"></h2>
     <input id="Eingabe" style="width: 200px"  placeholder="Länge der Hauptkette"><input type="button" id="PruefButton" value="Prüfen" onclick="Prüfen()">
-    
+    <input type="button" id="HilfButton" value="Hilfe" onclick="Hilfe()"> 
+    <p id="Hilfetext"></p>
   <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
   <p id="RückmeldungFeld"></p>
-  <input type="button" style="visibility: hidden;" value="Vergleich" id="VergleichsButton" onclick="Vergleich()">
+  <input type="button" style="visibility: hidden;" value="Vergleich" id="VergleichsButton" onclick="Vergleich()"><input type="button" id="Hilf2Button" value="Hilfe" onclick="Hilfe2()"> 
+  <p id="Hilfetext2"></p>
   <div class="card" id="großesDiv"><svg viewBox="0 0 800 800" role="img">
 
     
@@ -66,7 +80,7 @@
 
 </div>
   <script>
-    
+    document.getElementById("Hilf2Button").style.visibility = "hidden" ; 
     var hauptketteLänge;
     var benennungsArray = [];
     benennungsArray.push([1,"Methan","Methyl","",3]);
@@ -103,7 +117,8 @@
         strukturArrayAnt.push([hauptketteLänge-1,0,"H"]);
 
     function Zeichnen(){
-        hauptketteLänge = Math.floor(Math.random()*10)+1;
+        hauptketteLänge = Math.floor(Math.random()*10)+1;   //HIER TEST
+
         nebenkette = Math.floor(Math.random()*hauptketteLänge)+1;
         strukturArray = [];
         ausgabe = "";
@@ -114,7 +129,9 @@
         strukturArray.push([i,-1,"H"]);
         }
         strukturArray.push([hauptketteLänge-1,0,"H"]);
-        zufallsNebenkette(nebenkette);
+       zufallsNebenkette(nebenkette);
+
+
         namensBestimmer(strukturArray);
         document.getElementById("Namensfeld").innerHTML = namensBestimmer(strukturArray);
       /*  zeichneHauptkette();
@@ -134,9 +151,13 @@
         document.getElementById("VergleichsButton").style.visibility = "visible"; 
         document.getElementById("Eingabe").style.display = "none"; 
         document.getElementById("PruefButton").style.display = "none"; 
+        document.getElementById("HilfButton").style.display = "none"; 
+        document.getElementById("Hilfetext").textContent = ""; 
+        document.getElementById("Hilf2Button").style.visibility = "visible" ; 
       } else {
         document.getElementById("RückmeldungFeld").innerHTML = "Leider falsch";
-
+        document.getElementById("Hilfetext").textContent = ""; 
+        
       }
     }
 
@@ -154,6 +175,66 @@
         zeichneNebenkette(nebenkette);
         document.getElementById("großesDiv").innerHTML = ausgabe+"</svg>";
         buttonAktivierer();
+    }
+
+    function Hilfe(){
+      document.getElementById("Hilfetext").textContent = "Die Endung gibt dir an, wie lang die Hauptkette ist. Hierfür muss man die Namen der Kohlenwasserstoffe wie Vokabeln lernen."; 
+      document.getElementById("Hilfetext").innerHTML += `<br><br><table>  <tr>
+    <th>Name</th>
+    <td>Methan</th>
+    <td>Ethan</th>
+    <td>Propan</th>
+    <td>Butan</th>
+    <td>Pentan</th>
+    <td>Hexan</th>
+    <td>Heptan</th>
+    <td>Octan</th>
+    <td>Nonan</th>
+    <td>Decan</th>
+  </tr>
+  <tr>
+    <th>Anzahl C-Atome</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
+  </tr></table>`;  
+    }
+
+    function Hilfe2(){
+      document.getElementById("Hilfetext2").textContent = "Die Zahlen geben dir an, an welcher Stelle eine Seitenkette muss. Der Name (endet auf -yl) gibt dir an, wie lang diese Seitenkette ist."; 
+      document.getElementById("Hilfetext2").innerHTML += `<br><br>Hier eine Liste für die Länge der Seitenketten <table>  <tr>
+    <th>Name</th>
+    <td>Methyl</th>
+    <td>Ethyl</th>
+    <td>Propyl</th>
+    <td>Butyl</th>
+    <td>Pentyl</th>
+    <td>Hexyl</th>
+    <td>Heptyl</th>
+    <td>Octyl</th>
+    <td>Nonyl</th>
+    <td>Decyl</th>
+  </tr>
+  <tr>
+    <th>Anzahl C-Atome</td>
+    <td>1</td>
+    <td>2</td>
+    <td>3</td>
+    <td>4</td>
+    <td>5</td>
+    <td>6</td>
+    <td>7</td>
+    <td>8</td>
+    <td>9</td>
+    <td>10</td>
+  </tr></table>`;  //Tabelle einfügen
     }
 
     function buttonAktivierer(){
@@ -327,13 +408,60 @@
               summeRL += (hauptketteLänge)-(seitenketten[j][i]);
             }
           }
-          
+          console.table(seitenketten);
           if (summeLR>summeRL){
             vonRechtsNachLinks = true;
-          } else if(summeLR<=summeRL){
+            console.log(vonRechtsNachLinks);
+          } else if(summeLR<summeRL){
             vonRechtsNachLinks = false;
+            console.log(vonRechtsNachLinks);
+          } else if(summeLR=summeRL){
+            console.log("GLEICH GRoSS");
+            console.log(seitenketten[2][0],(hauptketteLänge-1-seitenketten[2][seitenketten[2].length-1]))
+            
+            console.log(seitenketten[2][0]<=(hauptketteLänge-1-seitenketten[2][seitenketten[2].length-1]))
+            if((seitenketten[3][0]!="" && seitenketten[3].length > 0)){
+              if(seitenketten[3][0]<=(hauptketteLänge-1-seitenketten[3][seitenketten[3].length-1])){
+                vonRechtsNachLinks = false;
+              }
+              if(seitenketten[3][0]>(hauptketteLänge-1-seitenketten[3][seitenketten[3].length-1])){
+                vonRechtsNachLinks = true;
+              }
+            }
+            if((seitenketten[5][0]!="" && seitenketten[5].length > 0)){
+              if(seitenketten[5][0]<=(hauptketteLänge-1-seitenketten[5][seitenketten[5].length-1])){
+                vonRechtsNachLinks = false;
+              }
+              if(seitenketten[5][0]>(hauptketteLänge-1-seitenketten[5][seitenketten[5].length-1])){
+                vonRechtsNachLinks = true;
+              }
+            }
+            if((seitenketten[1][0]!="" && seitenketten[1].length > 0)){
+              if(seitenketten[1][0]<=(hauptketteLänge-1-seitenketten[1][seitenketten[1].length-1])){
+                vonRechtsNachLinks = false;
+              }
+              if(seitenketten[1][0]>(hauptketteLänge-1-seitenketten[1][seitenketten[1].length-1])){
+                vonRechtsNachLinks = true;
+              }
+            }
+            if((seitenketten[2][0]!="" && seitenketten[2].length > 0)){
+              if(seitenketten[2][0]<=(hauptketteLänge-1-seitenketten[2][seitenketten[2].length-1])){   //3 vs 1
+                vonRechtsNachLinks = false;
+              }
+              if(seitenketten[2][0]>(hauptketteLänge-1-seitenketten[2][seitenketten[2].length-1])){   //3 vs 1
+                vonRechtsNachLinks = true;
+              }
+            }
+            if((seitenketten[4][0]!="" && seitenketten[4].length > 0)){
+              if(seitenketten[4][0]<=(hauptketteLänge-1-seitenketten[4][seitenketten[4].length-1])){ 
+                vonRechtsNachLinks = false;                
+              }
+              if(seitenketten[4][0]>(hauptketteLänge-1-seitenketten[4][seitenketten[4].length-1])){ 
+                vonRechtsNachLinks = true;                
+              }
+            }
           }
-        
+          console.log(vonRechtsNachLinks);
 
         
         var namensArray = [];

@@ -1,110 +1,181 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Stöchiometrie-Start</title>
-    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digitaltrainer Chemie</title>
 
-    <style> input{ width:140px; font-size:20px; text-align: center;}
-    .small{ width:50px; font-size:20px; text-align: center;}
-    .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
-    .ElementTabelle td{ border-color: black;border: 1px solid;}
-    .ElementTabelle tr{ border-color: black;border: 1px solid;}
-    td{ white-space: nowrap;}
-    li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
-    .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
-    .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
-    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
-    input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
-    body{background-color: rgba(193, 247, 239, 0.336);}
-    #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
-    h2{ font-size: 2vw;
-    margin-top: 1.5vh;
-    text-align: center;
-    margin-bottom: 0px;
+  <style>
+    body {
+      margin: 0;
+      background: #eef4fa;
+      font-family: system-ui, Arial;
     }
-    .Bildchen:hover{scale: 1.07;}
-    .Bildchen{
-        box-shadow: 7px 4px 6px 2px #000000;background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
-        border-radius: 40px; }
-    .Bildchen1{
-        box-shadow: 7px 4px 6px 2px #000000;background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
-        border-radius: 40px; display: none; align-content: center;}
-    .Bildchen:hover .Bildchen1{display: block;}
-    footer {  position: fixed;  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
-    img{
-        margin-top: 2vh;
-        margin-bottom: 2vh;
+
+    footer {
+        text-align: center;
     }
-        </style>
-    
-    
+
+    h1 {
+      text-align: center;
+      margin: 0.5rem 0;
+      font-size: 4vw;
+      text-shadow: 4px 4px 1px rgba(2,124,206,0.62);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      width: 95%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 0;
+    }
+
+    .card {
+      background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
+      border-radius: 30px;
+      box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
+      padding: 20px;
+      height: 390px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+      cursor: pointer;
+      transition: transform .25s ease;
+    }
+
+    .card:hover { transform: scale(1.05); }
+
+    .card h2 {
+      text-align: center;
+      font-size: 1.8rem;
+      margin: 0;
+    }
+
+    .card img {
+      width: 90%;
+      height: auto;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
+
+    /* Unterkarten für Reaktionsarten */
+    .subcard {
+      background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
+      border-radius: 30px;
+      box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
+      padding: 15px;
+      color: white;
+      text-align: center;
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      display: none;
+      cursor: pointer;
+    }
+
+    .card:hover .subcard { display: block; }
+
+    .sub-redox { top: 120px; }
+    .sub-sb { top: 250px; }
+
+    .smallgrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      width: 90%;
+      margin: 20px auto;
+    }
+
+    .smallcard {
+      height: 90px;
+      background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
+      border-radius: 30px;
+      box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.6rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform .25s;
+    }
+
+    .smallcard:hover { transform: scale(1.05); }
+
+  </style>
 </head>
 <body>
-    <div style="text-align: center; margin-top: 0.1em;margin-bottom: 0.4em;"><h1 style="font-size: 4em; margin: 0.5em;text-shadow: 4px 4px 1px rgba(2,124,206,0.62);font-size: 4vw;">Digitaltrainer Chemie</h1></div>
-    <div style="display: flex;flex-direction: row;justify-content: space-around;margin: auto;">
-        
-        <div class="Bildchen" onclick="Klasse8()" style="height: 50vh; background-color: blue; width: 28vw;margin: 3%;margin-top: 0;"> <h2>Stöchiometrietrainer <br>Klasse 8</h2> <img src="img/Klasse8.png" alt="Klasse8" width="100%"  height="75%" /></div>
-        <div class="Bildchen" onclick="Anzeigen()" style="position: relative; display: inline-block; height: 50vh; background-color: red; width: 28vw;margin: 3%;margin-top: 0;"> <h2>Reaktionsarten<br>Klasse 9</h2> <img src="img/Klasse9.png" alt="Klasse9" width="100%"  height="75%" />
-            <div class="Bildchen1" id="RedoxFeld" onclick="Redox()" style="height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 12vh; align-items: center;">
-                <h2 style="text-align: center; font-size: 2.5vw;">Redox- <br> reaktionen</h2>
-            </div>
-            <div class="Bildchen1" id="SäureBaseFeld" onclick="SäureBase()" style="height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 30vh; align-items: center;">
-                <h2 style="text-align: center;font-size: 2.5vw;">Säure-Base- <br> reaktionen</h2>
-            </div>
+  <h1>Digitaltrainer Chemie</h1>
 
-        </div>
-        <div class="Bildchen" onclick="Klasse10()" style="height: 50vh; background-color: red; width: 28vw;margin: 3%;margin-top: 0;"> <h2>Stöchiometrietrainer<br>Klasse 10</h2> <img src="img/Klasse10.png" alt="Klasse10" width="100%"  height="75%" /></div>
-    </div>
-    <div style="display: flex;align-content: center;justify-content: center;">
-        <div class="Bildchen" onclick="Wertigkeitstrainer()" style="display:flex; height: 10vh; background-color: red; width: 33vw;justify-content: center;align-content: center; margin: 2vb;"> <h2 style="text-align: center; margin:auto; font-size: 2vw;">Wertigkeitstrainer</h2></div>
-        <div class="Bildchen" onclick="MolareMasseTrainer()" style="display:flex; height: 10vh; background-color: red; width: 33vw;justify-content: center;align-content: center; margin: 2vb;"> <h2 style="text-align: center; margin:auto; font-size: 2vw;">Molare Masse Trainer</h2></div>
-        <div class="Bildchen" onclick="Stoffmengenkonzentration()" style="display:flex; height: 10vh; background-color: red; width: 33vw;justify-content: center;align-content: center; margin: 2vb;"> <h2 style="text-align: center; margin:auto; font-size: 2vw;">Stoffmengenkonzentration</h2></div>
-    </div>      
-    <div style="display: flex;flex-direction: row;justify-content: space-around;margin: auto;">
-        <div class="Bildchen" onclick="SchalenmodellVisualisieren()" style="align-items: center;display: flex; height: 10vh; background-color: red; width: 33vw;margin: 2vb;margin-top: 0;"> <h2 style="align-items: center;text-align: center; margin:auto; font-size: 2vw;">Schalen- & Energiestufenmodell</h2></div>
-        <div class="Bildchen" onclick="SchalenmodellZuordnen()" style="align-items: center;display: flex; height: 10vh; background-color: blue; width: 33vw;margin: 2vb;margin-top: 0;"> <h2 style="align-items: center;text-align: center; margin:auto; font-size: 2vw;">Schalenmodell<br>zuordnen</h2> </div>
-        <div class="Bildchen" onclick="SchalenmodellErstellen()" style="align-items: center;position: relative; display: flex; height: 10vh; background-color: red; width: 33vw;margin: 2vb;margin-top: 0;"> <h2 style="align-items: center;text-align: center; margin:auto; font-size: 2vw;">Schalenmodell<br>erstellen</h2> </div>
-        
-    </div>
-    <script>
-        function Klasse8(){
-            window.location = "Stöchiometrietrainer8.html";
-        }
-        function Klasse10(){
-            window.location = "Stöchiometrietrainer.html";
-        }
-        function Stoffmengenkonzentration(){
-            window.location = "Stoffmengenkonzentration.html";
-        }
-        function Redox(){
-            window.location = "Redox.html";
-        }
-        function SäureBase(){
-            window.location = "Säure-Base.html";
-        }
-        function Wertigkeitstrainer(){
-            window.location = "Wertigkeitstrainer.html";
-        }
-        function MolareMasseTrainer(){
-            window.location = "Molare Masse Trainer.html";
-        }
-        function Anzeigen(){
-            document.getElementById("RedoxFeld").setAttribute("style","height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 12vh; align-items: center; display:block;");
-            document.getElementById("SäureBaseFeld").setAttribute("style","height: 15vh; position: absolute;  background-color: blue; width: 24vw; margin: 3%; margin-top: 0; left: 3%;  top: 30vh; align-items: center;display:block;");
+  <div class="grid">
 
-        }
-        function SchalenmodellZuordnen(){
-            window.location = "SchalenmodellZuordnen.html";
-        }
-        function SchalenmodellVisualisieren(){
-            window.location = "Schalenmodell+Energiestufenmodell.html";
-        }
-        function SchalenmodellErstellen(){
-            window.location = "SchalenmodellErstellen.html";
-        }
-    </script>
+    <div class="card" onclick="Klasse8()">
+      <h2>Stöchiometrietrainer<br>Klasse 8</h2>
+      <img src="img/Klasse8.png" alt="Klasse8">
+    </div>
+
+    <div class="card" style="position: relative;" onclick="Anzeigen()">
+      <h2>Reaktionsarten<br>Klasse 9</h2>
+      <img src="img/Klasse9.png" alt="Klasse9">
+
+      <div class="subcard sub-redox" onclick="Redox()">
+        <h2>Redox-<br>reaktionen</h2>
+      </div>
+
+      <div class="subcard sub-sb" onclick="SäureBase()">
+        <h2>Säure-Base-<br>reaktionen</h2>
+      </div>
+    </div>
+
+    <div class="card" onclick="Klasse10()">
+      <h2>Stöchiometrietrainer<br>Klasse 10</h2>
+      <img src="img/Klasse10.png" alt="Klasse10">
+    </div>
+
+  </div>
+
+  <div class="smallgrid">
+    <div class="smallcard" onclick="Wertigkeitstrainer()">Wertigkeitstrainer</div>
+    <div class="smallcard" onclick="SchalenmodellVisualisieren()">Schalen- & <br>Energiestufenmodell</div>
+    <div class="smallcard" onclick="StrukturformelBenenner()">Strukturformeln benennen</div>
+  </div>
+
+  <div class="smallgrid">
+    <div class="smallcard" onclick="MolareMasseTrainer()">Molare Masse Trainer</div>
+    <div class="smallcard" onclick="SchalenmodellZuordnen()">Schalenmodell zuordnen</div>
+    <div class="smallcard" onclick="StrukturformelKlicker()">Strukturformeln zeichnen</div>
+  </div>
+
+<div class="smallgrid">
+    <div class="smallcard" onclick="Stoffmengenkonzentration()">Stoffmengenkonzentration</div>
+    <div class="smallcard" onclick="SchalenmodellErstellen()">Schalenmodell erstellen</div>
+    <div class="smallcard" onclick="Strukturformelzeichner()">Strukturformeln visualisieren</div>
+  </div>
+
+<script>
+  function Klasse8(){ window.location = "Stöchiometrietrainer8.html"; }
+  function Klasse10(){ window.location = "Stöchiometrietrainer.html"; }
+  function Stoffmengenkonzentration(){ window.location = "Stoffmengenkonzentration.html"; }
+  function Redox(){ window.location = "Redox.html"; }
+  function SäureBase(){ window.location = "Säure-Base.html"; }
+  function Wertigkeitstrainer(){ window.location = "Wertigkeitstrainer.html"; }
+  function MolareMasseTrainer(){ window.location = "Molare Masse Trainer.html"; }
+  function SchalenmodellZuordnen(){ window.location = "SchalenmodellZuordnen.html"; }
+  function SchalenmodellVisualisieren(){ window.location = "Schalenmodell+Energiestufenmodell.html"; }
+  function SchalenmodellErstellen(){ window.location = "SchalenmodellErstellen.html"; }
+  function StrukturformelBenenner(){ window.location = "StrukturformelBenenner.html"; }
+  function StrukturformelKlicker(){ window.location = "StrukturformelKlicker.html"; }
+  function Strukturformelzeichner(){ window.location = "Strukturformelzeichner.html"; }
+</script>
+
 </body>
-
+<footer>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Chemie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+</footer>
 </html>
