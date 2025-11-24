@@ -8,66 +8,63 @@
   <style>
     body {
       margin: 0;
-      background: #eff5fa;
+      background: #eef4fa;
       font-family: system-ui, Arial;
-      
-    }
-
-    footer {
-        text-align: center;
     }
 
     h1 {
       text-align: center;
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       font-size: 4vw;
       text-shadow: 4px 4px 1px rgba(2,124,206,0.62);
     }
 
-    .grid {
+    /* --- OBERER BEREICH: 3 große Cards --- */
+    .grid-top {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, minmax(280px, 1fr));
+      gap: 30px;
       width: 95%;
       max-width: 1400px;
       margin: 0 auto;
-      padding: 0 0;
+      padding: 20px 0;
     }
 
-    .card {
+    .card-large {
       background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
       border-radius: 12px;
       box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
       padding: 20px;
-      height: 390px;
+      height: 380px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: space-evenly;
       align-items: center;
       color: white;
       cursor: pointer;
       transition: transform .25s ease;
+      position: relative;
     }
 
-    .card:hover { transform: scale(1.05);outline: 2px solid #4B8BFF;}
+    .card-large:hover { transform: scale(1.05); }
 
-    .card h2 {
+    .card-large h2 {
       text-align: center;
       font-size: 1.8rem;
       margin: 0;
     }
 
-
-
-    .card img {
+    .card-large img {
       width: 100%;
-      max-width: 280px;
+      max-width: 260px;
       height: auto;
+      border-radius: 12px;
+      margin-top: 15px;
       object-fit: contain;
       display: block;
     }
 
-    /* Unterkarten für Reaktionsarten */
+    /* --- SUBCARDS --- */
     .subcard {
       background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
       border-radius: 12px;
@@ -76,112 +73,153 @@
       color: white;
       text-align: center;
       position: absolute;
-      width: 80%;
+      width: 70%;
       left: 10%;
       display: none;
       cursor: pointer;
+      transition: .25s;
     }
 
-    .card:hover .subcard { display: block; }
+    .card-large:hover .subcard,
+    .card-small:hover .subcard {
+      display: block;
+    }
 
-    .sub-redox { top: 120px; }
-    .sub-sb { top: 250px; }
+    .card-large .sub-1 { top: 140px; }
+    .card-large .sub-2 { top: 250px; }
 
-    .smallgrid {
+    .subcard:hover { transform: scale(1.05); }
+
+    .sub-1 { top: 70px; }
+    .sub-2 { top: 140px; }
+    .sub-3 { top: 210px; }
+
+    /* --- UNTERER BEREICH: 3 kleinere Cards --- */
+    .grid-bottom {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-      width: 90%;
-      margin: 20px auto;
+      grid-template-columns: repeat(3, minmax(280px, 1fr));
+      gap: 25px;
+      width: 95%;
+      max-width: 1400px;
+      margin: 20px auto 50px auto;
     }
+   
 
-    .smallcard {
-      height: 90px;
+    .card-small {
       background: linear-gradient(135deg, #03D1E9 0%, #3604FF 100%);
       border-radius: 12px;
       box-shadow: 6px 6px 10px rgba(0,0,0,0.4);
+      padding: 20px;
+      height: 250px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: space-evenly;
       align-items: center;
       color: white;
-      font-size: 1.6rem;
-      text-align: center;
       cursor: pointer;
       transition: transform .25s;
+      position: relative;
     }
 
-    .smallcard:hover { transform: scale(1.05); outline: 2px solid #4B8BFF; }
+    .card-small:hover { transform: scale(1.05); }
 
-    
+    .card-small h2 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    .card-small img {
+      width: 100%;
+      max-width: 180px;
+      height: auto;
+      display: block;
+      margin-top: 10px;
+    }
 
   </style>
 </head>
 <body>
+
   <h1>Digitaltrainer Chemie</h1>
 
-  <div class="grid">
+  <!-- OBERER BEREICH: 3 große Karten -->
+  <div class="grid-top">
 
-    <div class="card" onclick="Klasse8()">
+    <div class="card-large" onclick="Klasse8()">
       <h2>Stöchiometrietrainer<br>Klasse 8</h2>
-      <img src="img/Klasse8.png" alt="Klasse8">
+      <img src="img/Klasse8.png" alt="Klasse 8">
     </div>
 
-    <div class="card" style="position: relative;" onclick="Anzeigen()">
+    <div class="card-large">
       <h2>Reaktionsarten<br>Klasse 9</h2>
-      <img src="img/Klasse9.png" alt="Klasse9">
+      <img src="img/Klasse9.png" alt="Klasse 9">
 
-      <div class="subcard sub-redox" onclick="Redox()">
-        <h2>Redox-<br>reaktionen</h2>
-      </div>
-
-      <div class="subcard sub-sb" onclick="SäureBase()">
-        <h2>Säure-Base-<br>reaktionen</h2>
-      </div>
+      <div class="subcard sub-1" onclick="Redox()"><h2>Redoxreaktionen</h2></div>
+      <div class="subcard sub-2" onclick="SäureBase()"><h2>Säure-Base</h2></div>
+      
     </div>
 
-    <div class="card" onclick="Klasse10()">
+    <div class="card-large" onclick="Klasse10()">
       <h2>Stöchiometrietrainer<br>Klasse 10</h2>
-      <img src="img/Klasse10.png" alt="Klasse10">
+      <img src="img/Klasse10.png" alt="Klasse 10">
     </div>
 
   </div>
 
-  <div class="smallgrid">
-    <div class="smallcard" onclick="Wertigkeitstrainer()">Wertigkeitstrainer</div>
-    <div class="smallcard" onclick="SchalenmodellVisualisieren()">Schalen- & <br>Energiestufenmodell</div>
-    <div class="smallcard" onclick="StrukturformelBenenner()">Strukturformeln benennen</div>
+  <!-- UNTERER BEREICH: 3 kleinere Karten in fester Reihenfolge -->
+  <div class="grid-bottom">
+
+    <div class="card-small">
+      <h2>Stoffgrößen und Wertigkeiten</h2>
+      <img src="img/Wertigkeit.png" height="500pc" alt="Stoffgrößen und Wertigkeiten">
+
+      <div class="subcard sub-1" onclick="Wertigkeitstrainer()"><h2>Wertigkeit</h2></div>
+      <div class="subcard sub-2" onclick="MolareMasseTrainer()"><h2>Molare Masse</h2></div>
+      <div class="subcard sub-3" onclick="Stoffmengenkonzentration()"><h2>Konzentration</h2></div>
+    </div>
+
+    <div class="card-small">
+      <h2>Schalenmodelle</h2>
+      <img src="img/Schalenmodell.png" alt="Schalenmodelle">
+
+      <div class="subcard sub-1" onclick="SchalenmodellVisualisieren()"><h2>Visualisieren</h2></div>
+      <div class="subcard sub-2" onclick="SchalenmodellZuordnen()"><h2>Zuordnen</h2></div>
+      <div class="subcard sub-3" onclick="SchalenmodellErstellen()"><h2>Erstellen</h2></div>
+    </div>
+
+    <div class="card-small">
+      <h2>Strukturformeln</h2>
+      <img src="img/Strukturformeln.png" alt="Strukturformeln">
+
+      <div class="subcard sub-1" onclick="StrukturformelBenenner()"><h2>Benennen</h2></div>
+      <div class="subcard sub-2" onclick="StrukturformelKlicker()"><h2>Zeichnen</h2></div>
+      <div class="subcard sub-3" onclick="StrukturformelVisualisieren()"><h2>Visualisieren</h2></div>
+    </div>
+
   </div>
 
-  <div class="smallgrid">
-    <div class="smallcard" onclick="MolareMasseTrainer()">Molare Masse Trainer</div>
-    <div class="smallcard" onclick="SchalenmodellZuordnen()">Schalenmodell zuordnen</div>
-    <div class="smallcard" onclick="StrukturformelKlicker()">Strukturformeln zeichnen</div>
-  </div>
-
-<div class="smallgrid">
-    <div class="smallcard" onclick="Stoffmengenkonzentration()">Stoffmengenkonzentration</div>
-    <div class="smallcard" onclick="SchalenmodellErstellen()">Schalenmodell erstellen</div>
-    <div class="smallcard" onclick="Strukturformelzeichner()">Strukturformeln visualisieren</div>
-  </div>
 
 <script>
   function Klasse8(){ window.location = "Stöchiometrietrainer8.html"; }
   function Klasse10(){ window.location = "Stöchiometrietrainer.html"; }
-  function Stoffmengenkonzentration(){ window.location = "Stoffmengenkonzentration.html"; }
+
   function Redox(){ window.location = "Redox.html"; }
   function SäureBase(){ window.location = "Säure-Base.html"; }
+  function WeitereReaktionen(){ window.location = "WeitereReaktionen.html"; }
+
   function Wertigkeitstrainer(){ window.location = "Wertigkeitstrainer.html"; }
   function MolareMasseTrainer(){ window.location = "Molare Masse Trainer.html"; }
+  function Stoffmengenkonzentration(){ window.location = "Stoffmengenkonzentration.html"; }
+
   function SchalenmodellZuordnen(){ window.location = "SchalenmodellZuordnen.html"; }
   function SchalenmodellVisualisieren(){ window.location = "Schalenmodell+Energiestufenmodell.html"; }
   function SchalenmodellErstellen(){ window.location = "SchalenmodellErstellen.html"; }
+
   function StrukturformelBenenner(){ window.location = "StrukturformelBenenner.html"; }
   function StrukturformelKlicker(){ window.location = "StrukturformelKlicker.html"; }
-  function Strukturformelzeichner(){ window.location = "Strukturformelzeichner.html"; }
+  function StrukturformelVisualisieren(){ window.location = "Strukturformelzeichner.html"; }
 </script>
 
 </body>
-<footer>
-    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Chemie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-</footer>
 </html>
