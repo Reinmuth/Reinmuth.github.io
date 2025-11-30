@@ -94,6 +94,9 @@
     th {
       border: 1px solid black;
     }
+    div {
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -104,9 +107,12 @@
   <h3 style="text-align: center; color: coral;font-size:x-large;" id="AufgabenstellungsFeld">Gib zuerst die längste
     Kette des folgenden Stoffes an: </h3>
   <h2 id="Namensfeld"></h2>
-  <input id="Eingabe" style="width: 200px" placeholder="Länge der Hauptkette"><input type="button" id="PruefButton"
-    value="Prüfen" onclick="Prüfen()">
-  <input type="button" id="HilfButton" value="Hilfe" onclick="Hilfe()">
+<div>
+  <input id="Eingabe" style="width: 200px" placeholder="Länge der Hauptkette">
+  <div>
+  <input type="button" id="PruefButton" value="Prüfen" onclick="Prüfen()"> <input type="button" id="HilfButton" value="Hilfe" onclick="Hilfe()">
+  </div>
+</div>
   <p id="Hilfetext"></p>
   <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
   <p id="RückmeldungFeld"></p>
