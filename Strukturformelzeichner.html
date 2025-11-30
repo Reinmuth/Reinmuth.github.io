@@ -209,11 +209,58 @@
             }
           }
           
-          if (summeLR>summeRL){
-            vonRechtsNachLinks = true;
-          } else if(summeLR<=summeRL){
-            vonRechtsNachLinks = false;
-          }
+          if (summeLR > summeRL) {
+      vonRechtsNachLinks = true;
+      console.log(vonRechtsNachLinks);
+    } else if (summeLR < summeRL) {
+      vonRechtsNachLinks = false;
+      console.log(vonRechtsNachLinks);
+    } else if (summeLR = summeRL) {
+      console.log("GLEICH GRoSS");
+      console.log(seitenketten[2][0], (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1]))
+
+      console.log(seitenketten[2][0] <= (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1]))
+      if ((seitenketten[3][0] != "" && seitenketten[3].length > 0)) {
+        if (seitenketten[3][0] <= (hauptketteLänge - 1 - seitenketten[3][seitenketten[3].length - 1])) {
+          vonRechtsNachLinks = false;
+        }
+        if (seitenketten[3][0] > (hauptketteLänge - 1 - seitenketten[3][seitenketten[3].length - 1])) {
+          vonRechtsNachLinks = true;
+        }
+      }
+      if ((seitenketten[5][0] != "" && seitenketten[5].length > 0)) {
+        if (seitenketten[5][0] <= (hauptketteLänge - 1 - seitenketten[5][seitenketten[5].length - 1])) {
+          vonRechtsNachLinks = false;
+        }
+        if (seitenketten[5][0] > (hauptketteLänge - 1 - seitenketten[5][seitenketten[5].length - 1])) {
+          vonRechtsNachLinks = true;
+        }
+      }
+      if ((seitenketten[1][0] != "" && seitenketten[1].length > 0)) {
+        if (seitenketten[1][0] <= (hauptketteLänge - 1 - seitenketten[1][seitenketten[1].length - 1])) {
+          vonRechtsNachLinks = false;
+        }
+        if (seitenketten[1][0] > (hauptketteLänge - 1 - seitenketten[1][seitenketten[1].length - 1])) {
+          vonRechtsNachLinks = true;
+        }
+      }
+      if ((seitenketten[2][0] != "" && seitenketten[2].length > 0)) {
+        if (seitenketten[2][0] <= (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1])) {   //3 vs 1
+          vonRechtsNachLinks = false;
+        }
+        if (seitenketten[2][0] > (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1])) {   //3 vs 1
+          vonRechtsNachLinks = true;
+        }
+      }
+      if ((seitenketten[4][0] != "" && seitenketten[4].length > 0)) {
+        if (seitenketten[4][0] <= (hauptketteLänge - 1 - seitenketten[4][seitenketten[4].length - 1])) {
+          vonRechtsNachLinks = false;
+        }
+        if (seitenketten[4][0] > (hauptketteLänge - 1 - seitenketten[4][seitenketten[4].length - 1])) {
+          vonRechtsNachLinks = true;
+        }
+      }
+    }
         
 
         
