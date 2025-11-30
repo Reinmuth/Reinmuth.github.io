@@ -279,7 +279,7 @@
       document.getElementById("Hilf2Button").disabled = true;
     } else {
       if (HilfeCounter == 1) {
-        document.getElementById("Hilfetext2").textContent = "Die Zahlen geben dir an, an welcher Stelle eine Seitenkette muss. Der Name (endet auf -yl) gibt dir an, wie lang diese Seitenkette ist.";
+        document.getElementById("Hilfetext2").innerHTML = "Die Zahlen geben dir an, an welcher Stelle eine Seitenkette muss. <br>Der Name (endet auf -yl) gibt dir an, wie lang diese Seitenkette ist.";
         document.getElementById("Hilfetext2").innerHTML += `<br><br>Hier eine Liste für die Länge der Seitenketten <table>  <tr>
             <th>Name</th>
             <td id="S1">Methyl</th>
