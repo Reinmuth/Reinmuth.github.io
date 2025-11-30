@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    
+    <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
+    <title>Redoxreaktionen Klasse 9</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style> input{ width:140px; font-size:20px; text-align: center;}
+        
+        .small{ width:50px; font-size:20px; text-align: center;}
+        .ElementTabelle{ border-color: black;border: 1px solid; width:50%; margin:10px auto;}
+        .ElementTabelle td{ border-color: black;border: 1px solid; padding-top: 0px;}
+        .ElementTabelle tr{ border-color: black;border: 1px solid;}
+        .PfeilRechts{ 
+          font-weight: bolder;
+          padding-bottom: 0px;
+          padding-top: 0px;
+          text-align: left;
+          padding-left: 0px;}
+
+        .PfeilLinks{ 
+        font-weight: bolder;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        text-align: right;
+        padding-right: 0px;}
+
+        #Wahl {font-size: x-large;text-align: center;}
+        table, th, td {
+            font-size: x-large;
+        border: 1px solid none;
+        border-collapse: collapse;
+        padding: 10px;
+        }
+        p{text-align: center;}
+        select { font-size: 20px;        }
+        li{display: inline-block; margin-right: 5px; padding:10px; border: 1px solid black;border-radius: 5px;font-size: 18px;}
+        .image {margin-left: 20px; margin-right: 20px; box-shadow: 11px 12px 13px 7px rgba(0,0,0,0.67); }
+        .Haupttabelle{font-size: x-large; text-align: center; width: 80%; height: 100%; margin-left: auto; margin-right: auto;}
+        input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+        input[type="button"]:hover{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: rgba(223, 196, 161, 0.555);}
+        body{background-color: rgba(193, 247, 239, 0.336);}
+        #Anzeiger{display: flex; border: 1px solid black;margin: auto;width: fit-content; background-color: rgba(176, 181, 189, 0.438);vertical-align: auto; white-space: nowrap;}
+        h2{ font-size: 40px;}
+        footer {  padding: -0.4em;  bottom: 0.0em;  left: 0;  right: 0; text-align: center;}
+        nav > input{
+                display: none;
+            }
+    
+            ul{
+                display: none;
+                margin: 0;
+                padding: 5px;
+            }
+            input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+            nav li{display:flex;
+                margin-right: 0px;
+                padding:0px;
+                border: 0;
+                border-radius: 0px;
+            }
+            .OC td{
+            border: 1px solid;
+            border-collapse: collapse;
+          }
+          .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            
+          }
+          .Infos{
+            width: auto;
+          }
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+          div label input {margin-right: 100px;}
+          .container{width: 250px; height: 38px; margin: 100px auto;}
+    
+          .cat{
+      margin: 4px;
+      background-color: #104068;
+      border-radius: 4px;
+      border: 1px solid #fff;
+      overflow: hidden;
+      float: left;
+    }
+    
+    .cat label {
+      float: left; line-height: 3.0em;
+      width: 12.0em; height: 3.0em;
+    }
+    
+    .cat label span {
+      text-align: center;
+      padding: 3px 0;
+      display: block;
+    }
+    
+    .cat label input {
+      position: absolute;
+      display: none;
+      color: #fff !important;
+    }
+    /* selects all of the text within the input element and changes the color of the text */
+    .cat label input + span{color: #fff;}
+    
+    
+    /* This will declare how a selected input will look giving generic properties */
+    .cat input:checked + span {
+        background-color: #82D44E;
+        color: #ffffff;
+        text-shadow: 0 0  6px rgba(0, 0, 0, 0.8);
+    }
+    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
+    top: 20px;
+    left: 20px;}
+    @media (max-width: 768px) {
+
+/* Grundschrift leicht verkleinern */
+body {
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+/* Tabelle scrollbar machen, ohne Desktop zu verändern */
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+/* Zellen leicht kleiner */
+table th, table td {
+  padding: 6px;
+  font-size: 15px;
+  white-space: nowrap; /* kompakter auf Mobile */
+}
+
+/* Input-Felder füllen den Screen */
+input[type="text"],
+input[type="number"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 18px;
+  margin: 4px 0;
+}
+
+/* Buttons komfortabler für Touch */
+button,
+input[type="button"] {
+  padding: 12px;
+  font-size: 18px;
+}
+
+/* Zurück-Pfeil besser positionieren */
+#ZurückZumStart {
+  top: 10px;
+  left: 10px;
+  width: 40px;
+}
+
+/* Große Überschriften kleiner */
+h1, h2, h3 {
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Layout-Container: leicht einrücken */
+.Haupttabelle, 
+#AufgabenTabelle {
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+/* Buttons untereinander statt nebeneinander */
+#LoesungsFeld {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#LoesungsFeld input[type="button"] {
+  width: 100%;
+}
+}@media (max-width: 768px) {
+
+/* Grundschrift leicht verkleinern */
+body {
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+/* Tabelle scrollbar machen, ohne Desktop zu verändern */
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+}
+
+/* Zellen leicht kleiner */
+table th, table td {
+  padding: 6px;
+  font-size: 15px;
+  white-space: nowrap; /* kompakter auf Mobile */
+}
+
+/* Input-Felder füllen den Screen */
+input[type="text"],
+input[type="number"],
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  font-size: 18px;
+  margin: 4px 0;
+}
+
+/* Buttons komfortabler für Touch */
+button,
+input[type="button"] {
+  padding: 12px;
+  font-size: 18px;
+}
+
+/* Zurück-Pfeil besser positionieren */
+#ZurückZumStart {
+  top: 10px;
+  left: 10px;
+  width: 40px;
+}
+
+/* Große Überschriften kleiner */
+h1, h2, h3 {
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Layout-Container: leicht einrücken */
+.Haupttabelle, 
+#AufgabenTabelle {
+  width: 100% !important;
+  margin: 0 auto;
+}
+
+/* Buttons untereinander statt nebeneinander */
+#LoesungsFeld {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#LoesungsFeld input[type="button"] {
+  width: 100%;
+}
+}
+
+    
+            </style>
+    
+    
+</head>
+<body>
+    <h2 style="text-align: center;">Redoxreaktionen Klasse 9</h2>
+    <div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
+
+     
+ 
+    <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="Aufgabenstellung"></h3><button value="Neuladen" onclick="javascript:location.reload()"><img src="img/refresh.png" width="25px"></button></div>
+    <p id = "Ox"></p>
+    <p id = "Red"></p>
+    <div id="AufgabenTabelle" style="visibility: visible ;text-align: center; box-sizing: border-box; justify-items: center;">
+        <table>
+            <tbody id ="myTable" style="border-color: black;border: 1px solid;">
+                
+
+            </tbody>
+        </table>
+
+    </div>
+    <div style="text-align: center; box-sizing: border-box;" id="LoesungsFeld"><p></p><input value="Prüfen" type="button" id="PrüfButton" onclick="PrüfUnterscheidung()">  &ensp; <input style="visibility: visible;" value="weiter" type="button" id="PrüfButton2" onclick="Weiter()"></div>
+        <p style="text-align: center; font-size: large;" id="HilfeFeld"></p><p><br></p>
+        <p id = "HinweisFeld">Hinweis: Gib Summenformeln folgendermaßen ein: z.B. H2O (wird zu H2O), Cu^2+ (wird zu Cu<sup>2+</sup>)</p>
+        <div style="text-align: center;"><input type="button" id="HilfeButton" value="Hilfe" onclick="Hilfe()">
+        <p id="Hilfetext"></p></div>
+
+<script>
+    var meinArray = [];
+    var HilfeCounter = 0;
+    var level =0;
+    meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "I2", RedProdFormel: "I-", OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Iod", RedProd: "Iodidion", Prod: "Lithiumiodid"});
+    meinArray.push({OxEduktFormel: "Ca", OxProdFormel: "Ca^2+", RedEduktFormel: "N2", RedProdFormel: "N^3-", OxEdukt: "Calcium", OxProd: "Calciumion", RedEdukt: "Stickstoff", RedProd: "Nitridionen", Prod: "Calciumnitrid"});
+    meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "F2",  RedProdFormel: "F-",  OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Fluor",     RedProd: "Fluoridion",   Prod: "Lithiumfluorid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Lithiumchlorid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "Br2", RedProdFormel: "Br-", OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Brom",      RedProd: "Bromidion",    Prod: "Lithiumbromid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "I2",  RedProdFormel: "I-",  OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Iod",       RedProd: "Iodidion",     Prod: "Lithiumiodid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Lithiumoxid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "S8",   RedProdFormel: "S^2-",OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Schwefel",  RedProd: "Sulfidion",    Prod: "Lithiumsulfid"});
+meinArray.push({OxEduktFormel: "Li", OxProdFormel: "Li+", RedEduktFormel: "N2",  RedProdFormel: "N^3-",OxEdukt: "Lithium", OxProd: "Lithiumion", RedEdukt: "Stickstoff",RedProd: "Nitridionen",  Prod: "Lithiumnitrid"});
+
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "F2",  RedProdFormel: "F-",  OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Fluor",     RedProd: "Fluoridion",   Prod: "Natriumfluorid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Natriumchlorid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "Br2", RedProdFormel: "Br-", OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Brom",      RedProd: "Bromidion",    Prod: "Natriumbromid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "I2",  RedProdFormel: "I-",  OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Iod",       RedProd: "Iodidion",     Prod: "Natriumiodid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Natriumoxid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "S8",   RedProdFormel: "S^2-",OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Schwefel",  RedProd: "Sulfidion",    Prod: "Natriumsulfid"});
+meinArray.push({OxEduktFormel: "Na", OxProdFormel: "Na+", RedEduktFormel: "N2",  RedProdFormel: "N^3-",OxEdukt: "Natrium", OxProd: "Natriumion", RedEdukt: "Stickstoff",RedProd: "Nitridionen",  Prod: "Natriumnitrid"});
+
+meinArray.push({OxEduktFormel: "K",  OxProdFormel: "K+",  RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Kalium",  OxProd: "Kaliumion",  RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Kaliumchlorid"});
+meinArray.push({OxEduktFormel: "K",  OxProdFormel: "K+",  RedEduktFormel: "Br2", RedProdFormel: "Br-", OxEdukt: "Kalium",  OxProd: "Kaliumion",  RedEdukt: "Brom",      RedProd: "Bromidion",    Prod: "Kaliumbromid"});
+meinArray.push({OxEduktFormel: "K",  OxProdFormel: "K+",  RedEduktFormel: "I2",  RedProdFormel: "I-",  OxEdukt: "Kalium",  OxProd: "Kaliumion",  RedEdukt: "Iod",       RedProd: "Iodidion",     Prod: "Kaliumiodid"});
+meinArray.push({OxEduktFormel: "K",  OxProdFormel: "K+",  RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Kalium",  OxProd: "Kaliumion",  RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Kaliumoxid"});
+
+meinArray.push({OxEduktFormel: "Be", OxProdFormel: "Be^2+", RedEduktFormel: "F2",  RedProdFormel: "F-",  OxEdukt: "Beryllium", OxProd: "Berylliumion", RedEdukt: "Fluor",     RedProd: "Fluoridion",   Prod: "Berylliumfluorid"});
+meinArray.push({OxEduktFormel: "Be", OxProdFormel: "Be^2+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Beryllium", OxProd: "Berylliumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Berylliumchlorid"});
+meinArray.push({OxEduktFormel: "Be", OxProdFormel: "Be^2+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Beryllium", OxProd: "Berylliumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Berylliumoxid"});
+
+meinArray.push({OxEduktFormel: "Mg", OxProdFormel: "Mg^2+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Magnesium", OxProd: "Magnesiumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Magnesiumchlorid"});
+meinArray.push({OxEduktFormel: "Mg", OxProdFormel: "Mg^2+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Magnesium", OxProd: "Magnesiumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Magnesiumoxid"});
+meinArray.push({OxEduktFormel: "Mg", OxProdFormel: "Mg^2+", RedEduktFormel: "N2",  RedProdFormel: "N^3-",OxEdukt: "Magnesium", OxProd: "Magnesiumion", RedEdukt: "Stickstoff",RedProd: "Nitridionen",  Prod: "Magnesiumnitrid"});
+
+meinArray.push({OxEduktFormel: "Ca", OxProdFormel: "Ca^2+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Calcium", OxProd: "Calciumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Calciumchlorid"});
+meinArray.push({OxEduktFormel: "Ca", OxProdFormel: "Ca^2+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Calcium", OxProd: "Calciumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Calciumoxid"});
+meinArray.push({OxEduktFormel: "Ca", OxProdFormel: "Ca^2+", RedEduktFormel: "S8",   RedProdFormel: "S^2-",OxEdukt: "Calcium", OxProd: "Calciumion", RedEdukt: "Schwefel",  RedProd: "Sulfidion",    Prod: "Calciumsulfid"});
+meinArray.push({OxEduktFormel: "Ca", OxProdFormel: "Ca^2+", RedEduktFormel: "N2",  RedProdFormel: "N^3-",OxEdukt: "Calcium", OxProd: "Calciumion", RedEdukt: "Stickstoff",RedProd: "Nitridionen",  Prod: "Calciumnitrid"});
+
+meinArray.push({OxEduktFormel: "Al", OxProdFormel: "Al^3+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-", OxEdukt: "Aluminium", OxProd: "Aluminiumion", RedEdukt: "Chlor",     RedProd: "Chloridion",   Prod: "Aluminiumchlorid"});
+meinArray.push({OxEduktFormel: "Al", OxProdFormel: "Al^3+", RedEduktFormel: "O2",  RedProdFormel: "O^2-",OxEdukt: "Aluminium", OxProd: "Aluminiumion", RedEdukt: "Sauerstoff",RedProd: "Oxidion",      Prod: "Aluminiumoxid"});
+meinArray.push({OxEduktFormel: "Al", OxProdFormel: "Al^3+", RedEduktFormel: "S8",   RedProdFormel: "S^2-",OxEdukt: "Aluminium", OxProd: "Aluminiumion", RedEdukt: "Schwefel",  RedProd: "Sulfidion",    Prod: "Aluminiumsulfid"});
+
+/*  Hier erst anschalten, wenn in der Schule behandelt 
+
+// Eisen (Eisen(II)-ionen)
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "O2",  RedProdFormel: "O^2-", OxEdukt: "Eisen", OxProd: "Eisen(II)ion", RedEdukt: "Sauerstoff", RedProd: "Oxidion",   Prod: "Eisen(II)oxid"});
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "Cl2", RedProdFormel: "Cl-",  OxEdukt: "Eisen", OxProd: "Eisen(II)ion", RedEdukt: "Chlor",     RedProd: "Chloridion", Prod: "Eisen(II)chlorid"});
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "N2",  RedProdFormel: "N^3-", OxEdukt: "Eisen", OxProd: "Eisen(II)ion", RedEdukt: "Stickstoff", RedProd: "Nitridionen",Prod: "Eisen(II)nitrid"});
+
+// Silber (Silber(I)-ionen)
+meinArray.push({OxEduktFormel: "Ag", OxProdFormel: "Ag+",  RedEduktFormel: "O2",  RedProdFormel: "O^2-", OxEdukt: "Silber", OxProd: "Silber(I)ion", RedEdukt: "Sauerstoff", RedProd: "Oxidion",   Prod: "Silber(I)oxid"});
+meinArray.push({OxEduktFormel: "Ag", OxProdFormel: "Ag+",  RedEduktFormel: "Cl2", RedProdFormel: "Cl-",  OxEdukt: "Silber", OxProd: "Silber(I)ion", RedEdukt: "Chlor",     RedProd: "Chloridion", Prod: "Silber(I)chlorid"});
+meinArray.push({OxEduktFormel: "Ag", OxProdFormel: "Ag+",  RedEduktFormel: "N2",  RedProdFormel: "N^3-", OxEdukt: "Silber", OxProd: "Silber(I)ion", RedEdukt: "Stickstoff", RedProd: "Nitridionen",Prod: "Silber(I)nitrid"});
+
+// Gold (Gold(III)-ionen)
+meinArray.push({OxEduktFormel: "Au", OxProdFormel: "Au^3+",RedEduktFormel: "O2",  RedProdFormel: "O^2-", OxEdukt: "Gold",  OxProd: "Gold(III)ion", RedEdukt: "Sauerstoff", RedProd: "Oxidion",   Prod: "Gold(III)oxid"});
+meinArray.push({OxEduktFormel: "Au", OxProdFormel: "Au^3+",RedEduktFormel: "Cl2", RedProdFormel: "Cl-",  OxEdukt: "Gold",  OxProd: "Gold(III)ion", RedEdukt: "Chlor",     RedProd: "Chloridion", Prod: "Gold(III)chlorid"});
+meinArray.push({OxEduktFormel: "Au", OxProdFormel: "Au^3+",RedEduktFormel: "N2",  RedProdFormel: "N^3-", OxEdukt: "Gold",  OxProd: "Gold(III)ion", RedEdukt: "Stickstoff", RedProd: "Nitridionen",Prod: "Gold(III)nitrid"});
+
+// Zink (Zink(II)-ionen)
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+",RedEduktFormel: "O2",  RedProdFormel: "O^2-", OxEdukt: "Zink",  OxProd: "Zink(II)ion", RedEdukt: "Sauerstoff", RedProd: "Oxidion",   Prod: "Zink(II)oxid"});
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+",RedEduktFormel: "Cl2", RedProdFormel: "Cl-",  OxEdukt: "Zink",  OxProd: "Zink(II)ion", RedEdukt: "Chlor",     RedProd: "Chloridion", Prod: "Zink(II)chlorid"});
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+",RedEduktFormel: "N2",  RedProdFormel: "N^3-", OxEdukt: "Zink",  OxProd: "Zink(II)ion", RedEdukt: "Stickstoff", RedProd: "Nitridionen",Prod: "Zink(II)nitrid"});
+
+// Kupfer (Kupfer(II)-ionen)
+meinArray.push({OxEduktFormel: "Cu", OxProdFormel: "Cu^2+",RedEduktFormel: "O2",  RedProdFormel: "O^2-", OxEdukt: "Kupfer", OxProd: "Kupfer(II)ion", RedEdukt: "Sauerstoff", RedProd: "Oxidion",   Prod: "Kupfer(II)oxid"});
+meinArray.push({OxEduktFormel: "Cu", OxProdFormel: "Cu^2+",RedEduktFormel: "Cl2", RedProdFormel: "Cl-",  OxEdukt: "Kupfer", OxProd: "Kupfer(II)ion", RedEdukt: "Chlor",     RedProd: "Chloridion", Prod: "Kupfer(II)chlorid"});
+meinArray.push({OxEduktFormel: "Cu", OxProdFormel: "Cu^2+",RedEduktFormel: "N2",  RedProdFormel: "N^3-", OxEdukt: "Kupfer", OxProd: "Kupfer(II)ion", RedEdukt: "Stickstoff", RedProd: "Nitridionen",Prod: "Kupfer(II)nitrid"});
+
+
+
+// Zink (Zn) als unedles Metall
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+", RedEduktFormel: "Fe^2+", RedProdFormel: "Fe", OxEdukt: "Zink", OxProd: "Zink(II)ionen", RedEdukt: "Eisen(II)ionen", RedProd: "Eisen", Prod: "Zink(II)ionen und Eisen"});
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+", RedEduktFormel: "Cu^2+", RedProdFormel: "Cu", OxEdukt: "Zink", OxProd: "Zink(II)ionen", RedEdukt: "Kupfer(II)ionen", RedProd: "Kupfer", Prod: "Zink(II)ionen und Kupfer"});
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+", RedEduktFormel: "Ag+",  RedProdFormel: "Ag", OxEdukt: "Zink", OxProd: "Zink(II)ionen", RedEdukt: "Silber(I)ionen", RedProd: "Silber", Prod: "Zink(II)ionen und Silber"});
+meinArray.push({OxEduktFormel: "Zn", OxProdFormel: "Zn^2+", RedEduktFormel: "Au^3+", RedProdFormel: "Au", OxEdukt: "Zink", OxProd: "Zink(II)ionen", RedEdukt: "Gold(III)ionen", RedProd: "Gold", Prod: "Zink(II)ionen und Gold"});
+
+// Eisen (Fe) als unedles Metall
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "Cu^2+", RedProdFormel: "Cu", OxEdukt: "Eisen", OxProd: "Eisen(II)ionen", RedEdukt: "Kupfer(II)ionen", RedProd: "Kupfer", Prod: "Eisen(II)ionen und Kupfer"});
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "Ag+",  RedProdFormel: "Ag", OxEdukt: "Eisen", OxProd: "Eisen(II)ionen", RedEdukt: "Silber(I)ionen", RedProd: "Silber", Prod: "Eisen(II)ionen und Silber"});
+meinArray.push({OxEduktFormel: "Fe", OxProdFormel: "Fe^2+", RedEduktFormel: "Au^3+", RedProdFormel: "Au", OxEdukt: "Eisen", OxProd: "Eisen(II)ionen", RedEdukt: "Gold(III)ionen", RedProd: "Gold", Prod: "Eisen(II)ionen und Gold"});
+
+// Kupfer (Cu) als unedles Metall
+meinArray.push({OxEduktFormel: "Cu", OxProdFormel: "Cu^2+", RedEduktFormel: "Ag+",  RedProdFormel: "Ag", OxEdukt: "Kupfer", OxProd: "Kupfer(II)ionen", RedEdukt: "Silber(I)ionen", RedProd: "Silber", Prod: "Kupfer(II)ionen und Silber"});
+meinArray.push({OxEduktFormel: "Cu", OxProdFormel: "Cu^2+", RedEduktFormel: "Au^3+", RedProdFormel: "Au", OxEdukt: "Kupfer", OxProd: "Kupfer(II)ionen", RedEdukt: "Gold(III)ionen", RedProd: "Gold", Prod: "Kupfer(II)ionen und Gold"});
+
+// Silber (Ag) als unedles Metall
+meinArray.push({OxEduktFormel: "Ag", OxProdFormel: "Ag+", RedEduktFormel: "Au^3+", RedProdFormel: "Au", OxEdukt: "Silber", OxProd: "Silber(I)ionen", RedEdukt: "Gold(III)ionen", RedProd: "Gold", Prod: "Silber(I)ionen und Gold"});
+*/
+
+    var Aufgabe = meinArray[Math.floor(Math.random()*meinArray.length)];
+    var Ionen = Aufgabe.RedEdukt;
+    const AufgabenstellungText = document.getElementById("Aufgabenstellung");
+    if (Math.floor(Math.random()*2)<1){
+        AufgabenstellungText.innerHTML=""+Aufgabe.OxEdukt+" reagiert mit "+Aufgabe.RedEdukt+" zu "+Aufgabe.Prod+". <br> Gib die Summenformeln ohne Vorfaktoren und Elektronen in der Oxidation und in der Reduktion an.";
+    } else {
+        if (Ionen.includes("ionen")){
+            AufgabenstellungText.innerHTML=""+Aufgabe.RedEdukt+" reagieren mit "+Aufgabe.OxEdukt+" zu "+Aufgabe.Prod+". <br> Gib  die Summenformeln ohne Vorfaktoren und Elektronen in der Oxidation und in der Reduktion an.";
+        } else {
+            AufgabenstellungText.innerHTML=""+Aufgabe.RedEdukt+" reagiert mit "+Aufgabe.OxEdukt+" zu "+Aufgabe.Prod+". <br> Gib  die Summenformeln ohne Vorfaktoren und Elektronen in der Oxidation und in der Reduktion an.";
+        }
+    }
+    
+    const tabelle = document.getElementById("myTable");
+    tabelle.innerHTML = `
+    <tr>
+        <th><span style="color: red;">Oxidation</span></th>
+        <td><input id="FeldOxEd" placeholder='Summenformel' oninput="KoeffizientenVerkleinern(this.id)"></td>
+        <td>&#10141;</td>
+        <td><input id="FeldOxProd" placeholder='Summenformel' oninput="KoeffizientenVerkleinern(this.id)"></td>
+
+    </tr> 
+    <tr>
+        <th><span style="color: blue;">Reduktion</span></th>
+        <td><input id="FeldRedEd" placeholder='Summenformel' oninput="KoeffizientenVerkleinern(this.id)"></td>
+        <td>&#10141;</td>
+        <td><input id="FeldRedProd" placeholder='Summenformel' oninput="KoeffizientenVerkleinern(this.id)"></td>
+    </tr>  `; 
+    console.table(SummenformelArray(Aufgabe.OxEduktFormel));
+    console.table(SummenformelArray(Aufgabe.OxProdFormel));
+    document.getElementById("PrüfButton2").disabled = true;
+    let EduktArrayRed = SummenformelArray(Aufgabe.RedEduktFormel);
+    let ProduktArrayRed = SummenformelArray(Aufgabe.RedProdFormel);
+    let EduktArrayOx = SummenformelArray(Aufgabe.OxEduktFormel);
+    let ProduktArrayOx = SummenformelArray(Aufgabe.OxProdFormel);
+    document.getElementById("HilfeButton").style.visibility = "visible";
+
+function Hilfe(){
+    var text ="";
+    if (level==0){
+        
+        if (HilfeCounter > 2){
+            
+            document.getElementById("FeldOxEd").value = KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel);
+            document.getElementById("FeldOxProd").value = KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel);
+            document.getElementById("FeldRedEd").value = KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel);
+            document.getElementById("FeldRedProd").value = KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel);
+            document.getElementById("HilfeButton").disabled = true;
+        }
+        if (HilfeCounter > 1){
+            text+= "<h2>Hilfe 3</h2>";
+            text +="Das Teilchen "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)+" wird Elektronen aufnehmen. <br> Es wird zu "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)+" reagieren, da es so die Oktettregel (volle Außenschale) erfüllt. <br> Trage das oben ein.";
+            document.getElementById("HilfeButton").value = "Lösung";
+        }
+        if (HilfeCounter >= 1){
+            text+= "<h2>Hilfe 2</h2>";
+            text +="Das Teilchen "+KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)+" wird Elektronen abgeben. <br> Es wird zu "+KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)+" reagieren, da es so die Oktettregel (volle Außenschale) erfüllt. <br> Überlege dir, welcher Stoff Elektronen aufnehmen wird.";
+        }
+
+        if (HilfeCounter >= 0){
+            text+= "<h2>Hilfe 1</h2>";
+            if (Aufgabe.RedEduktFormel[Aufgabe.RedEduktFormel.length-1] == 2){
+                
+                text+="Bestimmte Elemente bestehen aus zweiatomigen Molekülen, z.B. die Summenformel von "+Aufgabe.RedEdukt+"-Molekülen lautet "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)+".<br>";
+            }
+            if (Aufgabe.RedEduktFormel[Aufgabe.RedEduktFormel.length-1] == 8){
+                
+                text+="Schwefelmoleküle bestehen aus acht Schwefelatomen: Die Summenformel von "+Aufgabe.RedEdukt+"-Molekülen lautet daher "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)+".<br>";
+            }
+            console.table(EduktArrayRed[0][1]);
+            if ((EduktArrayOx[0][1] ==1 )& (EduktArrayRed[0][1] ==1 )){
+                text += "Bei zwei Metallen will der edlere Stoff elementar vorliegen. Überlege dir mithilfe der Redoxreihe der Metalle welche Reaktion ablaufen wird. <br><br> Geordnet von unedel nach edel: Magnesium, Zink, Eisen, Kupfer, Silber, Quecksilber, Gold";
+            } else {
+            text += "Metallatome geben leicht Elektronen ab. Dies findet in der Oxidation statt. <br>Überlege dir, wie viel Elektronen das hier angegebene Metall abgeben kann."
+        }
+            
+        }
+        document.getElementById("Hilfetext").innerHTML = text;
+        HilfeCounter+=1;
+    }
+    if (level==2){
+        if (HilfeCounter > 3){
+            
+            let hilfeggTO = EA(EduktArrayOx[0][1],ProduktArrayOx[0][1]);
+            let hilfeggTR = EA(EduktArrayRed[0][1],ProduktArrayRed[0][1]);
+            document.getElementById("FeldRed1").value = (ProduktArrayRed[0][1]/hilfeggTR);
+            document.getElementById("FeldRed2").value = (EduktArrayRed[0][1]/hilfeggTR);
+            document.getElementById("FeldRedE").value = (ProduktArrayRed[0][1]/hilfeggTR)*EduktArrayRed[1][1]-(EduktArrayRed[0][1]/hilfeggTR)*ProduktArrayRed[1][1];
+            document.getElementById("FeldOx1").value =  (ProduktArrayOx[0][1]/hilfeggTO);
+            document.getElementById("FeldOx2").value =  (EduktArrayOx[0][1]/hilfeggTO);
+            document.getElementById("FeldOxE").value =  -(ProduktArrayOx[0][1]/hilfeggTO)*EduktArrayOx[1][1]+(EduktArrayOx[0][1]/hilfeggTO)*ProduktArrayOx[1][1];
+            document.getElementById("HilfeButton").disabled = true;
+        }
+        if (HilfeCounter >= 3){
+            text+= "<h2>Hilfe 4</h2>";
+            text +="Zum Beispiel in der Reduktion ist die Ladung von "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)+" ";
+            if (EduktArrayRed[1][1]==0){
+                text +="null."
+            } else {
+                text +=EduktArrayRed[1][1]+".";
+            }
+            text +="<br>Auf der rechten Seite ist die Ladung von "+KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)+" mit "+ProduktArrayRed[1][1]+" pro Teilchen.";
+            text +="<br><br>Nun gleichen wir die Ladungen mithilfe der Elektronenanzahlen aus. Dafür müssen wir aber auch die Vorfaktoren mitbeachten.";
+            document.getElementById("HilfeButton").value = "Lösung";
+        }
+        if (HilfeCounter >= 2){
+            text+= "<h2>Hilfe 3</h2>";
+            text +="Wenn die Anzahlen der Atome übereinstimmen, dann überlege dir, wie die Ladung mithilfe der Elektronenanzahl insgesamt auf null gebracht wird.";
+        }
+        if (HilfeCounter >= 1){
+            text+= "<h2>Hilfe 2</h2>";
+            text +="Zum Beispiel in der Reduktion stehen zunächst auf der linken Seite "+EduktArrayRed[0][1]+" "+EduktArrayRed[0][0]+"-Atome. ";
+            if (ProduktArrayRed[0][1] != 1) {
+                text +="Auf der rechten Seite stehen "+ProduktArrayRed[0][1]+" "+ProduktArrayRed[0][0]+"-Atome.";
+            } else {
+                text +="Auf der rechten Seite steht nur ein "+ProduktArrayRed[0][0]+"-Atom.";
+            }
+        }
+        if (HilfeCounter >= 0){
+            text+= "<h2>Hilfe 1</h2>";
+            text += "Prüfe zunächst, dass auf beiden Seiten der Gleichungen die gleiche Anzahl an Atomen stehen."
+        }
+        
+        
+        
+        
+        document.getElementById("Hilfetext").innerHTML = text;
+        HilfeCounter+=1;
+    }
+    if (level==4){
+        if (HilfeCounter > 2){
+        
+            let ggTE = EA(Aufgabe.OE, Aufgabe.RE);
+            document.getElementById("OM").value = Aufgabe.RE/ggTE;
+            document.getElementById("RM").value = Aufgabe.OE/ggTE;
+            document.getElementById("HilfeButton").disabled = true;
+        }
+        if (HilfeCounter >= 2){
+            text+= "<h2>Hilfe 3</h2>";
+            text += "Wenn das kleinste gemeinsame Vielfache die Zahl "+(Aufgabe.OE*Aufgabe.RE)/EA(Aufgabe.OE, Aufgabe.RE)+" ist, mit welchen Zahlen müssen dann die Gleichungen multipliziert werden?";
+            document.getElementById("HilfeButton").value = "Lösung";
+        }
+        if (HilfeCounter >= 1){
+            text+= "<h2>Hilfe 2</h2>";
+            text += "Was ist das kleinste gemeinsame Vielfache von "+Aufgabe.OE+" und "+Aufgabe.RE+"?";
+            
+        }
+        if (HilfeCounter >= 0){
+            text+= "<h2>Hilfe 1</h2>";
+            text += "Überlege dir, mit welchen möglichst kleinen Zahlen du die Gleichungen multiplizieren kannst, damit die Anzahl der abgegebenen und der aufgenommenen Elektronen gleich ist.";
+        }
+
+
+
+        document.getElementById("Hilfetext").innerHTML = text;
+        HilfeCounter+=1;
+    }
+
+}
+    
+function EA(a,b){
+    while(b != 0){
+        let ganzZ = a/b;
+        let Rest = a % b;
+        a=b;
+        b= Rest;
+        
+    }
+    return(a);
+}
+
+function Vergleicher(){
+    let ausgabe ="";
+
+    let allesRichtig = true;
+    if (document.getElementById("FeldRed1").value == ""){
+        document.getElementById("FeldRed1").value = 1;
+    }
+    if (document.getElementById("FeldRed2").value==""){
+        document.getElementById("FeldRed2").value = 1;
+    }
+    if (document.getElementById("FeldRedE").value==""){
+        document.getElementById("FeldRedE").value = 1;
+    }
+    let R1 = document.getElementById("FeldRed1").value;
+    let R2 = document.getElementById("FeldRed2").value;
+    let RE = document.getElementById("FeldRedE").value;
+    if (document.getElementById("FeldOx1").value==""){
+        document.getElementById("FeldOx1").value = 1;
+    }
+    if (document.getElementById("FeldOx2").value==""){
+        document.getElementById("FeldOx2").value = 1;
+    }
+    if (document.getElementById("FeldOxE").value==""){
+        document.getElementById("FeldOxE").value = 1;
+    }
+    let O1 = document.getElementById("FeldOx1").value;
+    let O2 = document.getElementById("FeldOx2").value;
+    let OE = document.getElementById("FeldOxE").value;
+
+    EduktArrayRed[0][2] = R1*EduktArrayRed[0][1];
+    EduktArrayRed[1][2] = R1*EduktArrayRed[1][1]-RE;
+    ProduktArrayRed[0][2] = R2*ProduktArrayRed[0][1];
+    ProduktArrayRed[1][2] = R2*ProduktArrayRed[1][1];
+
+    EduktArrayOx[0][2] = O1*EduktArrayOx[0][1];
+    EduktArrayOx[1][2] = O1*EduktArrayOx[1][1];
+    ProduktArrayOx[0][2] = O2*ProduktArrayOx[0][1];
+    ProduktArrayOx[1][2] = O2*ProduktArrayOx[1][1]-OE;
+    var ggTO = EA(EA(O1,O2),OE);
+    var ggTR = EA(EA(R1,R2),RE);
+    console.table(EduktArrayRed);
+    console.table(ProduktArrayRed);
+    console.table(EduktArrayOx);
+    console.table(ProduktArrayOx);
+
+
+    if (!((EduktArrayRed[0][2] == ProduktArrayRed[0][2])&& (EduktArrayRed[1][2] == ProduktArrayRed[1][2]))){
+        allesRichtig = false;
+    } else {
+        document.getElementById("FeldRed1").style.backgroundColor = "green";
+        document.getElementById("FeldRed2").style.backgroundColor = "green";
+        document.getElementById("FeldRedE").style.backgroundColor = "green";
+    }
+    if (!((EduktArrayOx[0][2] == ProduktArrayOx[0][2])&& (EduktArrayOx[1][2] == ProduktArrayOx[1][2]))){
+        allesRichtig = false;
+    } else {
+        document.getElementById("FeldOx1").style.backgroundColor = "green";
+        document.getElementById("FeldOx2").style.backgroundColor = "green";
+        document.getElementById("FeldOxE").style.backgroundColor = "green";
+    }
+
+    if (allesRichtig){
+        Aufgabe.O1=O1;
+        Aufgabe.O2=O2;
+        Aufgabe.OE=OE;
+        Aufgabe.R1=R1;
+        Aufgabe.R2=R2;
+        Aufgabe.RE=RE;
+        document.getElementById("PrüfButton2").disabled = false;
+        document.getElementById("PrüfButton").disabled = true;
+        level = 3;
+        ausgabe = "Super, alles richtig!";
+        
+        
+    } else {
+        ausgabe += "Achtung, hier sind Fehler passiert."
+    }
+    if (allesRichtig==true){
+        
+        if (ggTO !=1){
+
+            Aufgabe.O1=O1/ggTO;
+            Aufgabe.O2=O2/ggTO;
+            Aufgabe.OE=OE/ggTO;
+        }
+        
+        if (ggTR !=1){
+
+            Aufgabe.R1=R1/ggTR;
+            Aufgabe.R2=R2/ggTR;
+            Aufgabe.RE=RE/ggTR;
+        }
+    }
+    var OxRichtig = true;
+    var RedRichtig = true;
+    if ( EduktArrayOx[0][2] != ProduktArrayOx[0][2]){
+        document.getElementById("FeldOx1").style.backgroundColor = "red";
+        document.getElementById("FeldOx2").style.backgroundColor = "red";
+        OxRichtig = false;
+        ausgabe +="<br> Die Anzahlen der Edukte und Produkte bei der Oxidation stimmen nicht."
+    }else {
+        document.getElementById("FeldOx1").style.backgroundColor = "green";
+        document.getElementById("FeldOx2").style.backgroundColor = "green";
+    }
+    if ( ProduktArrayRed[0][2] != EduktArrayRed[0][2]){
+        document.getElementById("FeldRed1").style.backgroundColor = "red";
+        RedRichtig = false;
+        document.getElementById("FeldRed2").style.backgroundColor = "red";
+        ausgabe +="<br> Die Anzahlen der Edukte und Produkte bei der Reduktion stimmen nicht."
+    } else {
+        document.getElementById("FeldRed1").style.backgroundColor = "green";
+        document.getElementById("FeldRed2").style.backgroundColor = "green";
+    }
+    if ( ProduktArrayRed[1][2] != EduktArrayRed[1][2]){
+        document.getElementById("FeldRedE").style.backgroundColor = "red";
+        RedRichtig = false;
+        ausgabe +="<br> Die Anzahl der Elektronen bzw. Ladungen bei der Reduktion stimmen nicht."
+    }
+    if ( EduktArrayOx[1][2] != ProduktArrayOx[1][2]){
+        OxRichtig = false;
+        document.getElementById("FeldOxE").style.backgroundColor = "red";
+        ausgabe +="<br> Die Anzahl der Elektronen bzw. Ladungen bei der Oxidation stimmen nicht."
+    }
+    if (OxRichtig){
+        if (ggTO !=1){
+            document.getElementById("FeldOx1").style.backgroundColor = "coral";
+            document.getElementById("FeldOx2").style.backgroundColor = "coral";
+            document.getElementById("FeldOxE").style.backgroundColor = "coral";
+            ausgabe += "<br>Man könnte die Vorfaktoren der Oxidation noch durch die Zahl "+ggTO+" teilen.";
+        }
+    }
+    if (RedRichtig){
+        if (ggTR !=1){
+            document.getElementById("FeldRed1").style.backgroundColor = "coral";
+            document.getElementById("FeldRed2").style.backgroundColor = "coral";
+            document.getElementById("FeldRedE").style.backgroundColor = "coral";
+            ausgabe += "<br>Man könnte die Vorfaktoren der Reduktion noch durch die Zahl "+ggTR+" teilen.";
+
+        }
+    }
+
+
+    document.getElementById("HilfeFeld").innerHTML = ausgabe;
+}
+    
+
+function PrüfUnterscheidung(){
+    console.log(level);
+    if (level == 0){
+
+        Prüfen();
+    }
+
+    if (level == 2){
+        Vergleicher();
+    }
+
+    if (level == 4){
+        
+        Prüfen3();
+    }
+}
+
+function Weiter(){
+    document.getElementById("Hilfetext").innerHTML = "";
+    document.getElementById("HilfeButton").disabled = false;
+    document.getElementById("HilfeButton").value = "Hilfe";
+    document.getElementById("HinweisFeld").innerHTML="";
+    HilfeCounter = 0;
+    console.log(level);
+
+    if (level == 1){
+        document.getElementById("PrüfButton").disabled = false;
+        document.getElementById("PrüfButton2").disabled = true;
+        level = 2;
+        Stufe2();
+    }
+    if (level ==3){
+        document.getElementById("PrüfButton").disabled = false;
+        document.getElementById("PrüfButton2").disabled = true;
+        level = 4;
+        Stufe3();
+    }    
+    if (level ==5){
+        document.getElementById("PrüfButton").disabled = false;
+        document.getElementById("PrüfButton2").disabled = true;
+        
+        Gesamtgleichung();
+    }
+}
+
+function Prüfen(){
+    
+    let allesRichtig = true;
+    let zuTesten = document.getElementById("FeldOxEd").value;
+    if( KoeffizientenVergrößern(zuTesten) == Aufgabe.OxEduktFormel){
+        document.getElementById("FeldOxEd").style.backgroundColor="green";
+    } else {
+        document.getElementById("FeldOxEd").style.backgroundColor="red";
+        allesRichtig = false;
+    }
+    zuTesten = document.getElementById("FeldRedEd").value;
+    if(KoeffizientenVergrößern(document.getElementById("FeldRedEd").value) == Aufgabe.RedEduktFormel){
+        document.getElementById("FeldRedEd").style.backgroundColor="green";
+    } else {
+        document.getElementById("FeldRedEd").style.backgroundColor="red";
+        allesRichtig = false;
+    }
+    zuTesten = document.getElementById("FeldOxProd").value;
+    if(KoeffizientenVergrößern(document.getElementById("FeldOxProd").value) == Aufgabe.OxProdFormel){
+        document.getElementById("FeldOxProd").style.backgroundColor="green";
+    } else {
+        document.getElementById("FeldOxProd").style.backgroundColor="red";
+        allesRichtig = false;
+    }
+    zuTesten = document.getElementById("FeldRedProd").value;
+    if(KoeffizientenVergrößern(document.getElementById("FeldRedProd").value) == Aufgabe.RedProdFormel){
+        document.getElementById("FeldRedProd").style.backgroundColor="green";
+    } else {
+        document.getElementById("FeldRedProd").style.backgroundColor="red";
+        allesRichtig = false;
+    }
+    if (allesRichtig == true){
+        document.getElementById("PrüfButton2").disabled = false;
+        document.getElementById("PrüfButton").disabled = true;
+        level = 1;
+    }
+}
+
+function Stufe2(){
+    AufgabenstellungText.innerHTML=""+Aufgabe.RedEdukt+" reagiert mit "+Aufgabe.OxEdukt+" zu "+Aufgabe.Prod+". <br> Gleiche nun jeweils die Teilgleichungen aus.";
+    tabelle.innerHTML = `
+    <tr>
+        <th><span style="color: red;">Oxidation</span></th>
+        <td><input id="FeldOx1" class="small"> ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)}</td>
+        <td></td>
+        <td></td>
+        <td>&#10141;</td>
+        <td><input id="FeldOx2" class="small"> ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)}</td>
+        <td>+</td>
+        <td><input id="FeldOxE" class="small"> e<sup>-</sup></td>
+    </tr> 
+    <tr>
+        <th><span style="color: blue;">Reduktion</span></th>
+        <td><input id="FeldRed1"  class="small"> ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)}</td>
+        <td>+</td>
+        <td><input id="FeldRedE" class="small"> e<sup>-</sup></td>
+        <td>&#10141;</td>
+        <td><input id="FeldRed2"  class="small"> ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)}</td>
+    </tr>  `; 
+    document.getElementById("HinweisFeld").innerHTML="Trage möglichst kleine ganzzahlige Vorfaktoren in die entsprechenden Felder ein.";
+    
+}
+
+function Stufe3(){
+    document.getElementById("HilfeFeld").innerHTML = "";
+    AufgabenstellungText.innerHTML=""+Aufgabe.RedEdukt+" reagiert mit "+Aufgabe.OxEdukt+" zu "+Aufgabe.Prod+". <br> Gleiche nun die Elektronenzahlen aus.";
+    let O1;
+    let O2;
+    let OE;
+    let R1;
+    let R2;
+    let RE;
+    if (Aufgabe.O1 == 1){
+        O1 = "";
+    } else {O1= Aufgabe.O1;}
+    if (Aufgabe.O2 == 1){
+        O2 = "";
+    } else {O2= Aufgabe.O2;}
+    if (Aufgabe.OE == 1){
+        OE = "";
+    } else {OE= Aufgabe.OE;}
+    if (Aufgabe.R1 == 1){
+        R1 = "";
+    } else {R1= Aufgabe.R1;}
+    if (Aufgabe.R2 == 1){
+        R2 = "";
+    } else {R2= Aufgabe.R2;}
+    if (Aufgabe.RE == 1){
+        RE = "";
+    } else {RE= Aufgabe.RE;}
+    tabelle.innerHTML = `
+    <tr>
+        <th><span style="color: red;">Oxidation </span></th>
+        <td>${(O1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)}</td>
+        <td></td>
+        <td></td>
+        <td>&#10141;</td>
+        <td>${(O2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)}</td>
+        <td>+</td>
+        <td>${(OE)}  e<sup>-</sup></td>
+        <td>| · <input class="small" id="OM"></td>
+    </tr> 
+    <tr>
+        <th><span style="color: blue;">Reduktion</span></th>
+        <td>${(R1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)}</td>
+        <td>+</td>
+        <td>${(RE)} e<sup>-</sup></td>
+        <td>&#10141;</td>
+        <td>${(R2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)}</td>
+        <td></td>
+        <td></td>
+        <td>| · <input class="small" id="RM"></td>
+    </tr>  `; 
+    
+    
+}
+
+
+function Prüfen3(){
+    
+    let OM;
+    let RM;
+    let nichtTeilerfremd = true;
+    let ausgabe="";
+    if(document.getElementById("OM").value != ""){
+        OM=document.getElementById("OM").value;
+    } else {
+        document.getElementById("OM").value = 1;
+        OM=1;
+    }
+    if(document.getElementById("RM").value != ""){
+        
+        RM=document.getElementById("RM").value;
+    } else {
+        document.getElementById("RM").value=1;
+        RM=1;
+    }
+    if(OM*Aufgabe.OE==RM*Aufgabe.RE){
+        console.log("SUPER, alles RICHTIG")
+        document.getElementById("PrüfButton2").disabled = false;
+        document.getElementById("PrüfButton").disabled = true;
+        document.getElementById("OM").style.backgroundColor = "green";
+        document.getElementById("RM").style.backgroundColor = "green";
+        level = 5;
+        document.getElementById("HilfeButton").style.visibility = "hidden";
+    }
+    if (EA(OM,RM)!=1){
+        nichtTeilerfremd = false;
+        document.getElementById("OM").style.backgroundColor = "coral";
+        document.getElementById("RM").style.backgroundColor = "coral";
+        ausgabe = "<br>Die Faktoren können beide noch durch die Zahl "+EA(OM,RM)+" geteilt werden."
+        Aufgabe.OM=OM/EA(OM,RM);
+        Aufgabe.RM=RM/EA(OM,RM);
+    } else {
+        Aufgabe.OM=OM;
+        Aufgabe.RM=RM;
+    }
+
+    if(!(OM*Aufgabe.OE==RM*Aufgabe.RE)){
+        document.getElementById("OM").style.backgroundColor = "red";
+        document.getElementById("RM").style.backgroundColor = "red";
+        ausgabe ="<br>Die Faktoren stimmen leider nicht. Bitte überprüfe sie."
+    }
+    document.getElementById("HilfeFeld").innerHTML = ausgabe;
+
+}
+
+function Gesamtgleichung(){
+    document.getElementById("HilfeFeld").innerHTML = "Super alles richtig!";
+    document.getElementById("HilfeFeld").style.visibility = "hidden";
+    let O1;
+    let O2;
+    let OE;
+    let R1;
+    let R2;
+    let RE;
+    if (Aufgabe.O1 == 1){
+        O1 = "";
+    } else {O1= Aufgabe.O1;}
+    if (Aufgabe.O2 == 1){
+        O2 = "";
+    } else {O2= Aufgabe.O2;}
+    if (Aufgabe.OE == 1){
+        OE = "";
+    } else {OE= Aufgabe.OE;}
+    if (Aufgabe.R1 == 1){
+        R1 = "";
+    } else {R1= Aufgabe.R1;}
+    if (Aufgabe.R2 == 1){
+        R2 = "";
+    } else {R2= Aufgabe.R2;}
+    if (Aufgabe.RE == 1){
+        RE = "";
+    } else {RE= Aufgabe.RE;}
+    tabelle.innerHTML = `
+    <tr>
+        <th><span style="color: red;">Oxidation</span></th>
+        <td>${(O1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)}</td>
+        <td></td>
+        <td></td>
+        <td>&#10141;</td>
+        <td>${(O2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)}</td>
+        <td>+</td>
+        <td>${(OE)}  e<sup>-</sup></td>
+        <td>| · ${(Aufgabe.OM)}</td>
+    </tr> 
+    <tr>
+        <th><span style="color: blue;">Reduktion</span></th>
+        <td>${(R1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)}</td>
+        <td>+</td>
+        <td>${(RE)} e<sup>-</sup></td>
+        <td>&#10141;</td>
+        <td>${(R2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)}</td>
+        <td></td>
+        <td></td>
+        <td>| · ${(Aufgabe.RM)}</td>
+    </tr>   
+    <tr>
+    </tr>  `;
+    let A1;
+    let A2;
+    let A3;
+    let A4;
+    if (OE == ""){
+        OE = 1;
+    }
+    if (RE == ""){
+        RE = 1;
+    }
+    if(Aufgabe.O1*Aufgabe.OM==1){
+        A1 = "";
+    } else {
+        A1 = Aufgabe.O1*Aufgabe.OM;
+    }
+    if(Aufgabe.R1*Aufgabe.RM==1){
+        A2 = "";
+    } else {
+        A2 = Aufgabe.R1*Aufgabe.RM;
+    }
+    if((Aufgabe.O2*Aufgabe.OM)==1){
+        A3 = "";
+    } else {
+        A3 = Aufgabe.O2*Aufgabe.OM;
+    }    
+    if((Aufgabe.R2*Aufgabe.RM)==1){
+        A4 = "";
+    } else {
+        A4 = Aufgabe.R2*Aufgabe.RM;
+    }
+    /*
+    tabelle.innerHTML += `
+    <tr>
+        <th>Redoxreaktion</th>
+        <td>${(A1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)}</td>
+        <td>+</td>
+        <td>${(A2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)}</td>
+        <td>&#10141;</td>
+        <td>${(A3)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)}</td>
+        <td>+</td>
+        <td>${(A4)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)}</td>
+        
+    </tr>   `; */
+    
+    console.log("OE "+OE);
+    console.log(Aufgabe.OM);
+    tabelle.innerHTML += `</tbody></table>
+    <table>
+        <tbody id ="myTable" style="border-color: black;border: 1px solid;">
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td colspan="6" style="border-bottom: 2px solid red;"><span style="font-weight: bold; color: red;">Oxidation:</span> Abgabe von insgesamt ${OE*Aufgabe.OM} Elektronen</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid red; color: red;"></td>
+                    <td class="PfeilRechts" style="color: red;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid red; color: red;"></td>
+                    <td class="PfeilRechts" style="color: red;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                  </tr>
+                  <tr>
+                    <td><span style="color:blue">Red</span><span style="color: red">Ox</span>-Reaktion</td>
+                    <td colspan="2" >${(A1)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxEduktFormel)}</td>
+                    <td>+</td>
+                    <td colspan="2" >${(A2)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedEduktFormel)} &emsp; </td>
+                    <td>&#10141;</td>
+                    <td colspan="2">${(A3)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.OxProdFormel)}</td>
+                    <td>+</td>
+                    <td colspan="2">${(A4)} ${KoeffizientenVerkleinernSummenformel(Aufgabe.RedProdFormel)}</td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid blue; color: blue;"></td>
+                    <td class="PfeilRechts" style="color: blue;"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="PfeilLinks" style="border-right: 2px solid blue; color: blue;"></td>
+                    <td class="PfeilRechts" style="color: blue;"></td>
+
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>                    
+                    <td></td>
+                    <td></td>
+                    <td colspan="6" style="border-top: 2px solid blue;"><span style="font-weight: bold; color: blue;">Reduktion:</span> Aufnahme von insgesamt ${RE*Aufgabe.RM} Elektronen</td>
+                    <td></td>
+
+                  </tr>
+            </tbody>
+
+        </table>`;
+
+    document.getElementById("LoesungsFeld").innerHTML = "<input value='neue Aufgabe' onclick='javascript:location.reload()' type='button' style='background-color:green;'>";
+}
+
+function KoeffizientenVerkleinern(richtigeId){
+    let meineVariable = "";
+    meineVariable = document.getElementById(richtigeId).value;
+    meineVariable = meineVariable.replace("^1", "¹");
+    meineVariable = meineVariable.replace("^2", "²");
+    meineVariable = meineVariable.replace("^3", "³");
+    meineVariable = meineVariable.replace("^4", "⁴");
+    meineVariable = meineVariable.replace("^5", "⁵");
+    meineVariable = meineVariable.replace("^6", "⁶");
+    meineVariable = meineVariable.replace("^7", "⁷");
+    meineVariable = meineVariable.replace("^8", "⁸");
+    meineVariable = meineVariable.replace("^9", "⁹");
+    meineVariable = meineVariable.replace("^0", "⁰");
+    meineVariable = meineVariable.replace("1", "₁");
+    meineVariable = meineVariable.replace("2", "₂");
+    meineVariable = meineVariable.replace("3", "₃");
+    meineVariable = meineVariable.replace("4", "₄");
+    meineVariable = meineVariable.replace("5", "₅");
+    meineVariable = meineVariable.replace("6", "₆");
+    meineVariable = meineVariable.replace("7", "₇");
+    meineVariable = meineVariable.replace("8", "₈");
+    meineVariable = meineVariable.replace("9", "₉");
+    meineVariable = meineVariable.replace("0", "₀");
+    meineVariable = meineVariable.replace("+", "⁺");
+    meineVariable = meineVariable.replace("-", "⁻");
+    document.getElementById(richtigeId).value = meineVariable;
+}
+
+function KoeffizientenVergrößern(meinText){
+    let meineVariable = "";
+    meineVariable = meinText;
+    meineVariable = meineVariable.replaceAll("⁺","+");
+    meineVariable = meineVariable.replaceAll("⁻","-");
+    meineVariable = meineVariable.replaceAll("¹","^1");
+    meineVariable = meineVariable.replaceAll("²","^2");
+    meineVariable = meineVariable.replaceAll("³","^3");
+    meineVariable = meineVariable.replaceAll("⁴","^4");
+    meineVariable = meineVariable.replaceAll("⁵","^5");
+    meineVariable = meineVariable.replaceAll("⁶","^6");
+    meineVariable = meineVariable.replaceAll("⁷","^7");
+    meineVariable = meineVariable.replaceAll("⁸","^8");
+    meineVariable = meineVariable.replaceAll("⁹","^9");
+    meineVariable = meineVariable.replaceAll("⁰","^0");
+    meineVariable = meineVariable.replaceAll("₁", "1");
+    meineVariable = meineVariable.replaceAll("₂", "2");
+    meineVariable = meineVariable.replaceAll("₃", "3");
+    meineVariable = meineVariable.replaceAll("₄", "4");
+    meineVariable = meineVariable.replaceAll("₅", "5");
+    meineVariable = meineVariable.replaceAll("₆", "6");
+    meineVariable = meineVariable.replaceAll("₇", "7");
+    meineVariable = meineVariable.replaceAll("₈", "8");
+    meineVariable = meineVariable.replaceAll("₉", "9");
+    meineVariable = meineVariable.replaceAll("₀", "0");
+
+    return meineVariable;
+}
+
+function KoeffizientenVerkleinernSummenformel(meineVariable){
+    meineVariable = meineVariable.replace("^1", "¹");
+    meineVariable = meineVariable.replace("^2", "²");
+    meineVariable = meineVariable.replace("^3", "³");
+    meineVariable = meineVariable.replace("^4", "⁴");
+    meineVariable = meineVariable.replace("^5", "⁵");
+    meineVariable = meineVariable.replace("^6", "⁶");
+    meineVariable = meineVariable.replace("^7", "⁷");
+    meineVariable = meineVariable.replace("^8", "⁸");
+    meineVariable = meineVariable.replace("^9", "⁹");
+    meineVariable = meineVariable.replace("^0", "⁰");
+    meineVariable = meineVariable.replace("1", "₁");
+    meineVariable = meineVariable.replace("2", "₂");
+    meineVariable = meineVariable.replace("3", "₃");
+    meineVariable = meineVariable.replace("4", "₄");
+    meineVariable = meineVariable.replace("5", "₅");
+    meineVariable = meineVariable.replace("6", "₆");
+    meineVariable = meineVariable.replace("7", "₇");
+    meineVariable = meineVariable.replace("8", "₈");
+    meineVariable = meineVariable.replace("9", "₉");
+    meineVariable = meineVariable.replace("0", "₀");
+    meineVariable = meineVariable.replace("+", "⁺");
+    meineVariable = meineVariable.replace("-", "⁻");
+    return meineVariable;
+}
+
+function SummenformelArray(summenFormel){
+            const Formel = KoeffizientenVergrößern(summenFormel);
+            let teste;
+            let Ergebnis = [];
+            Ergebnis = Formel.split(/(?=[A-Z])/);
+            if (summenFormel.indexOf("^") != -1){
+                let Ladung = Formel.split("^");
+                Ergebnis[0] = Ladung[0];  //ACHTUNG HIER MUSS ERGEBNIS 0 stehen!!
+
+                teste = Ladung[1].match(/[0-9]/g);
+                if (teste == null){
+                    teste = 1;
+                }
+                Ladung = Ladung[1].match(/[^0-9]/g);
+                if (Ladung[0] == "-"){
+                    teste = teste * (-1);
+                }
+                if (Ladung[0] == "+"){
+                    teste = parseInt(teste);
+                }
+                
+            } else if (summenFormel.includes("+") == true){
+                teste = 1;
+            } else if (summenFormel.includes("-") == true){
+                teste = -1;
+            } else { teste = 0;}
+            
+
+            var summenArray = [];
+            for (i=0;i<Ergebnis.length;i++){
+
+                let Element = Ergebnis[i].match(/[a-z]+/gi);
+
+                if (Element == null){
+                    break;
+                } else {
+                let Zahl;
+                if (Ergebnis[i].match(/\d+/g) == null){
+                    Zahl = 1;
+                } else {
+                    Zahl = Ergebnis[i].match(/\d+/g);
+                }
+                summenArray.push([Element[0], parseInt(Zahl)]);
+            }
+            }
+            if((summenArray.length == 1) && (summenArray[0][0] == "e")){
+                summenArray.pop();
+            }
+            summenArray.push(["J",teste]);
+            return summenArray;
+        }
+
+</script>
+</body>
+<footer>
+    <p style="font-size: x-small;" xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL">Digitaltrainer Stöchiometrie</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName">Kevin Reinmuth-Vögeli</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+</footer>
+</html>
