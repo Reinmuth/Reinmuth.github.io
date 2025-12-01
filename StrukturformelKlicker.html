@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Strukturformel zeichnen</title>
+  <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
   <style>
     body {
       display: flex;
@@ -266,7 +267,8 @@
     if (HilfeCounter == 2) {
       document.getElementById("T" + hauptketteLänge).style.color = "red";
       document.getElementById("N" + hauptketteLänge).style.color = "red";
-
+      document.getElementById("T" + hauptketteLänge).style.fontWeight = "bold";
+      document.getElementById("N" + hauptketteLänge).style.fontWeight = "bold";
       document.getElementById("HilfButton").value = "Lösung";
     }
     if (HilfeCounter == 3) {
