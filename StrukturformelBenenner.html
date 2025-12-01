@@ -5,6 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Strukturformel benennen</title>
+  <link rel="icon" type="image/vnd.microsoft.icon" href="HP2.ico">
   <style>
     body {
       display: flex;
@@ -26,9 +27,12 @@
     }
 
     img {
-      max-width: 500px;
+      max-width: 1000px;
     }
 
+    p {
+      font-size: larger;
+    }
     svg {
       display: block;
       width: 80vh;
@@ -89,6 +93,7 @@
     td {
       border: 1px solid black;
     }
+    button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
 
     th {
       border: 1px solid black;
@@ -100,8 +105,8 @@
       width="50px"></a></div>
 <div>
   <h2 style="top: 20px;text-align: center;">Strukturformel benennen</h2>
-  <h3 style="text-align: center; color: coral;font-size:x-large;" id="AufgabenstellungsFeld">Gib den Namen des Stoffes
-    an</h3>
+  
+  <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h3 style="width: fit-content;text-align: center;padding: 0 6px; color: coral;font-size:x-large;" id="AufgabenstellungsFeld">Gib den Namen des Stoffes an</h3><button value="Neuladen" onclick="javascript:location.reload()"><img src="img/refresh.png" width="25px"></button></div>
   <div><input id="Eingabe" style="width: 400px" placeholder="Name des Stoffes">
     <p> </p>
   </div>
@@ -189,7 +194,7 @@
     const HilfeButton = document.getElementById("HilfeButton");
     if (HilfeCounter == 0) {
       document.getElementById("HilfeFeld").innerHTML += "<h2>Vorgehen</h2>Wir gehen zusammen die Schritte durch, um bei deinem Beispiel folgende unterschiedlichen Informationen zu sammeln:";
-      document.getElementById("HilfeFeld").innerHTML += "<br><img src='img/BeispielBenennung.png' alt='Informationen an einem Beispiel' width='70%' max-width='50px' >";
+      document.getElementById("HilfeFeld").innerHTML += "<br><img src='img/BeispielBenennung.png' alt='Informationen an einem Beispiel' width='90%'  >";
     }
     if (HilfeCounter == 1) {
       document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 1</h2> Suche zuerst die längste Kohlenstoffkette und merke dir die Anzahl. <br> Mithilfe dieser Zahl bekommst du das Ende deiner Kette heraus.";
@@ -309,7 +314,7 @@
     }
     if (HilfeCounter == 8) {
       EingabeFeld.value = Hilfsname2;
-      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 8</h2> Bis hier hin müsste die Bezeichnung nun "+Hilfsname3+" lauten.<br><br>Zwischen den Zahlen und dem jeweiligen Wort für die Nebenkette kommt jetzt ein Bindestrich und dann ein Zahlwort, das angibt, wie viele dieser gleichen Nebenketten es gibt. Eine Liste findest du hier:";
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 8</h2> Bis hier hin müsste die Bezeichnung nun "+Hilfsname3+" lauten.<br><br>Zwischen den Zahlen und dem jeweiligen Wort für die Nebenkette kommt jetzt ein Bindestrich <br> und dann ein Zahlwort, das angibt, wie viele dieser gleichen Nebenketten es gibt. Eine Liste findest du hier:";
       document.getElementById("HilfeFeld").innerHTML += `<table><tbody><tr>
             <th>Anzahl C-Atome</td>
             <td>1</td>
@@ -650,7 +655,8 @@
     if (NameDesStoffes == test) {
       document.getElementById("Eingabe").style.backgroundColor = "green";
       Rückmeldung = "Super! Alles richtig!";
-      document.getElementById("PrüfButton").value = "Neue Aufgabe";
+      document.getElementById("PrüfButton").value = "Nochmal!";
+      document.getElementById("PrüfButton").style.backgroundColor = "green";
       document.getElementById('PrüfButton').addEventListener('click', function() {
         location.reload();
       });
