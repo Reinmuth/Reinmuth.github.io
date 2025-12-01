@@ -23,7 +23,8 @@
       border-radius: 12px;
       box-shadow: 0 6px 20px rgba(10, 10, 10, 0.06);
       text-align: center;
-
+      width: fit-content;
+      margin: 0 auto;
     }
 
     img {
@@ -84,7 +85,7 @@
     table {
       align-items: center;
       text-align: center;
-      width: 90vh;
+      width: 70vb;
       border-style: solid;
       border-collapse: collapse;
       margin: auto;
@@ -145,6 +146,7 @@
   const color = ["black", "cyan", "navy", "green", "orange", "darkgray"];
   var ausgabe = "";
   var nebenkette;
+  var maxSeitenkette = 0;
   var NameDesStoffes = "";
   var vonRechtsNachLinks = true;
   var Hilfsname1 = "";
@@ -176,9 +178,9 @@
       strukturArray.push([i, -1, "H"]);
     }
     strukturArray.push([hauptketteLänge - 1, 0, "H"]);
-
-    zeichneHauptkette("black");
     zufallsNebenkette(nebenkette);
+    zeichneHauptkette("black");
+    
     zeichneNebenkette(nebenkette, false);
     zeichneHauptkettenWasserstoff(hauptketteLänge, strukturArray);
     document.getElementById("großesDiv").innerHTML = ausgabe + "</svg>";
@@ -355,7 +357,13 @@
 
 
   function zeichneHauptkette(farbe) {
-    ausgabe = "<svg viewBox='0 100 1600 1500' role='img'>";
+    //Hier weitermachen
+    const minX = 0;
+    const minY = 800-(maxSeitenkette+1)*140;
+    const width = (hauptketteLänge+1)*150;
+    const height = (maxSeitenkette+1)*280;
+    const viewBoxValue = `${minX} ${minY} ${width} ${height}`;
+    ausgabe = "<svg viewBox='"+viewBoxValue+"' role='img'>";
     for (let i = 0; i < hauptketteLänge; i++) {
       ausgabe += `<text x="${130 + 150 * i}" y="800" fill=` + farbe + ` font-size="50">C</text>`;
     }
@@ -366,6 +374,7 @@
 
   function zufallsNebenkette(nebenkette) {
     let j = 0;
+    maxSeitenkette = 0;
     while (j < Math.min(nebenkette, hauptketteLänge * 2 - 4)) {
       let zufallszahl = Math.floor(Math.random() * (strukturArray.length));
       if (strukturArray[zufallszahl][2] == "H") {
@@ -377,7 +386,13 @@
         }
       }
     }
-
+    for(let i =0 ; i< strukturArray.length; i++){
+      if(strukturArray[i][2]!= "H"){
+        if( maxSeitenkette < strukturArray[i][2]){
+          maxSeitenkette = strukturArray[i][2];
+        }
+      }
+    }
   }
 
   function zeichneNebenkette(nebenkette, wert) {
