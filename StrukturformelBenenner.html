@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="de">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -14,186 +15,434 @@
       font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       background: #f7f7f8;
     }
+
     .card {
       background: white;
       padding: 24px;
       border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(10,10,10,0.06);
+      box-shadow: 0 6px 20px rgba(10, 10, 10, 0.06);
       text-align: center;
-      
+
     }
-    svg { display: block; width: 80vh; }
+
+    img {
+      max-width: 500px;
+    }
+
+    svg {
+      display: block;
+      width: 80vh;
+      max-width: 700px;
+    }
+
     .circle-button {
       cursor: pointer;
       transition: transform 120ms ease;
       outline: none;
     }
-    .circle-button:active { transform: scale(0.98); }
-    .hint { margin-top: 12px; color: #555; font-size: 14px; }
-    input[type="button"]{ padding: 7px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
-    input { width: 110px;font-size:20px; text-align: center;}
-    #ZurückZumStart{ display: flex; width: 50px; height: 50px;    position: absolute;
-    top: 20px;
-    left: 20px;}
 
+    .circle-button:active {
+      transform: scale(0.98);
+    }
 
+    .hint {
+      margin-top: 12px;
+      color: #555;
+      font-size: 14px;
+    }
 
+    input[type="button"] {
+      padding: 7px;
+      box-shadow: 5px 5px 10px 5px rgba(0, 0, 0, 0.67);
+      background-color: burlywood;
+      border-radius: 10px;
+    }
+
+    input {
+      width: 110px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    #ZurückZumStart {
+      display: flex;
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    div {
+      text-align: center;
+    }
+
+    table {
+      align-items: center;
+      text-align: center;
+      width: 90vh;
+      border-style: solid;
+      border-collapse: collapse;
+      margin: auto;
+    }
+
+    td {
+      border: 1px solid black;
+    }
+
+    th {
+      border: 1px solid black;
+    }
   </style>
 </head>
 
-   <div  id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png" width="50px"></a></div>
-   <div><h2 style="top: 20px;text-align: center;">Strukturformel benennen</h2>  <h3 style="text-align: center; color: coral;font-size:x-large;"  id="AufgabenstellungsFeld">Gib den Namen des Stoffes an</h3> <input id="Eingabe" style="width: 400px" placeholder="Name des Stoffes"><input type="button" value="Prüfen" onclick="Prüfung()">
+<div id="ZurückZumStart"><a href="https://reinmuth.github.io/Startseite-Trainer.html"><img src="img/back-arrow.png"
+      width="50px"></a></div>
+<div>
+  <h2 style="top: 20px;text-align: center;">Strukturformel benennen</h2>
+  <h3 style="text-align: center; color: coral;font-size:x-large;" id="AufgabenstellungsFeld">Gib den Namen des Stoffes
+    an</h3>
+  <div><input id="Eingabe" style="width: 400px" placeholder="Name des Stoffes">
+    <p> </p>
+  </div>
+  <input type="button" value="Prüfen" onclick="Prüfung()" id="PrüfButton"> &emsp; <input type="button" id="HilfeButton" value="Hilfe"
+    onclick="Hilfe()">
   <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
-  <p id="RückmeldungFeld"></p>
+  <p id="RückmeldungFeld">Hinweis: Gib die Formeln wie folgt ein "3-Ethyl-2,5-dimethylhexan"</p>
+  <p id="HilfeFeld"></p>
   <div class="card" id="großesDiv"><svg viewBox="0 0 800 800" role="img">
 
-    
 
-  </svg>
+
+    </svg>
+  </div>
+  <p id="HilfeFeldAlt"></p>
 </div>
+<script>
 
-</div>
-  <script>
-    
-    var hauptketteLänge;
-    var benennungsArray = [];
-    benennungsArray.push([1,"Methan","Methyl","",3]);
-    benennungsArray.push([2,"Ethan","Ethyl","Di",1]);
-    benennungsArray.push([3,"Propan","Propyl","Tri",0]);
-    benennungsArray.push([4,"Butan","Butyl","Tetra",4]);
-    benennungsArray.push([5,"Pentan","Pentyl","Penta",2]);
-    benennungsArray.push([6,"Hexan","Hexyl","Hexa"]);
-    benennungsArray.push([7,"Heptan","Heptyl","Hepta"]);
-    benennungsArray.push([8,"Octan","Octyl","Octa"]);
-    benennungsArray.push([9,"Nonan","Nonyl","Nona"]);
-    benennungsArray.push([10,"Decan","Decyl","Deca"]);
-    document.getElementById("RückmeldungFeld").innerHTML ="";
-    var strukturArray = [];
-    var ausgabe = "";
-    var nebenkette;
-    var NameDesStoffes="";
-    var vonRechtsNachLinks = true;
-    var seitenketten = [];
-    var antwortHauptgruppenlänge;
-    var array1 = [];
-    var array2 = [];
-    var hauptgruppenname
-    var antwortArray =[]
-    var array3 = [];
-    var test;
-    Zeichnen();
+  var hauptketteLänge;
+  var benennungsArray = [];
+  var gleichGroß = false;
+  benennungsArray.push([1, "Methan", "Methyl", "", 3]);
+  benennungsArray.push([2, "Ethan", "Ethyl", "Di", 1]);
+  benennungsArray.push([3, "Propan", "Propyl", "Tri", 0]);
+  benennungsArray.push([4, "Butan", "Butyl", "Tetra", 4]);
+  benennungsArray.push([5, "Pentan", "Pentyl", "Penta", 2]);
+  benennungsArray.push([6, "Hexan", "Hexyl", "Hexa"]);
+  benennungsArray.push([7, "Heptan", "Heptyl", "Hepta"]);
+  benennungsArray.push([8, "Octan", "Octyl", "Octa"]);
+  benennungsArray.push([9, "Nonan", "Nonyl", "Nona"]);
+  benennungsArray.push([10, "Decan", "Decyl", "Deca"]);
+  document.getElementById("RückmeldungFeld").innerHTML = "Hinweis: Gib die Formeln wie folgt ein 3-Ethyl-2,5-dimethylhexan";
+  const EingabeFeld = document.getElementById("Eingabe");
+  var strukturArray = [];
+  var HilfeCounter = -1;
+  const color = ["black", "cyan", "navy", "green", "orange", "darkgray"];
+  var ausgabe = "";
+  var nebenkette;
+  var NameDesStoffes = "";
+  var vonRechtsNachLinks = true;
+  var Hilfsname1 = "";
+  var Hilfsname2 = "";
+  var Hilfsname3 = "";
+  var farbigerName = "";
+  var seitenketten = [];
+  var antwortHauptgruppenlänge;
+  var meinArray = [];
+  var meinArray2 = [];
+  var array1 = [];
+  var array2 = [];
+  var hauptgruppenname
+  var namensArray = [];
+  var antwortArray = [];
+  var array3 = [];
+  var test;
+  Zeichnen();
 
-    function Zeichnen(){
-        hauptketteLänge = Math.floor(Math.random()*10)+1;
-        nebenkette = Math.floor(Math.random()*hauptketteLänge)+1;
-        strukturArray = [];
-        ausgabe = "";
-        //hauptketteLänge=document.getElementById("Eingabe").value;
-        strukturArray.push([0,2,"H"]);
-        for (let i = 0; i<hauptketteLänge;i++){
-        strukturArray.push([i,1,"H"]);
-        strukturArray.push([i,-1,"H"]);
+  function Zeichnen() {
+    hauptketteLänge = Math.floor(Math.random() * 10) + 1;
+    nebenkette = Math.floor(Math.random() * hauptketteLänge) + 1;
+    strukturArray = [];
+    ausgabe = "";
+    //hauptketteLänge=document.getElementById("Eingabe").value;
+    strukturArray.push([0, 2, "H"]);
+    for (let i = 0; i < hauptketteLänge; i++) {
+      strukturArray.push([i, 1, "H"]);
+      strukturArray.push([i, -1, "H"]);
+    }
+    strukturArray.push([hauptketteLänge - 1, 0, "H"]);
+
+    zeichneHauptkette("black");
+    zufallsNebenkette(nebenkette);
+    zeichneNebenkette(nebenkette, false);
+    zeichneHauptkettenWasserstoff(hauptketteLänge, strukturArray);
+    document.getElementById("großesDiv").innerHTML = ausgabe + "</svg>";
+    namensBestimmer();
+  }
+
+  function Hilfe() {
+
+    HilfeCounter += 1;
+    document.getElementById("HilfeFeldAlt").innerHTML += document.getElementById("HilfeFeld").innerHTML;
+    document.getElementById("HilfeFeld").innerHTML = "";
+    const HilfeFeld = document.getElementById("HilfeFeld");
+    const HilfeButton = document.getElementById("HilfeButton");
+    if (HilfeCounter == 0) {
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Vorgehen</h2>Wir gehen zusammen die Schritte durch, um bei deinem Beispiel folgende unterschiedlichen Informationen zu sammeln:";
+      document.getElementById("HilfeFeld").innerHTML += "<br><img src='img/BeispielBenennung.png' alt='Informationen an einem Beispiel' width='70%' max-width='50px' >";
+    }
+    if (HilfeCounter == 1) {
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 1</h2> Suche zuerst die längste Kohlenstoffkette und merke dir die Anzahl. <br> Mithilfe dieser Zahl bekommst du das Ende deiner Kette heraus.";
+    }
+    if (HilfeCounter == 2) {
+
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 2</h2> Hier siehst du, welche Hauptkettenlänge zu welchem Namen der Verbindung führt.";
+      document.getElementById("HilfeFeld").innerHTML += `<div><table>  <tr>
+          <th>Name</th>
+          <td id="T1">Methan</th>
+          <td id="T2">Ethan</th>
+          <td id="T3">Propan</th>
+          <td id="T4">Butan</th>
+          <td id="T5">Pentan</th>
+          <td id="T6">Hexan</th>
+          <td id="T7">Heptan</th>
+          <td id="T8">Octan</th>
+          <td id="T9">Nonan</th>
+          <td id="T10">Decan</th>
+        </tr>
+        <tr>
+          <th>Anzahl C-Atome</td>
+          <td id="N1">1</td>
+          <td id="N2">2</td>
+          <td id="N3">3</td>
+          <td id="N4">4</td>
+          <td id="N5">5</td>
+          <td id="N6">6</td>
+          <td id="N7">7</td>
+          <td id="N8">8</td>
+          <td id="N9">9</td>
+          <td id="N10">10</td>
+        </tr></table></div>`;
+    }
+    if (HilfeCounter == 3) {
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 3</h2> Die längste Kette besteht insgesamt aus " + hauptketteLänge + " Kohlenstoffatomen. <br>Damit endet der Name des Stoffes mit " + benennungsArray[hauptketteLänge - 1][1] + ".";
+      document.getElementById(("T" + hauptketteLänge)).style.color = "red";
+      console.log("T" + hauptketteLänge);
+      document.getElementById("T" + hauptketteLänge).style.fontWeight = "bold";
+      document.getElementById("N" + hauptketteLänge).style.color = "red";
+      document.getElementById("N" + hauptketteLänge).style.fontWeight = "bold";
+      let temp = "" + benennungsArray[hauptketteLänge - 1][1];
+      temp = temp.toLowerCase();
+      EingabeFeld.value = temp;
+      document.getElementById("großesDiv").innerHTML = "";
+      zeichneHauptkette("red");
+      zeichneNebenkette(nebenkette, false);
+      zeichneHauptkettenWasserstoff(hauptketteLänge, strukturArray);
+      document.getElementById("großesDiv").innerHTML = ausgabe + "</svg>";
+    }
+    if (HilfeCounter == 4) {
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 4</h2> Suche jetzt die Nebenketten. Benenne diese nach der Anzahl der Kohlenstoffatome.";
+      document.getElementById("HilfeFeld").innerHTML += `<br><br>Hier eine Liste für die Länge der Nebenketten <table>  <tr>
+            <th>Name</th>
+            <td id="S1">Methyl</th>
+            <td id="S2">Ethyl</th>
+            <td id="S3">Propyl</th>
+            <td id="S4">Butyl</th>
+            <td id="S5">Pentyl</th>
+            <td id="S6">Hexyl</th>
+            <td id="S7">Heptyl</th>
+            <td id="S8">Octyl</th>
+            <td id="S9">Nonyl</th>
+            <td id="S10">Decyl</th>
+          </tr>
+          <tr>
+            <th>Anzahl C-Atome</td>
+            <td id="M1">1</td>
+            <td id="M2">2</td>
+            <td id="M3">3</td>
+            <td id="M4">4</td>
+            <td id="M5">5</td>
+            <td id="M6">6</td>
+            <td id="M7">7</td>
+            <td id="M8">8</td>
+            <td id="M9">9</td>
+            <td id="M10">10</td>
+          </tr></table>`;
+    }
+    if (HilfeCounter == 5) {
+      document.getElementById("großesDiv").innerHTML = "";
+      for (let i = 1; i < 6; i++) {
+        if ((seitenketten[i].length != 0) && (hauptketteLänge > 2)) {
+          document.getElementById("S" + i).style.color = color[i];
+          document.getElementById("S" + i).style.fontWeight = "bold";
+          document.getElementById("M" + i).style.color = color[i];
+          document.getElementById("M" + i).style.fontWeight = "bold";
         }
-        strukturArray.push([hauptketteLänge-1,0,"H"]);
-        
-        zeichneHauptkette(hauptketteLänge);
-        zufallsNebenkette(nebenkette);
-        zeichneNebenkette(nebenkette);
-        zeichneHauptkettenWasserstoff(hauptketteLänge,strukturArray);
-        document.getElementById("großesDiv").innerHTML = ausgabe+"</svg>";
-        namensBestimmer();
+      }
+      zeichneHauptkette("red");
+      zeichneNebenkette(nebenkette, true);
+      zeichneHauptkettenWasserstoff(hauptketteLänge, strukturArray);
+
+      document.getElementById("großesDiv").innerHTML = ausgabe + "</svg>";
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 5</h2> Ordne die Nebenketten in alphabetischer Reihenfolge ihres Namens an.";
+    }
+    if (HilfeCounter == 6) {
+
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 6</h2>Bisher hätten wir dann den Namen: "+Hilfsname1+".<br><br>Vor die Namen kommen jetzt noch die Zahlen, an welchem Kohlenstoffatom der Hauptkette die Nebenkette befestigt ist.<br>Wenn es mehrere gleichartige Seitenketten gibt, werden die Zahlen mit Komma getrennt.";
+      document.getElementById("HilfeFeld").innerHTML += "<br>Prüfe, von welcher Richtung (hier links nach rechts oder umgekehrt) die Summe der Zahlen niedriger ist und verwende diese Zählrichtung.";
+      EingabeFeld.value = Hilfsname1;
+    }
+    if (HilfeCounter == 7) {
+
+      if (gleichGroß != true) {
+        document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 7</h2>Wir zählen hier von ";
+        if (vonRechtsNachLinks != true) {
+          document.getElementById("HilfeFeld").innerHTML += "links nach rechts.";
+        } else {
+          document.getElementById("HilfeFeld").innerHTML += "rechts nach links.";
+        }
+      } else {
+        document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 7</h2> Hier ist die Summe gleich groß. Wir wählen deshalb die Zählrichtung, bei der vor der erst genannten Seitenkette die kleinere Zahl steht. ";
+      }
+      document.getElementById("HilfeFeld").innerHTML += "<br>Notiere die Nummern der Kohlenstoffatome, an denen die Nebenketten befestigt sind mit Komma getrennt vor das jeweilige Wort.";
+
+    }
+    if (HilfeCounter == 8) {
+      EingabeFeld.value = Hilfsname2;
+      document.getElementById("HilfeFeld").innerHTML += "<h2>Hilfe 8</h2> Bis hier hin müsste die Bezeichnung nun "+Hilfsname3+" lauten.<br><br>Zwischen den Zahlen und dem jeweiligen Wort für die Nebenkette kommt jetzt ein Bindestrich und dann ein Zahlwort, das angibt, wie viele dieser gleichen Nebenketten es gibt. Eine Liste findest du hier:";
+      document.getElementById("HilfeFeld").innerHTML += `<table><tbody><tr>
+            <th>Anzahl C-Atome</td>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <th>Zahlwort</th>
+            <td>(keins)</th>
+            <td>Di</th>
+            <td>Tri</th>
+            <td>Tetra</th>
+            <td>Penta</th>
+            <td>Hexa</th>
+            <td>Hepta</th>
+            <td>Octa</th>
+            <td>Nona</th>
+            <td>Deca</th>
+          </tr>
+          </tbody></table>`;
+          document.getElementById("HilfeFeld").innerHTML +="<br>Versuche die richtigen Zahlwörter einzubauen";
+          document.getElementById("HilfeButton").value = "Lösung";
+    }
+    if (HilfeCounter == 9) {
+          document.getElementById("HilfeFeld").innerHTML +="<h2>Hilfe 9</h2>Alles in allem müsste die richtige Bezeichnung nun "+farbigerName+" lauten.<br>Wir schreiben hier nur den ersten Buchstaben groß, den Rest klein.";
+          EingabeFeld.value = NameDesStoffes;
+          document.getElementById("HilfeButton").disabled = true;
+    }
+  }
+
+
+
+  function zeichneHauptkette(farbe) {
+    ausgabe = "<svg viewBox='0 100 1600 1500' role='img'>";
+    for (let i = 0; i < hauptketteLänge; i++) {
+      ausgabe += `<text x="${130 + 150 * i}" y="800" fill=` + farbe + ` font-size="50">C</text>`;
+    }
+    for (let i = 0; i < hauptketteLänge - 1; i++) {
+      ausgabe += `<line x1="${160 + 150 * i}" y1="${780}" x2="${270 + i * 150}" y2="${400 + 380}" opacity="1" style="stroke:` + farbe + `;stroke-width:4" />`;
+    }
+  }
+
+  function zufallsNebenkette(nebenkette) {
+    let j = 0;
+    while (j < Math.min(nebenkette, hauptketteLänge * 2 - 4)) {
+      let zufallszahl = Math.floor(Math.random() * (strukturArray.length));
+      if (strukturArray[zufallszahl][2] == "H") {
+        let möglicheLängen = Math.min(strukturArray[zufallszahl][0], hauptketteLänge - strukturArray[zufallszahl][0] - 1);
+        if (möglicheLängen != 0) {
+          let nebenlänge = Math.floor(Math.random() * (möglicheLängen) + 1);
+          strukturArray[zufallszahl][2] = nebenlänge;
+          j = j + 1;
+        }
+      }
     }
 
+  }
 
-    
+  function zeichneNebenkette(nebenkette, wert) {
+    console.table(strukturArray);
+    let farbe = "black";
 
-    function zeichneHauptkette(z){
-        ausgabe = "<svg viewBox='0 100 1600 1500' role='img'>";
-        for (let i=0; i<hauptketteLänge;i++){
-            ausgabe+=`<text x="${130+150*i}" y="800" fill="black" font-size="50">C</text>`;
+    for (let i = 0; i < strukturArray.length; i++) {
+
+      if (Number.isInteger(strukturArray[i][2])) {
+        if (wert == true) {
+          farbe = color[strukturArray[i][2]];
         }
-        for (let i=0; i<hauptketteLänge-1;i++){
-            ausgabe+=`<line x1="${160+150*i}" y1="${780}" x2="${270+i*150}" y2="${400+380}" opacity="1" style="stroke:black;stroke-width:4" />`;
-        }
-    }
-
-    function zufallsNebenkette(nebenkette){
-        let j = 0;
-        while (j<Math.min(nebenkette,hauptketteLänge*2-4)) {
-          let zufallszahl = Math.floor(Math.random()*(strukturArray.length));
-          if (strukturArray[zufallszahl][2] == "H" ){
-            let möglicheLängen = Math.min(strukturArray[zufallszahl][0],hauptketteLänge-strukturArray[zufallszahl][0]-1);
-            if (möglicheLängen != 0){
-              let nebenlänge = Math.floor(Math.random()*(möglicheLängen)+1);
-              strukturArray[zufallszahl][2] = nebenlänge;
-              j = j+1;
-            }
+        for (let j = 0; j < strukturArray[i][2]; j++) {
+          ausgabe += `<text x="${131 + 150 * strukturArray[i][0] + 150 * (j + 1) * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y="${400 + 397 + 150 * (j + 1) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" fill="${farbe}" font-size="50">C</text>`;
+          ausgabe += `<line x1="${148 + 150 * strukturArray[i][0] + 20 * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y1="${400 + 380 + (25 + 150 * j) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" x2="${148 + 150 * strukturArray[i][0] + 60 * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y2="${400 + 380 + (150 * (j + 1) - 32) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" opacity="1" style="stroke:${farbe};stroke-width:4" />`;
+          ausgabe += `<text x="${135 + 150 * strukturArray[i][0] + 50}" y="${400 + 394 + 150 * strukturArray[i][1] * (j + 1)}" fill="${farbe}" font-size="40">H</text>`;
+          ausgabe += `<line x1="${148 + 150 * strukturArray[i][0] + 18}" y1="${400 + 380 + (150 * (j + 1)) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" x2="${148 + 150 * strukturArray[i][0] + 32}" y2="${400 + 380 + (150 * (j + 1)) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" opacity="1" style="stroke:${farbe};stroke-width:2" />`;
+          ausgabe += `<line x1="${148 + 150 * strukturArray[i][0] - 18}" y1="${400 + 380 + (150 * (j + 1)) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" x2="${148 + 150 * strukturArray[i][0] - 32}" y2="${400 + 380 + (150 * (j + 1)) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" opacity="1" style="stroke:${farbe};stroke-width:2" />`;
+          ausgabe += `<text x="${135 + 150 * strukturArray[i][0] - 50}" y="${400 + 394 + 150 * strukturArray[i][1] * (j + 1)}" fill="${farbe}" font-size="40">H</text>`;
+          if (j == strukturArray[i][2] - 1) {
+            ausgabe += `<text x="${135 + 150 * strukturArray[i][0]}" y="${400 + 394 + (150 * (j + 1) + 55) * strukturArray[i][1]}" fill="${farbe}" font-size="40">H</text>`;
+            ausgabe += `<line x1="${148 + 150 * strukturArray[i][0]}" y1="${400 + 380 + (150 * (j + 1) + 22) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" x2="${148 + 150 * strukturArray[i][0]}" y2="${400 + 380 + (150 * (j + 1) + 37) * Math.sin(strukturArray[i][1] * Math.PI / 2)}" opacity="1" style="stroke:${farbe};stroke-width:2" />`;
           }
         }
-      
+      }
     }
 
-    function zeichneNebenkette(nebenkette){
-      for (let i=0; i<strukturArray.length;i++){
-            if(Number.isInteger(strukturArray[i][2])){
-              for (let j=0;j<strukturArray[i][2];j++){
-            ausgabe+=`<text x="${131+150*strukturArray[i][0]+150*(j+1)*Math.cos(strukturArray[i][1]*Math.PI/2)}" y="${400+397+150*(j+1)*Math.sin(strukturArray[i][1]*Math.PI/2)}" fill="black" font-size="50">C</text>`;
-            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+20*Math.cos(strukturArray[i][1]*Math.PI/2)}" y1="${400+380+(25+150*j)*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+60*Math.cos(strukturArray[i][1]*Math.PI/2)}" y2="${400+380+(150*(j+1)-32)*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:4" />`;
-            ausgabe+=`<text x="${135+150*strukturArray[i][0]+50}" y="${400+394+150*strukturArray[i][1]*(j+1)}" fill="black" font-size="40">H</text>`;
-            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+18}" y1="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+32}" y2="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
-            ausgabe+=`<line x1="${148+150*strukturArray[i][0]-18}" y1="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]-32}" y2="${400+380+(150*(j+1))*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
-            ausgabe+=`<text x="${135+150*strukturArray[i][0]-50}" y="${400+394+150*strukturArray[i][1]*(j+1)}" fill="black" font-size="40">H</text>`;
-            if(j==strukturArray[i][2]-1){
-              ausgabe+=`<text x="${135+150*strukturArray[i][0]}" y="${400+394+(150*(j+1)+55)*strukturArray[i][1]}" fill="black" font-size="40">H</text>`;
-              ausgabe+=`<line x1="${148+150*strukturArray[i][0]}" y1="${400+380+(150*(j+1)+22)*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]}" y2="${400+380+(150*(j+1)+37)*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
-            }
-          }  
-          }
-        }
+  }
 
+  function zeichneHauptkettenWasserstoff(hauptketteLänge, strukturArray) {
+
+    for (let i = 0; i < strukturArray.length; i++) {
+      if (strukturArray[i][2] == 'H') {
+        ausgabe += `<text x="${135 + 150 * strukturArray[i][0] + 80 * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y="${400 + 394 + 80 * Math.sin(strukturArray[i][1] * Math.PI / 2)}" fill="black" font-size="40">H</text>`;
+        ausgabe += `<line x1="${148 + 150 * strukturArray[i][0] + 20 * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y1="${400 + 380 + 25 * Math.sin(strukturArray[i][1] * Math.PI / 2)}" x2="${148 + 150 * strukturArray[i][0] + 60 * Math.cos(strukturArray[i][1] * Math.PI / 2)}" y2="${400 + 380 + 55 * Math.sin(strukturArray[i][1] * Math.PI / 2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
+      }
     }
 
-    function zeichneHauptkettenWasserstoff(hauptketteLänge,strukturArray){
-        
-        for (let i=0; i<strukturArray.length;i++){
-            if(strukturArray[i][2] == 'H'){
-            ausgabe+=`<text x="${135+150*strukturArray[i][0]+80*Math.cos(strukturArray[i][1]*Math.PI/2)}" y="${400+394+80*Math.sin(strukturArray[i][1]*Math.PI/2)}" fill="black" font-size="40">H</text>`;
-            ausgabe+=`<line x1="${148+150*strukturArray[i][0]+20*Math.cos(strukturArray[i][1]*Math.PI/2)}" y1="${400+380+25*Math.sin(strukturArray[i][1]*Math.PI/2)}" x2="${148+150*strukturArray[i][0]+60*Math.cos(strukturArray[i][1]*Math.PI/2)}" y2="${400+380+55*Math.sin(strukturArray[i][1]*Math.PI/2)}" opacity="1" style="stroke:black;stroke-width:2" />`;
-            }
-        }
+  }
 
+  function namensBestimmer() {
+    seitenketten = [];
+    for (let i = 1; i <= 5; i++) {
+      seitenketten[i] = [];
+    }
+    for (let i = 1; i < strukturArray.length; i++) {
+      if (strukturArray[i][2] != 'H') {
+        let z = strukturArray[i][2];
+        seitenketten[z].push(strukturArray[i][0]);
+      }
     }
 
-    function namensBestimmer(){
-        seitenketten = [];
-        for (let i=1;i<=5;i++){
-          seitenketten[i]=[];
-        }
-        for (let i=1;i<strukturArray.length;i++){
-          if (strukturArray[i][2] != 'H'){
-            let z = strukturArray[i][2];
-            seitenketten[z].push(strukturArray[i][0]);
-          }
-        }
+    var summeLR = 0;
+    var summeRL = 0;
 
-        var summeLR=0;
-        var summeRL=0;
-        
-          for (let j=1;j<=5;j++){
-            for (let i=0;i<seitenketten[j].length;i++){
-              summeLR += (seitenketten[j][i]+1);
-              summeRL += (hauptketteLänge)-(seitenketten[j][i]);
-            }
-          }
-          
-          if (summeLR > summeRL) {
+    for (let j = 1; j <= 5; j++) {
+      for (let i = 0; i < seitenketten[j].length; i++) {
+        summeLR += (seitenketten[j][i] + 1);
+        summeRL += (hauptketteLänge) - (seitenketten[j][i]);
+      }
+    }
+
+    if (summeLR > summeRL) {
       vonRechtsNachLinks = true;
       console.log(vonRechtsNachLinks);
     } else if (summeLR < summeRL) {
       vonRechtsNachLinks = false;
       console.log(vonRechtsNachLinks);
     } else if (summeLR = summeRL) {
-      console.log("GLEICH GRoSS");
+      gleichGroß = true;
       console.log(seitenketten[2][0], (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1]))
 
       console.log(seitenketten[2][0] <= (hauptketteLänge - 1 - seitenketten[2][seitenketten[2].length - 1]))
@@ -238,155 +487,193 @@
         }
       }
     }
-        
-
-        
-        var namensArray = [];
-        if (hauptketteLänge > 2){
-        for(let i=1;i<=5;i++){
-          namensArray[i]="";
-          if(vonRechtsNachLinks==true){
-            for(let j=0;j<seitenketten[i].length;j++){
-              namensArray[i]=namensArray[i]+","+(hauptketteLänge-(seitenketten[i][seitenketten[i].length-j-1])); // hier j ändern
-
-            }
-          } else{ 
-            for(let j=0;j<seitenketten[i].length;j++){
-              namensArray[i]=namensArray[i]+","+(seitenketten[i][j]+1);
-            }
-          }
-          if (namensArray[i].length !=0){
-            namensArray[i]=namensArray[i].slice(1,namensArray[i].length)+"-"; //Komma wegmachen
-            namensArray[i]+=""+benennungsArray[seitenketten[i].length-1][3];
-            namensArray[i]+=""+benennungsArray[i-1][2]+"-";
-            
-          }
-          namensArray[i]+="-";
-          namensArray[i]=namensArray[i].slice(0,namensArray[i].length-1);
-        }
-      } 
-
-        NameDesStoffes = "";
-        for (let i=0;i<5;i++){
-          NameDesStoffes += namensArray[benennungsArray[i][4]+1];
-        }
-        NameDesStoffes = NameDesStoffes.slice(0,NameDesStoffes.length-1)+benennungsArray[hauptketteLänge-1][1];
-        let großBuchstabe = NameDesStoffes.search(/[A-Z]/);
-        NameDesStoffes = NameDesStoffes.toLowerCase();
-        NameDesStoffes = NameDesStoffes.slice(0,großBuchstabe)+NameDesStoffes.charAt(großBuchstabe).toUpperCase()+NameDesStoffes.slice(großBuchstabe+1,NameDesStoffes.length);
-        
-        if(hauptketteLänge<3){
-          NameDesStoffes = benennungsArray[hauptketteLänge-1][1];
-        }
-        console.log(NameDesStoffes);
-      }
-        //mit Doppelschleife Anzahl zählen, dann in Alphabetischer Reihenfolge mit Zahlwort und entsprechenden Zahlen ausgeben lassen
-        // TEST ab hier
-       function Prüfung(){
-        test = "";
-        test = document.getElementById("Eingabe").value;
-        array1 = [];
-        array2 = [];
-        hauptgruppenname="";
-        antwortArray =[];
-        array3 = [];
 
 
-        array1 = test.split("-");
 
-        if (array1[array1.length-1].indexOf("yl")!=-1){
-          hauptgruppenname = array1[array1.length-1].slice(2+array1[array1.length-1].indexOf("yl"),array1[array1.length-1].length);
-          array1[array1.length-1]=array1[array1.length-1].slice(0,2+array1[array1.length-1].indexOf("yl"));
-          for ( let i=0; i<(array1.length/2);i++){
-            array2[i]=[array1[2*i],array1[2*i+1]];
+    namensArray = [];
+    if (hauptketteLänge > 2) {
+      for (let i = 1; i <= 5; i++) {
+        namensArray[i] = "";
+        if (vonRechtsNachLinks == true) {
+          for (let j = 0; j < seitenketten[i].length; j++) {
+            namensArray[i] = namensArray[i] + "," + (hauptketteLänge - (seitenketten[i][seitenketten[i].length - j - 1])); // hier j ändern
+
           }
         } else {
-          hauptgruppenname = test;
+          for (let j = 0; j < seitenketten[i].length; j++) {
+            namensArray[i] = namensArray[i] + "," + (seitenketten[i][j] + 1);
+          }
+          
         }
-        for (let i=1;i<=5;i++){
-          antwortArray[i]=[];
+        console.table(meinArray2);
+        if (namensArray[i].length != 0) {
+          namensArray[i] = namensArray[i].slice(1, namensArray[i].length) + "-"; //Komma wegmachen
+          meinArray2[i] = namensArray[i];
+          namensArray[i] += "" + benennungsArray[seitenketten[i].length - 1][3];
+          
+          namensArray[i] += "" + benennungsArray[i - 1][2] + "-";
+          meinArray2[i] += "" + benennungsArray[i - 1][2] + "-";
+          meinArray[i] = "" + benennungsArray[i - 1][2] + "-";
+          
         }
-        for(let i=0; i<array2.length;i++){
-          if ((array2[i][1].indexOf("Methyl")!=-1)||(array2[i][1].indexOf("methyl")!=-1)){
-            antwortArray[1]=array2[i][0].split(",");
-          } else if ((array2[i][1].indexOf("Ethyl")!=-1)||(array2[i][1].indexOf("ethyl")!=-1)){
-            antwortArray[2]=(array2[i][0].split(","));
-          }
-          if ((array2[i][1].indexOf("propyl")!=-1)||(array2[i][1].indexOf("Propyl")!=-1)){
-            antwortArray[3]=array2[i][0].split(",");
-          }
-          if ((array2[i][1].indexOf("butyl")!=-1)||(array2[i][1].indexOf("Butyl")!=-1)){
-            antwortArray[4]=array2[i][0].split(",");
-          }
-          if ((array2[i][1].indexOf("pentyl")!=-1)||(array2[i][1].indexOf("Pentyl")!=-1)){
-            antwortArray[5]=array2[i][0].split(",");
-          }
-        }
-        for (let i=1;i<=5;i++){
-          for (let j=0;j<(antwortArray[i].length);j++){
-            antwortArray[i][j]=parseInt(antwortArray[i][j])-1;
-          }
-        }
-
-      //Arrayvergleich
-      var arrayGleich = true;
-      console.log(vonRechtsNachLinks);
-      for (let i=1;i<=5;i++){
-        for (let j=0;j<(Math.max((antwortArray[i].length),(seitenketten[i].length)));j++){
-          if(vonRechtsNachLinks == false){  
-            console.log(antwortArray[i][j],seitenketten[i][j]);
-            if(parseInt(antwortArray[i][j])!=(seitenketten[i][j])){
-                
-              arrayGleich = false;
-            }
-          } else {
-            if(parseInt(antwortArray[i][j])!=(hauptketteLänge-1-(seitenketten[i][seitenketten[i].length-j-1]))){
-              arrayGleich = false;
-            }
-          }
-        }
+        namensArray[i] += "-";
+        meinArray2[i] += "-";
+        namensArray[i] = namensArray[i].slice(0, namensArray[i].length - 1);
+        meinArray2[i] = meinArray2[i].slice(0, meinArray2[i].length - 1);
+        //meinArray2[i] = "<span style='color:"+color[i]+";'>"+meinArray2[i]+"</span>";
       }
-      antwortHauptgruppenlänge=0;
-
-      for(let i=0;i<10;i++){
-        if (hauptgruppenname.toLowerCase()==benennungsArray[i][1].toLowerCase()){
-          antwortHauptgruppenlänge = benennungsArray[i][0];
-        }
+    }
+    console.table(namensArray);
+    NameDesStoffes = "";
+    for (let i = 0; i < 5; i++) {
+      NameDesStoffes += namensArray[benennungsArray[i][4] + 1];
+      if (namensArray[benennungsArray[i][4] + 1] != "") {
+        farbigerName += "<span style='font-weight:bold; color:"+color[benennungsArray[i][4]+1]+";'>"+namensArray[benennungsArray[i][4] + 1]+"</span>";
       }
-      let hgFalsch = false;
-      if (antwortHauptgruppenlänge != hauptketteLänge){
-        arrayGleich = false;
-        hgFalsch = true;
-      }
-      console.table(antwortArray);
-      console.table(seitenketten);
-      let Rückmeldung = "";
-      if (arrayGleich == false){
-        document.getElementById("Eingabe").style.backgroundColor ="red";
-        Rückmeldung +="Achtung, hier ist etwas falsch.";
-      }
-      if (NameDesStoffes == test){
-        document.getElementById("Eingabe").style.backgroundColor ="green";
-        Rückmeldung="Super! Alles richtig!";
-      }
-      console.log(arrayGleich,"Array gleich?")
-        if((arrayGleich==true)&&(NameDesStoffes!=test)){
-        Rückmeldung+="Die Vorsilben oder die Bindestriche stimmen nicht.";
-        document.getElementById("Eingabe").style.backgroundColor ="coral";
-        }
       
-      
-      if (hgFalsch == true){
-        Rückmeldung +="<br>Der Name der Hauptgruppe stimmt nicht. Die längeste Kette ist "+hauptketteLänge+" Kohlenstoffatome lang. <br> Sie müsste damit "+benennungsArray[hauptketteLänge-1][1]+" heißen.";
+      if (meinArray[benennungsArray[i][4] + 1] !== undefined) {
+        Hilfsname1 += meinArray[benennungsArray[i][4] + 1];
       }
-      document.getElementById("RückmeldungFeld").innerHTML = Rückmeldung;
-      console.table(antwortArray);
+      if (meinArray2[benennungsArray[i][4] + 1] != "undefined") {
+        Hilfsname2 += meinArray2[benennungsArray[i][4] + 1];
+        Hilfsname3 += "<span style='font-weight:bold; color:"+color[benennungsArray[i][4] + 1]+";'>"+meinArray2[benennungsArray[i][4] + 1]+"</span>";
+      }
+      console.log(farbigerName);
+    }
+    NameDesStoffes = NameDesStoffes.slice(0, NameDesStoffes.length - 1) + benennungsArray[hauptketteLänge - 1][1];
+    Hilfsname1 = Hilfsname1.slice(0, Hilfsname1.length - 1) + benennungsArray[hauptketteLänge - 1][1];
+    Hilfsname2 = Hilfsname2.slice(0, Hilfsname2.length - 1) + benennungsArray[hauptketteLänge - 1][1];
+    Hilfsname3 = Hilfsname3.slice(0, Hilfsname3.length-7)+"</span>" + benennungsArray[hauptketteLänge - 1][1];
+    farbigerName = farbigerName.slice(0, farbigerName.length - 7) +"</span>" + benennungsArray[hauptketteLänge - 1][1];
+
+    console.log(farbigerName);
+    let farbigerGroßBuchstabe = farbigerName.search(/[A-Z]/);
+    let großBuchstabe = NameDesStoffes.search(/[A-Z]/);
+    NameDesStoffes = NameDesStoffes.toLowerCase();
+    farbigerName = farbigerName.toLowerCase();
+    NameDesStoffes = NameDesStoffes.slice(0, großBuchstabe) + NameDesStoffes.charAt(großBuchstabe).toUpperCase() + NameDesStoffes.slice(großBuchstabe + 1, NameDesStoffes.length);
+    farbigerName = farbigerName.slice(0,farbigerGroßBuchstabe)+farbigerName.charAt(farbigerGroßBuchstabe).toUpperCase() + farbigerName.slice(farbigerGroßBuchstabe+1,farbigerName.length);
+    if (hauptketteLänge < 3) {
+      NameDesStoffes = benennungsArray[hauptketteLänge - 1][1];
+      Hilfsname1= benennungsArray[hauptketteLänge - 1][1];
+      Hilfsname2= benennungsArray[hauptketteLänge - 1][1];
+      Hilfsname3= benennungsArray[hauptketteLänge - 1][1];
+      farbigerName= benennungsArray[hauptketteLänge - 1][1];
+    }
+    console.log(NameDesStoffes);
+  }
+  //mit Doppelschleife Anzahl zählen, dann in Alphabetischer Reihenfolge mit Zahlwort und entsprechenden Zahlen ausgeben lassen
+  // TEST ab hier
+  function Prüfung() {
+    test = "";
+    test = document.getElementById("Eingabe").value;
+    array1 = [];
+    array2 = [];
+    hauptgruppenname = "";
+    antwortArray = [];
+    array3 = [];
+
+
+    array1 = test.split("-");
+
+    if (array1[array1.length - 1].indexOf("yl") != -1) {
+      hauptgruppenname = array1[array1.length - 1].slice(2 + array1[array1.length - 1].indexOf("yl"), array1[array1.length - 1].length);
+      array1[array1.length - 1] = array1[array1.length - 1].slice(0, 2 + array1[array1.length - 1].indexOf("yl"));
+      for (let i = 0; i < (array1.length / 2); i++) {
+        array2[i] = [array1[2 * i], array1[2 * i + 1]];
+      }
+    } else {
+      hauptgruppenname = test;
+    }
+    for (let i = 1; i <= 5; i++) {
+      antwortArray[i] = [];
+    }
+    for (let i = 0; i < array2.length; i++) {
+      if ((array2[i][1].indexOf("Methyl") != -1) || (array2[i][1].indexOf("methyl") != -1)) {
+        antwortArray[1] = array2[i][0].split(",");
+      } else if ((array2[i][1].indexOf("Ethyl") != -1) || (array2[i][1].indexOf("ethyl") != -1)) {
+        antwortArray[2] = (array2[i][0].split(","));
+      }
+      if ((array2[i][1].indexOf("propyl") != -1) || (array2[i][1].indexOf("Propyl") != -1)) {
+        antwortArray[3] = array2[i][0].split(",");
+      }
+      if ((array2[i][1].indexOf("butyl") != -1) || (array2[i][1].indexOf("Butyl") != -1)) {
+        antwortArray[4] = array2[i][0].split(",");
+      }
+      if ((array2[i][1].indexOf("pentyl") != -1) || (array2[i][1].indexOf("Pentyl") != -1)) {
+        antwortArray[5] = array2[i][0].split(",");
+      }
+    }
+    for (let i = 1; i <= 5; i++) {
+      for (let j = 0; j < (antwortArray[i].length); j++) {
+        antwortArray[i][j] = parseInt(antwortArray[i][j]) - 1;
+      }
     }
 
-      /*    Wenn Wort perfekt übereinstimmt
-            Wenn die Zahlen nicht die richtige RF haben (nach sortieren es passt)
-            Zählweise ist falsch herum.
-      */
-  </script>
+    //Arrayvergleich
+    var arrayGleich = true;
+    console.log(vonRechtsNachLinks);
+    for (let i = 1; i <= 5; i++) {
+      for (let j = 0; j < (Math.max((antwortArray[i].length), (seitenketten[i].length))); j++) {
+        if (vonRechtsNachLinks == false) {
+          console.log(antwortArray[i][j], seitenketten[i][j]);
+          if (parseInt(antwortArray[i][j]) != (seitenketten[i][j])) {
+
+            arrayGleich = false;
+          }
+        } else {
+          if (parseInt(antwortArray[i][j]) != (hauptketteLänge - 1 - (seitenketten[i][seitenketten[i].length - j - 1]))) {
+            arrayGleich = false;
+          }
+        }
+      }
+    }
+    antwortHauptgruppenlänge = 0;
+
+    for (let i = 0; i < 10; i++) {
+      if (hauptgruppenname.toLowerCase() == benennungsArray[i][1].toLowerCase()) {
+        antwortHauptgruppenlänge = benennungsArray[i][0];
+      }
+    }
+    let hgFalsch = false;
+    if (antwortHauptgruppenlänge != hauptketteLänge) {
+      arrayGleich = false;
+      hgFalsch = true;
+    }
+    console.table(antwortArray);
+    console.table(seitenketten);
+    let Rückmeldung = "";
+    if (arrayGleich == false) {
+      document.getElementById("Eingabe").style.backgroundColor = "red";
+      Rückmeldung += "Achtung, hier ist etwas falsch.";
+    }
+    if (NameDesStoffes == test) {
+      document.getElementById("Eingabe").style.backgroundColor = "green";
+      Rückmeldung = "Super! Alles richtig!";
+      document.getElementById("PrüfButton").value = "Neue Aufgabe";
+      document.getElementById('PrüfButton').addEventListener('click', function() {
+        location.reload();
+      });
+    }
+    console.log(arrayGleich, "Array gleich?")
+    if ((arrayGleich == true) && (NameDesStoffes != test)) {
+      Rückmeldung += "Die Vorsilben oder die Bindestriche stimmen nicht.";
+      document.getElementById("Eingabe").style.backgroundColor = "coral";
+    }
+
+
+    if (hgFalsch == true) {
+      Rückmeldung += "<br>Der Name der Hauptgruppe stimmt nicht. Die längeste Kette ist " + hauptketteLänge + " Kohlenstoffatome lang. <br> Sie müsste damit " + benennungsArray[hauptketteLänge - 1][1] + " heißen.";
+    }
+    document.getElementById("RückmeldungFeld").innerHTML = Rückmeldung;
+    console.table(antwortArray);
+  }
+
+  /*    Wenn Wort perfekt übereinstimmt
+        Wenn die Zahlen nicht die richtige RF haben (nach sortieren es passt)
+        Zählweise ist falsch herum.
+  */
+</script>
 </body>
+
 </html>
