@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>IUPAC-Builder — Finale Version (Design A, Regeln + H & 90°)</title>
+  <style>
+    :root{
+      --bg: #f5f9fb;
+      --card: #ffffff;
+      --accent: #0f6fbf;
+      --accent-2:#ff8a65;
+      --muted: #6b6f76;
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#eaf6ff);} 
+    .app{max-width:1100px;margin:28px auto;padding:20px;}
+    header{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+    h1{font-size:20px;margin:0}
+    .grid{display:grid;grid-template-columns:360px 1fr;gap:18px}
+
+    .panel{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 20px rgba(12,30,60,0.08)}
+    .controls{display:flex;flex-direction:column;gap:12px}
+
+    .chain-picker{display:flex;flex-wrap:wrap;gap:8px}
+    .chain-btn{padding:8px 10px;border-radius:8px;border:1px solid #e6eef8;background:white;cursor:pointer}
+    .chain-btn.active{background:var(--accent);color:white;border-color:transparent}
+
+    .subs-row{display:flex;gap:8px;align-items:center}
+    .subs-list{display:flex;gap:8px;flex-wrap:wrap}
+    .sub-card{padding:8px 10px;border-radius:8px;background:#f8fbff;border:1px solid #e6eef8;display:flex;gap:8px;align-items:center;cursor:pointer}
+    .sub-card.active{background:var(--accent-2);color:white}
+
+    .positions{display:flex;gap:6px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+    .pos{width:36px;height:36px;border-radius:8px;border:1px dashed #cbd9ee;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent}
+    .pos.inactive{opacity:0.28;pointer-events:none}
+    .pos.selected{background:var(--accent);color:white;border-style:solid}
+
+    .preview{display:flex;flex-direction:column;gap:12px}
+    .molecule-canvas{height:320px;background:linear-gradient(180deg,#ffffff, #f7fbff);border-radius:10px;display:flex;align-items:center;justify-content:center}
+
+    .output{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .chip{background:#eef7ff;padding:8px 12px;border-radius:999px;color:var(--accent);font-weight:600}
+    .name-area{font-size:20px;font-weight:600;color:#123a5a}
+
+    footer{margin-top:16px;text-align:center;color:var(--muted);font-size:13px}
+
+    svg{width:95%;height:95%;}
+    /* smaller screens */
+    @media (max-width:900px){.grid{grid-template-columns:1fr;}.molecule-canvas{height:260px}}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>IUPAC-Builder — interaktives Lernwerkzeug</h1>
+      <div style="color:var(--muted);font-size:13px">Wähle Kettenlänge → Seitenketten → Positionen. Name & Zeichnung werden live erzeugt.</div>
+    </header>
+
+    <div class="grid">
+      <div class="panel controls" aria-label="Kontrollen">
+        <div>
+          <strong>1) Hauptkette wählen</strong>
+          <div class="chain-picker" id="chainPicker" role="radiogroup" aria-label="Hauptkettenlänge"></div>
+        </div>
+
+        <div>
+          <strong>2) Seitenketten hinzufügen</strong>
+          <div style="margin-top:8px;color:var(--muted);font-size:13px">Klicke ein Substituent, dann klicke Positionen, um ihn zu platzieren. Ungültige Positionen sind ausgegraut.</div>
+          <div class="subs-list" id="subsList" aria-label="Seitenketten"></div>
+        </div>
+
+        <div>
+          <strong>3) Positionen & Auswahl</strong>
+          <div style="font-size:13px;color:var(--muted);margin-top:6px">Klicke auf die Nummer um an dieser Position die ausgewählte Seitenkette zu platzieren.</div>
+          <div class="positions" id="positions"></div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:12px">
+          <button id="clearBtn" class="chain-btn">Zurücksetzen</button>
+          <button id="exampleBtn" class="chain-btn">Beispiel (3-Ethyl-2,4-dimethylpentan)</button>
+        </div>
+      </div>
+
+      <div class="panel preview" aria-live="polite">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="output">
+            <div class="chip" id="chainChip">Kette: —</div>
+            <div class="chip" id="subsChip">Substituenten: —</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:13px;color:var(--muted)">Aktuelle Nummerierung</div>
+            <div id="numbering" style="font-weight:600;color:#0f3b5b">—</div>
+          </div>
+        </div>
+
+        <div class="molecule-canvas" id="canvas">
+          <svg id="svg" viewBox="0 0 900 300" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="name-area" id="iupacName">—</div>
+          <div style="text-align:right;color:var(--muted);font-size:13px">Live-Vorschau & Zeichnung</div>
+        </div>
+      </div>
+    </div>
+
+    <footer>Lehrversion • Für Unterricht & Übung • Aufbau: Methan–Decan, Methyl–Butyl • (IUPAC-Regeln vereinfacht, keine Stereochemie)</footer>
+  </div>
+
+<script>
+// --- Datenmodell + Längenmap ---
+const substituentenBasis = [
+  {key:'methyl', label:'Methyl', length:1},
+  {key:'ethyl',  label:'Ethyl',  length:2},
+  {key:'propyl', label:'Propyl', length:3},
+  {key:'butyl',  label:'Butyl',  length:4}
+];
+
+let state = {
+  mainChain: null,       // integer
+  selectedSub: null,     // key
+  attachments: []        // {subKey, position (1-based), id}
+};
+
+let nextId = 1;
+
+// DOM refs
+const chainPicker = document.getElementById('chainPicker');
+const subsList = document.getElementById('subsList');
+const positionsDiv = document.getElementById('positions');
+const svg = document.getElementById('svg');
+const chainChip = document.getElementById('chainChip');
+const subsChip = document.getElementById('subsChip');
+const numbering = document.getElementById('numbering');
+const nameArea = document.getElementById('iupacName');
+
+// render chain buttons
+for(let n=1;n<=10;n++){
+  const btn = document.createElement('button');
+  btn.className='chain-btn';
+  btn.textContent = (n===1)? 'Methan' : (n===2)? 'Ethan' : (n===3)? 'Propan' : (n===4)? 'Butan' :
+                    (n===5)? 'Pentan' : (n===6)? 'Hexan' : (n===7)? 'Heptan' : (n===8)? 'Octan' :
+                    (n===9)? 'Nonan' : 'Decan';
+  btn.dataset.len = n;
+  btn.addEventListener('click', ()=> selectChain(n, btn));
+  chainPicker.appendChild(btn);
+}
+
+// render substituent cards
+substituentenBasis.forEach(s => {
+  const el = document.createElement('div');
+  el.className='sub-card';
+  el.dataset.key = s.key;
+  el.innerHTML = `<div style="font-weight:600">${s.label}</div>`;
+  el.addEventListener('click', ()=> selectSub(s.key, el));
+  subsList.appendChild(el);
+});
+
+// chain select
+function selectChain(n, btn){
+  document.querySelectorAll('.chain-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  state.mainChain = n;
+  state.attachments = [];
+  state.selectedSub = null;
+  nextId = 1;
+  document.querySelectorAll('.sub-card').forEach(c=>c.classList.remove('active'));
+  renderPositions();
+  renderAll();
+}
+
+// sub select
+function selectSub(key, el){
+  if(!state.mainChain){ alert('Wähle zuerst die Hauptkette.'); return; }
+  if(state.selectedSub === key){ state.selectedSub = null; el.classList.remove('active'); }
+  else{ state.selectedSub = key; document.querySelectorAll('.sub-card').forEach(c=>c.classList.remove('active')); el.classList.add('active'); }
+  renderPositionsAvailability();
+}
+
+// render positions buttons
+function renderPositions(){
+  positionsDiv.innerHTML='';
+  const n = state.mainChain;
+  if(!n) return;
+  for(let i=1;i<=n;i++){
+    const d = document.createElement('div');
+    d.className='pos';
+    d.textContent = i;
+    d.dataset.pos = i;
+    d.addEventListener('click', ()=> toggleAttachment(i));
+    positionsDiv.appendChild(d);
+  }
+  renderPositionsAvailability();
+}
+
+// availability according to rules (disables invalid positions)
+function renderPositionsAvailability(){
+  const n = state.mainChain;
+  if(!n) return;
+  const selected = state.selectedSub;
+  const lenMap = sLenMap();
+  document.querySelectorAll('.pos').forEach(p=>{
+    p.classList.remove('inactive');
+    const x = Number(p.dataset.pos);
+    // always block 1 and n
+    if(x === 1 || x === n){ p.classList.add('inactive'); return; }
+    // max 2 attachments per position
+    const used = state.attachments.filter(a=>a.position===x).length;
+    if(used >= 2){ p.classList.add('inactive'); return; }
+    // if a substituent selected, check length rule: cannot place if x < y or (n - x) < y
+    if(selected){
+      const y = lenMap[selected];
+      if(x-1 < y || (n - x) < y){ p.classList.add('inactive'); return; }
+    }
+  });
+}
+
+// small helper to get length map
+function sLenMap(){
+  const m = {};
+  substituentenBasis.forEach(s=> m[s.key]=s.length);
+  return m;
+}
+
+// toggle/add attachment (with checks)
+function toggleAttachment(pos){
+  if(!state.selectedSub){ alert('Wähle zuerst einen Substituenten zum Platzieren.'); return; }
+  const n = state.mainChain;
+  if(!n) return;
+  // rule: no ends
+  if(pos === 1 || pos === n) return;
+  // rule: max 2 per pos
+  const used = state.attachments.filter(a=>a.position===pos).length;
+  if(used >= 2) return;
+  // rule: length fit
+  const len = sLenMap()[state.selectedSub];
+  if(pos < len) return;
+  if((n - pos) < len) return;
+  // add
+  state.attachments.push({ subKey: state.selectedSub, position: pos, id: nextId++ });
+  // after adding, re-evaluate availability and render
+  renderPositionsAvailability();
+  renderAll();
+}
+
+// clear & example
+function clearAll(){
+  state = { mainChain: null, selectedSub: null, attachments: [] };
+  nextId = 1;
+  document.querySelectorAll('.chain-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.sub-card').forEach(c=>c.classList.remove('active'));
+  svg.innerHTML='';
+  renderPositions();
+  renderAll();
+}
+document.getElementById('clearBtn').addEventListener('click', clearAll);
+document.getElementById('exampleBtn').addEventListener('click', ()=>{
+  clearAll();
+  const btn = document.querySelector('.chain-btn[data-len="5"]');
+  if(btn) selectChain(5, btn);
+  // 3-ethyl-2,4-dimethylpentan
+  const elEth = document.querySelector('.sub-card[data-key="ethyl"]');
+  selectSub('ethyl', elEth);
+  toggleAttachment(3);
+  const elMet = document.querySelector('.sub-card[data-key="methyl"]');
+  selectSub('methyl', elMet);
+  toggleAttachment(2);
+  toggleAttachment(4);
+  // deselect
+  state.selectedSub = null;
+  document.querySelectorAll('.sub-card').forEach(c=>c.classList.remove('active'));
+  renderPositionsAvailability();
+  renderAll();
+});
+
+// --------------- Name generation (unchanged) ---------------
+
+function normalizeSubs(attachments){
+  const map = {};
+  attachments.forEach(a=>{
+    if(!map[a.subKey]) map[a.subKey]=[];
+    map[a.subKey].push(a.position);
+  });
+  Object.keys(map).forEach(k=> map[k].sort((a,b)=>a-b));
+  return map;
+}
+
+function computeBestNumbering(map, chainLen){
+  const subs = Object.keys(map);
+  const leftLocants = [];
+  subs.forEach(k=> leftLocants.push(...map[k]));
+  const sumLeft = leftLocants.reduce((s,v)=>s+v,0);
+  const rightLocants = leftLocants.map(p => chainLen - p + 1);
+  const sumRight = rightLocants.reduce((s,v)=>s+v,0);
+  if(sumLeft < sumRight) return {dir:'LtoR', positions:map};
+  if(sumRight < sumLeft){
+    const revMap = {};
+    subs.forEach(k=> revMap[k] = map[k].map(p=> chainLen - p + 1).sort((a,b)=>a-b));
+    return {dir:'RtoL', positions:revMap};
+  }
+  const leftSorted = leftLocants.slice().sort((a,b)=>a-b);
+  const rightSorted = rightLocants.slice().sort((a,b)=>a-b);
+  for(let i=0;i<Math.min(leftSorted.length,rightSorted.length);i++){
+    if(leftSorted[i] < rightSorted[i]) return {dir:'LtoR', positions:map};
+    if(rightSorted[i] < leftSorted[i]){
+      const revMap = {};
+      subs.forEach(k=> revMap[k] = map[k].map(p=> chainLen - p + 1).sort((a,b)=>a-b));
+      return {dir:'RtoL', positions:revMap};
+    }
+  }
+  return {dir:'LtoR', positions:map};
+}
+
+function subLabelFromKey(key){
+  const s = substituentenBasis.find(x=>x.key===key);
+  return s? s.label : key;
+}
+
+function prefixForCount(n){
+  if(n===1) return '';
+  const map = {2:'di',3:'tri',4:'tetra',5:'penta',6:'hexa'};
+  return map[n] || (n+'-');
+}
+
+function generateIUPAC(){
+  if(!state.mainChain) return '—';
+  if(state.attachments.length===0) {
+    const base = ['Methan','Ethan','Propan','Butan','Pentan','Hexan','Heptan','Octan','Nonan','Decan'][state.mainChain-1] || (state.mainChain+'-carban');
+    return base;
+  }
+  const map = normalizeSubs(state.attachments);
+  const best = computeBestNumbering(map, state.mainChain);
+  const groups = Object.keys(best.positions).map(k=>({key:k, positions: best.positions[k]}));
+  groups.sort((a,b)=> subLabelFromKey(a.key).toLowerCase().localeCompare(subLabelFromKey(b.key).toLowerCase()));
+  const parts = [];
+  groups.forEach(g=>{
+    const positions = g.positions.join(',');
+    const count = g.positions.length;
+    const prefix = prefixForCount(count);
+    const name = subLabelFromKey(g.key).toLowerCase();
+    const full = (positions? positions + '-' : '') + (prefix? prefix + name : name);
+    parts.push(full);
+  });
+  const mainStem = ['Methan','Ethan','Propan','Butan','Pentan','Hexan','Heptan','Octan','Nonan','Decan'][state.mainChain-1] || (state.mainChain+'-carban');
+  let NameDesStoffes = parts.join('-') + mainStem.toLowerCase();
+  let großBuchstabe = NameDesStoffes.search(/[a-z]/);
+  NameDesStoffes = NameDesStoffes.slice(0, großBuchstabe) + NameDesStoffes.charAt(großBuchstabe).toUpperCase() + NameDesStoffes.slice(großBuchstabe + 1, NameDesStoffes.length);
+  return NameDesStoffes;
+}
+
+// --------------- Drawing: 90° & Hydrogens ---------------
+
+// Helper to draw SVG elements
+const svgns = 'http://www.w3.org/2000/svg';
+function drawLine(x1,y1,x2,y2, w=3){
+  const l = document.createElementNS(svgns,'line');
+  l.setAttribute('x1',x1); l.setAttribute('y1',y1); l.setAttribute('x2',x2); l.setAttribute('y2',y2);
+  l.setAttribute('stroke','#123a5a'); l.setAttribute('stroke-width',w);
+  svg.appendChild(l);
+}
+function drawCircle(x,y,r=14){
+
+}
+function drawText(x,y,txt,sz=16,dy=6){
+  const t = document.createElementNS(svgns,'text');
+  t.setAttribute('x',x); t.setAttribute('y',y+dy); t.setAttribute('font-size',sz);
+  t.setAttribute('fill','#0f3b5b'); t.setAttribute('text-anchor','middle'); t.textContent = txt;
+  svg.appendChild(t);
+}
+
+// place H atoms in available orthogonal directions (no overlap with existing C bonds)
+function placeHydrogens(x,y,occupiedDirs, count){
+  // possible directions with vector and label offset
+  const dirs = [
+    {name:'up',    vx:0,  vy:-1,  hx:0,  hy:-28},
+    {name:'right', vx:1,  vy:0,   hx:24, hy:2},
+    {name:'left',  vx:-1, vy:0,   hx:-24,hy:2},
+    {name:'down',  vx:0,  vy:1,   hx:0,  hy:28}
+  ];
+  let placed = 0;
+  for(let i=0;i<dirs.length && placed < count;i++){
+    const d = dirs[i];
+    if(occupiedDirs.has(d.name)) continue;
+    const X = x + d.hx;
+    const Y = y + d.hy;
+    // draw bond and label
+    drawLine(x, y, X, Y, 1.6);
+    drawText(X, Y, 'H', 12, 4);
+    placed++;
+  }
+}
+
+// compute H count for a carbon: H = 4 - number of C single bonds
+// For main chain: bonds = (left neighbor?1:0) + (right neighbor?1:0) + attachments at this pos
+// For substituent chain: inner carbons have 2 C-bonds (prev+next), terminal 1 (only prev)
+function renderMolecule(){
+  svg.innerHTML = '';
+  const n = state.mainChain; if(!n) return;
+  const w = 880, h = 260, margin = 60;
+  const step = (w - 2*margin)/(n-1 || 1);
+
+  // main chain coords (horizontal)
+  const coords = [];
+  for(let i=0;i<n;i++) coords.push({x: margin + i*step, y: h/2});
+
+  // draw main chain bonds (horizontal)
+  for(let i=0;i<n-1;i++) drawLine(coords[i].x, coords[i].y, coords[i+1].x, coords[i+1].y);
+
+  // draw attachments grouped by position for better layout
+  const atByPos = {};
+  state.attachments.forEach(a=>{
+    if(!atByPos[a.position]) atByPos[a.position]=[];
+    atByPos[a.position].push(a);
+  });
+
+  // draw main carbons + hydrogens (determine occupied dirs from neighbors + attachments)
+  for(let i=0;i<n;i++){
+    const c = coords[i];
+    // compute occupied directions for main carbon
+    const occ = new Set();
+    // neighbor left/right
+    if(i>0) occ.add('left');
+    if(i<n-1) occ.add('right');
+    // attachments: for visual clarity, attachments first go up, second down (if multiple)
+    const atList = atByPos[i+1] || [];
+    atList.forEach((att, idx)=>{
+      if(idx %2 ===0) occ.add('up'); else occ.add('down');
+    });
+    // number of C-bonds
+    const bonds = (i>0?1:0) + (i<n-1?1:0) + atList.length;
+    const Hcount = Math.max(0, 4 - bonds);
+    // draw carbon circle & label
+    drawCircle(c.x, c.y, 14);
+    drawText(c.x, c.y, 'C', 16, 6);
+    // position number
+    drawText(c.x-5, c.y+18, (i+1)+'', 12, 2);
+    // place hydrogens in free orthogonal dirs
+    placeHydrogens(c.x, c.y, occ, Hcount);
+  }
+
+  // draw substituent chains (vertical only), length = map length
+  const lenMap = {};
+  substituentenBasis.forEach(s=> lenMap[s.key]=s.length);
+
+  Object.keys(atByPos).forEach(posStr=>{
+    const pos = Number(posStr);
+    const list = atByPos[pos];
+    const base = coords[pos-1];
+    list.forEach((att, idx)=>{
+      const yDir = (idx % 2 === 0) ? -1 : 1; // first goes up, second down
+      const firstBondLen = 48; // vertical offset for first bond
+      // draw first vertical bond
+      const x0 = base.x;
+      const y0 = base.y;
+      const x1 = x0;
+      const y1 = y0 + yDir * firstBondLen;
+      drawLine(x0, y0, x1, y1);
+      // now draw substituent carbons along vertical 90° lines
+      const chainLen = lenMap[att.subKey] || 1;
+      // for k from 1..chainLen: place carbon at y1 + (k-1)*seg
+      const seg = 60;
+      for(let k=1;k<=chainLen;k++){
+        const cx = x1;
+        const cy = y1 + yDir * ( (k-1) * seg );
+        console.log(yDir);
+        // draw carbon (avoid overwriting base small bond)
+        drawCircle(cx, cy, 12);
+        drawText(cx, cy, 'C', 14, 5);
+        // draw bond to previous (already have base->first; need chain links)
+        if(k>1){
+          const prevY = y1 + yDir * ( (k-2) * seg );
+          drawLine(cx, prevY, cx, cy);
+        }
+        // calculate number of C-bonds for this substituent carbon
+        let cBonds = 0;
+
+        if (k === 1) {
+          // first carbon: 1 bond to main chain + (if longer chain) 1 bond to next carbon
+          cBonds = (chainLen > 1) ? 2 : 1;
+        } else if (k === chainLen) {
+          // last carbon: only 1 bond to the previous carbon
+          cBonds = 1;
+        } else {
+          // middle carbons in longer substituents: 2 bonds (prev + next)
+          cBonds = 2;
+        }
+        //HIER IST EIN FEHLER!!!!
+        // hydrogens = 4 - cBonds
+        const Hcount = Math.max(0, 4 - cBonds);
+        // occupied directions: vertical occupied by chain (up/down). We place Hs horizontally (left/right) first, then opposite
+        const occ = new Set();
+        if (yDir == 1){
+          occ.add('up');
+        }
+        if (yDir == -1){
+          occ.add('down'); 
+        }
+         // vertical taken
+        placeHydrogens(cx, cy, occ, Hcount);
+      }
+    });
+  });
+}
+
+// --------------- update UI & render ---------------
+function renderAll(){
+  chainChip.textContent = state.mainChain? ('Kette: ' + state.mainChain + ' C') : 'Kette: —';
+  const groups = normalizeSubs(state.attachments);
+  const subsText = Object.keys(groups).map(k=> subLabelFromKey(k) + (groups[k].length>1? ' x'+groups[k].length:'' ));
+  subsChip.textContent = subsText.length? ('Substituenten: ' + subsText.join(', ')) : 'Substituenten: —';
+  // highlight positions with attachments
+  document.querySelectorAll('.pos').forEach(p=>{
+    const pos = Number(p.dataset.pos);
+    const attached = state.attachments.filter(a=>a.position===pos);
+    p.classList.toggle('selected', attached.length>0);
+  });
+  // numbering
+  const map = normalizeSubs(state.attachments);
+  if(state.mainChain && Object.keys(map).length>0){
+    const best = computeBestNumbering(map, state.mainChain);
+    numbering.textContent = best.dir === 'LtoR' ? '1 → ' + state.mainChain : state.mainChain + ' ← 1';
+  } else { numbering.textContent = '—'; }
+  nameArea.textContent = generateIUPAC();
+  renderMolecule();
+}
+
+// allow click on SVG to remove last attachment at a position (same as before)
+svg.addEventListener('click', (ev)=>{
+  const rect = svg.getBoundingClientRect();
+  const x = ev.clientX - rect.left;
+  if(!state.mainChain) return;
+  const n = state.mainChain; const w = 880; const margin = 60; const step = (w - 2*margin)/(n-1 || 1);
+  const idx = Math.round((x - margin)/step);
+  if(idx>=0 && idx<n){
+    for(let i=state.attachments.length-1;i>=0;i--){
+      if(state.attachments[i].position===idx+1){
+        state.attachments.splice(i,1);
+        renderPositionsAvailability();
+        renderAll();
+        break;
+      }
+    }
+  }
+});
+
+// initial
+renderPositions();
+renderAll();
+
+</script>
+</body>
+</html>
