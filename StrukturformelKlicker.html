@@ -9,7 +9,7 @@
   <style>
     body {
       display: flex;
-      align-items: center;
+
       justify-content: center;
       min-height: 100vh;
       margin: 0;
@@ -76,6 +76,8 @@
 
     }
 
+    button{padding: 5px; box-shadow: 5px 5px 10px 5px rgba(0,0,0,0.67);background-color: burlywood;border-radius: 10px;}
+
     text {
       pointer-events: none;
     }
@@ -86,6 +88,7 @@
       width: 90vh;
       border-style: solid;
       border-collapse: collapse;
+      margin: auto;
     }
 
     td {
@@ -107,20 +110,20 @@
   <h2 style="top: 20px;text-align: center;">Strukturformel zeichnen</h2>
   <h3 style="text-align: center; color: coral;font-size:x-large;" id="AufgabenstellungsFeld">Gib zuerst die längste
     Kette des folgenden Stoffes an: </h3>
-  <h2 id="Namensfeld"></h2>
+    <div style="display:flex; align-items: center; align-content: center;margin: auto; text-align: center;width: fit-content;"><h2 id="Namensfeld"></h2> &emsp; <button value="Neuladen" onclick="javascript:location.reload()"><img src="img/refresh.png" width="25px"></button></div>
 <div>
-  <input id="Eingabe" style="width: 200px" placeholder="Länge der Hauptkette">
+  <input id="Eingabe" style="width: 200px" placeholder="Länge der Hauptkette"> <p></p>
   <div>
-  <input type="button" id="PruefButton" value="Prüfen" onclick="Prüfen()"> <input type="button" id="HilfButton" value="Hilfe" onclick="Hilfe()">
+  <input type="button" id="PruefButton" value="Prüfen" onclick="Prüfen()"> &emsp; <input type="button" id="HilfButton" value="Hilfe" onclick="Hilfe()">
   </div>
 </div>
   <p id="Hilfetext"></p>
   <!-- <p><input id="ElektronenFeld" type="number" min="0" max="18" placeholder="Elektronen"><input type="button" value="Zeichnen" onclick="ZeichnenAusFeld()"></p>-->
   <p id="RückmeldungFeld"></p>
-  <input type="button" style="visibility: hidden;" value="Vergleich" id="VergleichsButton" onclick="Vergleich()"><input
+  <input type="button" style="visibility: hidden;" value="Vergleich" id="VergleichsButton" onclick="Vergleich()"> &emsp; <input
     type="button" id="Hilf2Button" value="Hilfe" onclick="Hilfe2()">
   <p id="Hilfetext2"></p>
-  <div class="card" id="großesDiv"><svg viewBox="0 0 800 800" role="img">
+  <div class="card" id="großesDiv"><svg viewBox="0 0 0 0" role="img">
 
 
 
@@ -329,7 +332,9 @@
       }
       if (HilfeCounter >= 3) {
         if (vonRechtsNachLinks == true){
+            if (document.getElementById("Hilfetext2").innerHTML.includes("Hilfefarben")!=true){
             document.getElementById("Hilfetext2").innerHTML += `<br><br>Achtung, die Hilfefarben sind angezeigt, wenn du von rechts nach links nummerierst.`;
+            }
           }
         for (let i = 1; i<strukturArray.length ; i++){
           if ((strukturArray[i][2] != "H")&&(hauptketteLänge > 2)){
