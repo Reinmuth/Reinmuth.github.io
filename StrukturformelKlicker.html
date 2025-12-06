@@ -338,7 +338,10 @@
           }
         for (let i = 1; i<strukturArray.length ; i++){
           if ((strukturArray[i][2] != "H")&&(hauptketteLänge > 2)){
-            document.getElementById("Feld"+strukturArray[i][0]+strukturArray[i][1]).style.fill = color[strukturArray[i][2]];
+            if (document.getElementById("Feld"+strukturArray[i][0]+strukturArray[i][1])) {
+              document.getElementById("Feld"+strukturArray[i][0]+strukturArray[i][1]).style.fill = color[strukturArray[i][2]];
+            }
+            
             document.getElementById("Hilf2Button").disabled = true;
           }
         }
